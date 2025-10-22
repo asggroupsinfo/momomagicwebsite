@@ -11,8 +11,6 @@ const nextConfig: NextConfig = {
   
   reactStrictMode: true,
   
-  swcMinify: true,
-  
   poweredByHeader: false,
   
   experimental: {

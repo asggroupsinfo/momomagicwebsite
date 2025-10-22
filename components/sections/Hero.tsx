@@ -61,26 +61,30 @@ export const Hero: React.FC = () => {
 
       {/* Gold Particles Animation */}
       <div className="absolute inset-0 z-10 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-premium-gold rounded-full opacity-30"
-            initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-            }}
-            animate={{
-              y: [null, Math.random() * window.innerHeight],
-              x: [null, Math.random() * window.innerWidth],
-              opacity: [0.3, 0.6, 0.3],
-            }}
-            transition={{
-              duration: 10 + Math.random() * 10,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-          />
-        ))}
+        {[...Array(20)].map((_, i) => {
+          const windowWidth = typeof window !== 'undefined' ? window.innerWidth : 1920;
+          const windowHeight = typeof window !== 'undefined' ? window.innerHeight : 1080;
+          return (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-premium-gold rounded-full opacity-30"
+              initial={{
+                x: Math.random() * windowWidth,
+                y: Math.random() * windowHeight,
+              }}
+              animate={{
+                y: [null, Math.random() * windowHeight],
+                x: [null, Math.random() * windowWidth],
+                opacity: [0.3, 0.6, 0.3],
+              }}
+              transition={{
+                duration: 10 + Math.random() * 10,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+            />
+          );
+        })}
       </div>
 
       {/* Floating Momos */}
