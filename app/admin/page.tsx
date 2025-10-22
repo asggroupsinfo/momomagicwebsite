@@ -18,7 +18,8 @@ import {
   Package,
   FolderTree,
   MousePointerClick,
-  Share2
+  Share2,
+  Search
 } from 'lucide-react';
 import { HeroCMS } from '@/components/admin/HeroCMS';
 import { MenuCMS } from '@/components/admin/MenuCMS';
@@ -33,6 +34,7 @@ import { LogoCMS } from '@/components/admin/LogoCMS';
 import { CategoriesCMS } from '@/components/admin/CategoriesCMS';
 import { CTACMS } from '@/components/admin/CTACMS';
 import { SocialMediaCMS } from '@/components/admin/SocialMediaCMS';
+import { SEOCMS } from '@/components/admin/SEOCMS';
 
 interface AdminUser {
   username: string;
@@ -104,6 +106,7 @@ export default function AdminDashboard() {
     { id: 'combo-deals', label: 'Combo Deals', icon: Package },
     { id: 'cta', label: 'CTA Management', icon: MousePointerClick },
     { id: 'social', label: 'Social Media', icon: Share2 },
+    { id: 'seo', label: 'SEO Management', icon: Search },
     { id: 'media', label: 'Media Library', icon: Upload },
     { id: 'analytics', label: 'Analytics', icon: BarChart3 },
   ];
@@ -279,6 +282,8 @@ export default function AdminDashboard() {
               {activeTab === 'cta' && <CTACMS />}
 
               {activeTab === 'social' && <SocialMediaCMS />}
+
+              {activeTab === 'seo' && <SEOCMS />}
 
               {activeTab === 'media' && <MediaLibrary />}
 
