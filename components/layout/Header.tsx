@@ -48,7 +48,7 @@ export const Header: React.FC = () => {
           {/* Order Now Button - Right Side (Desktop) */}
           <Link 
             href="/menu" 
-            className="hidden md:flex items-center bg-premium-gold text-black px-6 py-2.5 rounded-lg font-semibold hover:bg-charcoal-black hover:text-premium-gold hover:border-premium-gold border-2 border-transparent transition-all duration-300 text-sm shadow-lg hover:shadow-premium-gold/50"
+            className="hidden md:flex items-center bg-premium-gold text-black px-6 py-2.5 rounded-lg font-semibold hover:bg-foreground hover:text-premium-gold hover:border-premium-gold border-2 border-transparent transition-all duration-300 text-sm shadow-lg hover:shadow-premium-gold/50"
           >
             Order Now
           </Link>
@@ -96,7 +96,7 @@ export const Header: React.FC = () => {
               >
                 <Link
                   href="/menu"
-                  className="block mt-4 bg-premium-gold text-black px-6 py-3 rounded-lg font-semibold text-center hover:bg-charcoal-black hover:text-premium-gold border-2 border-transparent hover:border-premium-gold transition-all duration-300 shadow-lg"
+                  className="block mt-4 bg-premium-gold text-black px-6 py-3 rounded-lg font-semibold text-center hover:bg-foreground hover:text-premium-gold border-2 border-transparent hover:border-premium-gold transition-all duration-300 shadow-lg"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Order Now

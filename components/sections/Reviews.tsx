@@ -314,7 +314,7 @@ export const Reviews: React.FC = () => {
                     <div className="mb-6">{renderStars(reviews[currentIndex].rating)}</div>
 
                     {/* Review Text */}
-                    <p className="text-lg md:text-xl text-charcoal-black leading-relaxed mb-6 font-body">
+                    <p className="text-lg md:text-xl text-foreground leading-relaxed mb-6 font-body">
                       "{reviews[currentIndex].text}"
                     </p>
                   </div>
@@ -329,13 +329,13 @@ export const Reviews: React.FC = () => {
                       />
                     ) : (
                       <div className="w-12 h-12 rounded-full bg-premium-gold flex items-center justify-center">
-                        <span className="text-xl font-bold text-charcoal-black">
+                        <span className="text-xl font-bold text-foreground">
                           {reviews[currentIndex].author_name.charAt(0)}
                         </span>
                       </div>
                     )}
                     <div>
-                      <p className="font-semibold text-charcoal-black">
+                      <p className="font-semibold text-foreground">
                         {reviews[currentIndex].author_name}
                       </p>
                       <p className="text-sm text-gray-600">

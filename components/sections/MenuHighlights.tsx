@@ -144,7 +144,7 @@ export const MenuHighlights: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-center mb-6 text-charcoal-black"
+          className="text-4xl md:text-5xl font-bold text-center mb-6 text-foreground"
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
           Our Magical Creations
@@ -178,7 +178,7 @@ export const MenuHighlights: React.FC = () => {
               className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
                 selectedCategory === category
                   ? 'bg-magic-red text-white border-2 border-premium-gold shadow-lg'
-                  : 'bg-white text-charcoal-black border-2 border-gray-300 hover:border-premium-gold'
+                  : 'bg-white text-foreground border-2 border-gray-300 hover:border-premium-gold'
               }`}
             >
               {category}
@@ -275,7 +275,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ item, index, imageLoaded, onImageLo
       {/* Content */}
       <div className="p-6">
         <h3
-          className="text-xl font-bold mb-2 text-charcoal-black"
+          className="text-xl font-bold mb-2 text-foreground"
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
           {item.name}

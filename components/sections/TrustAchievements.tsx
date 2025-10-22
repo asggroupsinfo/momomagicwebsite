@@ -231,7 +231,7 @@ export const TrustAchievements: React.FC = () => {
                     whileInView={{ scale: 1, rotate: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.15 + 0.3, type: 'spring', stiffness: 200 }}
-                    className="absolute -top-3 -right-3 bg-premium-gold text-charcoal-black px-4 py-1 rounded-full text-xs font-bold shadow-lg"
+                    className="absolute -top-3 -right-3 bg-premium-gold text-foreground px-4 py-1 rounded-full text-xs font-bold shadow-lg"
                   >
                     ⭐ CERTIFIED
                   </motion.div>
@@ -246,7 +246,7 @@ export const TrustAchievements: React.FC = () => {
                     transition={{ duration: 0.6, delay: index * 0.15 + 0.2 }}
                     className={`flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center ${
                       achievement.highlight
-                        ? 'bg-premium-gold text-charcoal-black'
+                        ? 'bg-premium-gold text-foreground'
                         : 'bg-white/10 text-premium-gold'
                     }`}
                   >
@@ -288,7 +288,7 @@ export const TrustAchievements: React.FC = () => {
               href="tel:+919955955191"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-block bg-premium-gold text-charcoal-black px-8 py-4 rounded-full font-bold text-lg hover:bg-premium-gold/90 transition-colors shadow-lg"
+              className="inline-block bg-premium-gold text-foreground px-8 py-4 rounded-full font-bold text-lg hover:bg-premium-gold/90 transition-colors shadow-lg"
             >
               Order Now: +91 9955955191
             </motion.a>

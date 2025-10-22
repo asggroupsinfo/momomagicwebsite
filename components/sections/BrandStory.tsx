@@ -55,7 +55,7 @@ export const BrandStory: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-center mb-16 text-charcoal-black"
+          className="text-4xl md:text-5xl font-bold text-center mb-16 text-foreground"
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
           The Magic Began With a Dream, Not a Recipe
@@ -189,7 +189,7 @@ export const BrandStory: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-bold text-center mb-12 text-charcoal-black"
+          className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground"
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
           Our Journey Timeline
@@ -254,7 +254,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ event, index, isLeft }) => 
             {event.date}
           </p>
           <h4
-            className="text-xl font-bold text-charcoal-black mb-2"
+            className="text-xl font-bold text-foreground mb-2"
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
             {event.event}
@@ -293,7 +293,7 @@ const MobileTimelineItem: React.FC<MobileTimelineItemProps> = ({ event, index })
           {event.date}
         </p>
         <h4
-          className="text-xl font-bold text-charcoal-black mb-2"
+          className="text-xl font-bold text-foreground mb-2"
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
           {event.event}
