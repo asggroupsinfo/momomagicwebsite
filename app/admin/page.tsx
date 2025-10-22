@@ -16,7 +16,9 @@ import {
   Images,
   Quote,
   Package,
-  FolderTree
+  FolderTree,
+  MousePointerClick,
+  Share2
 } from 'lucide-react';
 import { HeroCMS } from '@/components/admin/HeroCMS';
 import { MenuCMS } from '@/components/admin/MenuCMS';
@@ -29,6 +31,8 @@ import { TestimonialsCMS } from '@/components/admin/TestimonialsCMS';
 import { ComboDealsCMS } from '@/components/admin/ComboDealsCMS';
 import { LogoCMS } from '@/components/admin/LogoCMS';
 import { CategoriesCMS } from '@/components/admin/CategoriesCMS';
+import { CTACMS } from '@/components/admin/CTACMS';
+import { SocialMediaCMS } from '@/components/admin/SocialMediaCMS';
 
 interface AdminUser {
   username: string;
@@ -98,6 +102,8 @@ export default function AdminDashboard() {
     { id: 'gallery', label: 'Gallery', icon: Images },
     { id: 'testimonials', label: 'Testimonials', icon: Quote },
     { id: 'combo-deals', label: 'Combo Deals', icon: Package },
+    { id: 'cta', label: 'CTA Management', icon: MousePointerClick },
+    { id: 'social', label: 'Social Media', icon: Share2 },
     { id: 'media', label: 'Media Library', icon: Upload },
     { id: 'analytics', label: 'Analytics', icon: BarChart3 },
   ];
@@ -269,6 +275,10 @@ export default function AdminDashboard() {
               {activeTab === 'testimonials' && <TestimonialsCMS />}
 
               {activeTab === 'combo-deals' && <ComboDealsCMS />}
+
+              {activeTab === 'cta' && <CTACMS />}
+
+              {activeTab === 'social' && <SocialMediaCMS />}
 
               {activeTab === 'media' && <MediaLibrary />}
 
