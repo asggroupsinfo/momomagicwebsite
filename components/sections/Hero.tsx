@@ -183,13 +183,13 @@ export const Hero: React.FC = () => {
           >
             <span className="relative z-10">Taste the Magic → Order Now</span>
             <motion.div
-              className="absolute inset-0 border-3 border-charcoal-black rounded-lg"
+              className="absolute inset-0 border-3 border-foreground rounded-lg"
               initial={{ opacity: 0, scale: 0.8 }}
               whileHover={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
             />
             <motion.div
-              className="absolute inset-0 bg-charcoal-black"
+              className="absolute inset-0 bg-foreground"
               initial={{ x: '-100%' }}
               whileHover={{ x: 0 }}
               transition={{ duration: 0.3 }}

@@ -62,7 +62,7 @@ export const Gallery: React.FC = () => {
           className="text-center mb-12"
         >
           <h2 
-            className="text-4xl md:text-5xl font-bold text-charcoal-black mb-4"
+            className="text-4xl md:text-5xl font-bold text-foreground mb-4"
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
             Our <span className="text-premium-gold">Gallery</span>

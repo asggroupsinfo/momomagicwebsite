@@ -260,7 +260,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ item, index, imageLoaded, onImageLo
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
-            className="absolute top-4 right-4 bg-premium-gold text-charcoal-black px-3 py-1 rounded-full text-xs font-bold shadow-lg"
+            className="absolute top-4 right-4 bg-premium-gold text-foreground px-3 py-1 rounded-full text-xs font-bold shadow-lg"
           >
             ⭐ EXCLUSIVE
           </motion.div>
@@ -312,7 +312,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ item, index, imageLoaded, onImageLo
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="bg-magic-red text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-premium-gold hover:text-charcoal-black transition-colors duration-300"
+            className="bg-magic-red text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-premium-gold hover:text-foreground transition-colors duration-300"
           >
             Order
           </motion.button>

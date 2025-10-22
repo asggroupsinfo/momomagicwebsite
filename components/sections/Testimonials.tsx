@@ -39,7 +39,7 @@ export const Testimonials: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 bg-charcoal-black">
+    <section className="py-20 bg-black">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -86,7 +86,7 @@ export const Testimonials: React.FC = () => {
                   {testimonial.name.charAt(0)}
                 </div>
                 <div className="ml-4">
-                  <p className="font-semibold text-charcoal-black">{testimonial.name}</p>
+                  <p className="font-semibold text-foreground">{testimonial.name}</p>
                   <p className="text-sm text-gray-600">{testimonial.role}</p>
                 </div>
               </div>
@@ -105,7 +105,7 @@ export const Testimonials: React.FC = () => {
             href="https://www.google.com/search?q=momos+magic+sherghati"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-premium-gold text-black px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-charcoal-black transition-all duration-300 shadow-lg"
+            className="inline-block bg-premium-gold text-black px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-foreground transition-all duration-300 shadow-lg"
           >
             See All Reviews on Google
           </a>

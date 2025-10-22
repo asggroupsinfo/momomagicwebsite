@@ -214,7 +214,7 @@ export const Reviews: React.FC = () => {
 
   if (isLoading) {
     return (
-      <section className="py-20 bg-charcoal-black">
+      <section className="py-20 bg-black">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-premium-gold border-t-transparent"></div>
@@ -226,7 +226,7 @@ export const Reviews: React.FC = () => {
   }
 
   return (
-    <section className="py-20 bg-charcoal-black relative overflow-hidden">
+    <section className="py-20 bg-black relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
@@ -355,7 +355,7 @@ export const Reviews: React.FC = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={handlePrev}
-              className="pointer-events-auto bg-premium-gold text-charcoal-black p-3 rounded-full shadow-lg hover:bg-premium-gold/90 transition-colors"
+              className="pointer-events-auto bg-premium-gold text-foreground p-3 rounded-full shadow-lg hover:bg-premium-gold/90 transition-colors"
               aria-label="Previous review"
             >
               <ChevronLeft className="w-6 h-6" />
@@ -365,7 +365,7 @@ export const Reviews: React.FC = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={handleNext}
-              className="pointer-events-auto bg-premium-gold text-charcoal-black p-3 rounded-full shadow-lg hover:bg-premium-gold/90 transition-colors"
+              className="pointer-events-auto bg-premium-gold text-foreground p-3 rounded-full shadow-lg hover:bg-premium-gold/90 transition-colors"
               aria-label="Next review"
             >
               <ChevronRight className="w-6 h-6" />

@@ -126,7 +126,7 @@ export const TrustAchievements: React.FC = () => {
   };
 
   return (
-    <section ref={sectionRef} className="py-20 bg-charcoal-black relative overflow-hidden">
+    <section ref={sectionRef} className="py-20 bg-black relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div

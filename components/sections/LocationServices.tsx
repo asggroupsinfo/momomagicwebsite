@@ -193,7 +193,7 @@ export const LocationServices: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={openDirections}
-                className="absolute bottom-4 right-4 bg-premium-gold text-charcoal-black px-6 py-3 rounded-full shadow-lg font-semibold flex items-center space-x-2 hover:bg-premium-gold/90 transition-colors"
+                className="absolute bottom-4 right-4 bg-premium-gold text-foreground px-6 py-3 rounded-full shadow-lg font-semibold flex items-center space-x-2 hover:bg-premium-gold/90 transition-colors"
               >
                 <ExternalLink className="w-5 h-5" />
                 <span>Get Directions</span>
