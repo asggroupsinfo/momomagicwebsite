@@ -1,0 +1,20 @@
+{
+  "headline": "From Humble Stall to Culinary Legend",
+  "subheadline": "Experience the Magic That Transformed Sherghati's Street Food Scene",
+  "videoUrl": "/hero-video.mp4",
+  "fallbackImage": "/hero-bg.jpg",
+  "badges": [
+    "Awarded 'Best Quality Food in City'",
+    "FSSAI Certified: 20424201001152",
+    "100% Pure Vegetarian · Since 2023",
+    "⭐ 4.9/5 (2000+ Happy Customers)"
+  ],
+  "primaryCTA": {
+    "text": "Taste the Magic → Order Now",
+    "link": "#menu"
+  },
+  "secondaryCTA": {
+    "text": "Discover Our Story",
+    "link": "#story"
+  }
+}

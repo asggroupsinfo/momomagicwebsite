@@ -14,6 +14,10 @@ import {
   LogOut,
   Loader2
 } from 'lucide-react';
+import { HeroCMS } from '@/components/admin/HeroCMS';
+import { MenuCMS } from '@/components/admin/MenuCMS';
+import { AboutCMS } from '@/components/admin/AboutCMS';
+import { ContactCMS } from '@/components/admin/ContactCMS';
 
 interface AdminUser {
   username: string;
@@ -232,41 +236,13 @@ export default function AdminDashboard() {
                 </div>
               )}
 
-              {activeTab === 'hero' && (
-                <div>
-                  <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
-                    Hero Section CMS
-                  </h2>
-                  <p className="text-gray-600">Hero section editor coming soon...</p>
-                </div>
-              )}
+              {activeTab === 'hero' && <HeroCMS />}
 
-              {activeTab === 'menu' && (
-                <div>
-                  <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
-                    Menu Management
-                  </h2>
-                  <p className="text-gray-600">Menu editor coming soon...</p>
-                </div>
-              )}
+              {activeTab === 'menu' && <MenuCMS />}
 
-              {activeTab === 'about' && (
-                <div>
-                  <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
-                    About Us CMS
-                  </h2>
-                  <p className="text-gray-600">About section editor coming soon...</p>
-                </div>
-              )}
+              {activeTab === 'about' && <AboutCMS />}
 
-              {activeTab === 'contact' && (
-                <div>
-                  <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
-                    Contact Information
-                  </h2>
-                  <p className="text-gray-600">Contact editor coming soon...</p>
-                </div>
-              )}
+              {activeTab === 'contact' && <ContactCMS />}
 
               {activeTab === 'media' && (
                 <div>
