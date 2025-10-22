@@ -12,7 +12,10 @@ import {
   Upload, 
   BarChart3, 
   LogOut,
-  Loader2
+  Loader2,
+  Images,
+  Quote,
+  Package
 } from 'lucide-react';
 import { HeroCMS } from '@/components/admin/HeroCMS';
 import { MenuCMS } from '@/components/admin/MenuCMS';
@@ -20,6 +23,9 @@ import { AboutCMS } from '@/components/admin/AboutCMS';
 import { ContactCMS } from '@/components/admin/ContactCMS';
 import { MediaLibrary } from '@/components/admin/MediaLibrary';
 import { AnalyticsDashboard } from '@/components/admin/AnalyticsDashboard';
+import { GalleryCMS } from '@/components/admin/GalleryCMS';
+import { TestimonialsCMS } from '@/components/admin/TestimonialsCMS';
+import { ComboDealsCMS } from '@/components/admin/ComboDealsCMS';
 
 interface AdminUser {
   username: string;
@@ -84,6 +90,9 @@ export default function AdminDashboard() {
     { id: 'menu', label: 'Menu', icon: Menu },
     { id: 'about', label: 'About Us', icon: Info },
     { id: 'contact', label: 'Contact', icon: Phone },
+    { id: 'gallery', label: 'Gallery', icon: Images },
+    { id: 'testimonials', label: 'Testimonials', icon: Quote },
+    { id: 'combo-deals', label: 'Combo Deals', icon: Package },
     { id: 'media', label: 'Media Library', icon: Upload },
     { id: 'analytics', label: 'Analytics', icon: BarChart3 },
   ];
@@ -245,6 +254,12 @@ export default function AdminDashboard() {
               {activeTab === 'about' && <AboutCMS />}
 
               {activeTab === 'contact' && <ContactCMS />}
+
+              {activeTab === 'gallery' && <GalleryCMS />}
+
+              {activeTab === 'testimonials' && <TestimonialsCMS />}
+
+              {activeTab === 'combo-deals' && <ComboDealsCMS />}
 
               {activeTab === 'media' && <MediaLibrary />}
 

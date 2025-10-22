@@ -144,15 +144,6 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSucce
                   </div>
                 </div>
 
-                {/* Demo Credentials Info */}
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-                  <p className="text-xs text-blue-800">
-                    <strong>Demo Credentials:</strong><br />
-                    Username: <code className="bg-blue-100 px-1 rounded">admin</code><br />
-                    Password: <code className="bg-blue-100 px-1 rounded">admin123</code>
-                  </p>
-                </div>
-
                 {/* Submit Button */}
                 <button
                   type="submit"

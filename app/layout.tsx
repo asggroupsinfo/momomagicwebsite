@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 
 export const metadata: Metadata = {
   title: "Momos Magic - From Humble Stall to Culinary Legend",
@@ -78,6 +79,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/favicon.png" />
       </head>
       <body className="antialiased">
+        <GoogleAnalytics />
         <Header />
         <main className="min-h-screen">
           {children}

@@ -1,0 +1,25 @@
+{
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Rohan Kumar",
+      "role": "Regular Customer",
+      "content": "The Kurkure Momos are revolutionary! Nobody in Bihar makes them like Momos Magic. Dhruv bhaiya's innovation changed street food forever!",
+      "rating": 5
+    },
+    {
+      "id": 2,
+      "name": "Priya Singh",
+      "role": "Local Foodie",
+      "content": "From watching them start with a small stall to becoming the most premium food spot - what a journey! The Pizza Momos are genius!",
+      "rating": 5
+    },
+    {
+      "id": 3,
+      "name": "Amit Sharma",
+      "role": "Food Blogger",
+      "content": "Awarded \"Best Quality Food\" for a reason! The hygiene, taste, and innovation combination is unmatched in Sherghati.",
+      "rating": 5
+    }
+  ]
+}
