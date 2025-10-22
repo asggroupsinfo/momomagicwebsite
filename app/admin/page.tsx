@@ -20,7 +20,8 @@ import {
   MousePointerClick,
   Share2,
   Search,
-  Languages
+  Languages,
+  Settings
 } from 'lucide-react';
 import { HeroCMS } from '@/components/admin/HeroCMS';
 import { MenuCMS } from '@/components/admin/MenuCMS';
@@ -37,6 +38,7 @@ import { CTACMS } from '@/components/admin/CTACMS';
 import { SocialMediaCMS } from '@/components/admin/SocialMediaCMS';
 import { SEOCMS } from '@/components/admin/SEOCMS';
 import { TranslationsCMS } from '@/components/admin/TranslationsCMS';
+import { APIConfigCMS } from '@/components/admin/APIConfigCMS';
 
 interface AdminUser {
   username: string;
@@ -110,6 +112,7 @@ export default function AdminDashboard() {
     { id: 'social', label: 'Social Media', icon: Share2 },
     { id: 'seo', label: 'SEO Management', icon: Search },
     { id: 'translations', label: 'Translations', icon: Languages },
+    { id: 'api-config', label: 'API Configuration', icon: Settings },
     { id: 'media', label: 'Media Library', icon: Upload },
     { id: 'analytics', label: 'Analytics', icon: BarChart3 },
   ];
@@ -289,6 +292,8 @@ export default function AdminDashboard() {
               {activeTab === 'seo' && <SEOCMS />}
 
               {activeTab === 'translations' && <TranslationsCMS />}
+
+              {activeTab === 'api-config' && <APIConfigCMS />}
 
               {activeTab === 'media' && <MediaLibrary />}
 
