@@ -4,6 +4,7 @@ import React from 'react';
 import { Hero } from '@/components/sections/Hero';
 import { BrandStory } from '@/components/sections/BrandStory';
 import { MenuHighlights } from '@/components/sections/MenuHighlights';
+import { Reviews } from '@/components/sections/Reviews';
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <Hero />
       <BrandStory />
       <MenuHighlights />
+      <Reviews />
 
       <section className="py-16 px-4 bg-charcoal-black text-white">
         <div className="container mx-auto">
