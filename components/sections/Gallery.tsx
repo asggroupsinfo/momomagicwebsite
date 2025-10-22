@@ -52,7 +52,7 @@ export const Gallery: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-black">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -62,12 +62,12 @@ export const Gallery: React.FC = () => {
           className="text-center mb-12"
         >
           <h2 
-            className="text-4xl md:text-5xl font-bold text-foreground mb-4"
+            className="text-4xl md:text-5xl font-bold text-premium-gold mb-4"
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
             Our <span className="text-premium-gold">Gallery</span>
           </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
             A visual journey through our culinary creations and memorable moments
           </p>
         </motion.div>

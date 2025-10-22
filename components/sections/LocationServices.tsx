@@ -134,7 +134,7 @@ export const LocationServices: React.FC = () => {
   }&q=${encodeURIComponent(businessInfo.address.full)}&zoom=15&maptype=roadmap`;
 
   return (
-    <section className="py-20 bg-white relative overflow-hidden">
+    <section className="py-20 bg-black relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div
@@ -155,10 +155,10 @@ export const LocationServices: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 font-heading">
+          <h2 className="text-4xl md:text-5xl font-bold text-premium-gold mb-4 font-heading">
             Visit Our Magic Kitchen
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Find us, call us, or order online - we're here to serve you the best momos in Bihar
           </p>
         </motion.div>
@@ -193,7 +193,7 @@ export const LocationServices: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={openDirections}
-                className="absolute bottom-4 right-4 bg-premium-gold text-foreground px-6 py-3 rounded-full shadow-lg font-semibold flex items-center space-x-2 hover:bg-premium-gold/90 transition-colors"
+                className="absolute bottom-4 right-4 bg-premium-gold text-premium-gold px-6 py-3 rounded-full shadow-lg font-semibold flex items-center space-x-2 hover:bg-premium-gold/90 transition-colors"
               >
                 <ExternalLink className="w-5 h-5" />
                 <span>Get Directions</span>
@@ -210,10 +210,10 @@ export const LocationServices: React.FC = () => {
                   <MapPin className="w-6 h-6 text-magic-red" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-foreground mb-2">Our Location</h3>
-                  <p className="text-gray-600 mb-1">{businessInfo.address.line1}</p>
-                  <p className="text-gray-600 mb-1">{businessInfo.address.line2}</p>
-                  <p className="text-gray-600 mb-3">{businessInfo.address.line3}</p>
+                  <h3 className="text-xl font-bold text-premium-gold mb-2">Our Location</h3>
+                  <p className="text-gray-300 mb-1">{businessInfo.address.line1}</p>
+                  <p className="text-gray-300 mb-1">{businessInfo.address.line2}</p>
+                  <p className="text-gray-300 mb-3">{businessInfo.address.line3}</p>
 
                   <motion.button
                     whileHover={{ scale: 1.05 }}
@@ -256,8 +256,8 @@ export const LocationServices: React.FC = () => {
                   <Phone className="w-6 h-6 text-vegetarian-green" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-foreground mb-2">Call for Orders</h3>
-                  <p className="text-gray-600 mb-3">Quick takeaway orders via phone</p>
+                  <h3 className="text-xl font-bold text-premium-gold mb-2">Call for Orders</h3>
+                  <p className="text-gray-300 mb-3">Quick takeaway orders via phone</p>
 
                   <motion.button
                     whileHover={{ scale: 1.05 }}
@@ -282,12 +282,12 @@ export const LocationServices: React.FC = () => {
                   <Clock className="w-6 h-6 text-warm-orange" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-foreground mb-2">Service Hours</h3>
-                  <p className="text-gray-600 mb-3">{businessInfo.hours.days}</p>
+                  <h3 className="text-xl font-bold text-premium-gold mb-2">Service Hours</h3>
+                  <p className="text-gray-300 mb-3">{businessInfo.hours.days}</p>
 
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-2xl font-bold text-foreground">
+                      <p className="text-2xl font-bold text-premium-gold">
                         {businessInfo.hours.open} - {businessInfo.hours.close}
                       </p>
                     </div>
@@ -328,7 +328,7 @@ export const LocationServices: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h3 className="text-3xl font-bold text-foreground mb-8 text-center font-heading">
+          <h3 className="text-3xl font-bold text-premium-gold mb-8 text-center font-heading">
             Our Services
           </h3>
 
@@ -361,14 +361,14 @@ export const LocationServices: React.FC = () => {
                   </motion.div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
-                      <h4 className="text-lg font-bold text-foreground">{service.title}</h4>
+                      <h4 className="text-lg font-bold text-premium-gold">{service.title}</h4>
                       {service.status === 'coming-soon' && (
                         <span className="bg-premium-gold text-black px-2 py-1 rounded-full text-xs font-semibold">
                           Soon
                         </span>
                       )}
                     </div>
-                    <p className="text-gray-600 text-sm">{service.description}</p>
+                    <p className="text-gray-300 text-sm">{service.description}</p>
                   </div>
                 </div>
               </motion.div>

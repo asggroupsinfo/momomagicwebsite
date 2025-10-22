@@ -47,7 +47,7 @@ export const BrandStory: React.FC = () => {
   ];
 
   return (
-    <section id="story" className="py-20 px-4 bg-white">
+    <section id="story" className="py-20 px-4 bg-black">
       <div className="container mx-auto">
         {/* Section Title */}
         <motion.h2
@@ -55,7 +55,7 @@ export const BrandStory: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-center mb-16 text-foreground"
+          className="text-4xl md:text-5xl font-bold text-center mb-16 text-premium-gold"
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
           The Magic Began With a Dream, Not a Recipe
@@ -77,7 +77,7 @@ export const BrandStory: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={isStoryInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-lg text-gray-700 leading-relaxed"
+              className="text-lg text-white leading-relaxed"
             >
               In September 2023, a young entrepreneur named{' '}
               <span className="font-semibold text-magic-red">Dhruv Gupta</span>{' '}
@@ -93,7 +93,7 @@ export const BrandStory: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={isStoryInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="text-lg text-gray-700 leading-relaxed"
+              className="text-lg text-white leading-relaxed"
             >
               Starting with traditional Bihari{' '}
               <span className="font-semibold">'Pita'</span> - a delicacy made
@@ -106,7 +106,7 @@ export const BrandStory: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={isStoryInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="text-lg text-gray-700 leading-relaxed"
+              className="text-lg text-white leading-relaxed"
             >
               The pivot to momos wasn't just a business decision - it was a
               revelation. Dhruv infused them with the same passion and quality
@@ -120,7 +120,7 @@ export const BrandStory: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={isStoryInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 1.0 }}
-              className="text-lg text-gray-700 leading-relaxed"
+              className="text-lg text-white leading-relaxed"
             >
               Today, Momos Magic isn't just a food stall; it's a symbol of
               entrepreneurial spirit and culinary innovation. From introducing
@@ -178,7 +178,7 @@ export const BrandStory: React.FC = () => {
           >
             "Quantity bhi Mast, Taste bhi Zabardast"
           </p>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-gray-300">
             Because every customer deserves the best of both worlds
           </p>
         </motion.div>
@@ -189,7 +189,7 @@ export const BrandStory: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground"
+          className="text-3xl md:text-4xl font-bold text-center mb-12 text-premium-gold"
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
           Our Journey Timeline
@@ -254,12 +254,12 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ event, index, isLeft }) => 
             {event.date}
           </p>
           <h4
-            className="text-xl font-bold text-foreground mb-2"
+            className="text-xl font-bold text-premium-gold mb-2"
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
             {event.event}
           </h4>
-          <p className="text-gray-600">{event.description}</p>
+          <p className="text-gray-300">{event.description}</p>
         </motion.div>
       </div>
 
@@ -293,12 +293,12 @@ const MobileTimelineItem: React.FC<MobileTimelineItemProps> = ({ event, index })
           {event.date}
         </p>
         <h4
-          className="text-xl font-bold text-foreground mb-2"
+          className="text-xl font-bold text-premium-gold mb-2"
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
           {event.event}
         </h4>
-        <p className="text-gray-600">{event.description}</p>
+        <p className="text-gray-300">{event.description}</p>
       </div>
     </motion.div>
   );

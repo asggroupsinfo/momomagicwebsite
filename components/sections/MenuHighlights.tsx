@@ -136,7 +136,7 @@ export const MenuHighlights: React.FC = () => {
   };
 
   return (
-    <section id="menu" className="py-20 px-4 bg-white">
+    <section id="menu" className="py-20 px-4 bg-black">
       <div className="container mx-auto">
         {/* Section Title */}
         <motion.h2
@@ -144,7 +144,7 @@ export const MenuHighlights: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-center mb-6 text-foreground"
+          className="text-4xl md:text-5xl font-bold text-center mb-6 text-premium-gold"
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
           Our Magical Creations
@@ -155,7 +155,7 @@ export const MenuHighlights: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center text-gray-600 mb-12 max-w-2xl mx-auto"
+          className="text-center text-gray-300 mb-12 max-w-2xl mx-auto"
         >
           From traditional steamed momos to our exclusive Kurkure and Pizza
           innovations - every bite is crafted with love and quality
@@ -178,7 +178,7 @@ export const MenuHighlights: React.FC = () => {
               className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
                 selectedCategory === category
                   ? 'bg-magic-red text-white border-2 border-premium-gold shadow-lg'
-                  : 'bg-white text-foreground border-2 border-gray-300 hover:border-premium-gold'
+                  : 'bg-white text-premium-gold border-2 border-gray-300 hover:border-premium-gold'
               }`}
             >
               {category}
@@ -260,7 +260,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ item, index, imageLoaded, onImageLo
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
-            className="absolute top-4 right-4 bg-premium-gold text-foreground px-3 py-1 rounded-full text-xs font-bold shadow-lg"
+            className="absolute top-4 right-4 bg-premium-gold text-premium-gold px-3 py-1 rounded-full text-xs font-bold shadow-lg"
           >
             ⭐ EXCLUSIVE
           </motion.div>
@@ -275,13 +275,13 @@ const MenuCard: React.FC<MenuCardProps> = ({ item, index, imageLoaded, onImageLo
       {/* Content */}
       <div className="p-6">
         <h3
-          className="text-xl font-bold mb-2 text-foreground"
+          className="text-xl font-bold mb-2 text-premium-gold"
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
           {item.name}
         </h3>
 
-        <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+        <p className="text-sm text-gray-300 mb-4 line-clamp-2">
           {item.description}
         </p>
 
@@ -312,7 +312,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ item, index, imageLoaded, onImageLo
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="bg-magic-red text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-premium-gold hover:text-foreground transition-colors duration-300"
+            className="bg-magic-red text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-premium-gold hover:text-premium-gold transition-colors duration-300"
           >
             Order
           </motion.button>
