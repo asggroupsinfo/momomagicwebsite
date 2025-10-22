@@ -182,28 +182,40 @@ export const HeroCMS: React.FC = () => {
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Background Video URL
+              <span className="ml-2 text-xs text-premium-gold font-semibold">
+                📐 Recommended: 1920×1080px (Full HD)
+              </span>
             </label>
             <input
               type="text"
               value={content.videoUrl}
               onChange={(e) => setContent({ ...content, videoUrl: e.target.value })}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
-              placeholder="/hero-video.mp4"
+              placeholder="/hero-video.mp4 or https://example.com/video.mp4"
             />
+            <p className="text-xs text-gray-500 mt-1">
+              💡 Tip: Use MP4 format for best compatibility. Keep file size under 10MB for fast loading.
+            </p>
           </div>
 
           {/* Fallback Image */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Fallback Image URL
+              <span className="ml-2 text-xs text-premium-gold font-semibold">
+                📐 Recommended: 1920×1080px (Full HD)
+              </span>
             </label>
             <input
               type="text"
               value={content.fallbackImage}
               onChange={(e) => setContent({ ...content, fallbackImage: e.target.value })}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
-              placeholder="/hero-bg.jpg"
+              placeholder="/hero-bg.jpg or https://example.com/image.jpg"
             />
+            <p className="text-xs text-gray-500 mt-1">
+              💡 Tip: Use JPG or WebP format. Shows on mobile devices and when video fails to load.
+            </p>
           </div>
         </div>
 

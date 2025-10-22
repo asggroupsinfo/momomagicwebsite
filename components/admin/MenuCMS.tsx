@@ -273,7 +273,25 @@ export const MenuCMS: React.FC = () => {
                   onChange={(e) => updateItem(item.id, 'description', e.target.value)}
                   rows={2}
                   className="w-full px-2 py-1 border border-gray-300 rounded text-sm"
+                  placeholder="Item description"
                 />
+                
+                <div>
+                  <label className="text-xs text-gray-600 flex items-center justify-between">
+                    <span>Menu Item Image</span>
+                    <span className="text-premium-gold font-semibold">📐 600×400px</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={item.image}
+                    onChange={(e) => updateItem(item.id, 'image', e.target.value)}
+                    className="w-full px-2 py-1 border border-gray-300 rounded text-sm"
+                    placeholder="/images/menu/item-name.jpg or URL"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    💡 Use JPG/WebP format, 3:2 ratio
+                  </p>
+                </div>
                 
                 <div className="grid grid-cols-2 gap-2">
                   <div>

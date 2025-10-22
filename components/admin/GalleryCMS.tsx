@@ -148,14 +148,20 @@ export const GalleryCMS: React.FC = () => {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Image URL
+                <span className="ml-2 text-xs text-premium-gold font-semibold">
+                  📐 Recommended: 800×600px (4:3 ratio)
+                </span>
               </label>
               <input
                 type="text"
                 value={newImage.url || ''}
                 onChange={(e) => setNewImage({ ...newImage, url: e.target.value })}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent"
-                placeholder="/images/gallery/your-image.jpg"
+                placeholder="/images/gallery/your-image.jpg or https://example.com/image.jpg"
               />
+              <p className="text-xs text-gray-500 mt-1">
+                💡 Tip: Use JPG or WebP format. Keep file size under 500KB for fast loading.
+              </p>
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -166,8 +172,11 @@ export const GalleryCMS: React.FC = () => {
                 value={newImage.alt || ''}
                 onChange={(e) => setNewImage({ ...newImage, alt: e.target.value })}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent"
-                placeholder="Descriptive alt text for SEO"
+                placeholder="Descriptive alt text for SEO (e.g., 'Kurkure momos with special sauce')"
               />
+              <p className="text-xs text-gray-500 mt-1">
+                💡 Tip: Good alt text improves SEO and accessibility. Be descriptive and specific.
+              </p>
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">

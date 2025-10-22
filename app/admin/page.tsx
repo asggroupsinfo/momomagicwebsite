@@ -26,6 +26,7 @@ import { AnalyticsDashboard } from '@/components/admin/AnalyticsDashboard';
 import { GalleryCMS } from '@/components/admin/GalleryCMS';
 import { TestimonialsCMS } from '@/components/admin/TestimonialsCMS';
 import { ComboDealsCMS } from '@/components/admin/ComboDealsCMS';
+import { LogoCMS } from '@/components/admin/LogoCMS';
 
 interface AdminUser {
   username: string;
@@ -86,6 +87,7 @@ export default function AdminDashboard() {
 
   const tabs = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { id: 'logo', label: 'Logo & Branding', icon: ImageIcon },
     { id: 'hero', label: 'Hero Section', icon: ImageIcon },
     { id: 'menu', label: 'Menu', icon: Menu },
     { id: 'about', label: 'About Us', icon: Info },
@@ -246,6 +248,8 @@ export default function AdminDashboard() {
                   </div>
                 </div>
               )}
+
+              {activeTab === 'logo' && <LogoCMS />}
 
               {activeTab === 'hero' && <HeroCMS />}
 
