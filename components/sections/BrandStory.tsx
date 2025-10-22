@@ -144,9 +144,9 @@ export const BrandStory: React.FC = () => {
             className="relative"
           >
             <div className="relative h-full min-h-[400px] rounded-lg overflow-hidden shadow-2xl">
-              {/* Placeholder Image with Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-magic-red via-warm-orange to-premium-gold flex items-center justify-center">
-                <div className="text-center text-white p-8">
+              {/* Placeholder Image with Solid Background */}
+              <div className="absolute inset-0 bg-premium-gold flex items-center justify-center">
+                <div className="text-center text-black p-8">
                   <div className="text-8xl mb-4">🥟</div>
                   <p className="text-2xl font-bold mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>
                     Dhruv Gupta

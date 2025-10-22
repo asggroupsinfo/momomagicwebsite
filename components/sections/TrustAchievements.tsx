@@ -277,11 +277,11 @@ export const TrustAchievements: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center mt-16"
         >
-          <div className="inline-block bg-gradient-to-r from-magic-red to-warm-orange rounded-2xl p-8 shadow-2xl">
-            <h4 className="text-2xl font-bold text-white mb-3 font-heading">
+          <div className="inline-block bg-premium-gold rounded-2xl p-8 shadow-2xl">
+            <h4 className="text-2xl font-bold text-black mb-3 font-heading">
               Experience the Certified Magic
             </h4>
-            <p className="text-white/90 mb-6 max-w-xl">
+            <p className="text-black/90 mb-6 max-w-xl">
               Join 2000+ satisfied customers who trust our award-winning quality and taste
             </p>
             <motion.a

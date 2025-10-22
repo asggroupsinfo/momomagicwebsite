@@ -383,7 +383,7 @@ export default function MenuPage() {
                     onClick={() => setSelectedSpiceLevel(level.value)}
                     className={`px-4 py-2 rounded-full font-semibold transition-all ${
                       selectedSpiceLevel === level.value
-                        ? 'bg-warm-orange text-white shadow-lg'
+                        ? 'bg-premium-gold text-black shadow-lg'
                         : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                     }`}
                   >

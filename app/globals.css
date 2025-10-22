@@ -1,34 +1,175 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
+/* ============================================
+   PREMIUM MODERN COLOR SYSTEM
+   ONLY APPROVED COMBINATIONS
+   ============================================ */
+
 :root {
-  --background: #ffffff;
+  /* Base Colors - APPROVED ONLY */
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  --color-orange: #ffc241;
+  --color-orange-dark: #e6ac2b;
+  
+  /* Semantic Colors */
+  --background: #FFFFFF;
   --foreground: #000000;
-  --magic-red: #000000;
-  --premium-gold: #ffc241;
-  --charcoal-black: #000000;
-  --cream-white: #ffffff;
-  --vegetarian-green: #059669;
-  --warm-orange: #ffc241;
-  --cool-gray: #6B7280;
+  --primary: #ffc241;
+  --primary-dark: #e6ac2b;
+  
+  /* Premium Gradients - APPROVED */
+  --gradient-dark: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  --gradient-orange: linear-gradient(135deg, #ffc241 0%, #e6ac2b 100%);
+  --gradient-premium: linear-gradient(135deg, #000000 0%, #ffc241 100%);
+  
+  /* Shadows - Premium Modern */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.24);
+  --shadow-orange: 0 8px 32px rgba(255, 194, 65, 0.3);
+  
+  /* Typography */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
 }
 
 @theme inline {
+  /* Tailwind Custom Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-magic-red: var(--magic-red);
-  --color-premium-gold: var(--premium-gold);
-  --color-charcoal-black: var(--charcoal-black);
-  --color-cream-white: var(--cream-white);
-  --color-vegetarian-green: var(--vegetarian-green);
-  --color-warm-orange: var(--warm-orange);
-  --color-cool-gray: var(--cool-gray);
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-black: var(--color-black);
+  --color-white: var(--color-white);
+  --color-orange: var(--color-orange);
+  
+  /* Legacy Support (maintaining compatibility) */
+  --color-magic-red: #000000;
+  --color-premium-gold: #ffc241;
+  --color-charcoal-black: #000000;
+  --color-cream-white: #FFFFFF;
+  --color-vegetarian-green: #059669;
+  --color-warm-orange: #ffc241;
+  --color-cool-gray: #6B7280;
+  
+  /* Fonts */
   --font-heading: 'Playfair Display', serif;
   --font-body: 'Inter', sans-serif;
+}
+
+/* ============================================
+   GLOBAL STYLES - PREMIUM MODERN
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   PREMIUM UTILITY CLASSES
+   ============================================ */
+
+/* Combination 1: Black bg + Orange text */
+.premium-dark {
+  background: var(--color-black);
+  color: var(--color-orange);
+}
+
+.premium-dark-gradient {
+  background: var(--gradient-dark);
+  color: var(--color-orange);
+}
+
+/* Combination 2: Orange bg + Black text */
+.premium-accent {
+  background: var(--color-orange);
+  color: var(--color-black);
+}
+
+.premium-accent-gradient {
+  background: var(--gradient-orange);
+  color: var(--color-black);
+}
+
+/* Combination 3: White bg + Black text + Orange border */
+.premium-card {
+  background: var(--color-white);
+  color: var(--color-black);
+  border: 2px solid var(--color-orange);
+}
+
+/* Premium Shadows */
+.shadow-premium {
+  box-shadow: var(--shadow-lg);
+}
+
+.shadow-premium-orange {
+  box-shadow: var(--shadow-orange);
+}
+
+/* Premium Transitions */
+.transition-premium {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Premium Hover Effects */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Premium Gradients as Backgrounds */
+.bg-gradient-dark {
+  background: var(--gradient-dark);
+}
+
+.bg-gradient-orange {
+  background: var(--gradient-orange);
+}
+
+.bg-gradient-premium {
+  background: var(--gradient-premium);
+}
+
+/* Premium Text Styles */
+.text-gradient-orange {
+  background: var(--gradient-orange);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection Color */
+::selection {
+  background: var(--color-orange);
+  color: var(--color-black);
+}
+
+::-moz-selection {
+  background: var(--color-orange);
+  color: var(--color-black);
 }

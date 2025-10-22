@@ -242,7 +242,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ item, index, imageLoaded, onImageLo
       className="rounded-lg shadow-lg border-2 border-premium-gold hover:border-premium-gold overflow-hidden cursor-pointer transition-all duration-300 bg-white"
     >
       {/* Image Placeholder */}
-      <div className="relative h-48 bg-gradient-to-br from-magic-red via-warm-orange to-premium-gold overflow-hidden">
+      <div className="relative h-48 bg-premium-gold overflow-hidden">
         {/* Loading State */}
         {!imageLoaded && (
           <motion.div

@@ -310,10 +310,10 @@ export const LocationServices: React.FC = () => {
             {/* Quick Info */}
             <motion.div
               whileHover={{ y: -4 }}
-              className="bg-gradient-to-br from-magic-red to-warm-orange rounded-xl shadow-lg p-6 text-white"
+              className="bg-premium-gold rounded-xl shadow-lg p-6 text-black"
             >
               <h3 className="text-xl font-bold mb-2">🥟 Quick Tip</h3>
-              <p className="text-white/90">
+              <p className="text-black/90">
                 Call ahead for faster pickup! Our Kurkure and Pizza Momos are best enjoyed fresh and
                 hot.
               </p>
@@ -363,7 +363,7 @@ export const LocationServices: React.FC = () => {
                     <div className="flex items-center justify-between mb-2">
                       <h4 className="text-lg font-bold text-foreground">{service.title}</h4>
                       {service.status === 'coming-soon' && (
-                        <span className="bg-warm-orange text-white px-2 py-1 rounded-full text-xs font-semibold">
+                        <span className="bg-premium-gold text-black px-2 py-1 rounded-full text-xs font-semibold">
                           Soon
                         </span>
                       )}
