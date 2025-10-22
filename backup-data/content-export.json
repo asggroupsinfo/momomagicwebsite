@@ -1,0 +1,397 @@
+{
+  "backupVersion": "1.0",
+  "backupDate": "2025-10-22",
+  "websiteName": "Momos Magic",
+  "productionURL": "https://momomagicwebsite.vercel.app",
+  
+  "brandInformation": {
+    "businessName": "Momos Magic",
+    "tagline": "From Humble Stall to Culinary Legend",
+    "founder": "Dhruv Gupta",
+    "established": "September 2023",
+    "location": {
+      "address": "Momo Magic, Naya Bazar, Near Post Office",
+      "city": "Sherghati",
+      "state": "Bihar",
+      "pincode": "824211",
+      "country": "India"
+    },
+    "contact": {
+      "phone": "+91 9955955191",
+      "website": "www.momomegics.com",
+      "email": "Shivamkumar14102801@gmail.com"
+    },
+    "certifications": {
+      "fssai": "20424201001152",
+      "awards": ["Best Quality Food in City - District Magistrate Office"]
+    },
+    "philosophy": "Quantity bhi Mast, Taste bhi Zabardast"
+  },
+
+  "heroSection": {
+    "headline": "From Humble Stall to Culinary Legend",
+    "subheadline": "Experience the Magic That Transformed Sherghati's Street Food Scene",
+    "badges": [
+      "Awarded 'Best Quality Food in City' by District Magistrate",
+      "FSSAI Certified (20424201001152)",
+      "100% Pure Vegetarian · Since 2023",
+      "⭐ 4.9/5 (2000+ Happy Customers)"
+    ],
+    "ctaButtons": [
+      {
+        "text": "Taste the Magic → Order Now",
+        "link": "#menu",
+        "type": "primary"
+      },
+      {
+        "text": "Discover Our Story",
+        "link": "#story",
+        "type": "secondary"
+      }
+    ]
+  },
+
+  "brandStory": {
+    "title": "The Magic Began With a Dream, Not a Recipe",
+    "paragraphs": [
+      "In September 2023, a young entrepreneur named Dhruv Gupta decided he'd rather build his own empire than work in someone else's. Starting with traditional Bihari 'Pita', he quickly learned that success requires understanding what people truly crave.",
+      "The pivot to momos wasn't just a business decision - it was a revelation. Today, Momos Magic isn't just a food stall; it's a symbol of entrepreneurial spirit and culinary innovation."
+    ],
+    "timeline": [
+      {
+        "date": "Sep 2023",
+        "event": "Humble beginnings with small stall",
+        "description": "Started with traditional Bihari Pita in Naya Bazar"
+      },
+      {
+        "date": "Nov 2023",
+        "event": "Pita to Momos transformation",
+        "description": "Pivoted to momos after understanding market demand"
+      },
+      {
+        "date": "Jan 2024",
+        "event": "Exclusive Kurkure Momos introduced",
+        "description": "Launched innovative Kurkure Momos - first in Sherghati"
+      },
+      {
+        "date": "Jun 2024",
+        "event": "'Best Quality Food' award from DM Office",
+        "description": "Recognized by District Magistrate for quality standards"
+      },
+      {
+        "date": "Dec 2024",
+        "event": "Premium stall redesign",
+        "description": "Upgraded to premium branded stall experience"
+      },
+      {
+        "date": "Mar 2025",
+        "event": "Pizza Momos innovation launched",
+        "description": "Introduced fusion Pizza Momos variety"
+      }
+    ]
+  },
+
+  "menuItems": [
+    {
+      "id": 1,
+      "category": "Steamed Perfection",
+      "name": "Veg Momos",
+      "description": "Fresh vegetables wrapped in soft dough, steamed to perfection",
+      "prices": {
+        "5pc": 25,
+        "10pc": 50
+      },
+      "isVegetarian": true,
+      "isPopular": true,
+      "spiceLevel": "Medium"
+    },
+    {
+      "id": 2,
+      "category": "Steamed Perfection",
+      "name": "Paneer Momos",
+      "description": "Premium cottage cheese filling with special spices",
+      "prices": {
+        "5pc": 35,
+        "10pc": 70
+      },
+      "isVegetarian": true,
+      "isPopular": true,
+      "spiceLevel": "Medium"
+    },
+    {
+      "id": 3,
+      "category": "Steamed Perfection",
+      "name": "Soya Momos",
+      "description": "Protein-rich soya chunks with aromatic herbs",
+      "prices": {
+        "5pc": 30,
+        "10pc": 60
+      },
+      "isVegetarian": true,
+      "spiceLevel": "Medium"
+    },
+    {
+      "id": 4,
+      "category": "Steamed Perfection",
+      "name": "Cheese Corn Momos",
+      "description": "Sweet corn and melted cheese combination",
+      "prices": {
+        "5pc": 50,
+        "10pc": 100
+      },
+      "isVegetarian": true,
+      "isPopular": true,
+      "spiceLevel": "Mild"
+    },
+    {
+      "id": 5,
+      "category": "Crispy Fried",
+      "name": "Veg Fried Momos",
+      "description": "Crispy golden-fried vegetable momos",
+      "prices": {
+        "5pc": 30,
+        "10pc": 60
+      },
+      "isVegetarian": true,
+      "spiceLevel": "Medium"
+    },
+    {
+      "id": 6,
+      "category": "Crispy Fried",
+      "name": "Paneer Fried Momos",
+      "description": "Fried paneer momos with crunchy exterior",
+      "prices": {
+        "5pc": 46,
+        "10pc": 80
+      },
+      "isVegetarian": true,
+      "spiceLevel": "Medium"
+    },
+    {
+      "id": 7,
+      "category": "Crispy Fried",
+      "name": "Soya Fried Momos",
+      "description": "Crispy fried soya momos with herbs",
+      "prices": {
+        "5pc": 35,
+        "10pc": 70
+      },
+      "isVegetarian": true,
+      "spiceLevel": "Medium"
+    },
+    {
+      "id": 8,
+      "category": "Crispy Fried",
+      "name": "Cheese Corn Fried Momos",
+      "description": "Fried cheese corn momos with golden crust",
+      "prices": {
+        "5pc": 55,
+        "10pc": 119
+      },
+      "isVegetarian": true,
+      "spiceLevel": "Mild"
+    },
+    {
+      "id": 9,
+      "category": "Magic Signatures",
+      "name": "Kurkure Momos",
+      "description": "Sherghati's exclusive crispy kurkure coating momos",
+      "prices": {
+        "5pc": 50,
+        "10pc": 100
+      },
+      "isVegetarian": true,
+      "isPopular": true,
+      "isSignature": true,
+      "spiceLevel": "Medium"
+    },
+    {
+      "id": 10,
+      "category": "Magic Signatures",
+      "name": "Paneer Kurkure Momos",
+      "description": "Premium paneer with revolutionary kurkure coating",
+      "prices": {
+        "5pc": 60,
+        "10pc": 120
+      },
+      "isVegetarian": true,
+      "isSignature": true,
+      "spiceLevel": "Medium"
+    },
+    {
+      "id": 11,
+      "category": "Magic Signatures",
+      "name": "Cheese Kurkure Momos",
+      "description": "Melted cheese with crunchy kurkure exterior",
+      "prices": {
+        "5pc": 60,
+        "10pc": 120
+      },
+      "isVegetarian": true,
+      "isPopular": true,
+      "isSignature": true,
+      "spiceLevel": "Mild"
+    },
+    {
+      "id": 12,
+      "category": "Fusion Innovations",
+      "name": "Veg Pizza Momos",
+      "description": "Italian-Indian fusion with pizza flavors",
+      "prices": {
+        "5pc": 80,
+        "10pc": 160
+      },
+      "isVegetarian": true,
+      "isSignature": true,
+      "spiceLevel": "Medium"
+    },
+    {
+      "id": 13,
+      "category": "Fusion Innovations",
+      "name": "Paneer Pizza Momos",
+      "description": "Paneer with pizza sauce and cheese",
+      "prices": {
+        "5pc": 100,
+        "10pc": 200
+      },
+      "isVegetarian": true,
+      "isPopular": true,
+      "isSignature": true,
+      "spiceLevel": "Medium"
+    },
+    {
+      "id": 14,
+      "category": "Fusion Innovations",
+      "name": "Soya Pizza Momos",
+      "description": "Protein-rich soya with pizza twist",
+      "prices": {
+        "5pc": 90,
+        "10pc": 180
+      },
+      "isVegetarian": true,
+      "isSignature": true,
+      "spiceLevel": "Medium"
+    },
+    {
+      "id": 15,
+      "category": "Fusion Innovations",
+      "name": "Cheese Corn Pizza Momos",
+      "description": "Ultimate fusion of cheese, corn and pizza",
+      "prices": {
+        "5pc": 120,
+        "10pc": 240
+      },
+      "isVegetarian": true,
+      "isSignature": true,
+      "spiceLevel": "Mild"
+    }
+  ],
+
+  "reviews": [
+    {
+      "id": 1,
+      "author": "Rohan",
+      "rating": 5,
+      "text": "The Kurkure Momos are revolutionary! Nobody in Bihar makes them like Momos Magic. Dhruv bhaiya's innovation changed street food forever!",
+      "date": "2024-08-15",
+      "verified": true
+    },
+    {
+      "id": 2,
+      "author": "City Food Blog",
+      "rating": 5,
+      "text": "Awarded 'Best Quality Food' for a reason! The hygiene, taste, and innovation combination is unmatched in Sherghati.",
+      "date": "2024-06-20",
+      "verified": true
+    },
+    {
+      "id": 3,
+      "author": "Priya",
+      "rating": 5,
+      "text": "From watching them start with a small stall to becoming the most premium food spot - what a journey! The Pizza Momos are genius!",
+      "date": "2025-03-10",
+      "verified": true
+    }
+  ],
+
+  "trustFactors": [
+    {
+      "icon": "🏆",
+      "title": "Award Winning",
+      "description": "Best Quality Food in City - District Magistrate Office"
+    },
+    {
+      "icon": "🔒",
+      "title": "FSSAI Certified",
+      "description": "License: 20424201001152 - Highest Hygiene Standards"
+    },
+    {
+      "icon": "🌱",
+      "title": "100% Vegetarian",
+      "description": "Pure Veg Kitchen - No Compromise on Quality"
+    },
+    {
+      "icon": "⭐",
+      "title": "Rated 4.9/5",
+      "description": "2000+ Happy Customers - Consistent Quality"
+    }
+  ],
+
+  "services": [
+    {
+      "name": "Takeaway",
+      "status": "Available",
+      "description": "Currently available for takeaway orders"
+    },
+    {
+      "name": "Delivery",
+      "status": "Coming Soon",
+      "description": "10KM delivery radius launching soon"
+    },
+    {
+      "name": "Online Ordering",
+      "status": "Available",
+      "description": "Order via Momo Magic App"
+    },
+    {
+      "name": "Group Orders",
+      "status": "Available",
+      "description": "Special discounts for bulk orders"
+    },
+    {
+      "name": "Catering",
+      "status": "Available",
+      "description": "Booking available through app"
+    },
+    {
+      "name": "Table Booking",
+      "status": "Coming Soon",
+      "description": "Dine-in option launching in app"
+    }
+  ],
+
+  "operatingHours": {
+    "monday": "10:00 AM - 10:00 PM",
+    "tuesday": "10:00 AM - 10:00 PM",
+    "wednesday": "10:00 AM - 10:00 PM",
+    "thursday": "10:00 AM - 10:00 PM",
+    "friday": "10:00 AM - 10:00 PM",
+    "saturday": "10:00 AM - 10:00 PM",
+    "sunday": "10:00 AM - 10:00 PM"
+  },
+
+  "seoMetadata": {
+    "title": "Momos Magic - Premium Momos in Sherghati, Bihar",
+    "description": "Award-winning momos in Sherghati. Try our exclusive Kurkure Momos & Pizza Momos. FSSAI certified, 100% vegetarian. Order now!",
+    "keywords": ["momos sherghati", "kurkure momos", "pizza momos", "best momos bihar", "momos magic", "dhruv gupta momos"],
+    "ogImage": "/og-image.jpg",
+    "twitterCard": "summary_large_image"
+  },
+
+  "socialMedia": {
+    "facebook": "",
+    "instagram": "",
+    "twitter": "",
+    "whatsapp": "+919955955191"
+  }
+}

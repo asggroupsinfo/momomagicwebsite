@@ -1,0 +1,113 @@
+{
+  "backupVersion": "1.0",
+  "backupDate": "2025-10-22",
+  
+  "vercelConfiguration": {
+    "projectName": "momomagicwebsite",
+    "projectId": "prj_hBCmHuQyhfaJ1IiASCtmPRUc9WWv",
+    "orgId": "team_5pixPs70uw69M8Z4wtBddsIP",
+    "framework": "Next.js",
+    "nodeVersion": "20.x",
+    "buildCommand": "next build",
+    "outputDirectory": ".next",
+    "installCommand": "npm install",
+    "productionURL": "https://momomagicwebsite.vercel.app",
+    "deploymentProtection": "disabled"
+  },
+
+  "nextJsConfiguration": {
+    "version": "16.0.0",
+    "reactVersion": "18.x",
+    "typescript": true,
+    "appRouter": true,
+    "turbopack": true,
+    "imageOptimization": {
+      "formats": ["image/webp", "image/avif"],
+      "deviceSizes": [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+      "imageSizes": [16, 32, 48, 64, 96, 128, 256, 384]
+    },
+    "compression": true,
+    "reactStrictMode": true,
+    "poweredByHeader": false,
+    "experimental": {
+      "optimizeCss": true
+    }
+  },
+
+  "dependencies": {
+    "next": "16.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "framer-motion": "^11.15.0",
+    "lucide-react": "^0.468.0",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5"
+  },
+
+  "tailwindConfiguration": {
+    "colors": {
+      "magic-red": "#DC2626",
+      "premium-gold": "#D4AF37",
+      "charcoal-black": "#1F2937",
+      "cream-white": "#FEF3C7",
+      "vegetarian-green": "#059669",
+      "warm-orange": "#EA580C",
+      "cool-gray": "#6B7280"
+    },
+    "fonts": {
+      "heading": "Playfair Display",
+      "body": "Inter"
+    },
+    "breakpoints": {
+      "sm": "640px",
+      "md": "768px",
+      "lg": "1024px",
+      "xl": "1280px",
+      "2xl": "1536px"
+    }
+  },
+
+  "environmentVariables": {
+    "note": "Actual values stored securely in Vercel dashboard",
+    "required": [
+      "NEXT_PUBLIC_GOOGLE_MAPS_API_KEY",
+      "NEXT_PUBLIC_GOOGLE_PLACES_API_KEY",
+      "NEXT_PUBLIC_SITE_URL"
+    ],
+    "optional": [
+      "GOOGLE_ANALYTICS_ID",
+      "FACEBOOK_PIXEL_ID"
+    ]
+  },
+
+  "gitConfiguration": {
+    "repository": "https://github.com/asggroupsinfo/momomagicwebsite",
+    "mainBranch": "devin/1761120784-phase1-foundation",
+    "backupBranch": "backup-stable-v1",
+    "gitignore": [
+      "node_modules",
+      ".next",
+      ".vercel",
+      ".env.local",
+      "*.log"
+    ]
+  },
+
+  "seoConfiguration": {
+    "sitemap": true,
+    "robotsTxt": true,
+    "metaTags": true,
+    "openGraph": true,
+    "twitterCards": true,
+    "structuredData": false
+  },
+
+  "performanceOptimizations": {
+    "imageOptimization": true,
+    "codeSplitting": true,
+    "cssOptimization": true,
+    "compression": true,
+    "caching": true,
+    "lazyLoading": true
+  }
+}
