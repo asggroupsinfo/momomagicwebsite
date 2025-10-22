@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Hero } from '@/components/sections/Hero';
+import { BrandStory } from '@/components/sections/BrandStory';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 
@@ -9,29 +10,7 @@ export default function Home() {
   return (
     <div className="bg-cream-white">
       <Hero />
-
-      <section id="story" className="py-16 px-4">
-        <div className="container mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12 text-charcoal-black" style={{ fontFamily: 'Playfair Display, serif' }}>
-            The Magic Began With a Dream, Not a Recipe
-          </h2>
-          
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <p className="text-lg text-gray-700 mb-4">
-              In September 2023, a young entrepreneur named Dhruv Gupta decided he'd rather build his own empire than work in someone else's. Starting with traditional Bihari 'Pita', he quickly learned that success requires understanding what people truly crave.
-            </p>
-            <p className="text-lg text-gray-700">
-              The pivot to momos wasn't just a business decision - it was a revelation. Today, Momos Magic isn't just a food stall; it's a symbol of entrepreneurial spirit and culinary innovation.
-            </p>
-          </div>
-
-          <div className="text-center mb-12">
-            <p className="text-2xl font-semibold text-magic-red" style={{ fontFamily: 'Playfair Display, serif' }}>
-              "Quantity bhi Mast, Taste bhi Zabardast"
-            </p>
-          </div>
-        </div>
-      </section>
+      <BrandStory />
 
       <section id="menu" className="py-16 px-4 bg-white">
         <div className="container mx-auto">
