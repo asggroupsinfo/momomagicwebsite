@@ -15,7 +15,8 @@ import {
   Loader2,
   Images,
   Quote,
-  Package
+  Package,
+  FolderTree
 } from 'lucide-react';
 import { HeroCMS } from '@/components/admin/HeroCMS';
 import { MenuCMS } from '@/components/admin/MenuCMS';
@@ -27,6 +28,7 @@ import { GalleryCMS } from '@/components/admin/GalleryCMS';
 import { TestimonialsCMS } from '@/components/admin/TestimonialsCMS';
 import { ComboDealsCMS } from '@/components/admin/ComboDealsCMS';
 import { LogoCMS } from '@/components/admin/LogoCMS';
+import { CategoriesCMS } from '@/components/admin/CategoriesCMS';
 
 interface AdminUser {
   username: string;
@@ -90,6 +92,7 @@ export default function AdminDashboard() {
     { id: 'logo', label: 'Logo & Branding', icon: ImageIcon },
     { id: 'hero', label: 'Hero Section', icon: ImageIcon },
     { id: 'menu', label: 'Menu', icon: Menu },
+    { id: 'categories', label: 'Categories', icon: FolderTree },
     { id: 'about', label: 'About Us', icon: Info },
     { id: 'contact', label: 'Contact', icon: Phone },
     { id: 'gallery', label: 'Gallery', icon: Images },
@@ -254,6 +257,8 @@ export default function AdminDashboard() {
               {activeTab === 'hero' && <HeroCMS />}
 
               {activeTab === 'menu' && <MenuCMS />}
+
+              {activeTab === 'categories' && <CategoriesCMS />}
 
               {activeTab === 'about' && <AboutCMS />}
 
