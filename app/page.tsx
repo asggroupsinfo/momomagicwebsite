@@ -5,6 +5,7 @@ import { Hero } from '@/components/sections/Hero';
 import { BrandStory } from '@/components/sections/BrandStory';
 import { MenuHighlights } from '@/components/sections/MenuHighlights';
 import { Reviews } from '@/components/sections/Reviews';
+import { LocationServices } from '@/components/sections/LocationServices';
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <BrandStory />
       <MenuHighlights />
       <Reviews />
+      <LocationServices />
 
       <section className="py-16 px-4 bg-charcoal-black text-white">
         <div className="container mx-auto">
