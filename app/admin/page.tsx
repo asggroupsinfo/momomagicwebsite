@@ -18,6 +18,8 @@ import { HeroCMS } from '@/components/admin/HeroCMS';
 import { MenuCMS } from '@/components/admin/MenuCMS';
 import { AboutCMS } from '@/components/admin/AboutCMS';
 import { ContactCMS } from '@/components/admin/ContactCMS';
+import { MediaLibrary } from '@/components/admin/MediaLibrary';
+import { AnalyticsDashboard } from '@/components/admin/AnalyticsDashboard';
 
 interface AdminUser {
   username: string;
@@ -244,23 +246,9 @@ export default function AdminDashboard() {
 
               {activeTab === 'contact' && <ContactCMS />}
 
-              {activeTab === 'media' && (
-                <div>
-                  <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
-                    Media Library
-                  </h2>
-                  <p className="text-gray-600">Media library coming soon...</p>
-                </div>
-              )}
+              {activeTab === 'media' && <MediaLibrary />}
 
-              {activeTab === 'analytics' && (
-                <div>
-                  <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
-                    Analytics Dashboard
-                  </h2>
-                  <p className="text-gray-600">Analytics coming soon...</p>
-                </div>
-              )}
+              {activeTab === 'analytics' && <AnalyticsDashboard />}
             </motion.div>
           </div>
         </div>
