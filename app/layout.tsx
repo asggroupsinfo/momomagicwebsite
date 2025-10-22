@@ -3,6 +3,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { WebVitals } from "./web-vitals";
 
 export const metadata: Metadata = {
   title: "Momos Magic - From Humble Stall to Culinary Legend",
@@ -80,6 +81,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <GoogleAnalytics />
+        <WebVitals />
         <Header />
         <main className="min-h-screen">
           {children}
