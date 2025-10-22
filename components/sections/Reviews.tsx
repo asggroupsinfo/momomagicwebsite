@@ -226,7 +226,7 @@ export const Reviews: React.FC = () => {
   }
 
   return (
-    <section className="py-20 bg-black relative overflow-hidden">
+    <section data-section="reviews-v2" className="py-20 bg-[#000000] relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{

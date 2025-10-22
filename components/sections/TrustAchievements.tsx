@@ -277,18 +277,18 @@ export const TrustAchievements: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center mt-16"
         >
-          <div className="inline-block bg-premium-gold rounded-2xl p-8 shadow-2xl">
+          <div className="inline-block bg-gradient-orange rounded-2xl p-8 shadow-2xl border-2 border-black">
             <h4 className="text-2xl font-bold text-black mb-3 font-heading">
               Experience the Certified Magic
             </h4>
-            <p className="text-black/90 mb-6 max-w-xl">
+            <p className="text-black mb-6 max-w-xl font-semibold">
               Join 2000+ satisfied customers who trust our award-winning quality and taste
             </p>
             <motion.a
               href="tel:+919955955191"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-block bg-premium-gold text-foreground px-8 py-4 rounded-full font-bold text-lg hover:bg-premium-gold/90 transition-colors shadow-lg"
+              className="inline-block bg-black text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-black transition-all shadow-lg border-2 border-black"
             >
               Order Now: +91 9955955191
             </motion.a>

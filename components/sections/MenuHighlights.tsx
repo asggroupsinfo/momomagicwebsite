@@ -242,7 +242,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ item, index, imageLoaded, onImageLo
       className="rounded-lg shadow-lg border-2 border-premium-gold hover:border-premium-gold overflow-hidden cursor-pointer transition-all duration-300 bg-white"
     >
       {/* Image Placeholder */}
-      <div className="relative h-48 bg-premium-gold overflow-hidden">
+      <div className="relative h-48 bg-gradient-orange overflow-hidden">
         {/* Loading State */}
         {!imageLoaded && (
           <motion.div
@@ -260,7 +260,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ item, index, imageLoaded, onImageLo
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
-            className="absolute top-4 right-4 bg-premium-gold text-premium-gold px-3 py-1 rounded-full text-xs font-bold shadow-lg"
+            className="absolute top-4 right-4 bg-white text-black px-3 py-1 rounded-full text-xs font-bold shadow-lg border-2 border-black"
           >
             ⭐ EXCLUSIVE
           </motion.div>
@@ -275,13 +275,13 @@ const MenuCard: React.FC<MenuCardProps> = ({ item, index, imageLoaded, onImageLo
       {/* Content */}
       <div className="p-6">
         <h3
-          className="text-xl font-bold mb-2 text-premium-gold"
+          className="text-xl font-bold mb-2 text-black"
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
           {item.name}
         </h3>
 
-        <p className="text-sm text-gray-300 mb-4 line-clamp-2">
+        <p className="text-sm text-gray-600 mb-4 line-clamp-2">
           {item.description}
         </p>
 
@@ -312,7 +312,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ item, index, imageLoaded, onImageLo
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="bg-magic-red text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-premium-gold hover:text-premium-gold transition-colors duration-300"
+            className="bg-black text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gradient-orange hover:text-black transition-all duration-300"
           >
             Order
           </motion.button>
