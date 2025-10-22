@@ -10,7 +10,7 @@ import { TrustAchievements } from '@/components/sections/TrustAchievements';
 
 export default function Home() {
   return (
-    <div className="bg-cream-white">
+    <div className="bg-white">
       <Hero />
       <BrandStory />
       <MenuHighlights />

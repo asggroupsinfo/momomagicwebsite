@@ -134,7 +134,7 @@ export const LocationServices: React.FC = () => {
   }&q=${encodeURIComponent(businessInfo.address.full)}&zoom=15&maptype=roadmap`;
 
   return (
-    <section className="py-20 bg-cream-white relative overflow-hidden">
+    <section className="py-20 bg-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div
@@ -203,8 +203,7 @@ export const LocationServices: React.FC = () => {
             {/* Address Card */}
             <motion.div
               whileHover={{ y: -4 }}
-              className="rounded-xl shadow-lg p-6 border-2 border-gray-200 hover:border-premium-gold transition-colors"
-              style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f9f4e6 100%)' }}
+              className="rounded-xl shadow-lg p-6 border-2 border-premium-gold hover:border-premium-gold transition-colors bg-white"
             >
               <div className="flex items-start space-x-4">
                 <div className="bg-magic-red/10 p-3 rounded-full">
@@ -250,8 +249,7 @@ export const LocationServices: React.FC = () => {
             {/* Phone Card */}
             <motion.div
               whileHover={{ y: -4 }}
-              className="rounded-xl shadow-lg p-6 border-2 border-gray-200 hover:border-premium-gold transition-colors"
-              style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f9f4e6 100%)' }}
+              className="rounded-xl shadow-lg p-6 border-2 border-premium-gold hover:border-premium-gold transition-colors bg-white"
             >
               <div className="flex items-start space-x-4">
                 <div className="bg-vegetarian-green/10 p-3 rounded-full">
@@ -277,8 +275,7 @@ export const LocationServices: React.FC = () => {
             {/* Hours Card */}
             <motion.div
               whileHover={{ y: -4 }}
-              className="rounded-xl shadow-lg p-6 border-2 border-gray-200 hover:border-premium-gold transition-colors"
-              style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f9f4e6 100%)' }}
+              className="rounded-xl shadow-lg p-6 border-2 border-premium-gold hover:border-premium-gold transition-colors bg-white"
             >
               <div className="flex items-start space-x-4">
                 <div className="bg-warm-orange/10 p-3 rounded-full">
@@ -344,12 +341,11 @@ export const LocationServices: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -8, scale: 1.02 }}
-                className={`rounded-xl shadow-lg p-6 border-2 transition-all duration-300 ${
+                className={`rounded-xl shadow-lg p-6 border-2 transition-all duration-300 bg-white ${
                   service.status === 'available'
-                    ? 'border-gray-200 hover:border-premium-gold'
-                    : 'border-gray-200 hover:border-warm-orange'
+                    ? 'border-premium-gold hover:border-premium-gold'
+                    : 'border-premium-gold hover:border-warm-orange'
                 }`}
-                style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f9f4e6 100%)' }}
               >
                 <div className="flex items-start space-x-4">
                   <motion.div

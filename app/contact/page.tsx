@@ -157,7 +157,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="bg-cream-white py-16 px-4">
+    <div className="bg-white py-16 px-4">
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
         <motion.div

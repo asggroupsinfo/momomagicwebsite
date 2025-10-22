@@ -239,8 +239,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ item, index, imageLoaded, onImageLo
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.1 }}
       whileHover={{ y: -8, scale: 1.02 }}
-      className="rounded-lg shadow-lg border-2 border-gray-200 hover:border-premium-gold overflow-hidden cursor-pointer transition-all duration-300"
-      style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f9f4e6 100%)' }}
+      className="rounded-lg shadow-lg border-2 border-premium-gold hover:border-premium-gold overflow-hidden cursor-pointer transition-all duration-300 bg-white"
     >
       {/* Image Placeholder */}
       <div className="relative h-48 bg-gradient-to-br from-magic-red via-warm-orange to-premium-gold overflow-hidden">

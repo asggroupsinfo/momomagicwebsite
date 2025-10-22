@@ -52,7 +52,7 @@ export const Gallery: React.FC = () => {
   ];
 
   return (
-    <section className="py-20" style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f9f4e6 100%)' }}>
+    <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

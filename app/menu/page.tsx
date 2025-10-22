@@ -274,7 +274,7 @@ export default function MenuPage() {
   };
 
   return (
-    <div className="bg-cream-white min-h-screen py-20">
+    <div className="bg-white min-h-screen py-20">
       <div className="container mx-auto px-4">
         {/* Page Header */}
         <motion.div
