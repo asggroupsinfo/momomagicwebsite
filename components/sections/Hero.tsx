@@ -56,8 +56,8 @@ export const Hero: React.FC = () => {
         )}
       </div>
 
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-b from-charcoal-black/80 via-magic-red/60 to-charcoal-black/90" />
+      {/* Gradient Overlay - Black Background */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/90 via-black/80 to-black/95" />
 
       {/* Gold Particles Animation */}
       <div className="absolute inset-0 z-10 overflow-hidden">
@@ -168,28 +168,28 @@ export const Hero: React.FC = () => {
           })}
         </motion.div>
 
-        {/* CTA Buttons with Enhanced Hover Effects */}
+        {/* CTA Buttons with Enhanced Hover Effects - Orange Theme */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.2 }}
-          className="flex flex-col sm:flex-row gap-6 justify-center"
+          className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <motion.button
             onClick={() => scrollToSection('menu')}
-            className="group relative px-8 py-4 bg-magic-red text-white rounded-lg font-semibold text-lg overflow-hidden transition-all duration-300"
+            className="group relative px-6 py-3 bg-premium-gold text-black rounded-lg font-semibold text-base overflow-hidden transition-all duration-300 shadow-lg"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             <span className="relative z-10">Taste the Magic → Order Now</span>
             <motion.div
-              className="absolute inset-0 border-4 border-premium-gold rounded-lg"
+              className="absolute inset-0 border-3 border-charcoal-black rounded-lg"
               initial={{ opacity: 0, scale: 0.8 }}
               whileHover={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
             />
             <motion.div
-              className="absolute inset-0 bg-premium-gold"
+              className="absolute inset-0 bg-charcoal-black"
               initial={{ x: '-100%' }}
               whileHover={{ x: 0 }}
               transition={{ duration: 0.3 }}
@@ -199,11 +199,11 @@ export const Hero: React.FC = () => {
 
           <motion.button
             onClick={() => scrollToSection('story')}
-            className="group relative px-8 py-4 bg-transparent text-white rounded-lg font-semibold text-lg border-2 border-premium-gold overflow-hidden transition-all duration-300"
+            className="group relative px-6 py-3 bg-transparent text-white rounded-lg font-semibold text-base border-2 border-premium-gold overflow-hidden transition-all duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span className="relative z-10 group-hover:text-charcoal-black transition-colors duration-300">
+            <span className="relative z-10 group-hover:text-black transition-colors duration-300">
               Discover Our Story
             </span>
             <motion.div

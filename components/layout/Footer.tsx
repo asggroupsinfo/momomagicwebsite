@@ -2,17 +2,24 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Phone, MapPin, Clock } from 'lucide-react';
+import Image from 'next/image';
+import { Phone, MapPin, Clock, Lock } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-charcoal-black text-white py-12">
+    <footer className="bg-black text-white py-12 relative">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-2xl font-bold text-premium-gold mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
-              Momos Magic
-            </h3>
+            <div className="flex items-center mb-4">
+              <Image 
+                src="/logo.png" 
+                alt="Momos Magic Logo" 
+                width={100} 
+                height={33}
+                className="h-8 w-auto"
+              />
+            </div>
             <p className="text-gray-300 mb-4">
               From Humble Stall to Culinary Legend
             </p>
@@ -20,7 +27,7 @@ export const Footer: React.FC = () => {
               <span className="bg-vegetarian-green text-white px-3 py-1 rounded-full">
                 100% Vegetarian
               </span>
-              <span className="bg-premium-gold text-charcoal-black px-3 py-1 rounded-full">
+              <span className="bg-premium-gold text-black px-3 py-1 rounded-full font-semibold">
                 FSSAI Certified
               </span>
             </div>
@@ -55,9 +62,18 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400 relative">
           <p>&copy; {new Date().getFullYear()} Momos Magic. All rights reserved.</p>
           <p className="mt-2">Crafted with ❤️ by Dhruv Gupta</p>
+          
+          {/* Admin Login Button - Bottom Right */}
+          <button
+            className="absolute bottom-0 right-4 flex items-center space-x-2 text-xs text-gray-500 hover:text-premium-gold transition-colors duration-300 group"
+            onClick={() => alert('Admin dashboard coming soon!')}
+          >
+            <Lock size={14} className="group-hover:scale-110 transition-transform" />
+            <span>Admin</span>
+          </button>
         </div>
       </div>
     </footer>

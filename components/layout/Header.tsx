@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -16,14 +17,23 @@ export const Header: React.FC = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-magic-red shadow-md">
-      <nav className="container mx-auto px-4 py-4">
+    <header className="sticky top-0 z-50 bg-black shadow-lg">
+      <nav className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold text-premium-gold" style={{ fontFamily: 'Playfair Display, serif' }}>
-            Momos Magic
+          {/* Logo - Left Side */}
+          <Link href="/" className="flex items-center">
+            <Image 
+              src="/logo.png" 
+              alt="Momos Magic Logo" 
+              width={120} 
+              height={40}
+              className="h-10 w-auto"
+              priority
+            />
           </Link>
 
-          <div className="hidden md:flex space-x-8">
+          {/* Navigation - Center (Desktop) */}
+          <div className="hidden md:flex space-x-8 absolute left-1/2 transform -translate-x-1/2">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -35,6 +45,15 @@ export const Header: React.FC = () => {
             ))}
           </div>
 
+          {/* Order Now Button - Right Side (Desktop) */}
+          <Link 
+            href="/menu" 
+            className="hidden md:block bg-premium-gold text-black px-4 py-2 rounded-lg font-semibold hover:bg-charcoal-black hover:text-white transition-all duration-300 text-sm"
+          >
+            Order Now
+          </Link>
+
+          {/* Mobile Menu Button */}
           <button
             className="md:hidden text-white"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -43,6 +62,7 @@ export const Header: React.FC = () => {
           </button>
         </div>
 
+        {/* Mobile Menu */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
@@ -61,6 +81,13 @@ export const Header: React.FC = () => {
                   {link.label}
                 </Link>
               ))}
+              <Link
+                href="/menu"
+                className="block mt-4 bg-premium-gold text-black px-4 py-2 rounded-lg font-semibold text-center hover:bg-charcoal-black hover:text-white transition-all duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Order Now
+              </Link>
             </motion.div>
           )}
         </AnimatePresence>
