@@ -1,76 +1,16 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { Hero } from '@/components/sections/Hero';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
-import { Award, CheckCircle, Star, Utensils } from 'lucide-react';
 
 export default function Home() {
   return (
     <div className="bg-cream-white">
-      <section className="relative bg-magic-red text-white py-20 px-4">
-        <div className="container mx-auto text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-5xl md:text-6xl font-bold mb-6"
-            style={{ fontFamily: 'Playfair Display, serif' }}
-          >
-            From Humble Stall to Culinary Legend
-          </motion.h1>
-          
-          <motion.p
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl md:text-2xl mb-8 text-cream-white"
-          >
-            Experience the Magic That Transformed Sherghati's Street Food Scene
-          </motion.p>
+      <Hero />
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-wrap justify-center gap-4 mb-8"
-          >
-            <div className="flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full">
-              <Award className="text-premium-gold" size={20} />
-              <span className="text-sm">Best Quality Food in City</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full">
-              <CheckCircle className="text-vegetarian-green" size={20} />
-              <span className="text-sm">FSSAI Certified</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full">
-              <Utensils className="text-premium-gold" size={20} />
-              <span className="text-sm">100% Vegetarian</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full">
-              <Star className="text-premium-gold" size={20} />
-              <span className="text-sm">4.9/5 (2000+ Customers)</span>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Button variant="secondary" href="#menu">
-              Taste the Magic → Order Now
-            </Button>
-            <Button variant="secondary" href="/about">
-              Discover Our Story
-            </Button>
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="py-16 px-4">
+      <section id="story" className="py-16 px-4">
         <div className="container mx-auto">
           <h2 className="text-4xl font-bold text-center mb-12 text-charcoal-black" style={{ fontFamily: 'Playfair Display, serif' }}>
             The Magic Began With a Dream, Not a Recipe
@@ -93,7 +33,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 px-4 bg-white">
+      <section id="menu" className="py-16 px-4 bg-white">
         <div className="container mx-auto">
           <h2 className="text-4xl font-bold text-center mb-12 text-charcoal-black" style={{ fontFamily: 'Playfair Display, serif' }}>
             Our Magical Creations
