@@ -47,7 +47,7 @@ export const BrandStory: React.FC = () => {
   ];
 
   return (
-    <section id="story" className="py-20 px-4 bg-cream-white">
+    <section id="story" className="py-20 px-4" style={{ background: 'linear-gradient(135deg, #ffffff 0%, #fff9e6 100%)' }}>
       <div className="container mx-auto">
         {/* Section Title */}
         <motion.h2
@@ -248,7 +248,8 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ event, index, isLeft }) => 
         <motion.div
           whileHover={{ scale: 1.05, borderColor: '#D4AF37' }}
           transition={{ duration: 0.3 }}
-          className="bg-white p-6 rounded-lg shadow-lg border-2 border-gray-200 cursor-pointer"
+          className="p-6 rounded-lg shadow-lg border-2 border-gray-200 cursor-pointer"
+          style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f9f4e6 100%)' }}
         >
           <p className="text-sm font-semibold text-premium-gold mb-2">
             {event.date}
@@ -288,7 +289,7 @@ const MobileTimelineItem: React.FC<MobileTimelineItemProps> = ({ event, index })
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className="flex-shrink-0 w-72"
     >
-      <div className="bg-white p-6 rounded-lg shadow-lg border-2 border-gray-200 h-full">
+      <div className="p-6 rounded-lg shadow-lg border-2 border-gray-200 h-full" style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f9f4e6 100%)' }}>
         <p className="text-sm font-semibold text-premium-gold mb-2">
           {event.date}
         </p>

@@ -105,7 +105,8 @@ export const Testimonials: React.FC = () => {
             href="https://www.google.com/search?q=momos+magic+sherghati"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-premium-gold text-black px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-foreground transition-all duration-300 shadow-lg"
+            className="inline-block text-black px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-foreground transition-all duration-300 shadow-lg"
+            style={{ background: 'linear-gradient(135deg, #ffc241 0%, #e6ac2b 100%)' }}
           >
             See All Reviews on Google
           </a>

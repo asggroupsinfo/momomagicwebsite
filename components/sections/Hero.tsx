@@ -177,7 +177,8 @@ export const Hero: React.FC = () => {
         >
           <motion.button
             onClick={() => scrollToSection('menu')}
-            className="group relative px-6 py-3 bg-premium-gold text-black rounded-lg font-semibold text-base overflow-hidden transition-all duration-300 shadow-lg"
+            className="group relative px-6 py-3 text-black rounded-lg font-semibold text-base overflow-hidden transition-all duration-300 shadow-lg"
+            style={{ background: 'linear-gradient(135deg, #ffc241 0%, #e6ac2b 100%)' }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

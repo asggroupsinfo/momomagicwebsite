@@ -19,9 +19,11 @@ export const Button: React.FC<ButtonProps> = ({
   const baseStyles = 'px-6 py-3 rounded-lg font-medium transition-all duration-300 shadow-md hover:shadow-xl';
   
   const variantStyles = {
-    primary: 'bg-magic-red text-white hover:border-premium-gold border-2 border-magic-red hover:shadow-premium-gold/50',
+    primary: 'text-white hover:border-premium-gold border-2 border-transparent hover:shadow-premium-gold/50',
     secondary: 'border-2 border-premium-gold bg-transparent text-magic-red hover:bg-magic-red hover:text-white hover:shadow-magic-red/50',
   };
+
+  const primaryGradient = 'linear-gradient(135deg, #ffc241 0%, #e6ac2b 100%)';
 
   const combinedStyles = `${baseStyles} ${variantStyles[variant]} ${className}`;
 
@@ -41,6 +43,7 @@ export const Button: React.FC<ButtonProps> = ({
       <motion.a
         href={href}
         className={combinedStyles}
+        style={variant === 'primary' ? { background: primaryGradient } : undefined}
         whileHover={hoverAnimation}
         whileTap={tapAnimation}
         initial={{ opacity: 0, y: 20 }}
@@ -56,6 +59,7 @@ export const Button: React.FC<ButtonProps> = ({
     <motion.button
       onClick={onClick}
       className={combinedStyles}
+      style={variant === 'primary' ? { background: primaryGradient } : undefined}
       whileHover={hoverAnimation}
       whileTap={tapAnimation}
       initial={{ opacity: 0, y: 20 }}

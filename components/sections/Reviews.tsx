@@ -302,7 +302,7 @@ export const Reviews: React.FC = () => {
                 }}
                 className="absolute inset-0"
               >
-                <div className="bg-cream-white rounded-2xl shadow-2xl p-8 md:p-12 h-full flex flex-col justify-between">
+                <div className="rounded-2xl shadow-2xl p-8 md:p-12 h-full flex flex-col justify-between" style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f9f4e6 100%)' }}>
                   {/* Quote Icon */}
                   <div className="absolute top-6 right-6 opacity-10">
                     <Quote className="w-16 h-16 text-premium-gold" />
