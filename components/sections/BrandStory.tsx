@@ -64,7 +64,7 @@ export const BrandStory: React.FC = () => {
         {/* Split Screen Layout */}
         <div
           ref={storyRef}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20 px-4 md:px-8"
         >
           {/* Left: Story Text */}
           <motion.div
@@ -80,7 +80,7 @@ export const BrandStory: React.FC = () => {
               className="text-lg text-white leading-relaxed"
             >
               In September 2023, a young entrepreneur named{' '}
-              <span className="font-semibold text-magic-red">Dhruv Gupta</span>{' '}
+              <span className="font-semibold text-premium-gold">Dhruv Gupta</span>{' '}
               decided he'd rather build his own empire than work in someone
               else's. Tired of the 9-to-5 rat race, he believed in the
               philosophy:{' '}
@@ -112,7 +112,7 @@ export const BrandStory: React.FC = () => {
               revelation. Dhruv infused them with the same passion and quality
               standards he maintained for his traditional recipes. The small
               stall began attracting attention, and soon{' '}
-              <span className="font-bold text-magic-red">"Momos Magic"</span>{' '}
+              <span className="font-bold text-premium-gold">"Momos Magic"</span>{' '}
               became the talk of Sherghati.
             </motion.p>
 
@@ -143,10 +143,14 @@ export const BrandStory: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative h-full min-h-[400px] rounded-lg overflow-hidden shadow-2xl">
-              {/* Placeholder Image with Solid Background */}
-              <div className="absolute inset-0 bg-premium-gold flex items-center justify-center">
-                <div className="text-center text-black p-8">
+            <div className="relative h-full min-h-[400px] rounded-lg overflow-hidden shadow-2xl border-4 border-premium-gold">
+              {/* Video Container - Transparent background, video will fill completely */}
+              <div className="absolute inset-0 bg-transparent flex items-center justify-center">
+                {/* Video will be added here and will fill the entire box with object-cover */}
+                {/* <video className="absolute inset-0 w-full h-full object-cover" src="/videos/founder-video.mp4" autoPlay loop muted /> */}
+                
+                {/* Placeholder content (will be replaced by video) */}
+                <div className="text-center text-black p-8 z-10">
                   <div className="text-8xl mb-4">🥟</div>
                   <p className="text-2xl font-bold mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>
                     Dhruv Gupta
@@ -157,9 +161,6 @@ export const BrandStory: React.FC = () => {
                   </p>
                 </div>
               </div>
-
-              {/* Decorative Border */}
-              <div className="absolute inset-0 border-4 border-premium-gold rounded-lg pointer-events-none"></div>
             </div>
           </motion.div>
         </div>
