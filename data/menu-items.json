@@ -1,0 +1,197 @@
+[
+  {
+    "id": "1",
+    "name": "Veg Momos",
+    "category": "steamed",
+    "description": "Fresh vegetables wrapped in soft dough, steamed to perfection",
+    "price": {
+      "half": 25,
+      "full": 50
+    },
+    "image": "/menu/veg-momos.jpg",
+    "isPopular": true,
+    "spiceLevel": "mild"
+  },
+  {
+    "id": "2",
+    "name": "Paneer Momos",
+    "category": "steamed",
+    "description": "Premium cottage cheese filling with special spices",
+    "price": {
+      "half": 35,
+      "full": 70
+    },
+    "image": "/menu/paneer-momos.jpg",
+    "isPopular": true,
+    "spiceLevel": "medium"
+  },
+  {
+    "id": "3",
+    "name": "Soya Momos",
+    "category": "steamed",
+    "description": "Protein-rich soya chunks with aromatic herbs",
+    "price": {
+      "half": 30,
+      "full": 60
+    },
+    "image": "/menu/soya-momos.jpg",
+    "isPopular": false,
+    "spiceLevel": "medium"
+  },
+  {
+    "id": "4",
+    "name": "Cheese Corn Momos",
+    "category": "steamed",
+    "description": "Sweet corn and cheese blend for a creamy delight",
+    "price": {
+      "half": 50,
+      "full": 100
+    },
+    "image": "/menu/cheese-corn-momos.jpg",
+    "isPopular": true,
+    "spiceLevel": "mild"
+  },
+  {
+    "id": "5",
+    "name": "Veg Fried Momos",
+    "category": "fried",
+    "description": "Crispy golden-fried momos with tangy dipping sauce",
+    "price": {
+      "half": 30,
+      "full": 60
+    },
+    "image": "/menu/veg-fried.jpg",
+    "isPopular": true,
+    "spiceLevel": "medium"
+  },
+  {
+    "id": "6",
+    "name": "Paneer Fried Momos",
+    "category": "fried",
+    "description": "Paneer momos fried to golden perfection",
+    "price": {
+      "half": 46,
+      "full": 80
+    },
+    "image": "/menu/paneer-fried.jpg",
+    "isPopular": false,
+    "spiceLevel": "medium"
+  },
+  {
+    "id": "7",
+    "name": "Soya Fried Momos",
+    "category": "fried",
+    "description": "Crispy soya momos with special chutney",
+    "price": {
+      "half": 35,
+      "full": 70
+    },
+    "image": "/menu/soya-fried.jpg",
+    "isPopular": false,
+    "spiceLevel": "hot"
+  },
+  {
+    "id": "8",
+    "name": "Cheese Corn Fried",
+    "category": "fried",
+    "description": "Fried cheese corn momos with extra crunch",
+    "price": {
+      "half": 55,
+      "full": 119
+    },
+    "image": "/menu/cheese-corn-fried.jpg",
+    "isPopular": true,
+    "spiceLevel": "mild"
+  },
+  {
+    "id": "9",
+    "name": "Kurkure Veg Momos",
+    "category": "kurkure",
+    "description": "Our signature crispy kurkure coating - Sherghati exclusive!",
+    "price": {
+      "half": 50,
+      "full": 100
+    },
+    "image": "/menu/kurkure-veg.jpg",
+    "isPopular": true,
+    "spiceLevel": "medium"
+  },
+  {
+    "id": "10",
+    "name": "Paneer Kurkure Momos",
+    "category": "kurkure",
+    "description": "Premium paneer with our famous kurkure crunch",
+    "price": {
+      "half": 60,
+      "full": 120
+    },
+    "image": "/menu/paneer-kurkure.jpg",
+    "isPopular": true,
+    "spiceLevel": "medium"
+  },
+  {
+    "id": "11",
+    "name": "Cheese Kurkure Momos",
+    "category": "kurkure",
+    "description": "Cheesy goodness with kurkure coating",
+    "price": {
+      "half": 60,
+      "full": 120
+    },
+    "image": "/menu/cheese-kurkure.jpg",
+    "isPopular": true,
+    "spiceLevel": "mild"
+  },
+  {
+    "id": "12",
+    "name": "Veg Pizza Momos",
+    "category": "pizza",
+    "description": "Fusion innovation - Pizza meets momos!",
+    "price": {
+      "half": 80,
+      "full": 160
+    },
+    "image": "/menu/veg-pizza.jpg",
+    "isPopular": true,
+    "spiceLevel": "medium"
+  },
+  {
+    "id": "13",
+    "name": "Paneer Pizza Momos",
+    "category": "pizza",
+    "description": "Premium paneer pizza momos with Italian herbs",
+    "price": {
+      "half": 100,
+      "full": 200
+    },
+    "image": "/menu/paneer-pizza.jpg",
+    "isPopular": true,
+    "spiceLevel": "medium"
+  },
+  {
+    "id": "14",
+    "name": "Soya Pizza Momos",
+    "category": "pizza",
+    "description": "Protein-packed pizza momos",
+    "price": {
+      "half": 90,
+      "full": 180
+    },
+    "image": "/menu/soya-pizza.jpg",
+    "isPopular": false,
+    "spiceLevel": "hot"
+  },
+  {
+    "id": "15",
+    "name": "Cheese Corn Pizza Momos",
+    "category": "pizza",
+    "description": "Ultimate cheese corn pizza momos",
+    "price": {
+      "half": 120,
+      "full": 240
+    },
+    "image": "/menu/cheese-corn-pizza.jpg",
+    "isPopular": true,
+    "spiceLevel": "mild"
+  }
+]

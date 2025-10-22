@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Save, RefreshCw, AlertCircle, CheckCircle, Image as ImageIcon } from 'lucide-react';
+import { ImageInput } from './ImageInput';
 
 interface LogoContent {
   headerLogo: string;
@@ -107,24 +108,16 @@ export const LogoCMS: React.FC = () => {
             <h3 className="text-lg font-semibold">Header Logo</h3>
           </div>
           <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Logo URL
-                <span className="ml-2 text-xs text-premium-gold font-semibold">
-                  📐 Recommended: 200×60px
-                </span>
-              </label>
-              <input
-                type="text"
-                value={content.headerLogo}
-                onChange={(e) => setContent({ ...content, headerLogo: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
-                placeholder="/images/logo.png or https://example.com/logo.png"
-              />
-              <p className="text-xs text-gray-500 mt-2">
-                💡 Tip: Use PNG with transparent background. Appears in website header.
-              </p>
-            </div>
+            {/* Header Logo - Enhanced with Media Library */}
+            <ImageInput
+              label="Logo URL"
+              value={content.headerLogo}
+              onChange={(value) => setContent({ ...content, headerLogo: value })}
+              placeholder="/images/logo.png or https://example.com/logo.png"
+              sizeGuideline="Recommended: 200×60px"
+              tip="Use PNG with transparent background. Appears in website header."
+              fileType="image"
+            />
             <div className="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-24">
               {content.headerLogo ? (
                 <img 
@@ -149,24 +142,16 @@ export const LogoCMS: React.FC = () => {
             <h3 className="text-lg font-semibold">Footer Logo</h3>
           </div>
           <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Logo URL
-                <span className="ml-2 text-xs text-premium-gold font-semibold">
-                  📐 Recommended: 200×60px
-                </span>
-              </label>
-              <input
-                type="text"
-                value={content.footerLogo}
-                onChange={(e) => setContent({ ...content, footerLogo: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
-                placeholder="/images/logo.png or https://example.com/logo.png"
-              />
-              <p className="text-xs text-gray-500 mt-2">
-                💡 Tip: Can be same as header logo or a different variant for dark backgrounds.
-              </p>
-            </div>
+            {/* Footer Logo - Enhanced with Media Library */}
+            <ImageInput
+              label="Logo URL"
+              value={content.footerLogo}
+              onChange={(value) => setContent({ ...content, footerLogo: value })}
+              placeholder="/images/logo.png or https://example.com/logo.png"
+              sizeGuideline="Recommended: 200×60px"
+              tip="Can be same as header logo or a different variant for dark backgrounds."
+              fileType="image"
+            />
             <div className="bg-black rounded-lg p-4 flex items-center justify-center h-24">
               {content.footerLogo ? (
                 <img 
@@ -191,24 +176,16 @@ export const LogoCMS: React.FC = () => {
             <h3 className="text-lg font-semibold">Favicon</h3>
           </div>
           <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Favicon URL
-                <span className="ml-2 text-xs text-premium-gold font-semibold">
-                  📐 Required: 32×32px
-                </span>
-              </label>
-              <input
-                type="text"
-                value={content.favicon}
-                onChange={(e) => setContent({ ...content, favicon: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
-                placeholder="/favicon.png or /favicon.ico"
-              />
-              <p className="text-xs text-gray-500 mt-2">
-                💡 Tip: Use PNG or ICO format. Appears in browser tab.
-              </p>
-            </div>
+            {/* Favicon - Enhanced with Media Library */}
+            <ImageInput
+              label="Favicon URL"
+              value={content.favicon}
+              onChange={(value) => setContent({ ...content, favicon: value })}
+              placeholder="/favicon.png or /favicon.ico"
+              sizeGuideline="Required: 32×32px"
+              tip="Use PNG or ICO format. Appears in browser tab."
+              fileType="image"
+            />
             <div className="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-24">
               {content.favicon ? (
                 <img 
@@ -233,24 +210,16 @@ export const LogoCMS: React.FC = () => {
             <h3 className="text-lg font-semibold">Apple Touch Icon</h3>
           </div>
           <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Icon URL
-                <span className="ml-2 text-xs text-premium-gold font-semibold">
-                  📐 Required: 180×180px
-                </span>
-              </label>
-              <input
-                type="text"
-                value={content.appleTouchIcon}
-                onChange={(e) => setContent({ ...content, appleTouchIcon: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
-                placeholder="/apple-touch-icon.png"
-              />
-              <p className="text-xs text-gray-500 mt-2">
-                💡 Tip: Use PNG format. Appears when users save website to iOS home screen.
-              </p>
-            </div>
+            {/* Apple Touch Icon - Enhanced with Media Library */}
+            <ImageInput
+              label="Icon URL"
+              value={content.appleTouchIcon}
+              onChange={(value) => setContent({ ...content, appleTouchIcon: value })}
+              placeholder="/apple-touch-icon.png"
+              sizeGuideline="Required: 180×180px"
+              tip="Use PNG format. Appears when users save website to iOS home screen."
+              fileType="image"
+            />
             <div className="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-24">
               {content.appleTouchIcon ? (
                 <img 

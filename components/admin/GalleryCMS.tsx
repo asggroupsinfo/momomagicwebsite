@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Image as ImageIcon, Upload, Trash2, Edit2, Save, X, Plus } from 'lucide-react';
+import { ImageInput } from './ImageInput';
 
 interface GalleryImage {
   id: number;
@@ -145,24 +146,16 @@ export const GalleryCMS: React.FC = () => {
             </button>
           </div>
           <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Image URL
-                <span className="ml-2 text-xs text-premium-gold font-semibold">
-                  📐 Recommended: 800×600px (4:3 ratio)
-                </span>
-              </label>
-              <input
-                type="text"
-                value={newImage.url || ''}
-                onChange={(e) => setNewImage({ ...newImage, url: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent"
-                placeholder="/images/gallery/your-image.jpg or https://example.com/image.jpg"
-              />
-              <p className="text-xs text-gray-500 mt-1">
-                💡 Tip: Use JPG or WebP format. Keep file size under 500KB for fast loading.
-              </p>
-            </div>
+            {/* Image URL - Enhanced with Media Library */}
+            <ImageInput
+              label="Image URL"
+              value={newImage.url || ''}
+              onChange={(value) => setNewImage({ ...newImage, url: value })}
+              placeholder="/images/gallery/your-image.jpg or https://example.com/image.jpg"
+              sizeGuideline="Recommended: 800×600px (4:3 ratio)"
+              tip="Use JPG or WebP format. Keep file size under 500KB for fast loading."
+              fileType="image"
+            />
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Alt Text (SEO)

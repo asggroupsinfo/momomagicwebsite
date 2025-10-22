@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Save, Plus, Trash2, RefreshCw, AlertCircle, CheckCircle, Edit2 } from 'lucide-react';
 import type { MenuItem } from '@/lib/cms/content';
+import { ImageInput } from './ImageInput';
 
 export const MenuCMS: React.FC = () => {
   const [items, setItems] = useState<MenuItem[]>([]);
@@ -276,22 +277,16 @@ export const MenuCMS: React.FC = () => {
                   placeholder="Item description"
                 />
                 
-                <div>
-                  <label className="text-xs text-gray-600 flex items-center justify-between">
-                    <span>Menu Item Image</span>
-                    <span className="text-premium-gold font-semibold">📐 600×400px</span>
-                  </label>
-                  <input
-                    type="text"
-                    value={item.image}
-                    onChange={(e) => updateItem(item.id, 'image', e.target.value)}
-                    className="w-full px-2 py-1 border border-gray-300 rounded text-sm"
-                    placeholder="/images/menu/item-name.jpg or URL"
-                  />
-                  <p className="text-xs text-gray-500 mt-1">
-                    💡 Use JPG/WebP format, 3:2 ratio
-                  </p>
-                </div>
+                {/* Menu Item Image - Enhanced with Media Library */}
+                <ImageInput
+                  label="Menu Item Image"
+                  value={item.image}
+                  onChange={(value) => updateItem(item.id, 'image', value)}
+                  placeholder="/images/menu/item-name.jpg or URL"
+                  sizeGuideline="600×400px"
+                  tip="Use JPG/WebP format, 3:2 ratio"
+                  fileType="image"
+                />
                 
                 <div className="grid grid-cols-2 gap-2">
                   <div>
