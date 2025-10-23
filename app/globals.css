@@ -50,3 +50,13 @@ h1, h2, h3, h4, h5, h6 {
   background-size: 200% 200%;
   animation: gradient-x 3s ease infinite;
 }
+
+/* Hide scrollbar for mobile timeline */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
