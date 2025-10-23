@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { MediaLibraryPicker } from '@/components/cms/MediaLibraryPicker';
 
 interface MenuItem {
   id: string;
@@ -16,21 +15,10 @@ interface MenuItem {
     full: number;
   };
   image: string;
-  imageHalf?: string;  // Separate image for half plate
-  imageFull?: string;  // Separate image for full plate
   isPopular: boolean;
   isNew: boolean;
   spiceLevel: string;
 }
-
-const IMAGE_SPECS = {
-  menuItem: {
-    width: 600,
-    height: 400,
-    format: 'JPG or PNG',
-    description: 'High-quality food photography with good lighting'
-  }
-};
 
 interface MenuData {
   items: MenuItem[];
@@ -55,13 +43,6 @@ export default function MenuManagementPage() {
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
   const [newCategory, setNewCategory] = useState('');
   const [saveMessage, setSaveMessage] = useState('');
-  const [uploadingField, setUploadingField] = useState<string | null>(null);
-  const [mediaLibraryOpen, setMediaLibraryOpen] = useState(false);
-  const [mediaLibraryField, setMediaLibraryField] = useState<'image' | 'imageHalf' | 'imageFull'>('image');
-  
-  const imageInputRef = useRef<HTMLInputElement>(null);
-  const imageHalfInputRef = useRef<HTMLInputElement>(null);
-  const imageFullInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     loadMenuItems();
@@ -146,47 +127,6 @@ export default function MenuManagementPage() {
   const openEditModal = (item: MenuItem) => {
     setEditingItem({ ...item });
     setIsModalOpen(true);
-  };
-
-  const handleFileUpload = async (field: 'image' | 'imageHalf' | 'imageFull', file: File) => {
-    if (!editingItem) return;
-    
-    setUploadingField(field);
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('field', field);
-
-    try {
-      const response = await fetch('/api/cms/media/upload', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setEditingItem({ ...editingItem, [field]: data.url });
-        setSaveMessage(`✅ ${field} uploaded successfully!`);
-      } else {
-        setSaveMessage(`❌ Failed to upload ${field}`);
-      }
-    } catch (error) {
-      setSaveMessage(`❌ Error uploading ${field}`);
-    } finally {
-      setUploadingField(null);
-      setTimeout(() => setSaveMessage(''), 3000);
-    }
-  };
-
-  const openMediaLibrary = (field: 'image' | 'imageHalf' | 'imageFull') => {
-    setMediaLibraryField(field);
-    setMediaLibraryOpen(true);
-  };
-
-  const handleMediaSelect = (url: string) => {
-    if (!editingItem) return;
-    setEditingItem({ ...editingItem, [mediaLibraryField]: url });
-    setSaveMessage(`✅ Image selected from library!`);
-    setTimeout(() => setSaveMessage(''), 3000);
   };
 
   const handleAddCategory = async () => {
@@ -506,157 +446,18 @@ export default function MenuManagementPage() {
                   </div>
                 </div>
 
-                {/* Image Management Section */}
-                <div className="space-y-6 p-6 bg-pitch-black border border-charcoal rounded-lg">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-bold text-golden-glow">📸 Image Management</h3>
-                    <div className="text-xs text-foreground/60">
-                      Recommended: {IMAGE_SPECS.menuItem.width}×{IMAGE_SPECS.menuItem.height}px ({IMAGE_SPECS.menuItem.format})
-                    </div>
-                  </div>
-
-                  {/* Main Image */}
-                  <div>
-                    <label className="block text-sm font-semibold text-foreground/80 mb-2">
-                      Main Image (Default)
-                    </label>
-                    <div className="flex gap-3">
-                      <input
-                        type="text"
-                        value={editingItem.image}
-                        onChange={(e) => setEditingItem({ ...editingItem, image: e.target.value })}
-                        className="flex-1 px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
-                        placeholder="/images/menu/item.jpg"
-                      />
-                      <input
-                        ref={imageInputRef}
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => {
-                          const file = e.target.files?.[0];
-                          if (file) handleFileUpload('image', file);
-                        }}
-                        className="hidden"
-                      />
-                      <button
-                        onClick={() => imageInputRef.current?.click()}
-                        disabled={uploadingField === 'image'}
-                        className="px-6 py-3 bg-premium-orange text-pitch-black rounded-lg font-bold hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50"
-                      >
-                        {uploadingField === 'image' ? '⏳' : '📁'} Upload
-                      </button>
-                      <button
-                        onClick={() => openMediaLibrary('image')}
-                        className="px-6 py-3 bg-golden-glow text-pitch-black rounded-lg font-bold hover:-translate-y-0.5 transition-all duration-300"
-                      >
-                        📚 Library
-                      </button>
-                    </div>
-                    {editingItem.image && (
-                      <div className="mt-3 h-32 bg-charcoal rounded-lg overflow-hidden">
-                        <img src={editingItem.image} alt="Preview" className="w-full h-full object-cover" />
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Portion-Specific Images */}
-                  <div className="grid grid-cols-2 gap-4 pt-4 border-t border-charcoal">
-                    {/* Half Plate Image */}
-                    <div>
-                      <label className="block text-sm font-semibold text-foreground/80 mb-2">
-                        Half Plate Image (Optional)
-                      </label>
-                      <div className="space-y-2">
-                        <input
-                          type="text"
-                          value={editingItem.imageHalf || ''}
-                          onChange={(e) => setEditingItem({ ...editingItem, imageHalf: e.target.value })}
-                          className="w-full px-3 py-2 bg-deep-space border border-charcoal rounded-lg text-foreground text-sm focus:outline-none focus:border-golden-glow transition-colors"
-                          placeholder="URL for half plate"
-                        />
-                        <div className="flex gap-2">
-                          <input
-                            ref={imageHalfInputRef}
-                            type="file"
-                            accept="image/*"
-                            onChange={(e) => {
-                              const file = e.target.files?.[0];
-                              if (file) handleFileUpload('imageHalf', file);
-                            }}
-                            className="hidden"
-                          />
-                          <button
-                            onClick={() => imageHalfInputRef.current?.click()}
-                            disabled={uploadingField === 'imageHalf'}
-                            className="flex-1 px-4 py-2 bg-premium-orange/80 text-pitch-black rounded-lg text-sm font-bold hover:bg-premium-orange transition-colors disabled:opacity-50"
-                          >
-                            {uploadingField === 'imageHalf' ? '⏳' : '📁'} Upload
-                          </button>
-                          <button
-                            onClick={() => openMediaLibrary('imageHalf')}
-                            className="flex-1 px-4 py-2 bg-golden-glow/80 text-pitch-black rounded-lg text-sm font-bold hover:bg-golden-glow transition-colors"
-                          >
-                            📚 Library
-                          </button>
-                        </div>
-                        {editingItem.imageHalf && (
-                          <div className="h-20 bg-charcoal rounded-lg overflow-hidden">
-                            <img src={editingItem.imageHalf} alt="Half plate" className="w-full h-full object-cover" />
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Full Plate Image */}
-                    <div>
-                      <label className="block text-sm font-semibold text-foreground/80 mb-2">
-                        Full Plate Image (Optional)
-                      </label>
-                      <div className="space-y-2">
-                        <input
-                          type="text"
-                          value={editingItem.imageFull || ''}
-                          onChange={(e) => setEditingItem({ ...editingItem, imageFull: e.target.value })}
-                          className="w-full px-3 py-2 bg-deep-space border border-charcoal rounded-lg text-foreground text-sm focus:outline-none focus:border-golden-glow transition-colors"
-                          placeholder="URL for full plate"
-                        />
-                        <div className="flex gap-2">
-                          <input
-                            ref={imageFullInputRef}
-                            type="file"
-                            accept="image/*"
-                            onChange={(e) => {
-                              const file = e.target.files?.[0];
-                              if (file) handleFileUpload('imageFull', file);
-                            }}
-                            className="hidden"
-                          />
-                          <button
-                            onClick={() => imageFullInputRef.current?.click()}
-                            disabled={uploadingField === 'imageFull'}
-                            className="flex-1 px-4 py-2 bg-premium-orange/80 text-pitch-black rounded-lg text-sm font-bold hover:bg-premium-orange transition-colors disabled:opacity-50"
-                          >
-                            {uploadingField === 'imageFull' ? '⏳' : '📁'} Upload
-                          </button>
-                          <button
-                            onClick={() => openMediaLibrary('imageFull')}
-                            className="flex-1 px-4 py-2 bg-golden-glow/80 text-pitch-black rounded-lg text-sm font-bold hover:bg-golden-glow transition-colors"
-                          >
-                            📚 Library
-                          </button>
-                        </div>
-                        {editingItem.imageFull && (
-                          <div className="h-20 bg-charcoal rounded-lg overflow-hidden">
-                            <img src={editingItem.imageFull} alt="Full plate" className="w-full h-full object-cover" />
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  <p className="text-xs text-foreground/50 pt-2 border-t border-charcoal">
-                    💡 Tip: Upload separate images for half and full plates to show portion differences. If not provided, main image will be used.
-                  </p>
+                {/* Image URL */}
+                <div>
+                  <label className="block text-sm font-semibold text-foreground/80 mb-2">
+                    Image URL
+                  </label>
+                  <input
+                    type="text"
+                    value={editingItem.image}
+                    onChange={(e) => setEditingItem({ ...editingItem, image: e.target.value })}
+                    className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                    placeholder="/images/menu/item.jpg"
+                  />
                 </div>
 
                 {/* Spice Level */}
@@ -804,14 +605,6 @@ export default function MenuManagementPage() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Media Library Picker */}
-      <MediaLibraryPicker
-        isOpen={mediaLibraryOpen}
-        onClose={() => setMediaLibraryOpen(false)}
-        onSelect={handleMediaSelect}
-        fileType="image"
-      />
     </div>
   );
 }
