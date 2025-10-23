@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { validateCredentials, createSession } from '@/lib/auth/auth';
+import { checkRateLimit, recordLoginAttempt, getRemainingBlockTime } from '@/lib/auth/rate-limit';
 import { cookies } from 'next/headers';
 
 export async function POST(request: NextRequest) {
@@ -14,14 +15,34 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const clientIp = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown';
+    const identifier = `${clientIp}-${username}`;
+    const rateLimit = checkRateLimit(identifier);
+
+    if (!rateLimit.allowed) {
+      const remainingTime = getRemainingBlockTime(identifier);
+      const minutes = Math.ceil(remainingTime / 60000);
+      return NextResponse.json(
+        { error: `Too many login attempts. Please try again in ${minutes} minute${minutes > 1 ? 's' : ''}.` },
+        { status: 429 }
+      );
+    }
+
     const user = validateCredentials(username, password);
 
     if (!user) {
+      recordLoginAttempt(identifier, false);
+      const remaining = rateLimit.remainingAttempts ? rateLimit.remainingAttempts - 1 : 0;
       return NextResponse.json(
-        { error: 'Invalid credentials' },
+        { 
+          error: 'Invalid credentials',
+          remainingAttempts: remaining > 0 ? remaining : 0
+        },
         { status: 401 }
       );
     }
+
+    recordLoginAttempt(identifier, true);
 
     const sessionToken = createSession(user);
     const cookieStore = await cookies();
