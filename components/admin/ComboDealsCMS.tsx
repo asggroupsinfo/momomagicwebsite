@@ -138,7 +138,7 @@ export const ComboDealsCMS: React.FC = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-premium-gold"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-golden-glow"></div>
       </div>
     );
   }
@@ -154,7 +154,7 @@ export const ComboDealsCMS: React.FC = () => {
         </div>
         <button
           onClick={() => setShowAddForm(!showAddForm)}
-          className="flex items-center space-x-2 bg-premium-gold text-black px-4 py-2 rounded-lg font-semibold hover:bg-charcoal-black hover:text-white transition-all duration-300"
+          className="flex items-center space-x-2 bg-golden-glow text-black px-4 py-2 rounded-lg font-semibold hover:bg-pitch-black hover:text-white transition-all duration-300"
         >
           <Plus size={20} />
           <span>Add Combo Deal</span>
@@ -177,7 +177,7 @@ export const ComboDealsCMS: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
-          className="bg-white border-2 border-premium-gold rounded-lg p-6"
+          className="bg-white border-2 border-golden-glow rounded-lg p-6"
         >
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold">Add New Combo Deal</h3>
@@ -195,7 +195,7 @@ export const ComboDealsCMS: React.FC = () => {
                   type="text"
                   value={newDeal.name || ''}
                   onChange={(e) => setNewDeal({ ...newDeal, name: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent"
                   placeholder="Family Feast"
                 />
               </div>
@@ -207,7 +207,7 @@ export const ComboDealsCMS: React.FC = () => {
                   type="date"
                   value={newDeal.expiryDate || ''}
                   onChange={(e) => setNewDeal({ ...newDeal, expiryDate: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent"
                 />
               </div>
             </div>
@@ -219,7 +219,7 @@ export const ComboDealsCMS: React.FC = () => {
                 value={newDeal.description || ''}
                 onChange={(e) => setNewDeal({ ...newDeal, description: e.target.value })}
                 rows={2}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent"
                 placeholder="Perfect for family gatherings..."
               />
             </div>
@@ -233,7 +233,7 @@ export const ComboDealsCMS: React.FC = () => {
                   value={newItem}
                   onChange={(e) => setNewItem(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addItemToNewDeal())}
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent"
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent"
                   placeholder="e.g., 2 Full Plates Kurkure Momos"
                 />
                 <button
@@ -266,7 +266,7 @@ export const ComboDealsCMS: React.FC = () => {
                   type="number"
                   value={newDeal.originalPrice || ''}
                   onChange={(e) => setNewDeal({ ...newDeal, originalPrice: parseFloat(e.target.value) || 0 })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent"
                   placeholder="300"
                 />
               </div>
@@ -278,7 +278,7 @@ export const ComboDealsCMS: React.FC = () => {
                   type="number"
                   value={newDeal.discountedPrice || ''}
                   onChange={(e) => setNewDeal({ ...newDeal, discountedPrice: parseFloat(e.target.value) || 0 })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent"
                   placeholder="250"
                 />
               </div>
@@ -297,7 +297,7 @@ export const ComboDealsCMS: React.FC = () => {
                 id="isActive"
                 checked={newDeal.isActive}
                 onChange={(e) => setNewDeal({ ...newDeal, isActive: e.target.checked })}
-                className="w-4 h-4 text-premium-gold focus:ring-premium-gold border-gray-300 rounded"
+                className="w-4 h-4 text-golden-glow focus:ring-golden-glow border-gray-300 rounded"
               />
               <label htmlFor="isActive" className="text-sm font-medium text-gray-700">
                 Active (visible on website)
@@ -305,7 +305,7 @@ export const ComboDealsCMS: React.FC = () => {
             </div>
             <button
               onClick={handleAddDeal}
-              className="w-full bg-premium-gold text-black py-2 rounded-lg font-semibold hover:bg-charcoal-black hover:text-white transition-all duration-300"
+              className="w-full bg-golden-glow text-black py-2 rounded-lg font-semibold hover:bg-pitch-black hover:text-white transition-all duration-300"
             >
               Add Combo Deal
             </button>
@@ -324,7 +324,7 @@ export const ComboDealsCMS: React.FC = () => {
             <div className="flex items-start justify-between mb-4">
               <div className="flex-1">
                 <div className="flex items-center space-x-2 mb-2">
-                  <Package className="text-premium-gold" size={24} />
+                  <Package className="text-golden-glow" size={24} />
                   <h3 className="text-xl font-bold">{deal.name}</h3>
                 </div>
                 <p className="text-sm text-gray-600">{deal.description}</p>
@@ -340,7 +340,7 @@ export const ComboDealsCMS: React.FC = () => {
                 <ul className="space-y-1">
                   {deal.items.map((item, index) => (
                     <li key={index} className="text-sm flex items-center space-x-2">
-                      <span className="w-1.5 h-1.5 bg-premium-gold rounded-full"></span>
+                      <span className="w-1.5 h-1.5 bg-golden-glow rounded-full"></span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -354,7 +354,7 @@ export const ComboDealsCMS: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">Discounted Price</p>
-                  <p className="text-2xl font-bold text-premium-gold">₹{deal.discountedPrice}</p>
+                  <p className="text-2xl font-bold text-golden-glow">₹{deal.discountedPrice}</p>
                 </div>
                 <div className="bg-red-500 text-white px-3 py-2 rounded-lg">
                   <p className="text-xs">Save</p>
@@ -401,7 +401,7 @@ export const ComboDealsCMS: React.FC = () => {
         <button
           onClick={handleSave}
           disabled={isSaving}
-          className="flex items-center space-x-2 bg-premium-gold text-black px-6 py-3 rounded-lg font-semibold hover:bg-charcoal-black hover:text-white transition-all duration-300 disabled:opacity-50"
+          className="flex items-center space-x-2 bg-golden-glow text-black px-6 py-3 rounded-lg font-semibold hover:bg-pitch-black hover:text-white transition-all duration-300 disabled:opacity-50"
         >
           <Save size={20} />
           <span>{isSaving ? 'Saving...' : 'Save Changes'}</span>

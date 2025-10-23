@@ -23,9 +23,9 @@ export const LanguageSwitcher: React.FC = () => {
         className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
         aria-label="Change language"
       >
-        <Globe size={20} className="text-premium-gold" />
+        <Globe size={20} className="text-golden-glow" />
         <span className="text-sm font-medium text-white">
-          {localeNames[locale]}
+          {localeNames[locale as keyof typeof localeNames]}
         </span>
       </button>
 
@@ -52,16 +52,16 @@ export const LanguageSwitcher: React.FC = () => {
                   key={loc}
                   onClick={() => handleLocaleChange(loc)}
                   className={`w-full flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors ${
-                    locale === loc ? 'bg-premium-gold/10' : ''
+                    locale === loc ? 'bg-golden-glow/10' : ''
                   }`}
                 >
                   <span className={`text-sm font-medium ${
-                    locale === loc ? 'text-premium-gold' : 'text-gray-700'
+                    locale === loc ? 'text-golden-glow' : 'text-gray-700'
                   }`}>
-                    {localeNames[loc]}
+                    {localeNames[loc as keyof typeof localeNames]}
                   </span>
                   {locale === loc && (
-                    <Check size={16} className="text-premium-gold" />
+                    <Check size={16} className="text-golden-glow" />
                   )}
                 </button>
               ))}

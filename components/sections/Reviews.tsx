@@ -188,7 +188,7 @@ export const Reviews: React.FC = () => {
             key={star}
             className={`w-5 h-5 ${
               star <= rating
-                ? 'fill-premium-gold text-premium-gold'
+                ? 'fill-golden-glow text-golden-glow'
                 : 'fill-gray-300 text-gray-300'
             }`}
           />
@@ -217,8 +217,8 @@ export const Reviews: React.FC = () => {
       <section className="py-20 bg-black">
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-premium-gold border-t-transparent"></div>
-            <p className="mt-4 text-cream-white">Loading reviews...</p>
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-golden-glow border-t-transparent"></div>
+            <p className="mt-4 text-deep-space">Loading reviews...</p>
           </div>
         </div>
       </section>
@@ -230,7 +230,7 @@ export const Reviews: React.FC = () => {
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle, #D4AF37 1px, transparent 1px)',
+          backgroundImage: 'radial-gradient(circle, #ffd700 1px, transparent 1px)',
           backgroundSize: '50px 50px',
         }}></div>
       </div>
@@ -244,7 +244,7 @@ export const Reviews: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-cream-white mb-4 font-heading">
+          <h2 className="text-4xl md:text-5xl font-bold text-deep-space mb-4 font-heading">
             Join 2000+ Happy Customers
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
@@ -302,10 +302,10 @@ export const Reviews: React.FC = () => {
                 }}
                 className="absolute inset-0"
               >
-                <div className="rounded-2xl shadow-2xl p-8 md:p-12 h-full flex flex-col justify-between bg-white border-2 border-premium-gold">
+                <div className="rounded-2xl shadow-2xl p-8 md:p-12 h-full flex flex-col justify-between bg-white border-2 border-golden-glow">
                   {/* Quote Icon */}
                   <div className="absolute top-6 right-6 opacity-10">
-                    <Quote className="w-16 h-16 text-premium-gold" />
+                    <Quote className="w-16 h-16 text-golden-glow" />
                   </div>
 
                   {/* Review Content */}
@@ -320,7 +320,7 @@ export const Reviews: React.FC = () => {
                   </div>
 
                   {/* Author Info */}
-                  <div className="flex items-center space-x-4 pt-6 border-t-2 border-premium-gold/20">
+                  <div className="flex items-center space-x-4 pt-6 border-t-2 border-golden-glow/20">
                     {reviews[currentIndex].profile_photo_url ? (
                       <img
                         src={reviews[currentIndex].profile_photo_url}
@@ -328,7 +328,7 @@ export const Reviews: React.FC = () => {
                         className="w-12 h-12 rounded-full object-cover"
                       />
                     ) : (
-                      <div className="w-12 h-12 rounded-full bg-premium-gold flex items-center justify-center">
+                      <div className="w-12 h-12 rounded-full bg-golden-glow flex items-center justify-center">
                         <span className="text-xl font-bold text-foreground">
                           {reviews[currentIndex].author_name.charAt(0)}
                         </span>
@@ -355,7 +355,7 @@ export const Reviews: React.FC = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={handlePrev}
-              className="pointer-events-auto bg-premium-gold text-foreground p-3 rounded-full shadow-lg hover:bg-premium-gold/90 transition-colors"
+              className="pointer-events-auto bg-golden-glow text-foreground p-3 rounded-full shadow-lg hover:bg-golden-glow/90 transition-colors"
               aria-label="Previous review"
             >
               <ChevronLeft className="w-6 h-6" />
@@ -365,7 +365,7 @@ export const Reviews: React.FC = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={handleNext}
-              className="pointer-events-auto bg-premium-gold text-foreground p-3 rounded-full shadow-lg hover:bg-premium-gold/90 transition-colors"
+              className="pointer-events-auto bg-golden-glow text-foreground p-3 rounded-full shadow-lg hover:bg-golden-glow/90 transition-colors"
               aria-label="Next review"
             >
               <ChevronRight className="w-6 h-6" />
@@ -383,7 +383,7 @@ export const Reviews: React.FC = () => {
                 }}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   index === currentIndex
-                    ? 'bg-premium-gold w-8'
+                    ? 'bg-golden-glow w-8'
                     : 'bg-gray-500 hover:bg-gray-400'
                 }`}
                 aria-label={`Go to review ${index + 1}`}
@@ -404,7 +404,7 @@ export const Reviews: React.FC = () => {
             href="https://www.google.com/maps/search/?api=1&query=Momo+Magic+Sherghati"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-2 text-premium-gold hover:text-premium-gold/80 transition-colors font-semibold"
+            className="inline-flex items-center space-x-2 text-golden-glow hover:text-golden-glow/80 transition-colors font-semibold"
           >
             <span>See all reviews on Google</span>
             <svg

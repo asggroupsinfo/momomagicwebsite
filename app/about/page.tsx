@@ -181,7 +181,7 @@ export default function AboutPage() {
       title: 'Freshness Guarantee',
       description:
         'Ingredients sourced daily from trusted local suppliers. No preservatives or artificial flavors.',
-      color: 'bg-premium-gold',
+      color: 'bg-golden-glow',
     },
     {
       id: 3,
@@ -189,7 +189,7 @@ export default function AboutPage() {
       title: 'Innovation First',
       description:
         'Constantly experimenting with new flavors and techniques. First to introduce Kurkure and Pizza Momos in Sherghati.',
-      color: 'bg-magic-red',
+      color: 'bg-premium-orange',
     },
   ];
 
@@ -231,7 +231,7 @@ export default function AboutPage() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-6xl font-bold text-charcoal-black mb-4 font-heading">
+          <h1 className="text-4xl md:text-6xl font-bold text-pitch-black mb-4 font-heading">
             Our Story
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -254,7 +254,7 @@ export default function AboutPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              <div className="aspect-square rounded-2xl bg-gradient-to-br from-magic-red via-warm-orange to-premium-gold flex items-center justify-center shadow-2xl border-4 border-premium-gold">
+              <div className="aspect-square rounded-2xl bg-gradient-to-br from-premium-orange via-warm-orange to-golden-glow flex items-center justify-center shadow-2xl border-4 border-golden-glow">
                 <div className="text-center text-white">
                   <div className="text-8xl mb-4">👨‍🍳</div>
                   <h3 className="text-3xl font-bold mb-2">Dhruv Gupta</h3>
@@ -262,7 +262,7 @@ export default function AboutPage() {
                 </div>
               </div>
               {/* Decorative Elements */}
-              <div className="absolute -top-6 -right-6 bg-premium-gold text-charcoal-black px-6 py-3 rounded-full font-bold shadow-lg">
+              <div className="absolute -top-6 -right-6 bg-golden-glow text-pitch-black px-6 py-3 rounded-full font-bold shadow-lg">
                 Since 2023
               </div>
             </motion.div>
@@ -274,13 +274,13 @@ export default function AboutPage() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="space-y-6"
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-charcoal-black font-heading">
+              <h2 className="text-3xl md:text-4xl font-bold text-pitch-black font-heading">
                 The Dream Begins
               </h2>
               <p className="text-lg text-gray-700 leading-relaxed">
                 Dhruv Gupta, a young entrepreneur from Sherghati, Bihar, refused to settle for the
                 ordinary. Tired of the 9-to-5 rat race, he believed in the philosophy:{' '}
-                <span className="font-bold text-magic-red">
+                <span className="font-bold text-premium-orange">
                   "Why be an employee when you can be an employer?"
                 </span>
               </p>
@@ -294,7 +294,7 @@ export default function AboutPage() {
                 food. But these weren't ordinary momos. He infused them with the same passion and
                 quality standards he maintained for his traditional recipes. The small stall began
                 attracting attention, and soon{' '}
-                <span className="font-bold text-premium-gold">"Momos Magic"</span> became the talk
+                <span className="font-bold text-golden-glow">"Momos Magic"</span> became the talk
                 of Sherghati.
               </p>
             </motion.div>
@@ -308,7 +308,7 @@ export default function AboutPage() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="max-w-4xl mx-auto mb-20"
         >
-          <div className="bg-gradient-to-r from-magic-red to-warm-orange rounded-2xl p-8 md:p-12 text-center shadow-2xl">
+          <div className="bg-gradient-to-r from-premium-orange to-warm-orange rounded-2xl p-8 md:p-12 text-center shadow-2xl">
             <div className="text-6xl mb-6">🥟</div>
             <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 font-heading">
               Our Philosophy
@@ -330,7 +330,7 @@ export default function AboutPage() {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="max-w-6xl mx-auto mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-charcoal-black mb-12 font-heading">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-pitch-black mb-12 font-heading">
             Our Quality Commitment
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -341,17 +341,17 @@ export default function AboutPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
                 whileHover={{ y: -8, scale: 1.02 }}
-                className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-200 hover:border-premium-gold transition-all duration-300 text-center"
+                className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-200 hover:border-golden-glow transition-all duration-300 text-center"
               >
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.7 + index * 0.1, type: 'spring' }}
-                  className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-premium-gold/10 text-premium-gold mb-4"
+                  className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-golden-glow/10 text-golden-glow mb-4"
                 >
                   {commitment.icon}
                 </motion.div>
-                <h3 className="text-xl font-bold text-charcoal-black mb-2">
+                <h3 className="text-xl font-bold text-pitch-black mb-2">
                   {commitment.title}
                 </h3>
                 <p className="text-sm text-gray-600">{commitment.description}</p>
@@ -367,12 +367,12 @@ export default function AboutPage() {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="max-w-4xl mx-auto mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-charcoal-black mb-12 font-heading">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-pitch-black mb-12 font-heading">
             Our Journey Timeline
           </h2>
           <div className="relative">
             {/* Timeline Line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-premium-gold"></div>
+            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-golden-glow"></div>
 
             {/* Timeline Events */}
             <div className="space-y-8">
@@ -389,16 +389,16 @@ export default function AboutPage() {
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ duration: 0.5, delay: 1.0 + index * 0.1, type: 'spring' }}
-                    className="absolute left-6 top-2 w-5 h-5 rounded-full bg-premium-gold border-4 border-cream-white shadow-lg"
+                    className="absolute left-6 top-2 w-5 h-5 rounded-full bg-golden-glow border-4 border-deep-space shadow-lg"
                   ></motion.div>
 
                   {/* Event Card */}
-                  <div className="bg-white rounded-xl p-6 shadow-lg border-2 border-gray-200 hover:border-premium-gold transition-colors">
+                  <div className="bg-white rounded-xl p-6 shadow-lg border-2 border-gray-200 hover:border-golden-glow transition-colors">
                     <div className="flex items-center space-x-3 mb-2">
-                      <div className="text-premium-gold">{item.icon}</div>
-                      <span className="text-sm font-bold text-premium-gold">{item.date}</span>
+                      <div className="text-golden-glow">{item.icon}</div>
+                      <span className="text-sm font-bold text-golden-glow">{item.date}</span>
                     </div>
-                    <h3 className="text-xl font-bold text-charcoal-black mb-2">{item.event}</h3>
+                    <h3 className="text-xl font-bold text-pitch-black mb-2">{item.event}</h3>
                     <p className="text-gray-600">{item.description}</p>
                   </div>
                 </motion.div>
@@ -414,7 +414,7 @@ export default function AboutPage() {
           transition={{ duration: 0.6, delay: 1.2 }}
           className="max-w-6xl mx-auto mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-charcoal-black mb-8 font-heading">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-pitch-black mb-8 font-heading">
             Our Gallery
           </h2>
 
@@ -428,7 +428,7 @@ export default function AboutPage() {
                 onClick={() => setGalleryFilter(category.value)}
                 className={`px-6 py-3 rounded-full font-semibold transition-all ${
                   galleryFilter === category.value
-                    ? 'bg-premium-gold text-charcoal-black shadow-lg'
+                    ? 'bg-golden-glow text-pitch-black shadow-lg'
                     : 'bg-white text-gray-600 hover:bg-gray-100 border-2 border-gray-200'
                 }`}
               >
@@ -449,7 +449,7 @@ export default function AboutPage() {
                 transition={{ duration: 0.3, delay: index * 0.05 }}
                 whileHover={{ scale: 1.05 }}
                 onClick={() => setSelectedImage(image.id)}
-                className="relative aspect-square rounded-2xl bg-gradient-to-br from-magic-red via-warm-orange to-premium-gold cursor-pointer overflow-hidden shadow-lg group"
+                className="relative aspect-square rounded-2xl bg-gradient-to-br from-premium-orange via-warm-orange to-golden-glow cursor-pointer overflow-hidden shadow-lg group"
               >
                 {/* Placeholder Content */}
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -479,7 +479,7 @@ export default function AboutPage() {
           transition={{ duration: 0.6, delay: 1.4 }}
           className="max-w-6xl mx-auto mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-charcoal-black mb-12 font-heading">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-pitch-black mb-12 font-heading">
             Our Quality Standards
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -490,7 +490,7 @@ export default function AboutPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.5 + index * 0.1 }}
                 whileHover={{ y: -8 }}
-                className="bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-200 hover:border-premium-gold transition-all duration-300"
+                className="bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-200 hover:border-golden-glow transition-all duration-300"
               >
                 <motion.div
                   initial={{ scale: 0, rotate: -180 }}
@@ -500,7 +500,7 @@ export default function AboutPage() {
                 >
                   {standard.icon}
                 </motion.div>
-                <h3 className="text-2xl font-bold text-charcoal-black mb-4">{standard.title}</h3>
+                <h3 className="text-2xl font-bold text-pitch-black mb-4">{standard.title}</h3>
                 <p className="text-gray-600 leading-relaxed">{standard.description}</p>
               </motion.div>
             ))}
@@ -514,12 +514,12 @@ export default function AboutPage() {
           transition={{ duration: 0.6, delay: 1.7 }}
           className="max-w-6xl mx-auto mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-charcoal-black mb-8 font-heading">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-pitch-black mb-8 font-heading">
             Our Team
           </h2>
-          <div className="bg-gradient-to-r from-magic-red/10 to-warm-orange/10 rounded-2xl p-12 text-center border-2 border-dashed border-premium-gold">
+          <div className="bg-gradient-to-r from-premium-orange/10 to-warm-orange/10 rounded-2xl p-12 text-center border-2 border-dashed border-golden-glow">
             <div className="text-6xl mb-4">👥</div>
-            <h3 className="text-2xl font-bold text-charcoal-black mb-4">
+            <h3 className="text-2xl font-bold text-pitch-black mb-4">
               Meet Our Amazing Team
             </h3>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -536,7 +536,7 @@ export default function AboutPage() {
           transition={{ duration: 0.6, delay: 1.8 }}
           className="max-w-4xl mx-auto"
         >
-          <div className="bg-charcoal-black text-white rounded-2xl p-8 md:p-12 text-center shadow-2xl">
+          <div className="bg-pitch-black text-white rounded-2xl p-8 md:p-12 text-center shadow-2xl">
             <div className="text-6xl mb-6">💭</div>
             <p className="text-2xl md:text-3xl font-bold mb-6 font-heading">
               "Better to be a small owner than someone else's employee"
@@ -564,7 +564,7 @@ export default function AboutPage() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 bg-white text-charcoal-black p-3 rounded-full shadow-lg hover:bg-gray-100 transition-colors z-10"
+              className="absolute top-4 right-4 bg-white text-pitch-black p-3 rounded-full shadow-lg hover:bg-gray-100 transition-colors z-10"
             >
               <X className="w-6 h-6" />
             </motion.button>
@@ -580,7 +580,7 @@ export default function AboutPage() {
                 e.stopPropagation();
                 handlePrevImage();
               }}
-              className="absolute left-4 bg-white text-charcoal-black p-3 rounded-full shadow-lg hover:bg-gray-100 transition-colors"
+              className="absolute left-4 bg-white text-pitch-black p-3 rounded-full shadow-lg hover:bg-gray-100 transition-colors"
             >
               <ChevronLeft className="w-6 h-6" />
             </motion.button>
@@ -596,7 +596,7 @@ export default function AboutPage() {
                 e.stopPropagation();
                 handleNextImage();
               }}
-              className="absolute right-4 bg-white text-charcoal-black p-3 rounded-full shadow-lg hover:bg-gray-100 transition-colors"
+              className="absolute right-4 bg-white text-pitch-black p-3 rounded-full shadow-lg hover:bg-gray-100 transition-colors"
             >
               <ChevronRight className="w-6 h-6" />
             </motion.button>
@@ -616,7 +616,7 @@ export default function AboutPage() {
                 return (
                   <div className="bg-white rounded-2xl overflow-hidden shadow-2xl">
                     {/* Image */}
-                    <div className="aspect-video bg-gradient-to-br from-magic-red via-warm-orange to-premium-gold flex items-center justify-center">
+                    <div className="aspect-video bg-gradient-to-br from-premium-orange via-warm-orange to-golden-glow flex items-center justify-center">
                       <span className="text-9xl">
                         {image.category === 'stall' && '🏪'}
                         {image.category === 'food' && '🥟'}
@@ -626,7 +626,7 @@ export default function AboutPage() {
 
                     {/* Details */}
                     <div className="p-6">
-                      <h3 className="text-2xl font-bold text-charcoal-black mb-2">
+                      <h3 className="text-2xl font-bold text-pitch-black mb-2">
                         {image.title}
                       </h3>
                       <p className="text-gray-600">{image.description}</p>

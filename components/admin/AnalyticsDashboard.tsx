@@ -142,7 +142,7 @@ export const AnalyticsDashboard: React.FC = () => {
           <select
             value={timeRange}
             onChange={(e) => setTimeRange(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
           >
             <option value="24h">Last 24 Hours</option>
             <option value="7d">Last 7 Days</option>
@@ -158,7 +158,7 @@ export const AnalyticsDashboard: React.FC = () => {
           </button>
           <button
             onClick={() => handleExport('pdf')}
-            className="flex items-center space-x-2 px-4 py-2 bg-premium-gold text-black font-semibold rounded-lg hover:bg-charcoal-black hover:text-white transition-all"
+            className="flex items-center space-x-2 px-4 py-2 bg-golden-glow text-black font-semibold rounded-lg hover:bg-pitch-black hover:text-white transition-all"
           >
             <Download size={18} />
             <span>Export PDF</span>
@@ -282,7 +282,7 @@ export const AnalyticsDashboard: React.FC = () => {
                 className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
               >
                 <div className="flex items-center space-x-4">
-                  <MapPin size={16} className="text-premium-gold" />
+                  <MapPin size={16} className="text-golden-glow" />
                   <div>
                     <p className="text-sm font-medium">{visitor.city}, {visitor.country}</p>
                     <p className="text-xs text-gray-500">
@@ -304,7 +304,7 @@ export const AnalyticsDashboard: React.FC = () => {
         {/* Top Pages */}
         <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
           <div className="flex items-center space-x-2 mb-4">
-            <BarChart3 size={20} className="text-premium-gold" />
+            <BarChart3 size={20} className="text-golden-glow" />
             <h3 className="text-lg font-semibold">Top Pages</h3>
           </div>
 
@@ -332,7 +332,7 @@ export const AnalyticsDashboard: React.FC = () => {
         {/* Conversions */}
         <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
           <div className="flex items-center space-x-2 mb-4">
-            <MousePointerClick size={20} className="text-premium-gold" />
+            <MousePointerClick size={20} className="text-golden-glow" />
             <h3 className="text-lg font-semibold">Conversion Tracking</h3>
           </div>
 
@@ -355,7 +355,7 @@ export const AnalyticsDashboard: React.FC = () => {
                   <span>Conversion Rate: {conversion.rate}%</span>
                   <div className="w-32 bg-gray-200 rounded-full h-1.5">
                     <div
-                      className="bg-premium-gold h-1.5 rounded-full"
+                      className="bg-golden-glow h-1.5 rounded-full"
                       style={{ width: `${conversion.rate * 10}%` }}
                     />
                   </div>
@@ -369,7 +369,7 @@ export const AnalyticsDashboard: React.FC = () => {
       {/* Revenue Analytics */}
       <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
         <div className="flex items-center space-x-2 mb-4">
-          <DollarSign size={20} className="text-premium-gold" />
+          <DollarSign size={20} className="text-golden-glow" />
           <h3 className="text-lg font-semibold">Revenue Analytics</h3>
         </div>
 
@@ -402,7 +402,7 @@ export const AnalyticsDashboard: React.FC = () => {
                   initial={{ width: 0 }}
                   animate={{ width: `${(day.revenue / 25000) * 100}%` }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-gradient-to-r from-premium-gold to-orange-500 h-full rounded-full flex items-center justify-end pr-3"
+                  className="bg-gradient-to-r from-golden-glow to-orange-500 h-full rounded-full flex items-center justify-end pr-3"
                 >
                   <span className="text-xs font-semibold text-white">
                     ₹{day.revenue.toLocaleString()}
@@ -418,7 +418,7 @@ export const AnalyticsDashboard: React.FC = () => {
       {/* Geographic Distribution */}
       <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
         <div className="flex items-center space-x-2 mb-4">
-          <MapPin size={20} className="text-premium-gold" />
+          <MapPin size={20} className="text-golden-glow" />
           <h3 className="text-lg font-semibold">Geographic Distribution</h3>
         </div>
 
@@ -432,7 +432,7 @@ export const AnalyticsDashboard: React.FC = () => {
               <div className="flex items-center space-x-3">
                 <div className="flex-1 bg-gray-200 rounded-full h-2">
                   <div
-                    className="bg-premium-gold h-2 rounded-full"
+                    className="bg-golden-glow h-2 rounded-full"
                     style={{ width: `${location.percentage}%` }}
                   />
                 </div>

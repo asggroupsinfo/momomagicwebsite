@@ -19,18 +19,18 @@ export const Button: React.FC<ButtonProps> = ({
   const baseStyles = 'px-6 py-3 rounded-lg font-medium transition-all duration-300 shadow-md hover:shadow-xl';
   
   const variantStyles = {
-    primary: 'text-white hover:border-premium-gold border-2 border-transparent hover:shadow-premium-gold/50',
-    secondary: 'border-2 border-premium-gold bg-transparent text-magic-red hover:bg-magic-red hover:text-white hover:shadow-magic-red/50',
+    primary: 'text-black hover:border-golden-glow border-2 border-transparent hover:shadow-golden-glow/50',
+    secondary: 'border-2 border-golden-glow bg-transparent text-premium-orange hover:bg-burnt-orange hover:text-black hover:shadow-burnt-orange/50',
   };
 
-  const primaryGradient = 'linear-gradient(135deg, #ffc241 0%, #e6ac2b 100%)';
+  const primaryGradient = 'linear-gradient(135deg, #ffc241 0%, #e6ac00 100%)';
 
   const combinedStyles = `${baseStyles} ${variantStyles[variant]} ${className}`;
 
   const hoverAnimation = {
     scale: 1.05,
     y: -2,
-    transition: { type: 'spring', stiffness: 400, damping: 10 }
+    transition: { type: 'spring' as const, stiffness: 400, damping: 10 }
   };
 
   const tapAnimation = {

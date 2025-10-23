@@ -260,8 +260,8 @@ export default function MenuPage() {
     const displays = {
       steamed: { label: 'Steamed', color: 'bg-vegetarian-green' },
       fried: { label: 'Fried', color: 'bg-warm-orange' },
-      kurkure: { label: 'Kurkure', color: 'bg-premium-gold' },
-      pizza: { label: 'Pizza', color: 'bg-magic-red' },
+      kurkure: { label: 'Kurkure', color: 'bg-golden-glow' },
+      pizza: { label: 'Pizza', color: 'bg-premium-orange' },
     };
     return displays[category as keyof typeof displays] || displays.steamed;
   };
@@ -283,7 +283,7 @@ export default function MenuPage() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl md:text-6xl font-bold text-charcoal-black mb-4 font-heading">
+          <h1 className="text-4xl md:text-6xl font-bold text-pitch-black mb-4 font-heading">
             Our Complete Menu
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -305,12 +305,12 @@ export default function MenuPage() {
               placeholder="Search for your favorite momos..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-12 py-4 rounded-full border-2 border-gray-200 focus:border-premium-gold focus:outline-none text-charcoal-black placeholder-gray-400 transition-colors"
+              className="w-full pl-12 pr-12 py-4 rounded-full border-2 border-gray-200 focus:border-golden-glow focus:outline-none text-pitch-black placeholder-gray-400 transition-colors"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-magic-red transition-colors"
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-premium-orange transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -327,7 +327,7 @@ export default function MenuPage() {
         >
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="inline-flex items-center space-x-2 bg-charcoal-black text-white px-6 py-3 rounded-full hover:bg-charcoal-black/90 transition-colors"
+            className="inline-flex items-center space-x-2 bg-pitch-black text-white px-6 py-3 rounded-full hover:bg-pitch-black/90 transition-colors"
           >
             <Filter className="w-5 h-5" />
             <span>{showFilters ? 'Hide Filters' : 'Show Filters'}</span>
@@ -344,8 +344,8 @@ export default function MenuPage() {
           <div className="bg-white rounded-2xl shadow-lg p-6 border-2 border-gray-200">
             {/* Category Filters */}
             <div className="mb-6">
-              <h3 className="text-lg font-bold text-charcoal-black mb-4 flex items-center">
-                <Filter className="w-5 h-5 mr-2 text-premium-gold" />
+              <h3 className="text-lg font-bold text-pitch-black mb-4 flex items-center">
+                <Filter className="w-5 h-5 mr-2 text-golden-glow" />
                 Category
               </h3>
               <div className="flex flex-wrap gap-3">
@@ -357,7 +357,7 @@ export default function MenuPage() {
                     onClick={() => setSelectedCategory(category.value)}
                     className={`px-4 py-2 rounded-full font-semibold transition-all ${
                       selectedCategory === category.value
-                        ? 'bg-premium-gold text-charcoal-black shadow-lg'
+                        ? 'bg-golden-glow text-pitch-black shadow-lg'
                         : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                     }`}
                   >
@@ -370,7 +370,7 @@ export default function MenuPage() {
 
             {/* Spice Level Filters */}
             <div className="mb-6">
-              <h3 className="text-lg font-bold text-charcoal-black mb-4 flex items-center">
+              <h3 className="text-lg font-bold text-pitch-black mb-4 flex items-center">
                 <Flame className="w-5 h-5 mr-2 text-warm-orange" />
                 Spice Level
               </h3>
@@ -383,7 +383,7 @@ export default function MenuPage() {
                     onClick={() => setSelectedSpiceLevel(level.value)}
                     className={`px-4 py-2 rounded-full font-semibold transition-all ${
                       selectedSpiceLevel === level.value
-                        ? 'bg-premium-gold text-black shadow-lg'
+                        ? 'bg-golden-glow text-black shadow-lg'
                         : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                     }`}
                   >
@@ -396,7 +396,7 @@ export default function MenuPage() {
 
             {/* Price Range Slider */}
             <div className="mb-6">
-              <h3 className="text-lg font-bold text-charcoal-black mb-4">
+              <h3 className="text-lg font-bold text-pitch-black mb-4">
                 Price Range (10 pieces)
               </h3>
               <div className="px-2">
@@ -407,11 +407,11 @@ export default function MenuPage() {
                   step="10"
                   value={priceRange[1]}
                   onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-premium-gold"
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-golden-glow"
                 />
                 <div className="flex justify-between mt-2 text-sm text-gray-600">
                   <span>₹0</span>
-                  <span className="font-bold text-premium-gold">₹{priceRange[1]}</span>
+                  <span className="font-bold text-golden-glow">₹{priceRange[1]}</span>
                   <span>₹250</span>
                 </div>
               </div>
@@ -420,14 +420,14 @@ export default function MenuPage() {
             {/* Reset Filters */}
             <div className="flex items-center justify-between pt-4 border-t border-gray-200">
               <p className="text-sm text-gray-600">
-                Showing <span className="font-bold text-premium-gold">{filteredItems.length}</span> of{' '}
+                Showing <span className="font-bold text-golden-glow">{filteredItems.length}</span> of{' '}
                 <span className="font-bold">{menuItems.length}</span> items
               </p>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={resetFilters}
-                className="text-magic-red hover:text-magic-red/80 font-semibold text-sm transition-colors"
+                className="text-premium-orange hover:text-premium-orange/80 font-semibold text-sm transition-colors"
               >
                 Reset All Filters
               </motion.button>
@@ -454,10 +454,10 @@ export default function MenuPage() {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.3, delay: index * 0.05 }}
                   whileHover={{ y: -8, scale: 1.02 }}
-                  className="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-gray-200 hover:border-premium-gold transition-all duration-300"
+                  className="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-gray-200 hover:border-golden-glow transition-all duration-300"
                 >
                   {/* Item Image Placeholder */}
-                  <div className="relative h-48 bg-gradient-to-br from-magic-red via-warm-orange to-premium-gold flex items-center justify-center">
+                  <div className="relative h-48 bg-gradient-to-br from-premium-orange via-warm-orange to-golden-glow flex items-center justify-center">
                     <span className="text-6xl">🥟</span>
                     
                     {/* Badges */}
@@ -467,7 +467,7 @@ export default function MenuPage() {
                           initial={{ scale: 0, rotate: -45 }}
                           animate={{ scale: 1, rotate: 0 }}
                           transition={{ duration: 0.5, delay: index * 0.05 + 0.2 }}
-                          className="bg-premium-gold text-charcoal-black px-3 py-1 rounded-full text-xs font-bold shadow-lg flex items-center space-x-1"
+                          className="bg-golden-glow text-pitch-black px-3 py-1 rounded-full text-xs font-bold shadow-lg flex items-center space-x-1"
                         >
                           <TrendingUp className="w-3 h-3" />
                           <span>Popular</span>
@@ -478,7 +478,7 @@ export default function MenuPage() {
                           initial={{ scale: 0, rotate: 45 }}
                           animate={{ scale: 1, rotate: 0 }}
                           transition={{ duration: 0.5, delay: index * 0.05 + 0.3 }}
-                          className="bg-magic-red text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg flex items-center space-x-1"
+                          className="bg-premium-orange text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg flex items-center space-x-1"
                         >
                           <Sparkles className="w-3 h-3" />
                           <span>New</span>
@@ -502,7 +502,7 @@ export default function MenuPage() {
                   <div className="p-5">
                     {/* Name and Spice Level */}
                     <div className="flex items-start justify-between mb-2">
-                      <h3 className="text-xl font-bold text-charcoal-black flex-1">
+                      <h3 className="text-xl font-bold text-pitch-black flex-1">
                         {item.name}
                       </h3>
                       <span className="text-xl ml-2" title={getSpiceLevelDisplay(item.spiceLevel).label}>
@@ -525,11 +525,11 @@ export default function MenuPage() {
                     <div className="space-y-2 mb-4">
                       <div className="flex justify-between items-center">
                         <span className="text-sm text-gray-600">5 pieces</span>
-                        <span className="text-lg font-bold text-premium-gold">₹{item.price5}</span>
+                        <span className="text-lg font-bold text-golden-glow">₹{item.price5}</span>
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="text-sm text-gray-600">10 pieces</span>
-                        <span className="text-lg font-bold text-premium-gold">₹{item.price10}</span>
+                        <span className="text-lg font-bold text-golden-glow">₹{item.price10}</span>
                       </div>
                     </div>
 
@@ -538,7 +538,7 @@ export default function MenuPage() {
                       href="tel:+919955955191"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="block w-full bg-magic-red text-white text-center py-3 rounded-lg font-semibold hover:bg-magic-red/90 transition-colors"
+                      className="block w-full bg-premium-orange text-white text-center py-3 rounded-lg font-semibold hover:bg-premium-orange/90 transition-colors"
                     >
                       Order Now
                     </motion.a>
@@ -556,7 +556,7 @@ export default function MenuPage() {
               className="text-center py-20"
             >
               <div className="text-6xl mb-4">😢</div>
-              <h3 className="text-2xl font-bold text-charcoal-black mb-2">No items found</h3>
+              <h3 className="text-2xl font-bold text-pitch-black mb-2">No items found</h3>
               <p className="text-gray-600 mb-6">
                 Try adjusting your filters or search query
               </p>
@@ -564,7 +564,7 @@ export default function MenuPage() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={resetFilters}
-                className="bg-premium-gold text-charcoal-black px-8 py-3 rounded-full font-bold hover:bg-premium-gold/90 transition-colors"
+                className="bg-golden-glow text-pitch-black px-8 py-3 rounded-full font-bold hover:bg-golden-glow/90 transition-colors"
               >
                 Reset All Filters
               </motion.button>

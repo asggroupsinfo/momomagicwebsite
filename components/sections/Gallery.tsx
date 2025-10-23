@@ -62,10 +62,10 @@ export const Gallery: React.FC = () => {
           className="text-center mb-12"
         >
           <h2 
-            className="text-4xl md:text-5xl font-bold text-premium-gold mb-4"
+            className="text-4xl md:text-5xl font-bold text-golden-glow mb-4"
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
-            Our <span className="text-premium-gold">Gallery</span>
+            Our <span className="text-golden-glow">Gallery</span>
           </h2>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto">
             A visual journey through our culinary creations and memorable moments
@@ -93,7 +93,7 @@ export const Gallery: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="absolute bottom-0 left-0 right-0 p-4">
                     <p className="text-white font-semibold text-lg">{image.alt}</p>
-                    <span className="inline-block mt-2 px-3 py-1 bg-premium-gold text-black text-xs font-medium rounded-full">
+                    <span className="inline-block mt-2 px-3 py-1 bg-golden-glow text-black text-xs font-medium rounded-full">
                       {image.category}
                     </span>
                   </div>

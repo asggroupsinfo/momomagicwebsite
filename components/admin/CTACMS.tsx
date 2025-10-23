@@ -130,11 +130,11 @@ export const CTACMS: React.FC = () => {
   const getStylePreview = (style: string) => {
     switch (style) {
       case 'primary':
-        return 'bg-premium-gold text-black font-semibold';
+        return 'bg-golden-glow text-black font-semibold';
       case 'secondary':
-        return 'bg-charcoal-black text-white border-2 border-premium-gold';
+        return 'bg-pitch-black text-white border-2 border-golden-glow';
       case 'outline':
-        return 'bg-transparent text-premium-gold border-2 border-premium-gold';
+        return 'bg-transparent text-golden-glow border-2 border-golden-glow';
       default:
         return 'bg-gray-200 text-gray-800';
     }
@@ -168,7 +168,7 @@ export const CTACMS: React.FC = () => {
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className="flex items-center space-x-2 px-6 py-2 bg-premium-gold text-black font-semibold rounded-lg hover:bg-charcoal-black hover:text-white transition-all disabled:opacity-50"
+            className="flex items-center space-x-2 px-6 py-2 bg-golden-glow text-black font-semibold rounded-lg hover:bg-pitch-black hover:text-white transition-all disabled:opacity-50"
           >
             <Save size={18} />
             <span>{isSaving ? 'Saving...' : 'Save Changes'}</span>
@@ -216,7 +216,7 @@ export const CTACMS: React.FC = () => {
             <div className="flex items-start space-x-4">
               {/* Order Number */}
               <div className="flex-shrink-0 pt-2">
-                <div className="w-8 h-8 bg-premium-gold text-black rounded-full flex items-center justify-center font-bold text-sm">
+                <div className="w-8 h-8 bg-golden-glow text-black rounded-full flex items-center justify-center font-bold text-sm">
                   {cta.order}
                 </div>
               </div>
@@ -232,7 +232,7 @@ export const CTACMS: React.FC = () => {
                           type="text"
                           value={cta.label}
                           onChange={(e) => updateCTA(cta.id, 'label', e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                           placeholder="e.g., Hero Primary CTA"
                         />
                       </div>
@@ -242,7 +242,7 @@ export const CTACMS: React.FC = () => {
                           type="text"
                           value={cta.location}
                           onChange={(e) => updateCTA(cta.id, 'location', e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                           placeholder="e.g., Hero Section"
                         />
                       </div>
@@ -254,7 +254,7 @@ export const CTACMS: React.FC = () => {
                         type="text"
                         value={cta.text}
                         onChange={(e) => updateCTA(cta.id, 'text', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                         placeholder="e.g., Order Now"
                       />
                     </div>
@@ -266,7 +266,7 @@ export const CTACMS: React.FC = () => {
                           type="text"
                           value={cta.url}
                           onChange={(e) => updateCTA(cta.id, 'url', e.target.value)}
-                          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                           placeholder="#menu, /contact, or https://example.com"
                         />
                         {cta.url && !cta.url.startsWith('#') && (
@@ -288,7 +288,7 @@ export const CTACMS: React.FC = () => {
                       <select
                         value={cta.style}
                         onChange={(e) => updateCTA(cta.id, 'style', e.target.value as 'primary' | 'secondary' | 'outline')}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                       >
                         <option value="primary">Primary (Gold Background)</option>
                         <option value="secondary">Secondary (Black Background)</option>

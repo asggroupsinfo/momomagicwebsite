@@ -164,7 +164,7 @@ export const MediaLibraryModal: React.FC<MediaLibraryModalProps> = ({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search files..."
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
               />
             </div>
             <div className="flex space-x-2">
@@ -174,7 +174,7 @@ export const MediaLibraryModal: React.FC<MediaLibraryModalProps> = ({
                   onClick={() => setFilterType(type as any)}
                   className={`px-4 py-2 rounded-lg capitalize transition-all ${
                     filterType === type
-                      ? 'bg-premium-gold text-black font-semibold'
+                      ? 'bg-golden-glow text-black font-semibold'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
@@ -193,7 +193,7 @@ export const MediaLibraryModal: React.FC<MediaLibraryModalProps> = ({
                     key={file.id}
                     whileHover={{ scale: 1.05 }}
                     onClick={() => handleSelect(file.url)}
-                    className="bg-white border-2 border-gray-200 rounded-lg p-4 hover:border-premium-gold hover:shadow-md transition-all cursor-pointer"
+                    className="bg-white border-2 border-gray-200 rounded-lg p-4 hover:border-golden-glow hover:shadow-md transition-all cursor-pointer"
                   >
                     <div className="flex flex-col items-center">
                       {file.type === 'image' ? (
@@ -244,7 +244,7 @@ export const MediaLibraryModal: React.FC<MediaLibraryModalProps> = ({
                 </button>
                 <button
                   onClick={() => alert('Upload functionality will be implemented')}
-                  className="flex items-center space-x-2 px-4 py-2 bg-premium-gold text-black font-semibold rounded-lg hover:bg-charcoal-black hover:text-white transition-all"
+                  className="flex items-center space-x-2 px-4 py-2 bg-golden-glow text-black font-semibold rounded-lg hover:bg-pitch-black hover:text-white transition-all"
                 >
                   <Upload size={16} />
                   <span>Upload New</span>

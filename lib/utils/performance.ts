@@ -1,21 +1,19 @@
 'use client';
 
 export const reportWebVitals = (metric: any) => {
-  if (process.env.NODE_ENV === 'production') {
-    const { name, value, id } = metric;
-    
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`[Web Vitals] ${name}:`, value);
-    }
-    
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', name, {
-        event_category: 'Web Vitals',
-        value: Math.round(name === 'CLS' ? value * 1000 : value),
-        event_label: id,
-        non_interaction: true,
-      });
-    }
+  const { name, value, id } = metric;
+  
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`[Web Vitals] ${name}:`, value);
+  }
+  
+  if (process.env.NODE_ENV === 'production' && typeof window !== 'undefined' && (window as any).gtag) {
+    (window as any).gtag('event', name, {
+      event_category: 'Web Vitals',
+      value: Math.round(name === 'CLS' ? value * 1000 : value),
+      event_label: id,
+      non_interaction: true,
+    });
   }
 };
 

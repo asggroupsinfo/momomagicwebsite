@@ -99,7 +99,7 @@ export const TestimonialsCMS: React.FC = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-premium-gold"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-golden-glow"></div>
       </div>
     );
   }
@@ -115,7 +115,7 @@ export const TestimonialsCMS: React.FC = () => {
         </div>
         <button
           onClick={() => setShowAddForm(!showAddForm)}
-          className="flex items-center space-x-2 bg-premium-gold text-black px-4 py-2 rounded-lg font-semibold hover:bg-charcoal-black hover:text-white transition-all duration-300"
+          className="flex items-center space-x-2 bg-golden-glow text-black px-4 py-2 rounded-lg font-semibold hover:bg-pitch-black hover:text-white transition-all duration-300"
         >
           <Plus size={20} />
           <span>Add Testimonial</span>
@@ -138,7 +138,7 @@ export const TestimonialsCMS: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
-          className="bg-white border-2 border-premium-gold rounded-lg p-6"
+          className="bg-white border-2 border-golden-glow rounded-lg p-6"
         >
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold">Add New Testimonial</h3>
@@ -156,7 +156,7 @@ export const TestimonialsCMS: React.FC = () => {
                   type="text"
                   value={newTestimonial.name || ''}
                   onChange={(e) => setNewTestimonial({ ...newTestimonial, name: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent"
                   placeholder="John Doe"
                 />
               </div>
@@ -168,7 +168,7 @@ export const TestimonialsCMS: React.FC = () => {
                   type="text"
                   value={newTestimonial.role || ''}
                   onChange={(e) => setNewTestimonial({ ...newTestimonial, role: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent"
                   placeholder="Regular Customer"
                 />
               </div>
@@ -181,7 +181,7 @@ export const TestimonialsCMS: React.FC = () => {
                 value={newTestimonial.content || ''}
                 onChange={(e) => setNewTestimonial({ ...newTestimonial, content: e.target.value })}
                 rows={4}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent"
                 placeholder="Write the customer's testimonial here..."
               />
             </div>
@@ -192,7 +192,7 @@ export const TestimonialsCMS: React.FC = () => {
               <select
                 value={newTestimonial.rating || 5}
                 onChange={(e) => setNewTestimonial({ ...newTestimonial, rating: parseInt(e.target.value) })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent"
               >
                 <option value={5}>5 Stars</option>
                 <option value={4}>4 Stars</option>
@@ -203,7 +203,7 @@ export const TestimonialsCMS: React.FC = () => {
             </div>
             <button
               onClick={handleAddTestimonial}
-              className="w-full bg-premium-gold text-black py-2 rounded-lg font-semibold hover:bg-charcoal-black hover:text-white transition-all duration-300"
+              className="w-full bg-golden-glow text-black py-2 rounded-lg font-semibold hover:bg-pitch-black hover:text-white transition-all duration-300"
             >
               Add Testimonial
             </button>
@@ -219,7 +219,7 @@ export const TestimonialsCMS: React.FC = () => {
             animate={{ opacity: 1, scale: 1 }}
             className="bg-white rounded-lg shadow-lg p-6 border border-gray-200 relative"
           >
-            <Quote className="absolute top-4 right-4 text-premium-gold/20" size={32} />
+            <Quote className="absolute top-4 right-4 text-golden-glow/20" size={32} />
             
             {editingId === testimonial.id ? (
               <div className="space-y-3">
@@ -227,27 +227,27 @@ export const TestimonialsCMS: React.FC = () => {
                   type="text"
                   value={testimonial.name}
                   onChange={(e) => handleUpdateTestimonial(testimonial.id, 'name', e.target.value)}
-                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-premium-gold"
+                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-golden-glow"
                   placeholder="Name"
                 />
                 <input
                   type="text"
                   value={testimonial.role}
                   onChange={(e) => handleUpdateTestimonial(testimonial.id, 'role', e.target.value)}
-                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-premium-gold"
+                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-golden-glow"
                   placeholder="Role"
                 />
                 <textarea
                   value={testimonial.content}
                   onChange={(e) => handleUpdateTestimonial(testimonial.id, 'content', e.target.value)}
                   rows={4}
-                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-premium-gold"
+                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-golden-glow"
                   placeholder="Content"
                 />
                 <select
                   value={testimonial.rating}
                   onChange={(e) => handleUpdateTestimonial(testimonial.id, 'rating', parseInt(e.target.value))}
-                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-premium-gold"
+                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-golden-glow"
                 >
                   <option value={5}>5 Stars</option>
                   <option value={4}>4 Stars</option>
@@ -260,12 +260,12 @@ export const TestimonialsCMS: React.FC = () => {
               <>
                 <div className="flex items-center mb-3">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} size={16} className="text-premium-gold fill-premium-gold" />
+                    <Star key={i} size={16} className="text-golden-glow fill-golden-glow" />
                   ))}
                 </div>
                 <p className="text-gray-700 text-sm mb-4 italic">"{testimonial.content}"</p>
                 <div className="flex items-center">
-                  <div className="w-10 h-10 bg-premium-gold rounded-full flex items-center justify-center text-black font-bold">
+                  <div className="w-10 h-10 bg-golden-glow rounded-full flex items-center justify-center text-black font-bold">
                     {testimonial.name.charAt(0)}
                   </div>
                   <div className="ml-3">
@@ -307,7 +307,7 @@ export const TestimonialsCMS: React.FC = () => {
         <button
           onClick={handleSave}
           disabled={isSaving}
-          className="flex items-center space-x-2 bg-premium-gold text-black px-6 py-3 rounded-lg font-semibold hover:bg-charcoal-black hover:text-white transition-all duration-300 disabled:opacity-50"
+          className="flex items-center space-x-2 bg-golden-glow text-black px-6 py-3 rounded-lg font-semibold hover:bg-pitch-black hover:text-white transition-all duration-300 disabled:opacity-50"
         >
           <Save size={20} />
           <span>{isSaving ? 'Saving...' : 'Save Changes'}</span>

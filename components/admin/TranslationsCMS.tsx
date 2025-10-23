@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Save, RefreshCw, AlertCircle, CheckCircle, Globe, Plus, Trash2, Edit2 } from 'lucide-react';
-import { i18nConfig, Locale } from '@/lib/i18n/config';
+import { i18nConfig, Locale, getLocaleName } from '@/lib/i18n/config';
 
 interface TranslationKey {
   key: string;
@@ -124,7 +124,7 @@ export const TranslationsCMS: React.FC = () => {
         </div>
         <div className="flex items-center space-x-3">
           <div className="flex items-center space-x-2 px-4 py-2 bg-gray-100 rounded-lg">
-            <Globe size={18} className="text-premium-gold" />
+            <Globe size={18} className="text-golden-glow" />
             <span className="text-sm font-medium">Completion:</span>
             <span className="text-lg font-bold text-green-600">{getCompletionPercentage()}%</span>
           </div>
@@ -145,7 +145,7 @@ export const TranslationsCMS: React.FC = () => {
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className="flex items-center space-x-2 px-6 py-2 bg-premium-gold text-black font-semibold rounded-lg hover:bg-charcoal-black hover:text-white transition-all disabled:opacity-50"
+            className="flex items-center space-x-2 px-6 py-2 bg-golden-glow text-black font-semibold rounded-lg hover:bg-pitch-black hover:text-white transition-all disabled:opacity-50"
           >
             <Save size={18} />
             <span>{isSaving ? 'Saving...' : 'Save Changes'}</span>
@@ -181,14 +181,14 @@ export const TranslationsCMS: React.FC = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search translations..."
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
           />
         </div>
         <div>
           <select
             value={filterCategory}
             onChange={(e) => setFilterCategory(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
           >
             {categories.map(cat => (
               <option key={cat} value={cat}>
@@ -208,12 +208,12 @@ export const TranslationsCMS: React.FC = () => {
               onClick={() => setActiveLocale(loc)}
               className={`flex items-center space-x-2 py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
                 activeLocale === loc
-                  ? 'border-premium-gold text-premium-gold'
+                  ? 'border-golden-glow text-golden-glow'
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
               }`}
             >
               <Globe size={16} />
-              <span>{i18nConfig.localeNames[loc]}</span>
+              <span>{getLocaleName(loc as Locale)}</span>
             </button>
           ))}
         </nav>
@@ -254,7 +254,7 @@ export const TranslationsCMS: React.FC = () => {
                         type="text"
                         value={translation.key}
                         onChange={(e) => updateTranslation(translation.key, 'key', e.target.value)}
-                        className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                        className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                       />
                     ) : (
                       <code className="text-xs text-gray-900 bg-gray-100 px-2 py-1 rounded">
@@ -268,7 +268,7 @@ export const TranslationsCMS: React.FC = () => {
                         type="text"
                         value={translation.category}
                         onChange={(e) => updateTranslation(translation.key, 'category', e.target.value)}
-                        className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                        className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                       />
                     ) : (
                       <span className="text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded">
@@ -282,7 +282,7 @@ export const TranslationsCMS: React.FC = () => {
                         type="text"
                         value={translation.en}
                         onChange={(e) => updateTranslation(translation.key, 'en', e.target.value)}
-                        className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                        className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                       />
                     ) : (
                       <span className="text-sm text-gray-900">{translation.en}</span>
@@ -294,7 +294,7 @@ export const TranslationsCMS: React.FC = () => {
                         type="text"
                         value={translation.hi}
                         onChange={(e) => updateTranslation(translation.key, 'hi', e.target.value)}
-                        className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                        className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                       />
                     ) : (
                       <span className="text-sm text-gray-900">{translation.hi}</span>
@@ -306,7 +306,7 @@ export const TranslationsCMS: React.FC = () => {
                         type="text"
                         value={translation.bn}
                         onChange={(e) => updateTranslation(translation.key, 'bn', e.target.value)}
-                        className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                        className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                       />
                     ) : (
                       <span className="text-sm text-gray-900">{translation.bn}</span>

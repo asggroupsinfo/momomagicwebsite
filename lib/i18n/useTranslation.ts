@@ -30,12 +30,13 @@ const getNestedValue = (obj: any, path: string): string => {
 };
 
 export const useTranslation = () => {
-  const [locale, setLocale] = useState<Locale>(() => {
+  const [locale, setLocale] = useState<Locale>((): Locale => {
     if (typeof window !== 'undefined') {
-      const savedLocale = localStorage.getItem('locale') as Locale;
-      return savedLocale && i18nConfig.locales.includes(savedLocale) 
-        ? savedLocale 
+      const savedLocale = localStorage.getItem('locale');
+      const validLocale: Locale = savedLocale && (i18nConfig.locales as readonly string[]).includes(savedLocale) 
+        ? (savedLocale as Locale)
         : i18nConfig.defaultLocale;
+      return validLocale;
     }
     return i18nConfig.defaultLocale;
   });
@@ -71,7 +72,7 @@ export const useTranslation = () => {
   };
 
   const changeLocale = (newLocale: Locale) => {
-    if (i18nConfig.locales.includes(newLocale)) {
+    if ((i18nConfig.locales as readonly string[]).includes(newLocale)) {
       setLocale(newLocale);
     }
   };

@@ -21,7 +21,7 @@ export const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
       y: 0,
       transition: {
         duration: 0.5,
-        ease: 'easeOut',
+        ease: 'easeOut' as const,
       },
     },
     exit: {
@@ -29,7 +29,7 @@ export const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
       y: -20,
       transition: {
         duration: 0.3,
-        ease: 'easeIn',
+        ease: 'easeIn' as const,
       },
     },
   };
@@ -57,7 +57,7 @@ export const FadeIn: React.FC<{ children: React.ReactNode; delay?: number }> = (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay, ease: 'easeOut' }}
+      transition={{ duration: 0.5, delay, ease: 'easeOut' as const }}
     >
       {children}
     </motion.div>
@@ -80,7 +80,7 @@ export const SlideIn: React.FC<{
     <motion.div
       initial={{ opacity: 0, ...directions[direction] }}
       animate={{ opacity: 1, x: 0, y: 0 }}
-      transition={{ duration: 0.6, delay, ease: 'easeOut' }}
+      transition={{ duration: 0.6, delay, ease: 'easeOut' as const }}
     >
       {children}
     </motion.div>
@@ -95,7 +95,7 @@ export const ScaleIn: React.FC<{ children: React.ReactNode; delay?: number }> = 
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, delay, ease: 'easeOut' }}
+      transition={{ duration: 0.5, delay, ease: 'easeOut' as const }}
     >
       {children}
     </motion.div>

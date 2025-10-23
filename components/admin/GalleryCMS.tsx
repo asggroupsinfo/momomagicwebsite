@@ -98,7 +98,7 @@ export const GalleryCMS: React.FC = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-premium-gold"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-golden-glow"></div>
       </div>
     );
   }
@@ -114,7 +114,7 @@ export const GalleryCMS: React.FC = () => {
         </div>
         <button
           onClick={() => setShowAddForm(!showAddForm)}
-          className="flex items-center space-x-2 bg-premium-gold text-black px-4 py-2 rounded-lg font-semibold hover:bg-charcoal-black hover:text-white transition-all duration-300"
+          className="flex items-center space-x-2 bg-golden-glow text-black px-4 py-2 rounded-lg font-semibold hover:bg-pitch-black hover:text-white transition-all duration-300"
         >
           <Plus size={20} />
           <span>Add Image</span>
@@ -137,7 +137,7 @@ export const GalleryCMS: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
-          className="bg-white border-2 border-premium-gold rounded-lg p-6"
+          className="bg-white border-2 border-golden-glow rounded-lg p-6"
         >
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold">Add New Image</h3>
@@ -164,7 +164,7 @@ export const GalleryCMS: React.FC = () => {
                 type="text"
                 value={newImage.alt || ''}
                 onChange={(e) => setNewImage({ ...newImage, alt: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent"
                 placeholder="Descriptive alt text for SEO (e.g., 'Kurkure momos with special sauce')"
               />
               <p className="text-xs text-gray-500 mt-1">
@@ -178,7 +178,7 @@ export const GalleryCMS: React.FC = () => {
               <select
                 value={newImage.category || 'food'}
                 onChange={(e) => setNewImage({ ...newImage, category: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent"
               >
                 <option value="food">Food</option>
                 <option value="stall">Stall</option>
@@ -188,7 +188,7 @@ export const GalleryCMS: React.FC = () => {
             </div>
             <button
               onClick={handleAddImage}
-              className="w-full bg-premium-gold text-black py-2 rounded-lg font-semibold hover:bg-charcoal-black hover:text-white transition-all duration-300"
+              className="w-full bg-golden-glow text-black py-2 rounded-lg font-semibold hover:bg-pitch-black hover:text-white transition-all duration-300"
             >
               Add Image
             </button>
@@ -221,20 +221,20 @@ export const GalleryCMS: React.FC = () => {
                     type="text"
                     value={image.url}
                     onChange={(e) => handleUpdateImage(image.id, 'url', e.target.value)}
-                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-premium-gold"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-golden-glow"
                     placeholder="Image URL"
                   />
                   <input
                     type="text"
                     value={image.alt}
                     onChange={(e) => handleUpdateImage(image.id, 'alt', e.target.value)}
-                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-premium-gold"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-golden-glow"
                     placeholder="Alt text"
                   />
                   <select
                     value={image.category}
                     onChange={(e) => handleUpdateImage(image.id, 'category', e.target.value)}
-                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-premium-gold"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-golden-glow"
                   >
                     <option value="food">Food</option>
                     <option value="stall">Stall</option>
@@ -245,7 +245,7 @@ export const GalleryCMS: React.FC = () => {
               ) : (
                 <>
                   <p className="text-sm text-gray-700 font-medium line-clamp-2">{image.alt}</p>
-                  <span className="inline-block px-2 py-1 bg-premium-gold/20 text-premium-gold text-xs font-medium rounded">
+                  <span className="inline-block px-2 py-1 bg-golden-glow/20 text-golden-glow text-xs font-medium rounded">
                     {image.category}
                   </span>
                 </>
@@ -282,7 +282,7 @@ export const GalleryCMS: React.FC = () => {
         <button
           onClick={handleSave}
           disabled={isSaving}
-          className="flex items-center space-x-2 bg-premium-gold text-black px-6 py-3 rounded-lg font-semibold hover:bg-charcoal-black hover:text-white transition-all duration-300 disabled:opacity-50"
+          className="flex items-center space-x-2 bg-golden-glow text-black px-6 py-3 rounded-lg font-semibold hover:bg-pitch-black hover:text-white transition-all duration-300 disabled:opacity-50"
         >
           <Save size={20} />
           <span>{isSaving ? 'Saving...' : 'Save Changes'}</span>

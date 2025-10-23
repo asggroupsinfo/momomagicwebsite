@@ -158,7 +158,7 @@ export const CategoriesCMS: React.FC = () => {
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className="flex items-center space-x-2 px-6 py-2 bg-premium-gold text-black font-semibold rounded-lg hover:bg-charcoal-black hover:text-white transition-all disabled:opacity-50"
+            className="flex items-center space-x-2 px-6 py-2 bg-golden-glow text-black font-semibold rounded-lg hover:bg-pitch-black hover:text-white transition-all disabled:opacity-50"
           >
             <Save size={18} />
             <span>{isSaving ? 'Saving...' : 'Save Changes'}</span>
@@ -206,7 +206,7 @@ export const CategoriesCMS: React.FC = () => {
             onDragEnd={handleDragEnd}
             className={`bg-white border-2 rounded-lg p-6 transition-all cursor-move ${
               draggedItem?.id === category.id
-                ? 'border-premium-gold shadow-lg opacity-50'
+                ? 'border-golden-glow shadow-lg opacity-50'
                 : 'border-gray-200 hover:border-gray-300'
             }`}
           >
@@ -218,7 +218,7 @@ export const CategoriesCMS: React.FC = () => {
 
               {/* Order Number */}
               <div className="flex-shrink-0 pt-2">
-                <div className="w-8 h-8 bg-premium-gold text-black rounded-full flex items-center justify-center font-bold">
+                <div className="w-8 h-8 bg-golden-glow text-black rounded-full flex items-center justify-center font-bold">
                   {category.order}
                 </div>
               </div>
@@ -234,7 +234,7 @@ export const CategoriesCMS: React.FC = () => {
                           type="text"
                           value={category.name}
                           onChange={(e) => updateCategory(category.id, 'name', e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                           placeholder="Category name"
                         />
                       </div>
@@ -244,7 +244,7 @@ export const CategoriesCMS: React.FC = () => {
                           type="text"
                           value={category.slug}
                           onChange={(e) => updateCategory(category.id, 'slug', e.target.value.toLowerCase().replace(/\s+/g, '-'))}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                           placeholder="category-slug"
                         />
                       </div>
@@ -256,7 +256,7 @@ export const CategoriesCMS: React.FC = () => {
                         value={category.description}
                         onChange={(e) => updateCategory(category.id, 'description', e.target.value)}
                         rows={2}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                         placeholder="Category description"
                       />
                     </div>

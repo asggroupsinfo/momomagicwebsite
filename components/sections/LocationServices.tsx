@@ -140,7 +140,7 @@ export const LocationServices: React.FC = () => {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: 'radial-gradient(circle, #DC2626 1px, transparent 1px)',
+            backgroundImage: 'radial-gradient(circle, #ffc241 1px, transparent 1px)',
             backgroundSize: '50px 50px',
           }}
         ></div>
@@ -155,7 +155,7 @@ export const LocationServices: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-premium-gold mb-4 font-heading">
+          <h2 className="text-4xl md:text-5xl font-bold text-golden-glow mb-4 font-heading">
             Visit Our Magic Kitchen
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
@@ -174,7 +174,7 @@ export const LocationServices: React.FC = () => {
             className="space-y-6"
           >
             {/* Map Container */}
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-premium-gold">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-golden-glow">
               <div className="aspect-[4/3] bg-gray-200">
                 <iframe
                   src={mapEmbedUrl}
@@ -193,7 +193,7 @@ export const LocationServices: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={openDirections}
-                className="absolute bottom-4 right-4 bg-premium-gold text-premium-gold px-6 py-3 rounded-full shadow-lg font-semibold flex items-center space-x-2 hover:bg-premium-gold/90 transition-colors"
+                className="absolute bottom-4 right-4 bg-golden-glow text-golden-glow px-6 py-3 rounded-full shadow-lg font-semibold flex items-center space-x-2 hover:bg-golden-glow/90 transition-colors"
               >
                 <ExternalLink className="w-5 h-5" />
                 <span>Get Directions</span>
@@ -203,14 +203,14 @@ export const LocationServices: React.FC = () => {
             {/* Address Card */}
             <motion.div
               whileHover={{ y: -4 }}
-              className="rounded-xl shadow-lg p-6 border-2 border-premium-gold hover:border-premium-gold transition-colors bg-white"
+              className="rounded-xl shadow-lg p-6 border-2 border-golden-glow hover:border-golden-glow transition-colors bg-white"
             >
               <div className="flex items-start space-x-4">
-                <div className="bg-magic-red/10 p-3 rounded-full">
-                  <MapPin className="w-6 h-6 text-magic-red" />
+                <div className="bg-premium-orange/10 p-3 rounded-full">
+                  <MapPin className="w-6 h-6 text-premium-orange" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-premium-gold mb-2">Our Location</h3>
+                  <h3 className="text-xl font-bold text-golden-glow mb-2">Our Location</h3>
                   <p className="text-gray-300 mb-1">{businessInfo.address.line1}</p>
                   <p className="text-gray-300 mb-1">{businessInfo.address.line2}</p>
                   <p className="text-gray-300 mb-3">{businessInfo.address.line3}</p>
@@ -219,7 +219,7 @@ export const LocationServices: React.FC = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={copyAddress}
-                    className="flex items-center space-x-2 text-premium-gold hover:text-premium-gold/80 transition-colors font-semibold"
+                    className="flex items-center space-x-2 text-golden-glow hover:text-golden-glow/80 transition-colors font-semibold"
                   >
                     {copied ? (
                       <>
@@ -249,14 +249,14 @@ export const LocationServices: React.FC = () => {
             {/* Phone Card */}
             <motion.div
               whileHover={{ y: -4 }}
-              className="rounded-xl shadow-lg p-6 border-2 border-premium-gold hover:border-premium-gold transition-colors bg-white"
+              className="rounded-xl shadow-lg p-6 border-2 border-golden-glow hover:border-golden-glow transition-colors bg-white"
             >
               <div className="flex items-start space-x-4">
                 <div className="bg-vegetarian-green/10 p-3 rounded-full">
                   <Phone className="w-6 h-6 text-vegetarian-green" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-premium-gold mb-2">Call for Orders</h3>
+                  <h3 className="text-xl font-bold text-golden-glow mb-2">Call for Orders</h3>
                   <p className="text-gray-300 mb-3">Quick takeaway orders via phone</p>
 
                   <motion.button
@@ -275,19 +275,19 @@ export const LocationServices: React.FC = () => {
             {/* Hours Card */}
             <motion.div
               whileHover={{ y: -4 }}
-              className="rounded-xl shadow-lg p-6 border-2 border-premium-gold hover:border-premium-gold transition-colors bg-white"
+              className="rounded-xl shadow-lg p-6 border-2 border-golden-glow hover:border-golden-glow transition-colors bg-white"
             >
               <div className="flex items-start space-x-4">
                 <div className="bg-warm-orange/10 p-3 rounded-full">
                   <Clock className="w-6 h-6 text-warm-orange" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-premium-gold mb-2">Service Hours</h3>
+                  <h3 className="text-xl font-bold text-golden-glow mb-2">Service Hours</h3>
                   <p className="text-gray-300 mb-3">{businessInfo.hours.days}</p>
 
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-2xl font-bold text-premium-gold">
+                      <p className="text-2xl font-bold text-golden-glow">
                         {businessInfo.hours.open} - {businessInfo.hours.close}
                       </p>
                     </div>
@@ -297,7 +297,7 @@ export const LocationServices: React.FC = () => {
                           Open Now
                         </span>
                       ) : (
-                        <span className="bg-magic-red text-white px-4 py-2 rounded-full text-sm font-semibold">
+                        <span className="bg-premium-orange text-white px-4 py-2 rounded-full text-sm font-semibold">
                           Closed
                         </span>
                       )}
@@ -310,7 +310,7 @@ export const LocationServices: React.FC = () => {
             {/* Quick Info */}
             <motion.div
               whileHover={{ y: -4 }}
-              className="bg-premium-gold rounded-xl shadow-lg p-6 text-black"
+              className="bg-golden-glow rounded-xl shadow-lg p-6 text-black"
             >
               <h3 className="text-xl font-bold mb-2">🥟 Quick Tip</h3>
               <p className="text-black/90">
@@ -328,7 +328,7 @@ export const LocationServices: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h3 className="text-3xl font-bold text-premium-gold mb-8 text-center font-heading">
+          <h3 className="text-3xl font-bold text-golden-glow mb-8 text-center font-heading">
             Our Services
           </h3>
 
@@ -343,8 +343,8 @@ export const LocationServices: React.FC = () => {
                 whileHover={{ y: -8, scale: 1.02 }}
                 className={`rounded-xl shadow-lg p-6 border-2 transition-all duration-300 bg-white ${
                   service.status === 'available'
-                    ? 'border-premium-gold hover:border-premium-gold'
-                    : 'border-premium-gold hover:border-warm-orange'
+                    ? 'border-golden-glow hover:border-golden-glow'
+                    : 'border-golden-glow hover:border-warm-orange'
                 }`}
               >
                 <div className="flex items-start space-x-4">
@@ -353,7 +353,7 @@ export const LocationServices: React.FC = () => {
                     transition={{ duration: 0.6 }}
                     className={`p-3 rounded-full ${
                       service.status === 'available'
-                        ? 'bg-premium-gold/10 text-premium-gold'
+                        ? 'bg-golden-glow/10 text-golden-glow'
                         : 'bg-warm-orange/10 text-warm-orange'
                     }`}
                   >
@@ -361,9 +361,9 @@ export const LocationServices: React.FC = () => {
                   </motion.div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
-                      <h4 className="text-lg font-bold text-premium-gold">{service.title}</h4>
+                      <h4 className="text-lg font-bold text-golden-glow">{service.title}</h4>
                       {service.status === 'coming-soon' && (
-                        <span className="bg-premium-gold text-black px-2 py-1 rounded-full text-xs font-semibold">
+                        <span className="bg-golden-glow text-black px-2 py-1 rounded-full text-xs font-semibold">
                           Soon
                         </span>
                       )}

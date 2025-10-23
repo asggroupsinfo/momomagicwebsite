@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
@@ -9,7 +8,7 @@ interface TimelineEvent {
   description: string;
 }
 
-export const BrandStory: React.FC = () => {
+const BrandStoryComponent: React.FC = () => {
   const storyRef = useRef(null);
   const isStoryInView = useInView(storyRef, { once: true, amount: 0.3 });
 
@@ -47,7 +46,7 @@ export const BrandStory: React.FC = () => {
   ];
 
   return (
-    <section id="story" className="py-20 px-4 bg-black">
+    <section id="story" data-version="v2-fixed" className="py-20 px-4 bg-black">
       <div className="container mx-auto">
         {/* Section Title */}
         <motion.h2
@@ -55,7 +54,7 @@ export const BrandStory: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-center mb-16 text-premium-gold"
+          className="text-4xl md:text-5xl font-bold text-center mb-16 text-golden-glow"
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
           The Magic Began With a Dream, Not a Recipe
@@ -80,7 +79,7 @@ export const BrandStory: React.FC = () => {
               className="text-lg text-white leading-relaxed"
             >
               In September 2023, a young entrepreneur named{' '}
-              <span className="font-semibold text-premium-gold">Dhruv Gupta</span>{' '}
+              <span className="font-semibold text-golden-glow">Dhruv Gupta</span>{' '}
               decided he'd rather build his own empire than work in someone
               else's. Tired of the 9-to-5 rat race, he believed in the
               philosophy:{' '}
@@ -112,7 +111,7 @@ export const BrandStory: React.FC = () => {
               revelation. Dhruv infused them with the same passion and quality
               standards he maintained for his traditional recipes. The small
               stall began attracting attention, and soon{' '}
-              <span className="font-bold text-premium-gold">"Momos Magic"</span>{' '}
+              <span className="font-bold text-golden-glow">"Momos Magic"</span>{' '}
               became the talk of Sherghati.
             </motion.p>
 
@@ -143,7 +142,7 @@ export const BrandStory: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative h-full min-h-[400px] rounded-lg overflow-hidden shadow-2xl border-4 border-premium-gold">
+            <div className="relative h-full min-h-[400px] rounded-lg overflow-hidden shadow-2xl border-4 border-golden-glow">
               {/* Video Container - Transparent background, video will fill completely */}
               <div className="absolute inset-0 bg-transparent flex items-center justify-center">
                 {/* Video will be added here and will fill the entire box with object-cover */}
@@ -171,10 +170,10 @@ export const BrandStory: React.FC = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20 py-12 px-6 bg-white rounded-lg shadow-lg border-2 border-premium-gold"
+          className="text-center mb-20 py-12 px-6 bg-white rounded-lg shadow-lg border-2 border-golden-glow"
         >
           <p
-            className="text-3xl md:text-4xl font-bold text-magic-red mb-4"
+            className="text-3xl md:text-4xl font-bold text-premium-orange mb-4"
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
             "Quantity bhi Mast, Taste bhi Zabardast"
@@ -190,7 +189,7 @@ export const BrandStory: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-bold text-center mb-12 text-premium-gold"
+          className="text-3xl md:text-4xl font-bold text-center mb-12 text-golden-glow"
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
           Our Journey Timeline
@@ -199,7 +198,7 @@ export const BrandStory: React.FC = () => {
         {/* Desktop Timeline (Vertical) */}
         <div className="hidden md:block relative">
           {/* Vertical Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-premium-gold"></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-golden-glow"></div>
 
           {/* Timeline Events */}
           <div className="space-y-12">
@@ -247,15 +246,15 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ event, index, isLeft }) => 
     >
       <div className={`w-5/12 ${isLeft ? 'text-right pr-12' : 'pl-12'}`}>
         <motion.div
-          whileHover={{ scale: 1.05, borderColor: '#D4AF37' }}
+          whileHover={{ scale: 1.05, borderColor: '#ffd700' }}
           transition={{ duration: 0.3 }}
-          className="p-6 rounded-lg shadow-lg border-2 border-premium-gold cursor-pointer bg-white"
+          className="p-6 rounded-lg shadow-lg border-2 border-golden-glow cursor-pointer bg-white"
         >
-          <p className="text-sm font-semibold text-premium-gold mb-2">
+          <p className="text-sm font-semibold text-golden-glow mb-2">
             {event.date}
           </p>
           <h4
-            className="text-xl font-bold text-premium-gold mb-2"
+            className="text-xl font-bold text-golden-glow mb-2"
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
             {event.event}
@@ -269,7 +268,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ event, index, isLeft }) => 
         initial={{ scale: 0 }}
         animate={isInView ? { scale: 1 } : {}}
         transition={{ duration: 0.4, delay: index * 0.1 + 0.2 }}
-        className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-premium-gold rounded-full border-4 border-white shadow-lg z-10"
+        className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-golden-glow rounded-full border-4 border-white shadow-lg z-10"
       ></motion.div>
     </motion.div>
   );
@@ -289,12 +288,12 @@ const MobileTimelineItem: React.FC<MobileTimelineItemProps> = ({ event, index })
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className="flex-shrink-0 w-72"
     >
-      <div className="p-6 rounded-lg shadow-lg border-2 border-premium-gold h-full bg-white">
-        <p className="text-sm font-semibold text-premium-gold mb-2">
+      <div className="p-6 rounded-lg shadow-lg border-2 border-golden-glow h-full bg-white">
+        <p className="text-sm font-semibold text-golden-glow mb-2">
           {event.date}
         </p>
         <h4
-          className="text-xl font-bold text-premium-gold mb-2"
+          className="text-xl font-bold text-golden-glow mb-2"
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
           {event.event}
@@ -304,3 +303,5 @@ const MobileTimelineItem: React.FC<MobileTimelineItemProps> = ({ event, index })
     </motion.div>
   );
 };
+
+export const BrandStory = BrandStoryComponent;
