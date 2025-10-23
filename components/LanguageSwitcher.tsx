@@ -25,7 +25,7 @@ export const LanguageSwitcher: React.FC = () => {
       >
         <Globe size={20} className="text-golden-glow" />
         <span className="text-sm font-medium text-white">
-          {localeNames[locale]}
+          {localeNames[locale as keyof typeof localeNames]}
         </span>
       </button>
 
@@ -58,7 +58,7 @@ export const LanguageSwitcher: React.FC = () => {
                   <span className={`text-sm font-medium ${
                     locale === loc ? 'text-golden-glow' : 'text-gray-700'
                   }`}>
-                    {localeNames[loc]}
+                    {localeNames[loc as keyof typeof localeNames]}
                   </span>
                   {locale === loc && (
                     <Check size={16} className="text-golden-glow" />
