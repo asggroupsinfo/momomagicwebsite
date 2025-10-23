@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 interface FormData {
   name: string;
@@ -21,6 +22,33 @@ interface FormErrors {
   message?: string;
 }
 
+const faqs = [
+  {
+    question: 'What are your operating hours?',
+    answer: 'We are open every day from 10:00 AM to 10:00 PM. We never take a day off because we love serving you!'
+  },
+  {
+    question: 'Do you offer home delivery?',
+    answer: 'Currently, we offer takeaway only. However, we are working on launching delivery services within a 10KM radius soon. Stay tuned!'
+  },
+  {
+    question: 'Can I place bulk orders for events?',
+    answer: 'Absolutely! We love catering to events. Please call us at +91 9955955191 or fill out the contact form with your requirements, and we will get back to you with a custom quote.'
+  },
+  {
+    question: 'Are all your momos vegetarian?',
+    answer: 'Yes! We are a 100% pure vegetarian kitchen. All our momos are made with fresh vegetables, paneer, soya, and cheese corn fillings.'
+  },
+  {
+    question: 'What makes your Kurkure Momos special?',
+    answer: 'Our Kurkure Momos are the first of their kind in Bihar! They feature a unique crispy, crunchy coating that sets them apart from regular momos. It\'s a must-try!'
+  },
+  {
+    question: 'How can I provide feedback?',
+    answer: 'We love hearing from our customers! You can fill out the contact form, call us directly, or leave a review on Google. Your feedback helps us improve.'
+  }
+];
+
 export default function ContactPage() {
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -33,6 +61,10 @@ export default function ContactPage() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
+  const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null);
+  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -76,7 +108,13 @@ export default function ContactPage() {
       return;
     }
 
+    if (!recaptchaValue) {
+      setErrors({ ...errors, message: 'Please complete the reCAPTCHA verification' });
+      return;
+    }
+
     setIsSubmitting(true);
+    setSubmitError(false);
 
     setTimeout(() => {
       setIsSubmitting(false);
@@ -88,11 +126,19 @@ export default function ContactPage() {
         subject: '',
         message: '',
       });
+      setRecaptchaValue(null);
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
 
       setTimeout(() => {
         setSubmitSuccess(false);
       }, 5000);
     }, 1500);
+  };
+
+  const handleRecaptchaChange = (value: string | null) => {
+    setRecaptchaValue(value);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -105,6 +151,9 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-pitch-black py-20">
+      {/* Section Border */}
+      <div className="h-[3px] w-full bg-gradient-to-r from-premium-orange to-transparent mb-12" />
+      
       <div className="container mx-auto px-4">
         {/* Header */}
         <motion.div
@@ -127,21 +176,39 @@ export default function ContactPage() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
+            id="contact-form"
           >
             <Card className="p-8">
               <h2 className="text-2xl font-bold text-golden-glow mb-6">Send Us a Message</h2>
 
-              {submitSuccess && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mb-6 p-4 bg-vegetarian-green/20 border border-vegetarian-green rounded-lg"
-                >
-                  <p className="text-vegetarian-green font-semibold">
-                    ✓ Message sent successfully! We'll get back to you soon.
-                  </p>
-                </motion.div>
-              )}
+              <AnimatePresence>
+                {submitSuccess && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9, y: -10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.9, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="mb-6 p-4 bg-golden-glow/20 border-2 border-golden-glow rounded-lg"
+                  >
+                    <p className="text-golden-glow font-semibold flex items-center gap-2">
+                      <span className="text-2xl">✓</span> Message sent successfully! We'll get back to you soon.
+                    </p>
+                  </motion.div>
+                )}
+                {submitError && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9, y: -10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.9, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="mb-6 p-4 bg-warm-orange/20 border-2 border-warm-orange rounded-lg"
+                  >
+                    <p className="text-warm-orange font-semibold flex items-center gap-2">
+                      <span className="text-2xl">✗</span> Failed to send message. Please try again.
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Name */}
@@ -157,7 +224,7 @@ export default function ContactPage() {
                     onChange={handleChange}
                     className={`w-full px-4 py-3 bg-deep-space border ${
                       errors.name ? 'border-warm-orange' : 'border-charcoal'
-                    } rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors`}
+                    } rounded-lg text-foreground focus:outline-none focus:border-premium-orange focus:ring-2 focus:ring-premium-orange/20 transition-all`}
                     placeholder="Enter your full name"
                   />
                   {errors.name && (
@@ -178,7 +245,7 @@ export default function ContactPage() {
                     onChange={handleChange}
                     className={`w-full px-4 py-3 bg-deep-space border ${
                       errors.email ? 'border-warm-orange' : 'border-charcoal'
-                    } rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors`}
+                    } rounded-lg text-foreground focus:outline-none focus:border-premium-orange focus:ring-2 focus:ring-premium-orange/20 transition-all`}
                     placeholder="your.email@example.com"
                   />
                   {errors.email && (
@@ -199,7 +266,7 @@ export default function ContactPage() {
                     onChange={handleChange}
                     className={`w-full px-4 py-3 bg-deep-space border ${
                       errors.phone ? 'border-warm-orange' : 'border-charcoal'
-                    } rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors`}
+                    } rounded-lg text-foreground focus:outline-none focus:border-premium-orange focus:ring-2 focus:ring-premium-orange/20 transition-all`}
                     placeholder="9955955191"
                   />
                   {errors.phone && (
@@ -219,7 +286,7 @@ export default function ContactPage() {
                     onChange={handleChange}
                     className={`w-full px-4 py-3 bg-deep-space border ${
                       errors.subject ? 'border-warm-orange' : 'border-charcoal'
-                    } rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors`}
+                    } rounded-lg text-foreground focus:outline-none focus:border-premium-orange focus:ring-2 focus:ring-premium-orange/20 transition-all`}
                   >
                     <option value="">Select a subject</option>
                     <option value="general">General Inquiry</option>
@@ -246,7 +313,7 @@ export default function ContactPage() {
                     rows={5}
                     className={`w-full px-4 py-3 bg-deep-space border ${
                       errors.message ? 'border-warm-orange' : 'border-charcoal'
-                    } rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors resize-none`}
+                    } rounded-lg text-foreground focus:outline-none focus:border-premium-orange focus:ring-2 focus:ring-premium-orange/20 transition-all resize-none`}
                     placeholder="Tell us more about your inquiry..."
                   />
                   {errors.message && (
@@ -254,14 +321,30 @@ export default function ContactPage() {
                   )}
                 </div>
 
+                {/* reCAPTCHA */}
+                <div className="flex justify-center">
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'}
+                    onChange={handleRecaptchaChange}
+                    theme="dark"
+                  />
+                </div>
+
                 <Button
                   type="submit"
                   variant="primary"
                   size="lg"
-                  className="w-full"
+                  className="w-full bg-premium-orange text-pitch-black hover:bg-burnt-orange font-bold"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {isSubmitting ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <span className="animate-spin">⏳</span> Sending...
+                    </span>
+                  ) : (
+                    'Send Message'
+                  )}
                 </Button>
               </form>
             </Card>
@@ -360,6 +443,137 @@ export default function ContactPage() {
             </Card>
           </motion.div>
         </div>
+
+        {/* Interactive Map Section */}
+        <motion.div
+          className="mt-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <h2 className="text-3xl font-bold text-premium-orange mb-8 text-center">
+            Find Us on the Map
+          </h2>
+          <Card className="p-4 overflow-hidden">
+            <div className="w-full h-[400px] rounded-lg overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.123456789!2d85.1234567!3d24.5678901!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDM0JzA0LjQiTiA4NcKwMDcnMjQuNCJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Momos Magic Location"
+              />
+            </div>
+          </Card>
+        </motion.div>
+
+        {/* FAQ Section */}
+        <motion.div
+          className="mt-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-premium-orange mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-foreground/70 max-w-2xl mx-auto">
+              Got questions? We've got answers! Here are some common questions our customers ask.
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto space-y-4">
+            {faqs.map((faq, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+              >
+                <div
+                  className="cursor-pointer"
+                  onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
+                >
+                  <Card
+                    className={`transition-all duration-300 ${
+                      expandedFaq === index
+                        ? 'border-premium-orange shadow-lg shadow-premium-orange/20'
+                        : 'hover:border-premium-orange/50'
+                    }`}
+                  >
+                    <div className="p-6">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-lg font-semibold text-foreground pr-4">
+                        {faq.question}
+                      </h3>
+                      <motion.div
+                        animate={{ rotate: expandedFaq === index ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="text-premium-orange text-2xl flex-shrink-0"
+                      >
+                        ▼
+                      </motion.div>
+                    </div>
+                    <AnimatePresence>
+                      {expandedFaq === index && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <p className="text-foreground/70 mt-4 leading-relaxed">
+                            {faq.answer}
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                    </div>
+                  </Card>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Still Have Questions CTA */}
+          <motion.div
+            className="mt-12 text-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
+            <Card className="p-8 bg-gradient-to-br from-deep-space to-charcoal border-2 border-premium-orange max-w-2xl mx-auto">
+              <h3 className="text-2xl font-bold text-golden-glow mb-4">
+                Still Have Questions?
+              </h3>
+              <p className="text-foreground/80 mb-6">
+                Can't find what you're looking for? Feel free to reach out to us directly!
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a
+                  href="tel:+919955955191"
+                  className="px-6 py-3 bg-premium-orange text-pitch-black font-bold rounded-lg hover:bg-burnt-orange transition-colors duration-300"
+                >
+                  📞 Call Us Now
+                </a>
+                <button
+                  onClick={() => {
+                    const form = document.getElementById('contact-form');
+                    form?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="px-6 py-3 border-2 border-premium-orange text-premium-orange font-bold rounded-lg hover:bg-premium-orange hover:text-pitch-black transition-colors duration-300"
+                >
+                  ✉️ Send a Message
+                </button>
+              </div>
+            </Card>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   );
