@@ -16,12 +16,21 @@ interface StoredSubmission extends Omit<ContactSubmission, 'recaptchaToken'> {
   id: string;
 }
 
-async function verifyRecaptcha(token: string): Promise<boolean> {
+interface RecaptchaV3Response {
+  success: boolean;
+  score: number;
+  action: string;
+  challenge_ts: string;
+  hostname: string;
+  'error-codes'?: string[];
+}
+
+async function verifyRecaptchaV3(token: string): Promise<{ success: boolean; score: number }> {
   const secretKey = process.env.RECAPTCHA_SECRET_KEY;
   
   if (!secretKey) {
     console.error('RECAPTCHA_SECRET_KEY is not set');
-    return false;
+    return { success: false, score: 0 };
   }
 
   try {
@@ -33,11 +42,17 @@ async function verifyRecaptcha(token: string): Promise<boolean> {
       body: `secret=${secretKey}&response=${token}`,
     });
 
-    const data = await response.json();
-    return data.success === true;
+    const data: RecaptchaV3Response = await response.json();
+    
+    if (!data.success) {
+      console.error('reCAPTCHA v3 verification failed:', data['error-codes']);
+      return { success: false, score: 0 };
+    }
+
+    return { success: true, score: data.score };
   } catch (error) {
     console.error('reCAPTCHA verification error:', error);
-    return false;
+    return { success: false, score: 0 };
   }
 }
 
@@ -54,8 +69,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    
-    /*
     if (!recaptchaToken) {
       return NextResponse.json(
         { error: 'reCAPTCHA verification is required' },
@@ -63,14 +76,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const isRecaptchaValid = await verifyRecaptcha(recaptchaToken);
-    if (!isRecaptchaValid) {
+    const recaptchaResult = await verifyRecaptchaV3(recaptchaToken);
+    
+    if (!recaptchaResult.success) {
       return NextResponse.json(
         { error: 'reCAPTCHA verification failed' },
         { status: 400 }
       );
     }
-    */
+
+    if (recaptchaResult.score < 0.5) {
+      console.warn(`Low reCAPTCHA score detected: ${recaptchaResult.score}`);
+      return NextResponse.json(
+        { error: 'Suspicious activity detected. Please try again later.' },
+        { status: 403 }
+      );
+    }
 
     const dataDir = path.join(process.cwd(), 'data');
     const filePath = path.join(dataDir, 'contact-submissions.json');

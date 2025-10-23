@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import ReCAPTCHA from 'react-google-recaptcha';
+import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 interface FormData {
   name: string;
@@ -49,7 +49,7 @@ const faqs = [
   }
 ];
 
-export default function ContactPage() {
+function ContactPageContent() {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -62,9 +62,8 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState(false);
-  const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null);
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -108,19 +107,19 @@ export default function ContactPage() {
       return;
     }
 
-    // Note: reCAPTCHA validation temporarily disabled for testing
-    // The keys provided are for reCAPTCHA v3 but the form uses v2
-    /*
-    if (!recaptchaValue) {
-      setErrors({ ...errors, message: 'Please complete the reCAPTCHA verification' });
+    if (!executeRecaptcha) {
+      console.error('reCAPTCHA not yet available');
+      setSubmitError(true);
+      setTimeout(() => setSubmitError(false), 5000);
       return;
     }
-    */
 
     setIsSubmitting(true);
     setSubmitError(false);
 
     try {
+      const recaptchaToken = await executeRecaptcha('contact_form_submit');
+
       const response = await fetch('/api/contact/submit', {
         method: 'POST',
         headers: {
@@ -132,7 +131,7 @@ export default function ContactPage() {
           phone: formData.phone,
           subject: formData.subject,
           message: formData.message,
-          recaptchaToken: recaptchaValue,
+          recaptchaToken,
         }),
       });
 
@@ -148,10 +147,6 @@ export default function ContactPage() {
           subject: '',
           message: '',
         });
-        setRecaptchaValue(null);
-        if (recaptchaRef.current) {
-          recaptchaRef.current.reset();
-        }
 
         setTimeout(() => {
           setSubmitSuccess(false);
@@ -174,10 +169,6 @@ export default function ContactPage() {
         setSubmitError(false);
       }, 5000);
     }
-  };
-
-  const handleRecaptchaChange = (value: string | null) => {
-    setRecaptchaValue(value);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -358,16 +349,6 @@ export default function ContactPage() {
                   {errors.message && (
                     <p className="mt-1 text-sm text-warm-orange">{errors.message}</p>
                   )}
-                </div>
-
-                {/* reCAPTCHA */}
-                <div className="flex justify-center">
-                  <ReCAPTCHA
-                    ref={recaptchaRef}
-                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'}
-                    onChange={handleRecaptchaChange}
-                    theme="dark"
-                  />
                 </div>
 
                 <Button
@@ -615,5 +596,20 @@ export default function ContactPage() {
         </motion.div>
       </div>
     </div>
+  );
+}
+
+export default function ContactPage() {
+  return (
+    <GoogleReCaptchaProvider
+      reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
+      scriptProps={{
+        async: true,
+        defer: true,
+        appendTo: 'head',
+      }}
+    >
+      <ContactPageContent />
+    </GoogleReCaptchaProvider>
   );
 }
