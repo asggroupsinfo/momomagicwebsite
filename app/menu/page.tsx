@@ -10,7 +10,7 @@ export default function MenuPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedType, setSelectedType] = useState<string>('all');
   const [selectedSpiceLevel, setSelectedSpiceLevel] = useState<string>('all');
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 100]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 250]);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [showPopularOnly, setShowPopularOnly] = useState(false);
   const [showNewOnly, setShowNewOnly] = useState(false);
@@ -40,7 +40,7 @@ export default function MenuPage() {
     setSelectedCategory('all');
     setSelectedType('all');
     setSelectedSpiceLevel('all');
-    setPriceRange([0, 100]);
+    setPriceRange([0, 250]);
     setSearchQuery('');
     setShowPopularOnly(false);
     setShowNewOnly(false);
@@ -186,13 +186,13 @@ export default function MenuPage() {
             {/* Price Range Slider */}
             <div className="mb-6">
               <p className="text-sm font-semibold text-foreground/80 mb-3">
-                Price Range: ₹{priceRange[0]} - ₹{priceRange[1]}
+                Price Range: ₹{priceRange[0]} - ₹{priceRange[1]}{priceRange[1] === 250 ? '+' : ''}
               </p>
               <div className="flex items-center gap-4">
                 <input
                   type="range"
                   min="0"
-                  max="100"
+                  max="250"
                   value={priceRange[0]}
                   onChange={(e) => setPriceRange([parseInt(e.target.value), priceRange[1]])}
                   className="flex-1 h-2 bg-deep-space rounded-lg appearance-none cursor-pointer accent-premium-orange"
@@ -200,7 +200,7 @@ export default function MenuPage() {
                 <input
                   type="range"
                   min="0"
-                  max="100"
+                  max="250"
                   value={priceRange[1]}
                   onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
                   className="flex-1 h-2 bg-deep-space rounded-lg appearance-none cursor-pointer accent-premium-orange"
@@ -208,7 +208,7 @@ export default function MenuPage() {
               </div>
               <div className="flex justify-between text-xs text-foreground/50 mt-2">
                 <span>₹0</span>
-                <span>₹100</span>
+                <span>₹250+</span>
               </div>
             </div>
 
@@ -385,8 +385,14 @@ export default function MenuPage() {
                   {/* Price & Order */}
                   <div className="flex items-center justify-between pt-4 border-t border-charcoal">
                     <div>
-                      <p className="text-2xl font-bold text-premium-orange">₹{item.price}</p>
-                      <p className="text-xs text-foreground/50">per plate (6 pcs)</p>
+                      <div className="flex items-baseline gap-2">
+                        <p className="text-xl font-bold text-golden-glow">₹{item.halfPrice}</p>
+                        <span className="text-xs text-foreground/50">(5pc)</span>
+                        <span className="text-foreground/30">|</span>
+                        <p className="text-xl font-bold text-golden-glow">₹{item.price}</p>
+                        <span className="text-xs text-foreground/50">(10pc)</span>
+                      </div>
+                      <p className="text-xs text-foreground/50 mt-1">Half | Full Plate</p>
                     </div>
                     <Button variant="primary" size="sm">
                       Order Now
