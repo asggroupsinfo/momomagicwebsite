@@ -20,7 +20,12 @@ interface MenuItem {
   spiceLevel: string;
 }
 
-const categories = [
+interface MenuData {
+  items: MenuItem[];
+  categories: string[];
+}
+
+const defaultCategories = [
   'Steamed Perfection',
   'Crispy Fried Delights',
   'Magic Signatures',
@@ -31,9 +36,12 @@ const spiceLevels = ['Mild', 'Medium', 'Hot', 'Extra Magic'];
 
 export default function MenuManagementPage() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+  const [categories, setCategories] = useState<string[]>(defaultCategories);
   const [isLoading, setIsLoading] = useState(true);
   const [editingItem, setEditingItem] = useState<MenuItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
+  const [newCategory, setNewCategory] = useState('');
   const [saveMessage, setSaveMessage] = useState('');
 
   useEffect(() => {
@@ -44,8 +52,9 @@ export default function MenuManagementPage() {
     try {
       const response = await fetch('/api/cms/menu');
       if (response.ok) {
-        const data = await response.json();
+        const data: MenuData = await response.json();
         setMenuItems(data.items || []);
+        setCategories(data.categories || defaultCategories);
       }
     } catch (error) {
       console.error('Error loading menu items:', error);
@@ -120,6 +129,62 @@ export default function MenuManagementPage() {
     setIsModalOpen(true);
   };
 
+  const handleAddCategory = async () => {
+    if (!newCategory.trim()) return;
+    
+    const updatedCategories = [...categories, newCategory.trim()];
+    
+    try {
+      const response = await fetch('/api/cms/menu', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ categories: updatedCategories }),
+      });
+
+      if (response.ok) {
+        setCategories(updatedCategories);
+        setNewCategory('');
+        setIsCategoryModalOpen(false);
+        setSaveMessage('✅ Category added successfully!');
+      } else {
+        setSaveMessage('❌ Failed to add category');
+      }
+    } catch (error) {
+      setSaveMessage('❌ Error adding category');
+    } finally {
+      setTimeout(() => setSaveMessage(''), 3000);
+    }
+  };
+
+  const handleDeleteCategory = async (categoryToDelete: string) => {
+    if (!confirm(`Delete category "${categoryToDelete}"? Items in this category will need to be reassigned.`)) return;
+    
+    const updatedCategories = categories.filter(cat => cat !== categoryToDelete);
+    
+    try {
+      const response = await fetch('/api/cms/menu', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ categories: updatedCategories }),
+      });
+
+      if (response.ok) {
+        setCategories(updatedCategories);
+        setSaveMessage('✅ Category deleted successfully!');
+      } else {
+        setSaveMessage('❌ Failed to delete category');
+      }
+    } catch (error) {
+      setSaveMessage('❌ Error deleting category');
+    } finally {
+      setTimeout(() => setSaveMessage(''), 3000);
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -144,16 +209,25 @@ export default function MenuManagementPage() {
               Menu Management
             </h1>
             <p className="text-foreground/70">
-              Add, edit, and manage your menu items
+              Add, edit, and manage your menu items and categories
             </p>
           </div>
-          <Button
-            variant="primary"
-            size="lg"
-            onClick={openAddModal}
-          >
-            ➕ Add New Item
-          </Button>
+          <div className="flex gap-3">
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => setIsCategoryModalOpen(true)}
+            >
+              🏷️ Manage Categories
+            </Button>
+            <Button
+              variant="primary"
+              size="lg"
+              onClick={openAddModal}
+            >
+              ➕ Add New Item
+            </Button>
+          </div>
         </div>
 
         {saveMessage && (
@@ -442,6 +516,90 @@ export default function MenuManagementPage() {
                     Cancel
                   </Button>
                 </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Category Management Modal */}
+      <AnimatePresence>
+        {isCategoryModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-pitch-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={() => setIsCategoryModalOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="bg-deep-space border border-charcoal rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h2 className="text-3xl font-bold text-premium-orange mb-6">
+                Manage Categories
+              </h2>
+
+              {/* Add New Category */}
+              <div className="mb-8 p-6 bg-pitch-black border border-charcoal rounded-lg">
+                <h3 className="text-xl font-bold text-golden-glow mb-4">
+                  Add New Category
+                </h3>
+                <div className="flex gap-3">
+                  <input
+                    type="text"
+                    value={newCategory}
+                    onChange={(e) => setNewCategory(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && handleAddCategory()}
+                    className="flex-1 px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                    placeholder="e.g., Dessert Momos"
+                  />
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    onClick={handleAddCategory}
+                  >
+                    ➕ Add
+                  </Button>
+                </div>
+              </div>
+
+              {/* Existing Categories */}
+              <div>
+                <h3 className="text-xl font-bold text-golden-glow mb-4">
+                  Existing Categories ({categories.length})
+                </h3>
+                <div className="space-y-2">
+                  {categories.map((category) => (
+                    <div
+                      key={category}
+                      className="flex items-center justify-between p-4 bg-pitch-black border border-charcoal rounded-lg hover:border-golden-glow/30 transition-colors"
+                    >
+                      <span className="text-foreground font-medium">{category}</span>
+                      <button
+                        onClick={() => handleDeleteCategory(category)}
+                        className="px-4 py-2 bg-warm-orange/20 text-warm-orange rounded-lg text-sm font-bold hover:bg-warm-orange/30 transition-colors"
+                      >
+                        🗑️ Delete
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Close Button */}
+              <div className="mt-8 pt-6 border-t border-charcoal">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() => setIsCategoryModalOpen(false)}
+                  className="w-full"
+                >
+                  Close
+                </Button>
               </div>
             </motion.div>
           </motion.div>

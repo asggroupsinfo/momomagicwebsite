@@ -13,6 +13,13 @@ async function ensureDataDir() {
   }
 }
 
+const defaultCategories = [
+  'Steamed Perfection',
+  'Crispy Fried Delights',
+  'Magic Signatures',
+  'Fusion Innovations'
+];
+
 export async function GET(request: NextRequest) {
   try {
     await requireAuth();
@@ -23,7 +30,8 @@ export async function GET(request: NextRequest) {
       return NextResponse.json(JSON.parse(data));
     } catch (error) {
       const defaultData = {
-        items: []
+        items: [],
+        categories: defaultCategories
       };
       return NextResponse.json(defaultData);
     }
@@ -41,27 +49,37 @@ export async function POST(request: NextRequest) {
     await ensureDataDir();
 
     const body = await request.json();
-    const { item } = body;
+    const { item, categories } = body;
 
-    let menuData: { items: any[] } = { items: [] };
+    let menuData: { items: any[]; categories: string[] } = { 
+      items: [], 
+      categories: defaultCategories 
+    };
+    
     try {
       const data = await fs.readFile(MENU_DATA_FILE, 'utf-8');
       menuData = JSON.parse(data);
     } catch (error) {
     }
 
-    const existingIndex = menuData.items.findIndex((i: any) => i.id === item.id);
-    if (existingIndex >= 0) {
-      menuData.items[existingIndex] = item;
-    } else {
-      menuData.items.push(item);
+    if (categories) {
+      menuData.categories = categories;
+    }
+
+    if (item) {
+      const existingIndex = menuData.items.findIndex((i: any) => i.id === item.id);
+      if (existingIndex >= 0) {
+        menuData.items[existingIndex] = item;
+      } else {
+        menuData.items.push(item);
+      }
     }
 
     await fs.writeFile(MENU_DATA_FILE, JSON.stringify(menuData, null, 2), 'utf-8');
 
     return NextResponse.json({
       success: true,
-      message: 'Menu item saved successfully'
+      message: item ? 'Menu item saved successfully' : 'Categories updated successfully'
     });
   } catch (error) {
     if (error instanceof Error && error.message === 'Unauthorized') {
@@ -71,7 +89,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.error('Error saving menu item:', error);
+    console.error('Error saving menu data:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -94,7 +112,11 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
-    let menuData: { items: any[] } = { items: [] };
+    let menuData: { items: any[]; categories: string[] } = { 
+      items: [], 
+      categories: defaultCategories 
+    };
+    
     try {
       const data = await fs.readFile(MENU_DATA_FILE, 'utf-8');
       menuData = JSON.parse(data);
