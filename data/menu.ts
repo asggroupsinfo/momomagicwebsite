@@ -1,0 +1,199 @@
+export interface MenuItem {
+  id: string;
+  name: string;
+  category: 'steamed' | 'fried' | 'kurkure' | 'pizza';
+  type: 'veg' | 'paneer' | 'soya' | 'cheese-corn';
+  price: number;
+  description: string;
+  image: string;
+  popular?: boolean;
+  new?: boolean;
+  spicy?: boolean;
+}
+
+export const menuItems: MenuItem[] = [
+  {
+    id: 'steamed-veg',
+    name: 'Veg Steamed Momos',
+    category: 'steamed',
+    type: 'veg',
+    price: 40,
+    description: 'Soft and juicy steamed momos filled with fresh vegetables',
+    image: '/images/menu/steamed-veg.jpg',
+    popular: true,
+  },
+  {
+    id: 'steamed-paneer',
+    name: 'Paneer Steamed Momos',
+    category: 'steamed',
+    type: 'paneer',
+    price: 50,
+    description: 'Steamed momos with creamy paneer filling',
+    image: '/images/menu/steamed-paneer.jpg',
+    popular: true,
+  },
+  {
+    id: 'steamed-soya',
+    name: 'Soya Steamed Momos',
+    category: 'steamed',
+    type: 'soya',
+    price: 45,
+    description: 'Protein-rich soya steamed momos',
+    image: '/images/menu/steamed-soya.jpg',
+  },
+  {
+    id: 'steamed-cheese',
+    name: 'Cheese Corn Steamed Momos',
+    category: 'steamed',
+    type: 'cheese-corn',
+    price: 55,
+    description: 'Steamed momos with cheese and sweet corn',
+    image: '/images/menu/steamed-cheese.jpg',
+    popular: true,
+  },
+
+  {
+    id: 'fried-veg',
+    name: 'Veg Fried Momos',
+    category: 'fried',
+    type: 'veg',
+    price: 50,
+    description: 'Golden-fried momos with crispy exterior',
+    image: '/images/menu/fried-veg.jpg',
+    popular: true,
+  },
+  {
+    id: 'fried-paneer',
+    name: 'Paneer Fried Momos',
+    category: 'fried',
+    type: 'paneer',
+    price: 60,
+    description: 'Crispy fried momos with paneer filling',
+    image: '/images/menu/fried-paneer.jpg',
+  },
+  {
+    id: 'fried-soya',
+    name: 'Soya Fried Momos',
+    category: 'fried',
+    type: 'soya',
+    price: 55,
+    description: 'Crispy fried soya momos',
+    image: '/images/menu/fried-soya.jpg',
+  },
+  {
+    id: 'fried-cheese',
+    name: 'Cheese Corn Fried Momos',
+    category: 'fried',
+    type: 'cheese-corn',
+    price: 65,
+    description: 'Fried momos with cheese and corn',
+    image: '/images/menu/fried-cheese.jpg',
+  },
+
+  {
+    id: 'kurkure-veg',
+    name: 'Kurkure Veg Momos',
+    category: 'kurkure',
+    type: 'veg',
+    price: 60,
+    description: 'Our signature crispy, crunchy Kurkure momos - First in Bihar!',
+    image: '/images/menu/kurkure-veg.jpg',
+    popular: true,
+    spicy: true,
+  },
+  {
+    id: 'kurkure-paneer',
+    name: 'Kurkure Paneer Momos',
+    category: 'kurkure',
+    type: 'paneer',
+    price: 70,
+    description: 'Kurkure coating with creamy paneer filling',
+    image: '/images/menu/kurkure-paneer.jpg',
+    popular: true,
+    spicy: true,
+  },
+  {
+    id: 'kurkure-cheese',
+    name: 'Kurkure Cheese Corn Momos',
+    category: 'kurkure',
+    type: 'cheese-corn',
+    price: 75,
+    description: 'Ultimate Kurkure momos with cheese and corn',
+    image: '/images/menu/kurkure-cheese.jpg',
+    new: true,
+    spicy: true,
+  },
+
+  {
+    id: 'pizza-veg',
+    name: 'Veg Pizza Momos',
+    category: 'pizza',
+    type: 'veg',
+    price: 70,
+    description: 'Innovative fusion of pizza and momos',
+    image: '/images/menu/pizza-veg.jpg',
+    new: true,
+  },
+  {
+    id: 'pizza-paneer',
+    name: 'Paneer Pizza Momos',
+    category: 'pizza',
+    type: 'paneer',
+    price: 80,
+    description: 'Pizza momos with paneer topping',
+    image: '/images/menu/pizza-paneer.jpg',
+    new: true,
+    popular: true,
+  },
+  {
+    id: 'pizza-soya',
+    name: 'Soya Pizza Momos',
+    category: 'pizza',
+    type: 'soya',
+    price: 75,
+    description: 'Pizza momos with soya filling',
+    image: '/images/menu/pizza-soya.jpg',
+    new: true,
+  },
+  {
+    id: 'pizza-cheese',
+    name: 'Cheese Corn Pizza Momos',
+    category: 'pizza',
+    type: 'cheese-corn',
+    price: 85,
+    description: 'Ultimate pizza momos with extra cheese',
+    image: '/images/menu/pizza-cheese.jpg',
+    new: true,
+  },
+];
+
+export const categories = [
+  {
+    id: 'steamed',
+    name: 'Steamed Perfection',
+    description: 'Fresh & Healthy',
+    icon: '🥟',
+    color: 'vegetarian-green',
+  },
+  {
+    id: 'fried',
+    name: 'Crispy Fried Delights',
+    description: 'Golden & Crunchy',
+    icon: '🔥',
+    color: 'warm-orange',
+  },
+  {
+    id: 'kurkure',
+    name: 'Magic Signatures',
+    description: 'Sherghati Exclusive',
+    icon: '✨',
+    color: 'golden-glow',
+  },
+  {
+    id: 'pizza',
+    name: 'Fusion Innovations',
+    description: 'Innovative Fusion',
+    icon: '🍕',
+    color: 'premium-orange',
+  },
+];
