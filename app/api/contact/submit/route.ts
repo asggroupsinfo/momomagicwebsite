@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { sql } from '@vercel/postgres';
 
 interface ContactSubmission {
   name: string;
@@ -8,12 +7,7 @@ interface ContactSubmission {
   phone: string;
   subject: string;
   message: string;
-  timestamp: string;
   recaptchaToken: string;
-}
-
-interface StoredSubmission extends Omit<ContactSubmission, 'recaptchaToken'> {
-  id: string;
 }
 
 interface RecaptchaV3Response {
@@ -93,38 +87,20 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const dataDir = path.join(process.cwd(), 'data');
-    const filePath = path.join(dataDir, 'contact-submissions.json');
+    const result = await sql`
+      INSERT INTO contact_submissions (name, email, phone, subject, message, recaptcha_score)
+      VALUES (${name}, ${email}, ${phone}, ${subject}, ${message}, ${recaptchaResult.score})
+      RETURNING id, created_at
+    `;
 
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true });
-    }
-
-    let submissions: StoredSubmission[] = [];
-    if (fs.existsSync(filePath)) {
-      const fileContent = fs.readFileSync(filePath, 'utf-8');
-      submissions = JSON.parse(fileContent);
-    }
-
-    const newSubmission: StoredSubmission = {
-      id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-      name,
-      email,
-      phone,
-      subject,
-      message,
-      timestamp: new Date().toISOString(),
-    };
-
-    submissions.push(newSubmission);
-
-    fs.writeFileSync(filePath, JSON.stringify(submissions, null, 2));
+    const submission = result.rows[0];
 
     return NextResponse.json(
       { 
         success: true, 
         message: 'Contact form submitted successfully',
-        submissionId: newSubmission.id
+        submissionId: submission.id,
+        timestamp: submission.created_at
       },
       { status: 200 }
     );
