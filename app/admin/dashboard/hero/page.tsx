@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -12,7 +12,18 @@ interface HeroContent {
   secondaryCTA: string;
   badges: string[];
   backgroundVideo: string;
+  backgroundImage?: string;
+  backgroundType: 'video' | 'image';
 }
+
+const IMAGE_SPECS = {
+  heroBackground: {
+    width: 1920,
+    height: 1080,
+    format: 'JPG or PNG',
+    description: 'Full HD background for hero section'
+  }
+};
 
 export default function HeroCMSPage() {
   const [content, setContent] = useState<HeroContent>({
@@ -26,11 +37,17 @@ export default function HeroCMSPage() {
       '100% Pure Vegetarian · Since 2023',
       '⭐ 4.9/5 (2000+ Happy Customers)'
     ],
-    backgroundVideo: '/videos/hero-bg.mp4'
+    backgroundVideo: '/videos/hero-bg.mp4',
+    backgroundImage: '',
+    backgroundType: 'video'
   });
 
   const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState('');
+  const [uploadingFile, setUploadingFile] = useState(false);
+  
+  const videoInputRef = useRef<HTMLInputElement>(null);
+  const imageInputRef = useRef<HTMLInputElement>(null);
 
   const handleSave = async () => {
     setIsSaving(true);
@@ -71,6 +88,36 @@ export default function HeroCMSPage() {
   const removeBadge = (index: number) => {
     const newBadges = content.badges.filter((_, i) => i !== index);
     setContent({ ...content, badges: newBadges });
+  };
+
+  const handleFileUpload = async (file: File, type: 'video' | 'image') => {
+    setUploadingFile(true);
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const response = await fetch('/api/cms/media/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (type === 'video') {
+          setContent({ ...content, backgroundVideo: data.url, backgroundType: 'video' });
+        } else {
+          setContent({ ...content, backgroundImage: data.url, backgroundType: 'image' });
+        }
+        setSaveMessage(`✅ ${type === 'video' ? 'Video' : 'Image'} uploaded successfully!`);
+      } else {
+        setSaveMessage(`❌ Failed to upload ${type}`);
+      }
+    } catch (error) {
+      setSaveMessage(`❌ Error uploading ${type}`);
+    } finally {
+      setUploadingFile(false);
+      setTimeout(() => setSaveMessage(''), 3000);
+    }
   };
 
   return (
@@ -184,20 +231,128 @@ export default function HeroCMSPage() {
                   />
                 </div>
 
-                {/* Background Video */}
-                <div>
-                  <label className="block text-sm font-semibold text-foreground/80 mb-2">
-                    Background Video URL
-                  </label>
-                  <input
-                    type="text"
-                    value={content.backgroundVideo}
-                    onChange={(e) => setContent({ ...content, backgroundVideo: e.target.value })}
-                    className="w-full px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
-                    placeholder="/videos/hero-bg.mp4"
-                  />
-                  <p className="text-xs text-foreground/60 mt-1">
-                    Path to background video file
+                {/* Background Media Section */}
+                <div className="space-y-6 p-6 bg-pitch-black border border-charcoal rounded-lg">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-bold text-golden-glow">🎬 Background Media</h3>
+                    <div className="text-xs text-foreground/60">
+                      {content.backgroundType === 'image' 
+                        ? `${IMAGE_SPECS.heroBackground.width}×${IMAGE_SPECS.heroBackground.height}px`
+                        : 'MP4 or WebM (under 10MB)'}
+                    </div>
+                  </div>
+
+                  {/* Background Type Toggle */}
+                  <div>
+                    <label className="block text-sm font-semibold text-foreground/80 mb-2">
+                      Background Type
+                    </label>
+                    <div className="flex gap-3">
+                      <button
+                        onClick={() => setContent({ ...content, backgroundType: 'video' })}
+                        className={`flex-1 px-4 py-3 rounded-lg font-bold transition-all ${
+                          content.backgroundType === 'video'
+                            ? 'bg-premium-orange text-pitch-black'
+                            : 'bg-deep-space text-foreground/70 border border-charcoal hover:border-golden-glow'
+                        }`}
+                      >
+                        🎥 Video
+                      </button>
+                      <button
+                        onClick={() => setContent({ ...content, backgroundType: 'image' })}
+                        className={`flex-1 px-4 py-3 rounded-lg font-bold transition-all ${
+                          content.backgroundType === 'image'
+                            ? 'bg-premium-orange text-pitch-black'
+                            : 'bg-deep-space text-foreground/70 border border-charcoal hover:border-golden-glow'
+                        }`}
+                      >
+                        🖼️ Image
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Video Upload */}
+                  {content.backgroundType === 'video' && (
+                    <div>
+                      <label className="block text-sm font-semibold text-foreground/80 mb-2">
+                        Background Video
+                      </label>
+                      <div className="flex gap-3">
+                        <input
+                          type="text"
+                          value={content.backgroundVideo}
+                          onChange={(e) => setContent({ ...content, backgroundVideo: e.target.value })}
+                          className="flex-1 px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                          placeholder="/videos/hero-bg.mp4"
+                        />
+                        <input
+                          ref={videoInputRef}
+                          type="file"
+                          accept="video/*"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) handleFileUpload(file, 'video');
+                          }}
+                          className="hidden"
+                        />
+                        <button
+                          onClick={() => videoInputRef.current?.click()}
+                          disabled={uploadingFile}
+                          className="px-6 py-3 bg-premium-orange text-pitch-black rounded-lg font-bold hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50"
+                        >
+                          {uploadingFile ? '⏳' : '📁'} Upload
+                        </button>
+                      </div>
+                      {content.backgroundVideo && (
+                        <div className="mt-3 h-32 bg-charcoal rounded-lg overflow-hidden flex items-center justify-center">
+                          <video src={content.backgroundVideo} className="w-full h-full object-cover" muted />
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Image Upload */}
+                  {content.backgroundType === 'image' && (
+                    <div>
+                      <label className="block text-sm font-semibold text-foreground/80 mb-2">
+                        Background Image
+                      </label>
+                      <div className="flex gap-3">
+                        <input
+                          type="text"
+                          value={content.backgroundImage || ''}
+                          onChange={(e) => setContent({ ...content, backgroundImage: e.target.value })}
+                          className="flex-1 px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                          placeholder="/images/hero-bg.jpg"
+                        />
+                        <input
+                          ref={imageInputRef}
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) handleFileUpload(file, 'image');
+                          }}
+                          className="hidden"
+                        />
+                        <button
+                          onClick={() => imageInputRef.current?.click()}
+                          disabled={uploadingFile}
+                          className="px-6 py-3 bg-premium-orange text-pitch-black rounded-lg font-bold hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50"
+                        >
+                          {uploadingFile ? '⏳' : '📁'} Upload
+                        </button>
+                      </div>
+                      {content.backgroundImage && (
+                        <div className="mt-3 h-32 bg-charcoal rounded-lg overflow-hidden">
+                          <img src={content.backgroundImage} alt="Background preview" className="w-full h-full object-cover" />
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  <p className="text-xs text-foreground/50 pt-2 border-t border-charcoal">
+                    💡 Tip: Use high-quality {content.backgroundType === 'video' ? 'videos optimized for web' : 'images in Full HD resolution'} for best results
                   </p>
                 </div>
 

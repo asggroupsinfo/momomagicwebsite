@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -17,6 +17,15 @@ interface GalleryImage {
 
 const imageCategories = ['Food', 'Stall', 'Awards', 'Events', 'Behind the Scenes'];
 
+const IMAGE_SPECS = {
+  gallery: {
+    width: 1200,
+    height: 800,
+    format: 'JPG or PNG',
+    description: 'High-resolution images for gallery display'
+  }
+};
+
 export default function GalleryManagementPage() {
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -25,6 +34,12 @@ export default function GalleryManagementPage() {
   const [saveMessage, setSaveMessage] = useState('');
   const [selectedImages, setSelectedImages] = useState<Set<string>>(new Set());
   const [bulkAction, setBulkAction] = useState('');
+  const [uploadingFile, setUploadingFile] = useState(false);
+  const [bulkUploadCategory, setBulkUploadCategory] = useState(imageCategories[0]);
+  const [isBulkUploadModalOpen, setIsBulkUploadModalOpen] = useState(false);
+  
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  const bulkUploadInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     loadImages();
@@ -182,6 +197,81 @@ export default function GalleryManagementPage() {
     setIsModalOpen(true);
   };
 
+  const handleFileUpload = async (file: File) => {
+    if (!editingImage) return;
+    
+    setUploadingFile(true);
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const response = await fetch('/api/cms/media/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setEditingImage({ ...editingImage, url: data.url });
+        setSaveMessage('✅ Image uploaded successfully!');
+      } else {
+        setSaveMessage('❌ Failed to upload image');
+      }
+    } catch (error) {
+      setSaveMessage('❌ Error uploading image');
+    } finally {
+      setUploadingFile(false);
+      setTimeout(() => setSaveMessage(''), 3000);
+    }
+  };
+
+  const handleBulkUpload = async (files: FileList) => {
+    setUploadingFile(true);
+    const uploadedImages: GalleryImage[] = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const response = await fetch('/api/cms/media/upload', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const newImage: GalleryImage = {
+            id: Date.now().toString() + i,
+            url: data.url,
+            alt: file.name.replace(/\.[^/.]+$/, ''),
+            title: file.name.replace(/\.[^/.]+$/, ''),
+            category: bulkUploadCategory,
+            seoTags: [],
+            uploadDate: new Date().toISOString(),
+          };
+          uploadedImages.push(newImage);
+        }
+      } catch (error) {
+        console.error(`Error uploading ${file.name}:`, error);
+      }
+    }
+
+    if (uploadedImages.length > 0) {
+      for (const image of uploadedImages) {
+        await handleSave(image);
+      }
+      setSaveMessage(`✅ ${uploadedImages.length} images uploaded successfully!`);
+      setIsBulkUploadModalOpen(false);
+    } else {
+      setSaveMessage('❌ Failed to upload images');
+    }
+
+    setUploadingFile(false);
+    setTimeout(() => setSaveMessage(''), 3000);
+  };
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -209,13 +299,22 @@ export default function GalleryManagementPage() {
               Manage your gallery images with SEO optimization
             </p>
           </div>
-          <Button
-            variant="primary"
-            size="lg"
-            onClick={openAddModal}
-          >
-            ➕ Add New Image
-          </Button>
+          <div className="flex gap-3">
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => setIsBulkUploadModalOpen(true)}
+            >
+              📤 Bulk Upload
+            </Button>
+            <Button
+              variant="primary"
+              size="lg"
+              onClick={openAddModal}
+            >
+              ➕ Add New Image
+            </Button>
+          </div>
         </div>
 
         {saveMessage && (
@@ -425,18 +524,47 @@ export default function GalleryManagementPage() {
               </h2>
 
               <div className="space-y-6">
-                {/* Image URL */}
-                <div>
-                  <label className="block text-sm font-semibold text-foreground/80 mb-2">
-                    Image URL *
-                  </label>
-                  <input
-                    type="text"
-                    value={editingImage.url}
-                    onChange={(e) => setEditingImage({ ...editingImage, url: e.target.value })}
-                    className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
-                    placeholder="/images/gallery/image.jpg"
-                  />
+                {/* Image Upload Section */}
+                <div className="p-6 bg-pitch-black border border-charcoal rounded-lg space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-bold text-golden-glow">📸 Image Upload</h3>
+                    <div className="text-xs text-foreground/60">
+                      Recommended: {IMAGE_SPECS.gallery.width}×{IMAGE_SPECS.gallery.height}px ({IMAGE_SPECS.gallery.format})
+                    </div>
+                  </div>
+                  
+                  <div className="flex gap-3">
+                    <input
+                      type="text"
+                      value={editingImage.url}
+                      onChange={(e) => setEditingImage({ ...editingImage, url: e.target.value })}
+                      className="flex-1 px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                      placeholder="/images/gallery/image.jpg"
+                    />
+                    <input
+                      ref={imageInputRef}
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) handleFileUpload(file);
+                      }}
+                      className="hidden"
+                    />
+                    <button
+                      onClick={() => imageInputRef.current?.click()}
+                      disabled={uploadingFile}
+                      className="px-6 py-3 bg-premium-orange text-pitch-black rounded-lg font-bold hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50"
+                    >
+                      {uploadingFile ? '⏳ Uploading...' : '📁 Upload'}
+                    </button>
+                  </div>
+                  
+                  {editingImage.url && (
+                    <div className="h-48 bg-charcoal rounded-lg overflow-hidden">
+                      <img src={editingImage.url} alt="Preview" className="w-full h-full object-cover" />
+                    </div>
+                  )}
                 </div>
 
                 {/* Title */}
@@ -503,22 +631,6 @@ export default function GalleryManagementPage() {
                   </p>
                 </div>
 
-                {/* Preview */}
-                {editingImage.url && (
-                  <div>
-                    <label className="block text-sm font-semibold text-foreground/80 mb-2">
-                      Preview
-                    </label>
-                    <div className="h-48 bg-charcoal rounded-lg overflow-hidden">
-                      <img
-                        src={editingImage.url}
-                        alt={editingImage.alt}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </div>
-                )}
-
                 {/* Actions */}
                 <div className="flex gap-4 pt-6 border-t border-charcoal">
                   <Button
@@ -535,6 +647,95 @@ export default function GalleryManagementPage() {
                     onClick={() => setIsModalOpen(false)}
                   >
                     Cancel
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Bulk Upload Modal */}
+      <AnimatePresence>
+        {isBulkUploadModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-pitch-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={() => setIsBulkUploadModalOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="bg-deep-space border border-charcoal rounded-lg p-8 max-w-2xl w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h2 className="text-3xl font-bold text-premium-orange mb-6">
+                📤 Bulk Upload Images
+              </h2>
+
+              <div className="space-y-6">
+                <div className="p-6 bg-pitch-black border border-charcoal rounded-lg">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-bold text-golden-glow">Image Specifications</h3>
+                    <div className="text-xs text-foreground/60">
+                      {IMAGE_SPECS.gallery.width}×{IMAGE_SPECS.gallery.height}px ({IMAGE_SPECS.gallery.format})
+                    </div>
+                  </div>
+                  <p className="text-sm text-foreground/70">
+                    Upload multiple images at once. All images will be added to the selected category.
+                  </p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-foreground/80 mb-2">
+                    Category for All Images *
+                  </label>
+                  <select
+                    value={bulkUploadCategory}
+                    onChange={(e) => setBulkUploadCategory(e.target.value)}
+                    className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                  >
+                    {imageCategories.map((cat) => (
+                      <option key={cat} value={cat}>{cat}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <input
+                    ref={bulkUploadInputRef}
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={(e) => {
+                      const files = e.target.files;
+                      if (files && files.length > 0) handleBulkUpload(files);
+                    }}
+                    className="hidden"
+                  />
+                  <button
+                    onClick={() => bulkUploadInputRef.current?.click()}
+                    disabled={uploadingFile}
+                    className="w-full px-6 py-4 bg-premium-orange text-pitch-black rounded-lg font-bold text-lg hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50"
+                  >
+                    {uploadingFile ? '⏳ Uploading Images...' : '📁 Select Images to Upload'}
+                  </button>
+                  <p className="text-xs text-foreground/50 mt-2 text-center">
+                    You can select multiple images at once
+                  </p>
+                </div>
+
+                <div className="flex gap-4 pt-6 border-t border-charcoal">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    onClick={() => setIsBulkUploadModalOpen(false)}
+                    className="w-full"
+                  >
+                    Close
                   </Button>
                 </div>
               </div>
