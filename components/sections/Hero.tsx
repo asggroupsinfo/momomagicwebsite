@@ -152,7 +152,7 @@ export const Hero: React.FC = () => {
           Experience the Magic That Transformed Sherghati's Street Food Scene
         </motion.p>
 
-        {/* CTAs */}
+        {/* CTAs - Reduced Size for Elegance */}
         <motion.div
           className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -165,11 +165,11 @@ export const Hero: React.FC = () => {
           >
             <Button 
               variant="primary" 
-              size="lg" 
+              size="md" 
               className="relative overflow-hidden group"
               onClick={() => scrollToSection('menu')}
             >
-              <span className="relative z-10">Taste the Magic → Order Now</span>
+              <span className="relative z-10">Order Now</span>
               <motion.div
                 className="absolute inset-0 border-2 border-golden-glow opacity-0 group-hover:opacity-100 rounded-lg"
                 initial={{ scale: 0.8 }}
@@ -185,11 +185,11 @@ export const Hero: React.FC = () => {
           >
             <Button 
               variant="outline" 
-              size="lg" 
+              size="md" 
               className="relative overflow-hidden group"
               onClick={() => scrollToSection('brand-story')}
             >
-              <span className="relative z-10">Discover Our Story</span>
+              <span className="relative z-10">Our Story</span>
               <motion.div
                 className="absolute inset-0 bg-golden-glow/10 opacity-0 group-hover:opacity-100 rounded-lg"
                 transition={{ duration: 0.3 }}

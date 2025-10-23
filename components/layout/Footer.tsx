@@ -59,10 +59,18 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="border-t border-charcoal mt-8 pt-8 text-center">
-          <p className="text-foreground/60">
+        <div className="border-t border-charcoal mt-8 pt-8 relative">
+          <p className="text-foreground/60 text-center">
             © 2024 Momos Magic. All rights reserved. | FSSAI License: 20424201001152
           </p>
+          
+          {/* Admin Login Button - Bottom Right */}
+          <Link 
+            href="/admin/login" 
+            className="absolute bottom-0 right-0 bg-premium-orange text-pitch-black px-4 py-2 rounded-lg text-sm font-bold hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(255,194,65,0.3)] transition-all duration-300"
+          >
+            Admin Login
+          </Link>
         </div>
       </div>
     </footer>
