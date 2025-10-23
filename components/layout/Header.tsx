@@ -17,7 +17,7 @@ export const Header: React.FC = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-black shadow-lg border-b border-premium-gold/20">
+    <header className="sticky top-0 z-50 bg-pitch-black shadow-lg border-b border-premium-orange/20">
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo - Left Side */}
@@ -38,7 +38,7 @@ export const Header: React.FC = () => {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-white hover:text-premium-gold transition-all duration-300 font-medium text-base border-b-2 border-transparent hover:border-premium-gold pb-1 tracking-wide"
+                className="text-white hover:text-premium-orange transition-all duration-300 font-medium text-base border-b-2 border-transparent hover:border-premium-orange pb-1 tracking-wide"
               >
                 {link.label}
               </Link>
@@ -48,14 +48,14 @@ export const Header: React.FC = () => {
           {/* Order Now Button - Right Side (Desktop) */}
           <Link 
             href="/menu" 
-            className="hidden md:flex items-center bg-premium-gold text-black px-6 py-2.5 rounded-lg font-semibold hover:bg-foreground hover:text-premium-gold hover:border-premium-gold border-2 border-transparent transition-all duration-300 text-sm shadow-lg hover:shadow-premium-gold/50"
+            className="hidden md:flex items-center bg-premium-orange text-black px-6 py-2.5 rounded-lg font-semibold hover:bg-burnt-orange hover:text-black hover:border-golden-glow border-2 border-transparent transition-all duration-300 text-sm shadow-lg hover:shadow-golden-glow/50"
           >
             Order Now
           </Link>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white hover:text-premium-gold transition-colors p-2 rounded-lg hover:bg-white/10"
+            className="md:hidden text-white hover:text-premium-orange transition-colors p-2 rounded-lg hover:bg-white/10"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -71,7 +71,7 @@ export const Header: React.FC = () => {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden mt-4 pb-4 border-t border-premium-gold/20 pt-4"
+              className="md:hidden mt-4 pb-4 border-t border-premium-orange/20 pt-4"
             >
               {navLinks.map((link, index) => (
                 <motion.div
@@ -82,7 +82,7 @@ export const Header: React.FC = () => {
                 >
                   <Link
                     href={link.href}
-                    className="block py-3 px-4 text-white hover:text-premium-gold hover:bg-white/5 rounded-lg transition-all duration-300 font-medium"
+                    className="block py-3 px-4 text-white hover:text-premium-orange hover:bg-white/5 rounded-lg transition-all duration-300 font-medium"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.label}
@@ -96,7 +96,7 @@ export const Header: React.FC = () => {
               >
                 <Link
                   href="/menu"
-                  className="block mt-4 bg-premium-gold text-black px-6 py-3 rounded-lg font-semibold text-center hover:bg-foreground hover:text-premium-gold border-2 border-transparent hover:border-premium-gold transition-all duration-300 shadow-lg"
+                  className="block mt-4 bg-premium-orange text-black px-6 py-3 rounded-lg font-semibold text-center hover:bg-burnt-orange hover:text-black border-2 border-transparent hover:border-golden-glow transition-all duration-300 shadow-lg"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Order Now

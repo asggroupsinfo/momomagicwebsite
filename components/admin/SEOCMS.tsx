@@ -151,7 +151,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
         <div className="flex items-center space-x-3">
           {/* SEO Score */}
           <div className="flex items-center space-x-2 px-4 py-2 bg-gray-100 rounded-lg">
-            <Search size={18} className="text-premium-gold" />
+            <Search size={18} className="text-golden-glow" />
             <span className="text-sm font-medium">SEO Score:</span>
             <span className={`text-lg font-bold ${
               seoScore >= 80 ? 'text-green-600' : 
@@ -170,7 +170,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className="flex items-center space-x-2 px-6 py-2 bg-premium-gold text-black font-semibold rounded-lg hover:bg-charcoal-black hover:text-white transition-all disabled:opacity-50"
+            className="flex items-center space-x-2 px-6 py-2 bg-golden-glow text-black font-semibold rounded-lg hover:bg-pitch-black hover:text-white transition-all disabled:opacity-50"
           >
             <Save size={18} />
             <span>{isSaving ? 'Saving...' : 'Save Changes'}</span>
@@ -209,7 +209,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center space-x-2 py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === tab.id
-                    ? 'border-premium-gold text-premium-gold'
+                    ? 'border-golden-glow text-golden-glow'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
@@ -240,7 +240,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
                     type="text"
                     value={seoSettings.title}
                     onChange={(e) => updateSetting('title', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                     placeholder="Enter page title"
                   />
                   <p className={`text-xs mt-1 ${
@@ -258,7 +258,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
                     value={seoSettings.description}
                     onChange={(e) => updateSetting('description', e.target.value)}
                     rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                     placeholder="Enter meta description"
                   />
                   <p className={`text-xs mt-1 ${
@@ -276,7 +276,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
                     type="text"
                     value={seoSettings.keywords}
                     onChange={(e) => updateSetting('keywords', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                     placeholder="keyword1, keyword2, keyword3"
                   />
                   <p className="text-xs text-gray-500 mt-1">Separate keywords with commas</p>
@@ -290,7 +290,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
                     type="text"
                     value={seoSettings.author}
                     onChange={(e) => updateSetting('author', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                     placeholder="Author name"
                   />
                 </div>
@@ -298,7 +298,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
 
               <div className="bg-gray-50 p-6 rounded-lg">
                 <h3 className="text-lg font-semibold mb-4 flex items-center">
-                  <Eye size={20} className="mr-2 text-premium-gold" />
+                  <Eye size={20} className="mr-2 text-golden-glow" />
                   Search Preview
                 </h3>
                 <div className="bg-white p-4 rounded border">
@@ -331,7 +331,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
                     type="text"
                     value={seoSettings.ogTitle}
                     onChange={(e) => updateSetting('ogTitle', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                     placeholder="Open Graph title"
                   />
                 </div>
@@ -344,7 +344,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
                     value={seoSettings.ogDescription}
                     onChange={(e) => updateSetting('ogDescription', e.target.value)}
                     rows={3}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                     placeholder="Open Graph description"
                   />
                 </div>
@@ -357,7 +357,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
                     type="text"
                     value={seoSettings.ogImage}
                     onChange={(e) => updateSetting('ogImage', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                     placeholder="/images/og-image.jpg"
                   />
                   <p className="text-xs text-gray-500 mt-1">Recommended: 1200×630px</p>
@@ -370,7 +370,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
                   <select
                     value={seoSettings.ogType}
                     onChange={(e) => updateSetting('ogType', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                   >
                     <option value="website">Website</option>
                     <option value="article">Article</option>
@@ -389,7 +389,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
                   <select
                     value={seoSettings.twitterCard}
                     onChange={(e) => updateSetting('twitterCard', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                   >
                     <option value="summary">Summary</option>
                     <option value="summary_large_image">Summary Large Image</option>
@@ -404,7 +404,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
                     type="text"
                     value={seoSettings.twitterSite}
                     onChange={(e) => updateSetting('twitterSite', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                     placeholder="@MomosMagic"
                   />
                 </div>
@@ -417,7 +417,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
                     type="text"
                     value={seoSettings.twitterCreator}
                     onChange={(e) => updateSetting('twitterCreator', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                     placeholder="@MomosMagic"
                   />
                 </div>
@@ -438,7 +438,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
                     type="text"
                     value={seoSettings.canonicalUrl}
                     onChange={(e) => updateSetting('canonicalUrl', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                     placeholder="https://www.momomegics.com"
                   />
                 </div>
@@ -466,7 +466,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
                     value={seoSettings.robotsTxt}
                     onChange={(e) => updateSetting('robotsTxt', e.target.value)}
                     rows={8}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none font-mono text-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none font-mono text-sm"
                     placeholder="User-agent: *&#10;Allow: /"
                   />
                 </div>
@@ -487,7 +487,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
                     type="text"
                     value={seoSettings.businessName}
                     onChange={(e) => updateSetting('businessName', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                     placeholder="Momos Magic"
                   />
                 </div>
@@ -500,7 +500,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
                     value={seoSettings.businessAddress}
                     onChange={(e) => updateSetting('businessAddress', e.target.value)}
                     rows={3}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                     placeholder="Full business address"
                   />
                 </div>
@@ -513,7 +513,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
                     type="text"
                     value={seoSettings.businessPhone}
                     onChange={(e) => updateSetting('businessPhone', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                     placeholder="+91 9955955191"
                   />
                 </div>
@@ -528,7 +528,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
                     type="text"
                     value={seoSettings.businessHours}
                     onChange={(e) => updateSetting('businessHours', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                     placeholder="Monday-Sunday: 10:00 AM - 10:00 PM"
                   />
                 </div>
@@ -540,7 +540,7 @@ Sitemap: https://www.momomegics.com/sitemap.xml`,
                   <select
                     value={seoSettings.businessType}
                     onChange={(e) => updateSetting('businessType', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                   >
                     <option value="Restaurant">Restaurant</option>
                     <option value="Food">Food</option>

@@ -167,7 +167,7 @@ export default function ContactPage() {
           className="text-center mb-16"
         >
           <h1
-            className="text-5xl md:text-6xl font-bold mb-4 text-charcoal-black"
+            className="text-5xl md:text-6xl font-bold mb-4 text-pitch-black"
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
             Get in Touch
@@ -187,16 +187,16 @@ export default function ContactPage() {
           {/* Phone */}
           <motion.div
             whileHover={{ y: -8, scale: 1.02 }}
-            className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-200 hover:border-premium-gold transition-all duration-300"
+            className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-200 hover:border-golden-glow transition-all duration-300"
           >
             <div className="flex flex-col items-center text-center">
-              <div className="w-16 h-16 rounded-full bg-magic-red/10 flex items-center justify-center mb-4">
-                <Phone className="text-magic-red" size={32} />
+              <div className="w-16 h-16 rounded-full bg-premium-orange/10 flex items-center justify-center mb-4">
+                <Phone className="text-premium-orange" size={32} />
               </div>
-              <h3 className="text-xl font-bold text-charcoal-black mb-2">Call Us</h3>
+              <h3 className="text-xl font-bold text-pitch-black mb-2">Call Us</h3>
               <a
                 href="tel:+919955955191"
-                className="text-magic-red hover:text-premium-gold transition-colors font-semibold"
+                className="text-premium-orange hover:text-golden-glow transition-colors font-semibold"
               >
                 +91 9955955191
               </a>
@@ -207,13 +207,13 @@ export default function ContactPage() {
           {/* Location */}
           <motion.div
             whileHover={{ y: -8, scale: 1.02 }}
-            className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-200 hover:border-premium-gold transition-all duration-300"
+            className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-200 hover:border-golden-glow transition-all duration-300"
           >
             <div className="flex flex-col items-center text-center">
-              <div className="w-16 h-16 rounded-full bg-magic-red/10 flex items-center justify-center mb-4">
-                <MapPin className="text-magic-red" size={32} />
+              <div className="w-16 h-16 rounded-full bg-premium-orange/10 flex items-center justify-center mb-4">
+                <MapPin className="text-premium-orange" size={32} />
               </div>
-              <h3 className="text-xl font-bold text-charcoal-black mb-2">Visit Us</h3>
+              <h3 className="text-xl font-bold text-pitch-black mb-2">Visit Us</h3>
               <p className="text-gray-700">
                 Naya Bazar, Near Post Office
                 <br />
@@ -225,13 +225,13 @@ export default function ContactPage() {
           {/* Hours */}
           <motion.div
             whileHover={{ y: -8, scale: 1.02 }}
-            className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-200 hover:border-premium-gold transition-all duration-300"
+            className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-200 hover:border-golden-glow transition-all duration-300"
           >
             <div className="flex flex-col items-center text-center">
-              <div className="w-16 h-16 rounded-full bg-magic-red/10 flex items-center justify-center mb-4">
-                <Clock className="text-magic-red" size={32} />
+              <div className="w-16 h-16 rounded-full bg-premium-orange/10 flex items-center justify-center mb-4">
+                <Clock className="text-premium-orange" size={32} />
               </div>
-              <h3 className="text-xl font-bold text-charcoal-black mb-2">Open Daily</h3>
+              <h3 className="text-xl font-bold text-pitch-black mb-2">Open Daily</h3>
               <p className="text-gray-700">
                 Monday - Sunday
                 <br />
@@ -243,14 +243,14 @@ export default function ContactPage() {
           {/* Website */}
           <motion.div
             whileHover={{ y: -8, scale: 1.02 }}
-            className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-200 hover:border-premium-gold transition-all duration-300"
+            className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-200 hover:border-golden-glow transition-all duration-300"
           >
             <div className="flex flex-col items-center text-center">
-              <div className="w-16 h-16 rounded-full bg-magic-red/10 flex items-center justify-center mb-4">
-                <Mail className="text-magic-red" size={32} />
+              <div className="w-16 h-16 rounded-full bg-premium-orange/10 flex items-center justify-center mb-4">
+                <Mail className="text-premium-orange" size={32} />
               </div>
-              <h3 className="text-xl font-bold text-charcoal-black mb-2">Website</h3>
-              <p className="text-magic-red hover:text-premium-gold transition-colors font-semibold">
+              <h3 className="text-xl font-bold text-pitch-black mb-2">Website</h3>
+              <p className="text-premium-orange hover:text-golden-glow transition-colors font-semibold">
                 www.momomegics.com
               </p>
               <p className="text-sm text-gray-600 mt-2">Visit us online</p>
@@ -268,7 +268,7 @@ export default function ContactPage() {
           >
             <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-200">
               <h2
-                className="text-3xl font-bold mb-6 text-charcoal-black"
+                className="text-3xl font-bold mb-6 text-pitch-black"
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
                 Send Us a Message
@@ -278,7 +278,7 @@ export default function ContactPage() {
                 {/* Name Field */}
                 <div>
                   <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Full Name <span className="text-magic-red">*</span>
+                    Full Name <span className="text-premium-orange">*</span>
                   </label>
                   <input
                     type="text"
@@ -287,15 +287,15 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={handleInputChange}
                     className={`w-full px-4 py-3 rounded-lg border-2 ${
-                      formErrors.name ? 'border-magic-red' : 'border-gray-300'
-                    } focus:border-premium-gold focus:outline-none transition-colors`}
+                      formErrors.name ? 'border-premium-orange' : 'border-gray-300'
+                    } focus:border-golden-glow focus:outline-none transition-colors`}
                     placeholder="Enter your full name"
                   />
                   {formErrors.name && (
                     <motion.p
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="text-magic-red text-sm mt-1 flex items-center"
+                      className="text-premium-orange text-sm mt-1 flex items-center"
                     >
                       <AlertCircle size={16} className="mr-1" />
                       {formErrors.name}
@@ -306,7 +306,7 @@ export default function ContactPage() {
                 {/* Phone Field */}
                 <div>
                   <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Phone Number <span className="text-magic-red">*</span>
+                    Phone Number <span className="text-premium-orange">*</span>
                   </label>
                   <input
                     type="tel"
@@ -315,15 +315,15 @@ export default function ContactPage() {
                     value={formData.phone}
                     onChange={handleInputChange}
                     className={`w-full px-4 py-3 rounded-lg border-2 ${
-                      formErrors.phone ? 'border-magic-red' : 'border-gray-300'
-                    } focus:border-premium-gold focus:outline-none transition-colors`}
+                      formErrors.phone ? 'border-premium-orange' : 'border-gray-300'
+                    } focus:border-golden-glow focus:outline-none transition-colors`}
                     placeholder="Enter 10-digit phone number"
                   />
                   {formErrors.phone && (
                     <motion.p
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="text-magic-red text-sm mt-1 flex items-center"
+                      className="text-premium-orange text-sm mt-1 flex items-center"
                     >
                       <AlertCircle size={16} className="mr-1" />
                       {formErrors.phone}
@@ -343,15 +343,15 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={handleInputChange}
                     className={`w-full px-4 py-3 rounded-lg border-2 ${
-                      formErrors.email ? 'border-magic-red' : 'border-gray-300'
-                    } focus:border-premium-gold focus:outline-none transition-colors`}
+                      formErrors.email ? 'border-premium-orange' : 'border-gray-300'
+                    } focus:border-golden-glow focus:outline-none transition-colors`}
                     placeholder="Enter your email address"
                   />
                   {formErrors.email && (
                     <motion.p
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="text-magic-red text-sm mt-1 flex items-center"
+                      className="text-premium-orange text-sm mt-1 flex items-center"
                     >
                       <AlertCircle size={16} className="mr-1" />
                       {formErrors.email}
@@ -362,7 +362,7 @@ export default function ContactPage() {
                 {/* Message Field */}
                 <div>
                   <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Your Message <span className="text-magic-red">*</span>
+                    Your Message <span className="text-premium-orange">*</span>
                   </label>
                   <textarea
                     id="message"
@@ -371,15 +371,15 @@ export default function ContactPage() {
                     onChange={handleInputChange}
                     rows={5}
                     className={`w-full px-4 py-3 rounded-lg border-2 ${
-                      formErrors.message ? 'border-magic-red' : 'border-gray-300'
-                    } focus:border-premium-gold focus:outline-none transition-colors resize-none`}
+                      formErrors.message ? 'border-premium-orange' : 'border-gray-300'
+                    } focus:border-golden-glow focus:outline-none transition-colors resize-none`}
                     placeholder="Tell us how we can help you..."
                   />
                   {formErrors.message && (
                     <motion.p
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="text-magic-red text-sm mt-1 flex items-center"
+                      className="text-premium-orange text-sm mt-1 flex items-center"
                     >
                       <AlertCircle size={16} className="mr-1" />
                       {formErrors.message}
@@ -404,7 +404,7 @@ export default function ContactPage() {
                   className={`w-full py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center ${
                     isSubmitting
                       ? 'bg-gray-400 cursor-not-allowed'
-                      : 'bg-magic-red text-white hover:bg-premium-gold hover:text-charcoal-black'
+                      : 'bg-premium-orange text-white hover:bg-golden-glow hover:text-pitch-black'
                   }`}
                 >
                   {isSubmitting ? (
@@ -444,11 +444,11 @@ export default function ContactPage() {
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className="bg-magic-red/10 border-2 border-magic-red rounded-lg p-4 flex items-center"
+                      className="bg-premium-orange/10 border-2 border-premium-orange rounded-lg p-4 flex items-center"
                     >
-                      <AlertCircle className="text-magic-red mr-3" size={24} />
+                      <AlertCircle className="text-premium-orange mr-3" size={24} />
                       <div>
-                        <p className="font-bold text-magic-red">Oops! Something went wrong.</p>
+                        <p className="font-bold text-premium-orange">Oops! Something went wrong.</p>
                         <p className="text-sm text-gray-700">
                           Please try again or call us directly.
                         </p>
@@ -468,7 +468,7 @@ export default function ContactPage() {
           >
             <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-200 h-full">
               <h2
-                className="text-3xl font-bold mb-6 text-charcoal-black"
+                className="text-3xl font-bold mb-6 text-pitch-black"
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
                 Find Us Here
@@ -490,9 +490,9 @@ export default function ContactPage() {
 
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
-                  <MapPin className="text-magic-red flex-shrink-0 mt-1" size={20} />
+                  <MapPin className="text-premium-orange flex-shrink-0 mt-1" size={20} />
                   <div>
-                    <p className="font-semibold text-charcoal-black">Address</p>
+                    <p className="font-semibold text-pitch-black">Address</p>
                     <p className="text-gray-700">
                       Momo Magic, Naya Bazar, Near Post Office
                       <br />
@@ -502,20 +502,20 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start space-x-3">
-                  <Clock className="text-magic-red flex-shrink-0 mt-1" size={20} />
+                  <Clock className="text-premium-orange flex-shrink-0 mt-1" size={20} />
                   <div>
-                    <p className="font-semibold text-charcoal-black">Operating Hours</p>
+                    <p className="font-semibold text-pitch-black">Operating Hours</p>
                     <p className="text-gray-700">Open every day: 10:00 AM - 10:00 PM</p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-3">
-                  <Phone className="text-magic-red flex-shrink-0 mt-1" size={20} />
+                  <Phone className="text-premium-orange flex-shrink-0 mt-1" size={20} />
                   <div>
-                    <p className="font-semibold text-charcoal-black">Call for Directions</p>
+                    <p className="font-semibold text-pitch-black">Call for Directions</p>
                     <a
                       href="tel:+919955955191"
-                      className="text-magic-red hover:text-premium-gold transition-colors"
+                      className="text-premium-orange hover:text-golden-glow transition-colors"
                     >
                       +91 9955955191
                     </a>
@@ -531,7 +531,7 @@ export default function ContactPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="bg-gradient-to-r from-magic-red to-warm-orange rounded-2xl p-8 shadow-lg mb-16"
+          className="bg-gradient-to-r from-premium-orange to-warm-orange rounded-2xl p-8 shadow-lg mb-16"
         >
           <div className="text-center text-white">
             <h2 className="text-3xl font-bold mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
@@ -574,7 +574,7 @@ export default function ContactPage() {
           transition={{ duration: 0.6, delay: 0.8 }}
         >
           <h2
-            className="text-4xl font-bold text-center mb-12 text-charcoal-black"
+            className="text-4xl font-bold text-center mb-12 text-pitch-black"
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
             Frequently Asked Questions
@@ -593,15 +593,15 @@ export default function ContactPage() {
                   onClick={() => toggleFAQ(faq.id)}
                   className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
                 >
-                  <span className="font-bold text-lg text-charcoal-black pr-4">{faq.question}</span>
+                  <span className="font-bold text-lg text-pitch-black pr-4">{faq.question}</span>
                   <motion.div
                     animate={{ rotate: expandedFAQ === faq.id ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
                   >
                     {expandedFAQ === faq.id ? (
-                      <ChevronUp className="text-magic-red flex-shrink-0" size={24} />
+                      <ChevronUp className="text-premium-orange flex-shrink-0" size={24} />
                     ) : (
-                      <ChevronDown className="text-magic-red flex-shrink-0" size={24} />
+                      <ChevronDown className="text-premium-orange flex-shrink-0" size={24} />
                     )}
                   </motion.div>
                 </button>
@@ -631,7 +631,7 @@ export default function ContactPage() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 1.0 }}
-          className="mt-16 text-center bg-charcoal-black text-white p-12 rounded-2xl shadow-2xl"
+          className="mt-16 text-center bg-pitch-black text-white p-12 rounded-2xl shadow-2xl"
         >
           <h2 className="text-4xl font-bold mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
             Ready to Experience the Magic?
@@ -644,7 +644,7 @@ export default function ContactPage() {
               href="tel:+919955955191"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-magic-red text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-premium-gold hover:text-charcoal-black transition-all duration-300 inline-flex items-center"
+              className="bg-premium-orange text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-golden-glow hover:text-pitch-black transition-all duration-300 inline-flex items-center"
             >
               <Phone className="mr-2" size={24} />
               Call Now
@@ -653,7 +653,7 @@ export default function ContactPage() {
               href="/"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-premium-gold text-charcoal-black px-8 py-4 rounded-full font-bold text-lg hover:bg-white transition-all duration-300"
+              className="bg-golden-glow text-pitch-black px-8 py-4 rounded-full font-bold text-lg hover:bg-white transition-all duration-300"
             >
               View Menu
             </motion.a>

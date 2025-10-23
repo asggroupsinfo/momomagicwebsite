@@ -141,7 +141,7 @@ export const APIConfigCMS: React.FC = () => {
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className="flex items-center space-x-2 px-6 py-2 bg-premium-gold text-black font-semibold rounded-lg hover:bg-charcoal-black hover:text-white transition-all disabled:opacity-50"
+            className="flex items-center space-x-2 px-6 py-2 bg-golden-glow text-black font-semibold rounded-lg hover:bg-pitch-black hover:text-white transition-all disabled:opacity-50"
           >
             <Save size={18} />
             <span>{isSaving ? 'Saving...' : 'Save Changes'}</span>
@@ -188,7 +188,7 @@ export const APIConfigCMS: React.FC = () => {
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center space-x-2 py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === tab.id
-                    ? 'border-premium-gold text-premium-gold'
+                    ? 'border-golden-glow text-golden-glow'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
@@ -233,7 +233,7 @@ export const APIConfigCMS: React.FC = () => {
                       type={showKeys.googleAnalytics ? 'text' : 'password'}
                       value={apiConfig.googleAnalyticsId}
                       onChange={(e) => updateConfig('googleAnalyticsId', e.target.value)}
-                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                       placeholder="G-XXXXXXXXXX"
                       disabled={!apiConfig.googleAnalyticsEnabled}
                     />
@@ -300,7 +300,7 @@ export const APIConfigCMS: React.FC = () => {
                       type={showKeys.googleMaps ? 'text' : 'password'}
                       value={apiConfig.googleMapsApiKey}
                       onChange={(e) => updateConfig('googleMapsApiKey', e.target.value)}
-                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                       placeholder="AIzaSy..."
                       disabled={!apiConfig.googleMapsEnabled}
                     />
@@ -326,7 +326,7 @@ export const APIConfigCMS: React.FC = () => {
                       step="0.0001"
                       value={apiConfig.mapCenter.lat}
                       onChange={(e) => updateConfig('mapCenter', { ...apiConfig.mapCenter, lat: parseFloat(e.target.value) })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                       disabled={!apiConfig.googleMapsEnabled}
                     />
                   </div>
@@ -339,7 +339,7 @@ export const APIConfigCMS: React.FC = () => {
                       step="0.0001"
                       value={apiConfig.mapCenter.lng}
                       onChange={(e) => updateConfig('mapCenter', { ...apiConfig.mapCenter, lng: parseFloat(e.target.value) })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                       disabled={!apiConfig.googleMapsEnabled}
                     />
                   </div>
@@ -355,7 +355,7 @@ export const APIConfigCMS: React.FC = () => {
                     max="20"
                     value={apiConfig.mapZoom}
                     onChange={(e) => updateConfig('mapZoom', parseInt(e.target.value))}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                     disabled={!apiConfig.googleMapsEnabled}
                   />
                 </div>
@@ -409,7 +409,7 @@ export const APIConfigCMS: React.FC = () => {
                     type="text"
                     value={apiConfig.googleBusinessPlaceId}
                     onChange={(e) => updateConfig('googleBusinessPlaceId', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                     placeholder="ChIJ..."
                     disabled={!apiConfig.googleBusinessEnabled}
                   />
@@ -427,7 +427,7 @@ export const APIConfigCMS: React.FC = () => {
                       type={showKeys.googleBusiness ? 'text' : 'password'}
                       value={apiConfig.googleBusinessApiKey}
                       onChange={(e) => updateConfig('googleBusinessApiKey', e.target.value)}
-                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                       placeholder="AIzaSy..."
                       disabled={!apiConfig.googleBusinessEnabled}
                     />
@@ -491,7 +491,7 @@ export const APIConfigCMS: React.FC = () => {
                       type={showKeys.facebook ? 'text' : 'password'}
                       value={apiConfig.facebookAppId}
                       onChange={(e) => updateConfig('facebookAppId', e.target.value)}
-                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                       placeholder="123456789012345"
                       disabled={!apiConfig.facebookMetaEnabled}
                     />
@@ -515,7 +515,7 @@ export const APIConfigCMS: React.FC = () => {
                     type="text"
                     value={apiConfig.facebookPixelId}
                     onChange={(e) => updateConfig('facebookPixelId', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                     placeholder="123456789012345"
                     disabled={!apiConfig.facebookMetaEnabled}
                   />

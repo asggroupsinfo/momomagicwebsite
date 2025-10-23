@@ -117,7 +117,7 @@ export const MenuCMS: React.FC = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <RefreshCw size={32} className="animate-spin text-premium-gold" />
+        <RefreshCw size={32} className="animate-spin text-golden-glow" />
       </div>
     );
   }
@@ -150,7 +150,7 @@ export const MenuCMS: React.FC = () => {
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className="flex items-center space-x-2 px-6 py-2 bg-premium-gold text-black font-semibold rounded-lg hover:bg-charcoal-black hover:text-white transition-all disabled:opacity-50"
+            className="flex items-center space-x-2 px-6 py-2 bg-golden-glow text-black font-semibold rounded-lg hover:bg-pitch-black hover:text-white transition-all disabled:opacity-50"
           >
             <Save size={18} />
             <span>{isSaving ? 'Saving...' : 'Save All Changes'}</span>
@@ -186,7 +186,7 @@ export const MenuCMS: React.FC = () => {
             onClick={() => setFilterCategory(category)}
             className={`px-4 py-2 rounded-lg capitalize transition-all ${
               filterCategory === category
-                ? 'bg-premium-gold text-black font-semibold'
+                ? 'bg-golden-glow text-black font-semibold'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
@@ -346,8 +346,8 @@ export const MenuCMS: React.FC = () => {
                 <p className="text-sm text-gray-600 mb-2">{item.description}</p>
                 <div className="flex items-center justify-between">
                   <div className="text-sm">
-                    <span className="font-semibold text-premium-gold">₹{item.price.half}</span> (5pc) / 
-                    <span className="font-semibold text-premium-gold"> ₹{item.price.full}</span> (10pc)
+                    <span className="font-semibold text-golden-glow">₹{item.price.half}</span> (5pc) / 
+                    <span className="font-semibold text-golden-glow"> ₹{item.price.full}</span> (10pc)
                   </div>
                   <span className="text-xs text-gray-500 capitalize">🌶️ {item.spiceLevel}</span>
                 </div>

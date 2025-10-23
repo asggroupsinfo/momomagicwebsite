@@ -13,7 +13,7 @@ export const Card: React.FC<CardProps> = ({
   hover = true,
 }) => {
   const baseStyles = 'bg-white rounded-xl shadow-lg border-2 border-gray-200 p-6 transition-all duration-300';
-  const hoverStyles = hover ? 'hover:border-premium-gold hover:shadow-2xl' : '';
+  const hoverStyles = hover ? 'hover:border-golden-glow hover:shadow-2xl' : '';
   const combinedStyles = `${baseStyles} ${hoverStyles} ${className}`;
 
   if (hover) {

@@ -144,7 +144,7 @@ export const MenuHighlights: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-center mb-6 text-premium-gold"
+          className="text-4xl md:text-5xl font-bold text-center mb-6 text-golden-glow"
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
           Our Magical Creations
@@ -177,8 +177,8 @@ export const MenuHighlights: React.FC = () => {
               whileTap={{ scale: 0.95 }}
               className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
                 selectedCategory === category
-                  ? 'bg-magic-red text-white border-2 border-premium-gold shadow-lg'
-                  : 'bg-white text-premium-gold border-2 border-gray-300 hover:border-premium-gold'
+                  ? 'bg-premium-orange text-white border-2 border-golden-glow shadow-lg'
+                  : 'bg-white text-golden-glow border-2 border-gray-300 hover:border-golden-glow'
               }`}
             >
               {category}
@@ -239,7 +239,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ item, index, imageLoaded, onImageLo
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.1 }}
       whileHover={{ y: -8, scale: 1.02 }}
-      className="rounded-lg shadow-lg border-2 border-premium-gold hover:border-premium-gold overflow-hidden cursor-pointer transition-all duration-300 bg-white"
+      className="rounded-lg shadow-lg border-2 border-golden-glow hover:border-golden-glow overflow-hidden cursor-pointer transition-all duration-300 bg-white"
     >
       {/* Image Placeholder */}
       <div className="relative h-48 bg-gradient-orange overflow-hidden">
@@ -267,7 +267,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ item, index, imageLoaded, onImageLo
         )}
 
         {/* Category Badge */}
-        <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-magic-red">
+        <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-premium-orange">
           {item.category}
         </div>
       </div>
@@ -291,7 +291,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ item, index, imageLoaded, onImageLo
             <div className="flex items-baseline space-x-2">
               <span className="text-xs text-gray-500">5 pcs</span>
               <span
-                className="text-lg font-bold text-premium-gold"
+                className="text-lg font-bold text-golden-glow"
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
                 ₹{item.price5pc}
@@ -300,7 +300,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ item, index, imageLoaded, onImageLo
             <div className="flex items-baseline space-x-2">
               <span className="text-xs text-gray-500">10 pcs</span>
               <span
-                className="text-lg font-bold text-premium-gold"
+                className="text-lg font-bold text-golden-glow"
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
                 ₹{item.price10pc}

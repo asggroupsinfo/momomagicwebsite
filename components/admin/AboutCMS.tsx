@@ -99,7 +99,7 @@ export const AboutCMS: React.FC = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <RefreshCw size={32} className="animate-spin text-premium-gold" />
+        <RefreshCw size={32} className="animate-spin text-golden-glow" />
       </div>
     );
   }
@@ -134,7 +134,7 @@ export const AboutCMS: React.FC = () => {
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className="flex items-center space-x-2 px-6 py-2 bg-premium-gold text-black font-semibold rounded-lg hover:bg-charcoal-black hover:text-white transition-all disabled:opacity-50"
+            className="flex items-center space-x-2 px-6 py-2 bg-golden-glow text-black font-semibold rounded-lg hover:bg-pitch-black hover:text-white transition-all disabled:opacity-50"
           >
             <Save size={18} />
             <span>{isSaving ? 'Saving...' : 'Save Changes'}</span>
@@ -182,7 +182,7 @@ export const AboutCMS: React.FC = () => {
                     value={paragraph}
                     onChange={(e) => updateStoryParagraph(index, e.target.value)}
                     rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                     placeholder={`Paragraph ${index + 1}`}
                   />
                   {content.story.length > 1 && (
@@ -207,7 +207,7 @@ export const AboutCMS: React.FC = () => {
               type="text"
               value={content.philosophy}
               onChange={(e) => setContent({ ...content, philosophy: e.target.value })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
               placeholder="Your brand philosophy"
             />
           </div>
@@ -221,14 +221,14 @@ export const AboutCMS: React.FC = () => {
               type="text"
               value={content.founderName}
               onChange={(e) => setContent({ ...content, founderName: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
               placeholder="Founder name"
             />
             <input
               type="text"
               value={content.founderTitle}
               onChange={(e) => setContent({ ...content, founderTitle: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
               placeholder="Founder title"
             />
           </div>
@@ -262,14 +262,14 @@ export const AboutCMS: React.FC = () => {
                     type="text"
                     value={item.date}
                     onChange={(e) => updateTimeline(index, 'date', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none text-sm font-semibold"
+                    className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none text-sm font-semibold"
                     placeholder="Date"
                   />
                   <textarea
                     value={item.event}
                     onChange={(e) => updateTimeline(index, 'event', e.target.value)}
                     rows={2}
-                    className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none text-sm"
+                    className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none text-sm"
                     placeholder="Event description"
                   />
                 </div>

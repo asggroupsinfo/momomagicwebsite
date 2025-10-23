@@ -20,10 +20,10 @@ export const Hero: React.FC = () => {
   }, []);
 
   const badges = [
-    { icon: Award, text: 'Best Quality Food in City', color: 'text-premium-gold' },
+    { icon: Award, text: 'Best Quality Food in City', color: 'text-golden-glow' },
     { icon: CheckCircle, text: 'FSSAI Certified', color: 'text-vegetarian-green' },
-    { icon: Utensils, text: '100% Vegetarian', color: 'text-premium-gold' },
-    { icon: Star, text: '4.9/5 (2000+ Customers)', color: 'text-premium-gold' },
+    { icon: Utensils, text: '100% Vegetarian', color: 'text-premium-orange' },
+    { icon: Star, text: '4.9/5 (2000+ Customers)', color: 'text-premium-orange' },
   ];
 
   const scrollToSection = (sectionId: string) => {
@@ -67,7 +67,7 @@ export const Hero: React.FC = () => {
           return (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 bg-premium-gold rounded-full opacity-30"
+              className="absolute w-2 h-2 bg-golden-glow rounded-full opacity-30"
               initial={{
                 x: Math.random() * windowWidth,
                 y: Math.random() * windowHeight,
@@ -125,14 +125,14 @@ export const Hero: React.FC = () => {
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
           From Humble Stall to{' '}
-          <span className="text-premium-gold">Culinary Legend</span>
+          <span className="text-premium-orange">Culinary Legend</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-xl md:text-3xl mb-12 text-cream-white drop-shadow-lg max-w-4xl mx-auto"
+          className="text-xl md:text-3xl mb-12 text-deep-space drop-shadow-lg max-w-4xl mx-auto"
         >
           Experience the Magic That Transformed Sherghati's Street Food Scene
         </motion.p>
@@ -157,7 +157,7 @@ export const Hero: React.FC = () => {
                   type: 'spring',
                   stiffness: 100,
                 }}
-                className="flex items-center space-x-2 bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-premium-gold/30 hover:bg-white/20 hover:border-premium-gold transition-all duration-300"
+                className="flex items-center space-x-2 bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-premium-orange/30 hover:bg-white/20 hover:border-premium-orange transition-all duration-300"
               >
                 <Icon className={badge.color} size={24} />
                 <span className="text-sm md:text-base text-white font-medium">
@@ -178,7 +178,7 @@ export const Hero: React.FC = () => {
           <motion.button
             onClick={() => scrollToSection('menu')}
             className="group relative px-6 py-3 text-black rounded-lg font-semibold text-base overflow-hidden transition-all duration-300 shadow-lg"
-            style={{ background: 'linear-gradient(135deg, #ffc241 0%, #e6ac2b 100%)' }}
+            style={{ background: 'linear-gradient(135deg, #ffc241 0%, #e6ac00 100%)' }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -200,7 +200,7 @@ export const Hero: React.FC = () => {
 
           <motion.button
             onClick={() => scrollToSection('story')}
-            className="group relative px-6 py-3 bg-transparent text-white rounded-lg font-semibold text-base border-2 border-premium-gold overflow-hidden transition-all duration-300"
+            className="group relative px-6 py-3 bg-transparent text-white rounded-lg font-semibold text-base border-2 border-golden-glow overflow-hidden transition-all duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -208,7 +208,7 @@ export const Hero: React.FC = () => {
               Discover Our Story
             </span>
             <motion.div
-              className="absolute inset-0 bg-premium-gold"
+              className="absolute inset-0 bg-golden-glow"
               initial={{ y: '100%' }}
               whileHover={{ y: 0 }}
               transition={{ duration: 0.3 }}
@@ -227,7 +227,7 @@ export const Hero: React.FC = () => {
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
-            className="text-premium-gold text-4xl"
+            className="text-premium-orange text-4xl"
           >
             ↓
           </motion.div>

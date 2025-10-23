@@ -79,7 +79,7 @@ export const ContactCMS: React.FC = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <RefreshCw size={32} className="animate-spin text-premium-gold" />
+        <RefreshCw size={32} className="animate-spin text-golden-glow" />
       </div>
     );
   }
@@ -114,7 +114,7 @@ export const ContactCMS: React.FC = () => {
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className="flex items-center space-x-2 px-6 py-2 bg-premium-gold text-black font-semibold rounded-lg hover:bg-charcoal-black hover:text-white transition-all disabled:opacity-50"
+            className="flex items-center space-x-2 px-6 py-2 bg-golden-glow text-black font-semibold rounded-lg hover:bg-pitch-black hover:text-white transition-all disabled:opacity-50"
           >
             <Save size={18} />
             <span>{isSaving ? 'Saving...' : 'Save Changes'}</span>
@@ -156,7 +156,7 @@ export const ContactCMS: React.FC = () => {
                     address: { ...content.address, line1: e.target.value },
                   })
                 }
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                 placeholder="Address line 1"
               />
               <input
@@ -168,7 +168,7 @@ export const ContactCMS: React.FC = () => {
                     address: { ...content.address, line2: e.target.value },
                   })
                 }
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                 placeholder="Address line 2"
               />
               <input
@@ -180,7 +180,7 @@ export const ContactCMS: React.FC = () => {
                     address: { ...content.address, line3: e.target.value },
                   })
                 }
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                 placeholder="Address line 3"
               />
             </div>
@@ -195,7 +195,7 @@ export const ContactCMS: React.FC = () => {
               type="text"
               value={content.phone}
               onChange={(e) => setContent({ ...content, phone: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
               placeholder="+91 XXXXXXXXXX"
             />
           </div>
@@ -209,7 +209,7 @@ export const ContactCMS: React.FC = () => {
               type="email"
               value={content.email}
               onChange={(e) => setContent({ ...content, email: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
               placeholder="info@example.com"
             />
           </div>
@@ -223,7 +223,7 @@ export const ContactCMS: React.FC = () => {
               type="text"
               value={content.hours}
               onChange={(e) => setContent({ ...content, hours: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
               placeholder="Monday-Sunday: 10:00 AM - 10:00 PM"
             />
           </div>
@@ -237,7 +237,7 @@ export const ContactCMS: React.FC = () => {
               type="text"
               value={content.mapUrl}
               onChange={(e) => setContent({ ...content, mapUrl: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
               placeholder="https://maps.google.com/..."
             />
           </div>
@@ -264,7 +264,7 @@ export const ContactCMS: React.FC = () => {
                   type="text"
                   value={service}
                   onChange={(e) => updateService(index, e.target.value)}
-                  className="w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                  className="w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                   placeholder={`Service ${index + 1}`}
                 />
                 <button

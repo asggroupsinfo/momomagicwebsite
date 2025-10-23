@@ -86,7 +86,7 @@ export default function AdminDashboard() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <Loader2 size={48} className="animate-spin text-premium-gold mx-auto mb-4" />
+          <Loader2 size={48} className="animate-spin text-golden-glow mx-auto mb-4" />
           <p className="text-gray-600">Verifying authentication...</p>
         </div>
       </div>
@@ -124,7 +124,7 @@ export default function AdminDashboard() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-premium-gold" style={{ fontFamily: 'Playfair Display, serif' }}>
+              <h1 className="text-2xl font-bold text-golden-glow" style={{ fontFamily: 'Playfair Display, serif' }}>
                 Momos Magic Admin
               </h1>
               <p className="text-sm text-gray-300">Welcome back, {user.username}</p>
@@ -154,7 +154,7 @@ export default function AdminDashboard() {
                       onClick={() => setActiveTab(tab.id)}
                       className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all ${
                         activeTab === tab.id
-                          ? 'bg-premium-gold text-black font-semibold'
+                          ? 'bg-golden-glow text-black font-semibold'
                           : 'text-gray-700 hover:bg-gray-100'
                       }`}
                     >
@@ -221,9 +221,9 @@ export default function AdminDashboard() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <button
                         onClick={() => setActiveTab('hero')}
-                        className="flex items-center space-x-3 p-4 border-2 border-gray-200 rounded-lg hover:border-premium-gold hover:bg-gray-50 transition-all"
+                        className="flex items-center space-x-3 p-4 border-2 border-gray-200 rounded-lg hover:border-golden-glow hover:bg-gray-50 transition-all"
                       >
-                        <ImageIcon size={24} className="text-premium-gold" />
+                        <ImageIcon size={24} className="text-golden-glow" />
                         <div className="text-left">
                           <p className="font-semibold">Edit Hero Section</p>
                           <p className="text-sm text-gray-600">Update headlines and CTAs</p>
@@ -232,9 +232,9 @@ export default function AdminDashboard() {
 
                       <button
                         onClick={() => setActiveTab('menu')}
-                        className="flex items-center space-x-3 p-4 border-2 border-gray-200 rounded-lg hover:border-premium-gold hover:bg-gray-50 transition-all"
+                        className="flex items-center space-x-3 p-4 border-2 border-gray-200 rounded-lg hover:border-golden-glow hover:bg-gray-50 transition-all"
                       >
-                        <Menu size={24} className="text-premium-gold" />
+                        <Menu size={24} className="text-golden-glow" />
                         <div className="text-left">
                           <p className="font-semibold">Manage Menu</p>
                           <p className="text-sm text-gray-600">Add or edit menu items</p>
@@ -243,9 +243,9 @@ export default function AdminDashboard() {
 
                       <button
                         onClick={() => setActiveTab('media')}
-                        className="flex items-center space-x-3 p-4 border-2 border-gray-200 rounded-lg hover:border-premium-gold hover:bg-gray-50 transition-all"
+                        className="flex items-center space-x-3 p-4 border-2 border-gray-200 rounded-lg hover:border-golden-glow hover:bg-gray-50 transition-all"
                       >
-                        <Upload size={24} className="text-premium-gold" />
+                        <Upload size={24} className="text-golden-glow" />
                         <div className="text-left">
                           <p className="font-semibold">Upload Media</p>
                           <p className="text-sm text-gray-600">Add images and videos</p>
@@ -254,9 +254,9 @@ export default function AdminDashboard() {
 
                       <button
                         onClick={() => setActiveTab('analytics')}
-                        className="flex items-center space-x-3 p-4 border-2 border-gray-200 rounded-lg hover:border-premium-gold hover:bg-gray-50 transition-all"
+                        className="flex items-center space-x-3 p-4 border-2 border-gray-200 rounded-lg hover:border-golden-glow hover:bg-gray-50 transition-all"
                       >
-                        <BarChart3 size={24} className="text-premium-gold" />
+                        <BarChart3 size={24} className="text-golden-glow" />
                         <div className="text-left">
                           <p className="font-semibold">View Analytics</p>
                           <p className="text-sm text-gray-600">Check site performance</p>

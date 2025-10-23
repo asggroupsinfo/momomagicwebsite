@@ -77,7 +77,7 @@ export const HeroCMS: React.FC = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <RefreshCw size={32} className="animate-spin text-premium-gold" />
+        <RefreshCw size={32} className="animate-spin text-golden-glow" />
       </div>
     );
   }
@@ -119,7 +119,7 @@ export const HeroCMS: React.FC = () => {
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className="flex items-center space-x-2 px-6 py-2 bg-premium-gold text-black font-semibold rounded-lg hover:bg-charcoal-black hover:text-white transition-all disabled:opacity-50"
+            className="flex items-center space-x-2 px-6 py-2 bg-golden-glow text-black font-semibold rounded-lg hover:bg-pitch-black hover:text-white transition-all disabled:opacity-50"
           >
             <Save size={18} />
             <span>{isSaving ? 'Saving...' : 'Save Changes'}</span>
@@ -160,7 +160,7 @@ export const HeroCMS: React.FC = () => {
               type="text"
               value={content.headline}
               onChange={(e) => setContent({ ...content, headline: e.target.value })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
               placeholder="Enter main headline"
             />
           </div>
@@ -174,7 +174,7 @@ export const HeroCMS: React.FC = () => {
               value={content.subheadline}
               onChange={(e) => setContent({ ...content, subheadline: e.target.value })}
               rows={3}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
               placeholder="Enter subheadline"
             />
           </div>
@@ -216,7 +216,7 @@ export const HeroCMS: React.FC = () => {
                   type="text"
                   value={badge}
                   onChange={(e) => updateBadge(index, e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none text-sm"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none text-sm"
                   placeholder={`Badge ${index + 1}`}
                 />
               ))}
@@ -238,7 +238,7 @@ export const HeroCMS: React.FC = () => {
                     primaryCTA: { ...content.primaryCTA, text: e.target.value },
                   })
                 }
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none text-sm"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none text-sm"
                 placeholder="Button text"
               />
               <input
@@ -250,7 +250,7 @@ export const HeroCMS: React.FC = () => {
                     primaryCTA: { ...content.primaryCTA, link: e.target.value },
                   })
                 }
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none text-sm"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none text-sm"
                 placeholder="Button link"
               />
             </div>
@@ -271,7 +271,7 @@ export const HeroCMS: React.FC = () => {
                     secondaryCTA: { ...content.secondaryCTA, text: e.target.value },
                   })
                 }
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none text-sm"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none text-sm"
                 placeholder="Button text"
               />
               <input
@@ -283,7 +283,7 @@ export const HeroCMS: React.FC = () => {
                     secondaryCTA: { ...content.secondaryCTA, link: e.target.value },
                   })
                 }
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none text-sm"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none text-sm"
                 placeholder="Button link"
               />
             </div>
@@ -300,7 +300,7 @@ export const HeroCMS: React.FC = () => {
         >
           <h3 className="text-lg font-semibold mb-4">Preview</h3>
           <div className="bg-black text-white p-8 rounded-lg">
-            <h1 className="text-4xl font-bold text-premium-gold mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
+            <h1 className="text-4xl font-bold text-golden-glow mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
               {content.headline}
             </h1>
             <p className="text-xl text-gray-300 mb-6">{content.subheadline}</p>
@@ -312,10 +312,10 @@ export const HeroCMS: React.FC = () => {
               ))}
             </div>
             <div className="flex space-x-4">
-              <button className="bg-premium-gold text-black px-6 py-3 rounded-lg font-semibold">
+              <button className="bg-golden-glow text-black px-6 py-3 rounded-lg font-semibold">
                 {content.primaryCTA.text}
               </button>
-              <button className="border border-premium-gold text-premium-gold px-6 py-3 rounded-lg font-semibold">
+              <button className="border border-golden-glow text-golden-glow px-6 py-3 rounded-lg font-semibold">
                 {content.secondaryCTA.text}
               </button>
             </div>

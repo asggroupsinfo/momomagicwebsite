@@ -190,7 +190,7 @@ export const SocialMediaCMS: React.FC = () => {
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className="flex items-center space-x-2 px-6 py-2 bg-premium-gold text-black font-semibold rounded-lg hover:bg-charcoal-black hover:text-white transition-all disabled:opacity-50"
+            className="flex items-center space-x-2 px-6 py-2 bg-golden-glow text-black font-semibold rounded-lg hover:bg-pitch-black hover:text-white transition-all disabled:opacity-50"
           >
             <Save size={18} />
             <span>{isSaving ? 'Saving...' : 'Save Changes'}</span>
@@ -262,7 +262,7 @@ export const SocialMediaCMS: React.FC = () => {
                         type="text"
                         value={sm.username}
                         onChange={(e) => updateSocialMedia(sm.platform, 'username', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none text-sm"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none text-sm"
                         placeholder="@username"
                       />
                     </div>
@@ -274,7 +274,7 @@ export const SocialMediaCMS: React.FC = () => {
                           type="text"
                           value={sm.url}
                           onChange={(e) => updateSocialMedia(sm.platform, 'url', e.target.value)}
-                          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none text-sm"
+                          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none text-sm"
                           placeholder="https://..."
                         />
                         {sm.url && (
@@ -316,7 +316,7 @@ export const SocialMediaCMS: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
-              className="space-y-4 pl-6 border-l-2 border-premium-gold"
+              className="space-y-4 pl-6 border-l-2 border-golden-glow"
             >
               <div>
                 <label className="text-sm text-gray-600 font-medium">Share Title</label>
@@ -324,7 +324,7 @@ export const SocialMediaCMS: React.FC = () => {
                   type="text"
                   value={shareSettings.shareTitle}
                   onChange={(e) => setShareSettings({ ...shareSettings, shareTitle: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                   placeholder="Title shown when sharing"
                 />
               </div>
@@ -335,7 +335,7 @@ export const SocialMediaCMS: React.FC = () => {
                   value={shareSettings.shareDescription}
                   onChange={(e) => setShareSettings({ ...shareSettings, shareDescription: e.target.value })}
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                   placeholder="Description shown when sharing"
                 />
               </div>
@@ -346,7 +346,7 @@ export const SocialMediaCMS: React.FC = () => {
                   type="text"
                   value={shareSettings.shareImage}
                   onChange={(e) => setShareSettings({ ...shareSettings, shareImage: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
                   placeholder="/images/share-image.jpg"
                 />
                 <p className="text-xs text-gray-500 mt-1">Recommended: 1200×630px (Facebook/Twitter optimal size)</p>

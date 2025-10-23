@@ -7,29 +7,43 @@
    ============================================ */
 
 :root {
-  /* Base Colors - APPROVED ONLY */
-  --color-black: #000000;
-  --color-white: #FFFFFF;
-  --color-orange: #ffc241;
-  --color-orange-dark: #e6ac2b;
+  /* BRAND_COLORS.md - Official Brand Color Palette */
+  
+  /* Primary Colors */
+  --color-pitch-black: #000000;
+  --color-premium-orange: #ffc241;
+  
+  /* Secondary Colors */
+  --color-deep-space: #0a0a0a;
+  --color-charcoal: #111111;
+  
+  /* Accent Colors */
+  --color-golden-glow: #ffd700;
+  --color-burnt-orange: #e6ac00;
+  
+  /* Functional Colors (Preserved) */
+  --color-vegetarian-green: #059669;
+  --color-warm-orange: #EA580C;
   
   /* Semantic Colors */
-  --background: #FFFFFF;
-  --foreground: #000000;
+  --background: #000000;
+  --foreground: #FFFFFF;
   --primary: #ffc241;
-  --primary-dark: #e6ac2b;
+  --primary-dark: #e6ac00;
   
-  /* Premium Gradients - APPROVED */
-  --gradient-dark: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
-  --gradient-orange: linear-gradient(135deg, #ffc241 0%, #e6ac2b 100%);
+  /* Premium Gradients */
+  --gradient-dark: linear-gradient(135deg, #000000 0%, #0a0a0a 100%);
+  --gradient-orange: linear-gradient(135deg, #ffc241 0%, #e6ac00 100%);
   --gradient-premium: linear-gradient(135deg, #000000 0%, #ffc241 100%);
+  --gradient-golden: linear-gradient(135deg, #ffd700 0%, #ffc241 100%);
   
   /* Shadows - Premium Modern */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
-  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.24);
-  --shadow-orange: 0 8px 32px rgba(255, 194, 65, 0.3);
+  --shadow-sm: 0 2px 8px rgba(255, 194, 65, 0.1);
+  --shadow-md: 0 4px 16px rgba(255, 194, 65, 0.15);
+  --shadow-lg: 0 8px 32px rgba(255, 194, 65, 0.2);
+  --shadow-xl: 0 16px 48px rgba(255, 194, 65, 0.25);
+  --shadow-orange: 0 8px 32px rgba(255, 194, 65, 0.4);
+  --shadow-golden: 0 8px 32px rgba(255, 215, 0, 0.4);
   
   /* Typography */
   --font-heading: 'Playfair Display', serif;
@@ -37,23 +51,36 @@
 }
 
 @theme inline {
-  /* Tailwind Custom Colors */
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
-  --color-primary-dark: var(--primary-dark);
-  --color-black: var(--color-black);
-  --color-white: var(--color-white);
-  --color-orange: var(--color-orange);
+  /* BRAND_COLORS.md - Tailwind Theme Configuration */
   
-  /* Legacy Support (maintaining compatibility) */
-  --color-magic-red: #000000;
-  --color-premium-gold: #ffc241;
-  --color-charcoal-black: #000000;
-  --color-cream-white: #FFFFFF;
+  /* Primary Colors */
+  --color-pitch-black: #000000;
+  --color-premium-orange: #ffc241;
+  
+  /* Secondary Colors */
+  --color-deep-space: #0a0a0a;
+  --color-charcoal: #111111;
+  
+  /* Accent Colors */
+  --color-golden-glow: #ffd700;
+  --color-burnt-orange: #e6ac00;
+  
+  /* Functional Colors */
   --color-vegetarian-green: #059669;
-  --color-warm-orange: #ffc241;
-  --color-cool-gray: #6B7280;
+  --color-warm-orange: #EA580C;
+  
+  /* Semantic Aliases */
+  --color-background: #000000;
+  --color-foreground: #FFFFFF;
+  --color-primary: #ffc241;
+  --color-primary-dark: #e6ac00;
+  
+  /* Legacy Support (mapped to new colors) */
+  --color-magic-red: #ffc241;
+  --color-premium-gold: #ffd700;
+  --color-charcoal-black: #000000;
+  --color-cream-white: #0a0a0a;
+  --color-cool-gray: #111111;
   
   /* Fonts */
   --font-heading: 'Playfair Display', serif;
@@ -84,33 +111,46 @@ body {
    PREMIUM UTILITY CLASSES
    ============================================ */
 
-/* Combination 1: Black bg + Orange text */
+/* BRAND_COLORS.md - Premium Utility Classes */
+
+/* Combination 1: Pitch Black bg + Premium Orange text */
 .premium-dark {
-  background: var(--color-black);
-  color: var(--color-orange);
+  background: var(--color-pitch-black);
+  color: var(--color-premium-orange);
 }
 
 .premium-dark-gradient {
   background: var(--gradient-dark);
-  color: var(--color-orange);
+  color: var(--color-premium-orange);
 }
 
-/* Combination 2: Orange bg + Black text */
+/* Combination 2: Premium Orange bg + Black text */
 .premium-accent {
-  background: var(--color-orange);
-  color: var(--color-black);
+  background: var(--color-premium-orange);
+  color: var(--color-pitch-black);
 }
 
 .premium-accent-gradient {
   background: var(--gradient-orange);
-  color: var(--color-black);
+  color: var(--color-pitch-black);
 }
 
-/* Combination 3: White bg + Black text + Orange border */
+/* Combination 3: Deep Space bg + Premium Orange border */
 .premium-card {
-  background: var(--color-white);
-  color: var(--color-black);
-  border: 2px solid var(--color-orange);
+  background: var(--color-deep-space);
+  color: var(--foreground);
+  border: 2px solid var(--color-premium-orange);
+}
+
+/* Combination 4: Golden Glow accents */
+.premium-golden {
+  background: var(--color-golden-glow);
+  color: var(--color-pitch-black);
+}
+
+.premium-golden-gradient {
+  background: var(--gradient-golden);
+  color: var(--color-pitch-black);
 }
 
 /* Premium Shadows */
@@ -165,11 +205,11 @@ html {
 
 /* Selection Color */
 ::selection {
-  background: var(--color-orange);
-  color: var(--color-black);
+  background: var(--color-premium-orange);
+  color: var(--color-pitch-black);
 }
 
 ::-moz-selection {
-  background: var(--color-orange);
-  color: var(--color-black);
+  background: var(--color-premium-orange);
+  color: var(--color-pitch-black);
 }

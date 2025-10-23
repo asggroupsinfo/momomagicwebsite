@@ -134,7 +134,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
             onClick={() => setMode('plain')}
             className={`px-3 py-1 text-xs rounded-lg transition-all ${
               mode === 'plain'
-                ? 'bg-premium-gold text-black font-semibold'
+                ? 'bg-golden-glow text-black font-semibold'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
@@ -146,7 +146,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
             onClick={() => setMode('rich')}
             className={`px-3 py-1 text-xs rounded-lg transition-all ${
               mode === 'rich'
-                ? 'bg-premium-gold text-black font-semibold'
+                ? 'bg-golden-glow text-black font-semibold'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
@@ -165,7 +165,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
               type="button"
               onClick={() => applyFormatting('bold')}
               className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-                isBold ? 'bg-premium-gold text-black' : 'bg-white'
+                isBold ? 'bg-golden-glow text-black' : 'bg-white'
               }`}
               title="Bold"
             >
@@ -175,7 +175,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
               type="button"
               onClick={() => applyFormatting('italic')}
               className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-                isItalic ? 'bg-premium-gold text-black' : 'bg-white'
+                isItalic ? 'bg-golden-glow text-black' : 'bg-white'
               }`}
               title="Italic"
             >
@@ -185,7 +185,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
               type="button"
               onClick={() => applyFormatting('underline')}
               className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-                isUnderline ? 'bg-premium-gold text-black' : 'bg-white'
+                isUnderline ? 'bg-golden-glow text-black' : 'bg-white'
               }`}
               title="Underline"
             >
@@ -198,7 +198,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
               type="button"
               onClick={() => applyAlignment('left')}
               className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-                textAlign === 'left' ? 'bg-premium-gold text-black' : 'bg-white'
+                textAlign === 'left' ? 'bg-golden-glow text-black' : 'bg-white'
               }`}
               title="Align Left"
             >
@@ -208,7 +208,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
               type="button"
               onClick={() => applyAlignment('center')}
               className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-                textAlign === 'center' ? 'bg-premium-gold text-black' : 'bg-white'
+                textAlign === 'center' ? 'bg-golden-glow text-black' : 'bg-white'
               }`}
               title="Align Center"
             >
@@ -218,7 +218,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
               type="button"
               onClick={() => applyAlignment('right')}
               className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-                textAlign === 'right' ? 'bg-premium-gold text-black' : 'bg-white'
+                textAlign === 'right' ? 'bg-golden-glow text-black' : 'bg-white'
               }`}
               title="Align Right"
             >
@@ -234,7 +234,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
                 setFontFamily(e.target.value);
                 applyFormatting('fontFamily', e.target.value);
               }}
-              className="px-3 py-1.5 text-sm border border-gray-300 rounded bg-white focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+              className="px-3 py-1.5 text-sm border border-gray-300 rounded bg-white focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
             >
               <option value="Inter">Inter</option>
               <option value="Playfair Display">Playfair Display</option>
@@ -250,7 +250,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
                 setFontSize(e.target.value);
                 applyFormatting('fontSize', e.target.value);
               }}
-              className="px-3 py-1.5 text-sm border border-gray-300 rounded bg-white focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+              className="px-3 py-1.5 text-sm border border-gray-300 rounded bg-white focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
             >
               <option value="12">12px</option>
               <option value="14">14px</option>
@@ -309,14 +309,14 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         rows={rows}
-        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none resize-y"
+        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none resize-y"
         placeholder={placeholder}
         style={mode === 'plain' ? {} : getPreviewStyle()}
       />
 
       {/* Live Preview Panel */}
       {mode === 'rich' && showPreview && showPreviewPanel && (
-        <div className="border-2 border-premium-gold rounded-lg p-4 bg-white">
+        <div className="border-2 border-golden-glow rounded-lg p-4 bg-white">
           <div className="flex items-center justify-between mb-3">
             <h4 className="text-sm font-semibold text-gray-700">Live Preview</h4>
             <span className="text-xs text-gray-500">How it will appear on the website</span>

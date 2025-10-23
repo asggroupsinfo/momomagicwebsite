@@ -71,7 +71,7 @@ export const LogoCMS: React.FC = () => {
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className="flex items-center space-x-2 px-6 py-2 bg-premium-gold text-black font-semibold rounded-lg hover:bg-charcoal-black hover:text-white transition-all disabled:opacity-50"
+            className="flex items-center space-x-2 px-6 py-2 bg-golden-glow text-black font-semibold rounded-lg hover:bg-pitch-black hover:text-white transition-all disabled:opacity-50"
           >
             <Save size={18} />
             <span>{isSaving ? 'Saving...' : 'Save Changes'}</span>
@@ -104,7 +104,7 @@ export const LogoCMS: React.FC = () => {
         {/* Header Logo */}
         <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
           <div className="flex items-center space-x-2 mb-4">
-            <ImageIcon size={24} className="text-premium-gold" />
+            <ImageIcon size={24} className="text-golden-glow" />
             <h3 className="text-lg font-semibold">Header Logo</h3>
           </div>
           <div className="space-y-4">
@@ -138,7 +138,7 @@ export const LogoCMS: React.FC = () => {
         {/* Footer Logo */}
         <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
           <div className="flex items-center space-x-2 mb-4">
-            <ImageIcon size={24} className="text-premium-gold" />
+            <ImageIcon size={24} className="text-golden-glow" />
             <h3 className="text-lg font-semibold">Footer Logo</h3>
           </div>
           <div className="space-y-4">
@@ -172,7 +172,7 @@ export const LogoCMS: React.FC = () => {
         {/* Favicon */}
         <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
           <div className="flex items-center space-x-2 mb-4">
-            <ImageIcon size={24} className="text-premium-gold" />
+            <ImageIcon size={24} className="text-golden-glow" />
             <h3 className="text-lg font-semibold">Favicon</h3>
           </div>
           <div className="space-y-4">
@@ -206,7 +206,7 @@ export const LogoCMS: React.FC = () => {
         {/* Apple Touch Icon */}
         <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
           <div className="flex items-center space-x-2 mb-4">
-            <ImageIcon size={24} className="text-premium-gold" />
+            <ImageIcon size={24} className="text-golden-glow" />
             <h3 className="text-lg font-semibold">Apple Touch Icon</h3>
           </div>
           <div className="space-y-4">

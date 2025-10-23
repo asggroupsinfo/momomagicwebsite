@@ -34,7 +34,7 @@ export const ImageInput: React.FC<ImageInputProps> = ({
       <label className="block text-sm font-medium text-gray-700 mb-2">
         {label}
         {sizeGuideline && (
-          <span className="ml-2 text-xs text-premium-gold font-semibold">
+          <span className="ml-2 text-xs text-golden-glow font-semibold">
             📐 {sizeGuideline}
           </span>
         )}
@@ -46,7 +46,7 @@ export const ImageInput: React.FC<ImageInputProps> = ({
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none"
+          className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none"
           placeholder={placeholder}
         />
         
@@ -54,7 +54,7 @@ export const ImageInput: React.FC<ImageInputProps> = ({
         <button
           type="button"
           onClick={() => setIsMediaLibraryOpen(true)}
-          className="px-4 py-3 bg-premium-gold text-black font-semibold rounded-lg hover:bg-charcoal-black hover:text-white transition-all flex items-center space-x-2 whitespace-nowrap"
+          className="px-4 py-3 bg-golden-glow text-black font-semibold rounded-lg hover:bg-pitch-black hover:text-white transition-all flex items-center space-x-2 whitespace-nowrap"
           title="Choose from Media Library"
         >
           <ImageIcon size={18} />

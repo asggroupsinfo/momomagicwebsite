@@ -52,7 +52,7 @@ export const Testimonials: React.FC = () => {
             className="text-4xl md:text-5xl font-bold text-white mb-4"
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
-            What Our <span className="text-premium-gold">Customers Say</span>
+            What Our <span className="text-golden-glow">Customers Say</span>
           </h2>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto">
             Join 2000+ happy customers who found their magic
@@ -69,11 +69,11 @@ export const Testimonials: React.FC = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-white rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 relative"
             >
-              <Quote className="absolute top-4 right-4 text-premium-gold/20" size={48} />
+              <Quote className="absolute top-4 right-4 text-golden-glow/20" size={48} />
               
               <div className="flex items-center mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} size={20} className="text-premium-gold fill-premium-gold" />
+                  <Star key={i} size={20} className="text-golden-glow fill-golden-glow" />
                 ))}
               </div>
 
@@ -82,7 +82,7 @@ export const Testimonials: React.FC = () => {
               </p>
 
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-premium-gold rounded-full flex items-center justify-center text-black font-bold text-lg">
+                <div className="w-12 h-12 bg-golden-glow rounded-full flex items-center justify-center text-black font-bold text-lg">
                   {testimonial.name.charAt(0)}
                 </div>
                 <div className="ml-4">

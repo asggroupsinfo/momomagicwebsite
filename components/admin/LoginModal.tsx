@@ -78,7 +78,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSucce
                   <X size={24} />
                 </button>
                 <div className="flex items-center space-x-3">
-                  <div className="bg-premium-gold p-3 rounded-full">
+                  <div className="bg-golden-glow p-3 rounded-full">
                     <Lock size={24} className="text-black" />
                   </div>
                   <div>
@@ -116,7 +116,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSucce
                       type="text"
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none transition-all"
+                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none transition-all"
                       placeholder="Enter username"
                       required
                       disabled={isLoading}
@@ -136,7 +136,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSucce
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-premium-gold focus:border-transparent outline-none transition-all"
+                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-glow focus:border-transparent outline-none transition-all"
                       placeholder="Enter password"
                       required
                       disabled={isLoading}
@@ -148,7 +148,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSucce
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-premium-gold text-black font-semibold py-3 rounded-lg hover:bg-charcoal-black hover:text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-golden-glow text-black font-semibold py-3 rounded-lg hover:bg-pitch-black hover:text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isLoading ? 'Logging in...' : 'Login to Dashboard'}
                 </button>

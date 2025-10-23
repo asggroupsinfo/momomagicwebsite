@@ -18,7 +18,7 @@ export const Loading: React.FC<LoadingProps> = ({ size = 'md', text }) => {
   return (
     <div className="flex flex-col items-center justify-center space-y-4">
       <motion.div
-        className={`${sizes[size]} border-4 border-gray-200 border-t-premium-gold rounded-full`}
+        className={`${sizes[size]} border-4 border-gray-200 border-t-golden-glow rounded-full`}
         animate={{ rotate: 360 }}
         transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
       />
@@ -40,7 +40,7 @@ export const ProgressBar: React.FC<{ progress: number }> = ({ progress }) => {
   return (
     <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
       <motion.div
-        className="h-full bg-gradient-to-r from-magic-red to-premium-gold"
+        className="h-full bg-gradient-to-r from-premium-orange to-golden-glow"
         initial={{ width: 0 }}
         animate={{ width: `${progress}%` }}
         transition={{ duration: 0.5, ease: 'easeOut' }}

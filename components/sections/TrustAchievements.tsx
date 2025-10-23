@@ -119,7 +119,7 @@ export const TrustAchievements: React.FC = () => {
     }, [isCountInView, hasAnimated, end, duration]);
 
     return (
-      <span ref={countRef} className="text-5xl font-bold text-premium-gold">
+      <span ref={countRef} className="text-5xl font-bold text-golden-glow">
         {count.toFixed(1)}
       </span>
     );
@@ -132,7 +132,7 @@ export const TrustAchievements: React.FC = () => {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: 'radial-gradient(circle, #D4AF37 1px, transparent 1px)',
+            backgroundImage: 'radial-gradient(circle, #ffd700 1px, transparent 1px)',
             backgroundSize: '50px 50px',
           }}
         ></div>
@@ -147,7 +147,7 @@ export const TrustAchievements: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-cream-white mb-4 font-heading">
+          <h2 className="text-4xl md:text-5xl font-bold text-deep-space mb-4 font-heading">
             Why Customers Trust Our Magic
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
@@ -165,7 +165,7 @@ export const TrustAchievements: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ scale: 1.05, y: -8 }}
-              className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border-2 border-premium-gold/20 hover:border-premium-gold transition-all duration-300 text-center"
+              className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border-2 border-golden-glow/20 hover:border-golden-glow transition-all duration-300 text-center"
             >
               {/* Icon */}
               <motion.div
@@ -173,13 +173,13 @@ export const TrustAchievements: React.FC = () => {
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 + 0.2, type: 'spring', stiffness: 200 }}
-                className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-premium-gold/10 text-premium-gold mb-6"
+                className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-golden-glow/10 text-golden-glow mb-6"
               >
                 {factor.icon}
               </motion.div>
 
               {/* Title */}
-              <h3 className="text-2xl font-bold text-cream-white mb-3 font-heading">
+              <h3 className="text-2xl font-bold text-deep-space mb-3 font-heading">
                 {factor.title}
               </h3>
 
@@ -187,7 +187,7 @@ export const TrustAchievements: React.FC = () => {
               {factor.value && (
                 <div className="mb-3">
                   <CountUp end={factor.value} duration={2000} />
-                  <span className="text-3xl font-bold text-premium-gold">{factor.suffix}</span>
+                  <span className="text-3xl font-bold text-golden-glow">{factor.suffix}</span>
                 </div>
               )}
 
@@ -205,7 +205,7 @@ export const TrustAchievements: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="max-w-4xl mx-auto"
         >
-          <h3 className="text-3xl md:text-4xl font-bold text-center text-cream-white mb-12 font-heading">
+          <h3 className="text-3xl md:text-4xl font-bold text-center text-deep-space mb-12 font-heading">
             Our Achievements & Certifications
           </h3>
 
@@ -220,8 +220,8 @@ export const TrustAchievements: React.FC = () => {
                 whileHover={{ scale: 1.02, x: 10 }}
                 className={`relative bg-white/5 backdrop-blur-sm rounded-xl p-6 border-2 transition-all duration-300 ${
                   achievement.highlight
-                    ? 'border-premium-gold hover:border-premium-gold/80 hover:shadow-2xl hover:shadow-premium-gold/20'
-                    : 'border-white/10 hover:border-premium-gold/50'
+                    ? 'border-golden-glow hover:border-golden-glow/80 hover:shadow-2xl hover:shadow-golden-glow/20'
+                    : 'border-white/10 hover:border-golden-glow/50'
                 }`}
               >
                 {/* Highlight Badge */}
@@ -231,7 +231,7 @@ export const TrustAchievements: React.FC = () => {
                     whileInView={{ scale: 1, rotate: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.15 + 0.3, type: 'spring', stiffness: 200 }}
-                    className="absolute -top-3 -right-3 bg-premium-gold text-foreground px-4 py-1 rounded-full text-xs font-bold shadow-lg"
+                    className="absolute -top-3 -right-3 bg-golden-glow text-foreground px-4 py-1 rounded-full text-xs font-bold shadow-lg"
                   >
                     ⭐ CERTIFIED
                   </motion.div>
@@ -246,8 +246,8 @@ export const TrustAchievements: React.FC = () => {
                     transition={{ duration: 0.6, delay: index * 0.15 + 0.2 }}
                     className={`flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center ${
                       achievement.highlight
-                        ? 'bg-premium-gold text-foreground'
-                        : 'bg-white/10 text-premium-gold'
+                        ? 'bg-golden-glow text-foreground'
+                        : 'bg-white/10 text-golden-glow'
                     }`}
                   >
                     {achievement.icon}
@@ -256,8 +256,8 @@ export const TrustAchievements: React.FC = () => {
                   {/* Content */}
                   <div className="flex-1">
                     <div className="flex items-start justify-between mb-2">
-                      <h4 className="text-xl font-bold text-cream-white">{achievement.title}</h4>
-                      <span className="text-sm text-premium-gold font-semibold whitespace-nowrap ml-4">
+                      <h4 className="text-xl font-bold text-deep-space">{achievement.title}</h4>
+                      <span className="text-sm text-golden-glow font-semibold whitespace-nowrap ml-4">
                         {achievement.date}
                       </span>
                     </div>
