@@ -88,7 +88,7 @@ export default function MenuPage() {
                   placeholder="Search menu items..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-4 py-3 bg-deep-space text-foreground rounded-lg border border-charcoal focus:border-golden-glow focus:outline-none transition-all duration-300"
+                  className="w-full px-4 py-3 bg-deep-space text-foreground rounded-xl border-2 border-charcoal focus:border-premium-orange focus:shadow-[0_0_20px_rgba(255,194,65,0.2)] focus:outline-none transition-all duration-300"
                 />
                 <span className="absolute right-4 top-1/2 -translate-y-1/2 text-foreground/50">
                   🔍
@@ -102,10 +102,10 @@ export default function MenuPage() {
               <div className="flex flex-wrap gap-3">
                 <button
                   onClick={() => handleFilterChange(() => setSelectedCategory('all'))}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+                  className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${
                     selectedCategory === 'all'
-                      ? 'bg-premium-orange text-pitch-black'
-                      : 'bg-deep-space text-foreground/70 hover:bg-charcoal'
+                      ? 'bg-premium-orange text-pitch-black shadow-[0_10px_25px_rgba(255,194,65,0.3)]'
+                      : 'bg-transparent text-foreground/70 border-2 border-premium-orange/30 hover:border-premium-orange hover:-translate-y-0.5'
                   }`}
                 >
                   All
@@ -114,10 +114,10 @@ export default function MenuPage() {
                   <button
                     key={cat.id}
                     onClick={() => handleFilterChange(() => setSelectedCategory(cat.id))}
-                    className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+                    className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${
                       selectedCategory === cat.id
-                        ? 'bg-premium-orange text-pitch-black'
-                        : 'bg-deep-space text-foreground/70 hover:bg-charcoal'
+                        ? 'bg-premium-orange text-pitch-black shadow-[0_10px_25px_rgba(255,194,65,0.3)]'
+                        : 'bg-transparent text-foreground/70 border-2 border-premium-orange/30 hover:border-premium-orange hover:-translate-y-0.5'
                     }`}
                   >
                     {cat.icon} {cat.name}

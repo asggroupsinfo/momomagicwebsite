@@ -228,7 +228,7 @@ export const Hero: React.FC = () => {
           ].map((badge, index) => (
             <motion.div
               key={index}
-              className={`bg-deep-space/80 backdrop-blur-sm border ${badge.borderColor} rounded-lg p-4 flex items-center gap-3 hover:border-golden-glow hover:shadow-lg hover:shadow-golden-glow/20 transition-all duration-300`}
+              className={`bg-deep-space/80 backdrop-blur-sm border-2 ${badge.borderColor} rounded-xl p-4 flex items-center gap-3 hover:border-golden-glow hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(255,194,65,0.2)] transition-all duration-300`}
               initial={{ opacity: 0, y: 30, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{

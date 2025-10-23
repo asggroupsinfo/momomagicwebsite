@@ -216,7 +216,7 @@ export const BrandStory: React.FC = () => {
                 >
                   <div className={`flex-1 ${index % 2 === 0 ? 'text-right' : 'text-left'}`}>
                     <motion.div
-                      className="bg-deep-space border border-charcoal rounded-lg p-6 hover:border-golden-glow hover:shadow-lg hover:shadow-golden-glow/20 transition-all duration-300"
+                      className="bg-deep-space border border-[#1a1a1a] rounded-xl p-6 hover:border-premium-orange hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(255,194,65,0.2)] transition-all duration-300 relative before:absolute before:top-0 before:left-0 before:right-0 before:h-[3px] before:bg-gradient-to-r before:from-premium-orange before:to-transparent before:rounded-t-xl"
                       whileHover={{ scale: 1.05, y: -5 }}
                       transition={{ duration: 0.3 }}
                     >
@@ -285,7 +285,7 @@ export const BrandStory: React.FC = () => {
 
                     {/* Timeline Card */}
                     <motion.div
-                      className="w-72 bg-deep-space border border-charcoal rounded-lg p-6 hover:border-golden-glow hover:shadow-lg hover:shadow-golden-glow/20 transition-all duration-300"
+                      className="w-72 bg-deep-space border border-[#1a1a1a] rounded-xl p-6 hover:border-premium-orange hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(255,194,65,0.2)] transition-all duration-300 relative before:absolute before:top-0 before:left-0 before:right-0 before:h-[3px] before:bg-gradient-to-r before:from-premium-orange before:to-transparent before:rounded-t-xl"
                       whileHover={{ scale: 1.05, y: -5 }}
                       transition={{ duration: 0.3 }}
                     >

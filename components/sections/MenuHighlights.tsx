@@ -108,10 +108,10 @@ export const MenuHighlights: React.FC = () => {
             <motion.button
               key={filter.id}
               onClick={() => setSelectedFilter(filter.id)}
-              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+              className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${
                 selectedFilter === filter.id
-                  ? 'bg-golden-glow text-pitch-black shadow-lg shadow-golden-glow/30'
-                  : 'bg-deep-space text-foreground/70 border border-charcoal hover:border-golden-glow'
+                  ? 'bg-premium-orange text-pitch-black shadow-[0_10px_25px_rgba(255,194,65,0.3)]'
+                  : 'bg-transparent text-foreground/70 border-2 border-premium-orange/30 hover:border-premium-orange hover:-translate-y-0.5'
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -141,12 +141,10 @@ export const MenuHighlights: React.FC = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <motion.div
-                  className="h-full bg-deep-space border border-charcoal rounded-lg p-6 flex flex-col cursor-pointer"
+                  className="h-full bg-deep-space border-2 border-transparent rounded-xl p-6 flex flex-col cursor-pointer hover:border-premium-orange hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(255,194,65,0.2)] transition-all duration-300"
                   whileHover={{ 
                     scale: 1.05, 
-                    y: -10,
-                    borderColor: '#ffd700',
-                    boxShadow: '0 20px 40px rgba(255, 215, 0, 0.2)'
+                    y: -10
                   }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ duration: 0.3 }}
