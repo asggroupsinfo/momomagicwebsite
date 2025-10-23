@@ -364,14 +364,14 @@ export default function MenuPage() {
                         ✨ New
                       </motion.span>
                     )}
-                    {item.spicy && (
+                    {item.spicy && item.spiceLevel && (
                       <motion.span 
                         className="px-2 py-1 bg-premium-orange/20 text-premium-orange text-xs font-semibold rounded"
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ delay: index * 0.05 + 0.3 }}
                       >
-                        🌶️ {item.spiceLevel === 'extra-magic' ? 'Extra Magic' : item.spiceLevel?.charAt(0).toUpperCase() + item.spiceLevel?.slice(1)}
+                        🌶️ {item.spiceLevel === 'extra-magic' ? 'Extra Magic' : item.spiceLevel.charAt(0).toUpperCase() + item.spiceLevel.slice(1)}
                       </motion.span>
                     )}
                   </div>

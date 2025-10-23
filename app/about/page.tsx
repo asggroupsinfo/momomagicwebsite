@@ -498,8 +498,9 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.05 }}
+                onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
               >
-                <Card className="cursor-pointer" onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}>
+                <Card className="cursor-pointer">
                   <div className="flex items-center justify-between">
                     <h3 className="text-lg font-semibold text-premium-orange pr-4">
                       {faq.question}
