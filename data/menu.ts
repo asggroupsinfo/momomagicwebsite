@@ -9,6 +9,7 @@ export interface MenuItem {
   popular?: boolean;
   new?: boolean;
   spicy?: boolean;
+  spiceLevel?: 'mild' | 'medium' | 'hot' | 'extra-magic';
 }
 
 export const menuItems: MenuItem[] = [
@@ -21,6 +22,7 @@ export const menuItems: MenuItem[] = [
     description: 'Soft and juicy steamed momos filled with fresh vegetables',
     image: '/images/menu/steamed-veg.jpg',
     popular: true,
+    spiceLevel: 'mild',
   },
   {
     id: 'steamed-paneer',
@@ -31,6 +33,7 @@ export const menuItems: MenuItem[] = [
     description: 'Steamed momos with creamy paneer filling',
     image: '/images/menu/steamed-paneer.jpg',
     popular: true,
+    spiceLevel: 'mild',
   },
   {
     id: 'steamed-soya',
@@ -40,6 +43,7 @@ export const menuItems: MenuItem[] = [
     price: 45,
     description: 'Protein-rich soya steamed momos',
     image: '/images/menu/steamed-soya.jpg',
+    spiceLevel: 'mild',
   },
   {
     id: 'steamed-cheese',
@@ -50,6 +54,7 @@ export const menuItems: MenuItem[] = [
     description: 'Steamed momos with cheese and sweet corn',
     image: '/images/menu/steamed-cheese.jpg',
     popular: true,
+    spiceLevel: 'mild',
   },
 
   {
@@ -61,6 +66,7 @@ export const menuItems: MenuItem[] = [
     description: 'Golden-fried momos with crispy exterior',
     image: '/images/menu/fried-veg.jpg',
     popular: true,
+    spiceLevel: 'medium',
   },
   {
     id: 'fried-paneer',
@@ -70,6 +76,7 @@ export const menuItems: MenuItem[] = [
     price: 60,
     description: 'Crispy fried momos with paneer filling',
     image: '/images/menu/fried-paneer.jpg',
+    spiceLevel: 'medium',
   },
   {
     id: 'fried-soya',
@@ -79,6 +86,7 @@ export const menuItems: MenuItem[] = [
     price: 55,
     description: 'Crispy fried soya momos',
     image: '/images/menu/fried-soya.jpg',
+    spiceLevel: 'medium',
   },
   {
     id: 'fried-cheese',
@@ -88,6 +96,7 @@ export const menuItems: MenuItem[] = [
     price: 65,
     description: 'Fried momos with cheese and corn',
     image: '/images/menu/fried-cheese.jpg',
+    spiceLevel: 'medium',
   },
 
   {
@@ -100,6 +109,7 @@ export const menuItems: MenuItem[] = [
     image: '/images/menu/kurkure-veg.jpg',
     popular: true,
     spicy: true,
+    spiceLevel: 'hot',
   },
   {
     id: 'kurkure-paneer',
@@ -111,6 +121,7 @@ export const menuItems: MenuItem[] = [
     image: '/images/menu/kurkure-paneer.jpg',
     popular: true,
     spicy: true,
+    spiceLevel: 'hot',
   },
   {
     id: 'kurkure-cheese',
@@ -122,6 +133,7 @@ export const menuItems: MenuItem[] = [
     image: '/images/menu/kurkure-cheese.jpg',
     new: true,
     spicy: true,
+    spiceLevel: 'extra-magic',
   },
 
   {
@@ -133,6 +145,7 @@ export const menuItems: MenuItem[] = [
     description: 'Innovative fusion of pizza and momos',
     image: '/images/menu/pizza-veg.jpg',
     new: true,
+    spiceLevel: 'medium',
   },
   {
     id: 'pizza-paneer',
@@ -144,6 +157,7 @@ export const menuItems: MenuItem[] = [
     image: '/images/menu/pizza-paneer.jpg',
     new: true,
     popular: true,
+    spiceLevel: 'medium',
   },
   {
     id: 'pizza-soya',
@@ -154,6 +168,7 @@ export const menuItems: MenuItem[] = [
     description: 'Pizza momos with soya filling',
     image: '/images/menu/pizza-soya.jpg',
     new: true,
+    spiceLevel: 'hot',
   },
   {
     id: 'pizza-cheese',
@@ -164,6 +179,7 @@ export const menuItems: MenuItem[] = [
     description: 'Ultimate pizza momos with extra cheese',
     image: '/images/menu/pizza-cheese.jpg',
     new: true,
+    spiceLevel: 'hot',
   },
 ];
 
