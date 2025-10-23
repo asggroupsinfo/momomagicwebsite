@@ -43,7 +43,7 @@ const categories = [
 
 export const MenuHighlights: React.FC = () => {
   return (
-    <section className="py-20 bg-pitch-black">
+    <section id="menu" className="py-20 bg-pitch-black">
       <div className="container mx-auto px-4">
         <motion.div
           className="text-center mb-16"

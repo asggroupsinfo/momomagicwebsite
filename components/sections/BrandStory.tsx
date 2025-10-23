@@ -38,7 +38,7 @@ const timelineEvents = [
 
 export const BrandStory: React.FC = () => {
   return (
-    <section className="py-20 bg-deep-space">
+    <section id="brand-story" className="py-20 bg-deep-space">
       <div className="container mx-auto px-4">
         <motion.div
           className="text-center mb-16"

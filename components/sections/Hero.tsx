@@ -1,25 +1,78 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 
 export const Hero: React.FC = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Video Background */}
+      {/* Video Background with Mobile Optimization */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-pitch-black/70 via-pitch-black/50 to-pitch-black z-10" />
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover"
-          poster="/images/hero-poster.jpg"
-        >
-          <source src="/videos/hero-background.mp4" type="video/mp4" />
-        </video>
+        {/* Enhanced Gradient Overlay with Premium Orange Particles */}
+        <div className="absolute inset-0 bg-gradient-to-b from-pitch-black/70 via-pitch-black/50 to-pitch-black z-10">
+          {/* Animated Premium Orange Particles */}
+          <div className="absolute inset-0 overflow-hidden">
+            {[...Array(20)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-1 h-1 bg-premium-orange rounded-full"
+                initial={{
+                  x: Math.random() * 100 + '%',
+                  y: Math.random() * 100 + '%',
+                  opacity: 0,
+                }}
+                animate={{
+                  y: [Math.random() * 100 + '%', (Math.random() * 100 - 20) + '%'],
+                  opacity: [0, 0.6, 0],
+                }}
+                transition={{
+                  duration: 3 + Math.random() * 4,
+                  repeat: Infinity,
+                  delay: Math.random() * 5,
+                  ease: 'easeInOut',
+                }}
+              />
+            ))}
+          </div>
+        </div>
+        
+        {/* Video for Desktop, Image for Mobile */}
+        {!isMobile ? (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+            poster="/images/hero-poster.jpg"
+          >
+            <source src="/videos/hero-background.mp4" type="video/mp4" />
+          </video>
+        ) : (
+          <div 
+            className="w-full h-full bg-cover bg-center"
+            style={{ backgroundImage: 'url(/images/hero-poster.jpg)' }}
+          />
+        )}
       </div>
 
       {/* Floating Momos Animation */}
@@ -85,7 +138,9 @@ export const Hero: React.FC = () => {
           transition={{ duration: 0.8 }}
         >
           From Humble Stall to{' '}
-          <span className="text-premium-orange">Culinary Legend</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-premium-orange via-golden-glow to-premium-orange animate-gradient-x drop-shadow-[0_0_30px_rgba(255,194,65,0.5)]">
+            Culinary Legend
+          </span>
         </motion.h1>
 
         <motion.p
@@ -104,49 +159,104 @@ export const Hero: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <Button variant="primary" size="lg" className="transform hover:scale-105">
-            Taste the Magic → Order Now
-          </Button>
-          <Button variant="outline" size="lg" className="transform hover:scale-105">
-            Discover Our Story
-          </Button>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Button 
+              variant="primary" 
+              size="lg" 
+              className="relative overflow-hidden group"
+              onClick={() => scrollToSection('menu')}
+            >
+              <span className="relative z-10">Taste the Magic → Order Now</span>
+              <motion.div
+                className="absolute inset-0 border-2 border-golden-glow opacity-0 group-hover:opacity-100 rounded-lg"
+                initial={{ scale: 0.8 }}
+                whileHover={{ scale: 1 }}
+                transition={{ duration: 0.3 }}
+              />
+            </Button>
+          </motion.div>
+          
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="relative overflow-hidden group"
+              onClick={() => scrollToSection('brand-story')}
+            >
+              <span className="relative z-10">Discover Our Story</span>
+              <motion.div
+                className="absolute inset-0 bg-golden-glow/10 opacity-0 group-hover:opacity-100 rounded-lg"
+                transition={{ duration: 0.3 }}
+              />
+            </Button>
+          </motion.div>
         </motion.div>
 
-        {/* Trust Badges */}
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          <div className="bg-deep-space/80 backdrop-blur-sm border border-golden-glow/30 rounded-lg p-4 flex items-center gap-3">
-            <span className="text-3xl">🏆</span>
-            <p className="text-sm text-foreground/90 text-left">
-              Awarded 'Best Quality Food in City' by District Magistrate
-            </p>
-          </div>
-
-          <div className="bg-deep-space/80 backdrop-blur-sm border border-vegetarian-green/30 rounded-lg p-4 flex items-center gap-3">
-            <span className="text-3xl">🔒</span>
-            <p className="text-sm text-foreground/90 text-left">
-              FSSAI Certified: 20424201001152
-            </p>
-          </div>
-
-          <div className="bg-deep-space/80 backdrop-blur-sm border border-vegetarian-green/30 rounded-lg p-4 flex items-center gap-3">
-            <span className="text-3xl">🌱</span>
-            <p className="text-sm text-foreground/90 text-left">
-              100% Pure Vegetarian · Since 2023
-            </p>
-          </div>
-
-          <div className="bg-deep-space/80 backdrop-blur-sm border border-warm-orange/30 rounded-lg p-4 flex items-center gap-3">
-            <span className="text-3xl">⭐</span>
-            <p className="text-sm text-foreground/90 text-left">
-              4.9/5 (2000+ Happy Customers)
-            </p>
-          </div>
-        </motion.div>
+        {/* Trust Badges with Staggered Animation */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+          {[
+            {
+              icon: '🏆',
+              text: "Awarded 'Best Quality Food in City' by District Magistrate",
+              borderColor: 'border-golden-glow/30',
+              delay: 0.6,
+            },
+            {
+              icon: '🔒',
+              text: 'FSSAI Certified: 20424201001152',
+              borderColor: 'border-vegetarian-green/30',
+              delay: 0.7,
+            },
+            {
+              icon: '🌱',
+              text: '100% Pure Vegetarian · Since 2023',
+              borderColor: 'border-vegetarian-green/30',
+              delay: 0.8,
+            },
+            {
+              icon: '⭐',
+              text: '4.9/5 (2000+ Happy Customers)',
+              borderColor: 'border-warm-orange/30',
+              delay: 0.9,
+            },
+          ].map((badge, index) => (
+            <motion.div
+              key={index}
+              className={`bg-deep-space/80 backdrop-blur-sm border ${badge.borderColor} rounded-lg p-4 flex items-center gap-3 hover:border-golden-glow hover:shadow-lg hover:shadow-golden-glow/20 transition-all duration-300`}
+              initial={{ opacity: 0, y: 30, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{
+                duration: 0.5,
+                delay: badge.delay,
+                ease: 'easeOut',
+              }}
+              whileHover={{ scale: 1.05, y: -5 }}
+            >
+              <motion.span
+                className="text-3xl"
+                initial={{ rotate: 0 }}
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{
+                  duration: 2,
+                  delay: badge.delay + 0.5,
+                  repeat: Infinity,
+                  repeatDelay: 3,
+                }}
+              >
+                {badge.icon}
+              </motion.span>
+              <p className="text-sm text-foreground/90 text-left">
+                {badge.text}
+              </p>
+            </motion.div>
+          ))}
+        </div>
 
         {/* Scroll Indicator */}
         <motion.div
