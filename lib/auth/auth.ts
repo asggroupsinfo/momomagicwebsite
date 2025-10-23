@@ -7,17 +7,14 @@ export interface User {
   role: 'admin' | 'editor';
 }
 
-const users: Record<string, { password: string; user: User }> = {
-  'admin': {
-    password: 'admin123', // In production, this would be hashed
-    user: {
-      id: '1',
-      username: 'admin',
-      email: 'admin@momomagic.com',
-      role: 'admin',
-    },
-  },
-};
+function getAdminCredentials() {
+  return {
+    username: process.env.ADMIN_USERNAME || 'admin',
+    password: process.env.ADMIN_PASSWORD || 'admin123',
+  };
+}
+
+const users: Record<string, { password: string; user: User }> = {};
 
 const sessions: Map<string, User> = new Map();
 
@@ -40,10 +37,17 @@ export function deleteSession(token: string): void {
 }
 
 export function validateCredentials(username: string, password: string): User | null {
-  const userRecord = users[username];
-  if (userRecord && userRecord.password === password) {
-    return userRecord.user;
+  const adminCreds = getAdminCredentials();
+  
+  if (username === adminCreds.username && password === adminCreds.password) {
+    return {
+      id: '1',
+      username: adminCreds.username,
+      email: 'admin@momomagic.com',
+      role: 'admin',
+    };
   }
+  
   return null;
 }
 

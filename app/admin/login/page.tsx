@@ -14,6 +14,7 @@ export default function AdminLoginPage() {
   });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [remainingAttempts, setRemainingAttempts] = useState<number | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,10 +34,14 @@ export default function AdminLoginPage() {
 
       if (!response.ok) {
         setError(data.error || 'Login failed');
+        if (data.remainingAttempts !== undefined) {
+          setRemainingAttempts(data.remainingAttempts);
+        }
         setIsLoading(false);
         return;
       }
 
+      setRemainingAttempts(null);
       router.push('/admin/dashboard');
     } catch (err) {
       setError('An error occurred. Please try again.');
@@ -64,6 +69,11 @@ export default function AdminLoginPage() {
             {error && (
               <div className="p-4 bg-warm-orange/20 border border-warm-orange rounded-lg">
                 <p className="text-warm-orange text-sm">{error}</p>
+                {remainingAttempts !== null && remainingAttempts > 0 && (
+                  <p className="text-golden-glow text-xs mt-2">
+                    {remainingAttempts} attempt{remainingAttempts > 1 ? 's' : ''} remaining
+                  </p>
+                )}
               </div>
             )}
 
@@ -107,14 +117,6 @@ export default function AdminLoginPage() {
               {isLoading ? 'Signing in...' : 'Sign In'}
             </Button>
           </form>
-
-          <div className="mt-6 pt-6 border-t border-charcoal">
-            <p className="text-sm text-foreground/60 text-center">
-              Demo Credentials:<br />
-              Username: <span className="text-golden-glow">admin</span><br />
-              Password: <span className="text-golden-glow">admin123</span>
-            </p>
-          </div>
         </Card>
       </motion.div>
     </div>
