@@ -30,7 +30,7 @@ export const Button: React.FC<ButtonProps> = ({
   const hoverAnimation = {
     scale: 1.05,
     y: -2,
-    transition: { type: 'spring', stiffness: 400, damping: 10 }
+    transition: { type: 'spring' as const, stiffness: 400, damping: 10 }
   };
 
   const tapAnimation = {

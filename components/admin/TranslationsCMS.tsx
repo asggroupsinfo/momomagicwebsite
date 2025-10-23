@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Save, RefreshCw, AlertCircle, CheckCircle, Globe, Plus, Trash2, Edit2 } from 'lucide-react';
-import { i18nConfig, Locale } from '@/lib/i18n/config';
+import { i18nConfig, Locale, getLocaleName } from '@/lib/i18n/config';
 
 interface TranslationKey {
   key: string;
@@ -213,7 +213,7 @@ export const TranslationsCMS: React.FC = () => {
               }`}
             >
               <Globe size={16} />
-              <span>{i18nConfig.localeNames[loc]}</span>
+              <span>{getLocaleName(loc as Locale)}</span>
             </button>
           ))}
         </nav>
