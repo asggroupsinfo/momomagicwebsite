@@ -17,6 +17,7 @@ const menuItems = [
   { id: 'analytics', label: 'Analytics', icon: '📈', href: '/admin/dashboard/analytics' },
   { id: 'hero', label: 'Hero CMS', icon: '🎬', href: '/admin/dashboard/hero' },
   { id: 'menu', label: 'Menu Management', icon: '🥟', href: '/admin/dashboard/menu' },
+  { id: 'menu-filters', label: 'Menu Filters', icon: '🔧', href: '/admin/dashboard/menu-filters' },
   { id: 'categories', label: 'Categories', icon: '📁', href: '/admin/dashboard/categories' },
   { id: 'about', label: 'About Us CMS', icon: '📖', href: '/admin/dashboard/about' },
   { id: 'contact', label: 'Contact CMS', icon: '📧', href: '/admin/dashboard/contact' },
