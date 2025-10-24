@@ -4,6 +4,7 @@ import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { MediaLibraryPicker } from '@/components/cms/MediaLibraryPicker';
 
 interface HeroContent {
   headline: string;
@@ -45,6 +46,8 @@ export default function HeroCMSPage() {
   const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState('');
   const [uploadingFile, setUploadingFile] = useState(false);
+  const [mediaLibraryOpen, setMediaLibraryOpen] = useState(false);
+  const [mediaLibraryField, setMediaLibraryField] = useState<'video' | 'image'>('image');
   
   const videoInputRef = useRef<HTMLInputElement>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
@@ -118,6 +121,21 @@ export default function HeroCMSPage() {
       setUploadingFile(false);
       setTimeout(() => setSaveMessage(''), 3000);
     }
+  };
+
+  const openMediaLibrary = (field: 'video' | 'image') => {
+    setMediaLibraryField(field);
+    setMediaLibraryOpen(true);
+  };
+
+  const handleMediaSelect = (url: string) => {
+    if (mediaLibraryField === 'video') {
+      setContent({ ...content, backgroundVideo: url, backgroundType: 'video' });
+    } else {
+      setContent({ ...content, backgroundImage: url, backgroundType: 'image' });
+    }
+    setSaveMessage(`✅ ${mediaLibraryField === 'video' ? 'Video' : 'Image'} selected from library!`);
+    setTimeout(() => setSaveMessage(''), 3000);
   };
 
   return (
@@ -302,6 +320,12 @@ export default function HeroCMSPage() {
                         >
                           {uploadingFile ? '⏳' : '📁'} Upload
                         </button>
+                        <button
+                          onClick={() => openMediaLibrary('video')}
+                          className="px-6 py-3 bg-golden-glow text-pitch-black rounded-lg font-bold hover:-translate-y-0.5 transition-all duration-300"
+                        >
+                          📚 Library
+                        </button>
                       </div>
                       {content.backgroundVideo && (
                         <div className="mt-3 h-32 bg-charcoal rounded-lg overflow-hidden flex items-center justify-center">
@@ -341,6 +365,12 @@ export default function HeroCMSPage() {
                           className="px-6 py-3 bg-premium-orange text-pitch-black rounded-lg font-bold hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50"
                         >
                           {uploadingFile ? '⏳' : '📁'} Upload
+                        </button>
+                        <button
+                          onClick={() => openMediaLibrary('image')}
+                          className="px-6 py-3 bg-golden-glow text-pitch-black rounded-lg font-bold hover:-translate-y-0.5 transition-all duration-300"
+                        >
+                          📚 Library
                         </button>
                       </div>
                       {content.backgroundImage && (
@@ -458,6 +488,14 @@ export default function HeroCMSPage() {
           </div>
         </div>
       </motion.div>
+
+      {/* Media Library Picker */}
+      <MediaLibraryPicker
+        isOpen={mediaLibraryOpen}
+        onClose={() => setMediaLibraryOpen(false)}
+        onSelect={handleMediaSelect}
+        fileType={mediaLibraryField === 'video' ? 'video' : 'image'}
+      />
     </div>
   );
 }
