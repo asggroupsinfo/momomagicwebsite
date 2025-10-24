@@ -24,6 +24,7 @@ const menuItems = [
   { id: 'gallery', label: 'Gallery CMS', icon: '🖼️', href: '/admin/dashboard/gallery' },
   { id: 'testimonials', label: 'Testimonials', icon: '⭐', href: '/admin/dashboard/testimonials' },
   { id: 'combos', label: 'Combo Deals', icon: '🎁', href: '/admin/dashboard/combos' },
+  { id: 'catering', label: 'Catering Services', icon: '🎊', href: '/admin/dashboard/catering' },
   { id: 'logo', label: 'Logo Management', icon: '🎨', href: '/admin/dashboard/logo' },
   { id: 'cta', label: 'CTA Management', icon: '🎯', href: '/admin/dashboard/cta' },
   { id: 'social', label: 'Social Media', icon: '📱', href: '/admin/dashboard/social' },
