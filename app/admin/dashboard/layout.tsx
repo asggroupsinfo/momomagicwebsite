@@ -14,6 +14,7 @@ interface User {
 
 const menuItems = [
   { id: 'dashboard', label: 'Dashboard', icon: '📊', href: '/admin/dashboard' },
+  { id: 'analytics', label: 'Analytics', icon: '📈', href: '/admin/dashboard/analytics' },
   { id: 'hero', label: 'Hero CMS', icon: '🎬', href: '/admin/dashboard/hero' },
   { id: 'menu', label: 'Menu Management', icon: '🥟', href: '/admin/dashboard/menu' },
   { id: 'categories', label: 'Categories', icon: '📁', href: '/admin/dashboard/categories' },
@@ -23,16 +24,13 @@ const menuItems = [
   { id: 'testimonials', label: 'Testimonials', icon: '⭐', href: '/admin/dashboard/testimonials' },
   { id: 'combos', label: 'Combo Deals', icon: '🎁', href: '/admin/dashboard/combos' },
   { id: 'logo', label: 'Logo Management', icon: '🎨', href: '/admin/dashboard/logo' },
-  { id: 'social', label: 'Social Media', icon: '📱', href: '/admin/dashboard/social' },
-  { id: 'api', label: 'API Configuration', icon: '🔌', href: '/admin/dashboard/api' },
   { id: 'cta', label: 'CTA Management', icon: '🎯', href: '/admin/dashboard/cta' },
-  { id: 'media', label: 'Media Library', icon: '📚', href: '/admin/dashboard/media' },
+  { id: 'social', label: 'Social Media', icon: '📱', href: '/admin/dashboard/social' },
   { id: 'seo', label: 'SEO Management', icon: '🔍', href: '/admin/dashboard/seo' },
-  { id: 'i18n', label: 'Multi-language', icon: '🌍', href: '/admin/dashboard/i18n' },
+  { id: 'translations', label: 'Multi-language', icon: '🌍', href: '/admin/dashboard/translations' },
+  { id: 'api-integrations', label: 'API Integrations', icon: '🔌', href: '/admin/dashboard/api-integrations' },
+  { id: 'media', label: 'Media Library', icon: '📚', href: '/admin/dashboard/media' },
   { id: 'backup', label: 'Backup & Recovery', icon: '💾', href: '/admin/dashboard/backup' },
-  { id: 'users', label: 'User Management', icon: '👥', href: '/admin/dashboard/users' },
-  { id: 'security', label: 'Security Settings', icon: '🔒', href: '/admin/dashboard/security' },
-  { id: 'settings', label: 'System Settings', icon: '⚙️', href: '/admin/dashboard/settings' },
 ];
 
 export default function AdminDashboardLayout({
