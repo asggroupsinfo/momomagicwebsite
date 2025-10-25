@@ -2,9 +2,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 
 export const Hero: React.FC = () => {
+  const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -177,7 +179,7 @@ export const Hero: React.FC = () => {
               variant="primary" 
               size="md" 
               className="relative overflow-hidden group"
-              onClick={() => scrollToSection('menu')}
+              onClick={() => router.push('/order/menu')}
             >
               <span className="relative z-10">Order Now</span>
               <motion.div

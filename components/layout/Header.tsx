@@ -10,6 +10,11 @@ export const Header: React.FC = () => {
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/menu', label: 'Menu' },
+    { href: '/combo-deals', label: 'Combo Deals' },
+    { href: '/catering', label: 'Catering' },
+    { href: '/gallery', label: 'Gallery' },
+    { href: '/franchise', label: 'Franchise' },
+    { href: '/download-app', label: 'Download App' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
   ];
@@ -31,12 +36,12 @@ export const Header: React.FC = () => {
           </Link>
 
           {/* Navigation - Center (Desktop) with Smooth Transitions */}
-          <nav className="hidden lg:flex items-center space-x-10 xl:space-x-12 absolute left-1/2 transform -translate-x-1/2">
+          <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6 absolute left-1/2 transform -translate-x-1/2">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="relative text-premium-orange hover:text-golden-glow transition-all duration-300 font-medium text-base group"
+                className="relative text-premium-orange hover:text-golden-glow transition-all duration-300 font-medium text-sm xl:text-base group whitespace-nowrap"
               >
                 {link.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-golden-glow transition-all duration-300 group-hover:w-full"></span>
