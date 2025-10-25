@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { MediaLibraryPicker } from '@/components/cms/MediaLibraryPicker';
 
 interface GalleryImage {
   id: string;
@@ -37,6 +38,7 @@ export default function GalleryManagementPage() {
   const [uploadingFile, setUploadingFile] = useState(false);
   const [bulkUploadCategory, setBulkUploadCategory] = useState(imageCategories[0]);
   const [isBulkUploadModalOpen, setIsBulkUploadModalOpen] = useState(false);
+  const [mediaLibraryOpen, setMediaLibraryOpen] = useState(false);
   
   const imageInputRef = useRef<HTMLInputElement>(null);
   const bulkUploadInputRef = useRef<HTMLInputElement>(null);
@@ -223,6 +225,13 @@ export default function GalleryManagementPage() {
       setUploadingFile(false);
       setTimeout(() => setSaveMessage(''), 3000);
     }
+  };
+
+  const handleMediaSelect = (url: string) => {
+    if (!editingImage) return;
+    setEditingImage({ ...editingImage, url });
+    setSaveMessage('✅ Image selected from library!');
+    setTimeout(() => setSaveMessage(''), 3000);
   };
 
   const handleBulkUpload = async (files: FileList) => {
@@ -556,7 +565,13 @@ export default function GalleryManagementPage() {
                       disabled={uploadingFile}
                       className="px-6 py-3 bg-premium-orange text-pitch-black rounded-lg font-bold hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50"
                     >
-                      {uploadingFile ? '⏳ Uploading...' : '📁 Upload'}
+                      {uploadingFile ? '⏳' : '📁'} Upload
+                    </button>
+                    <button
+                      onClick={() => setMediaLibraryOpen(true)}
+                      className="px-6 py-3 bg-golden-glow text-pitch-black rounded-lg font-bold hover:-translate-y-0.5 transition-all duration-300"
+                    >
+                      📚 Library
                     </button>
                   </div>
                   
@@ -743,6 +758,14 @@ export default function GalleryManagementPage() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Media Library Picker */}
+      <MediaLibraryPicker
+        isOpen={mediaLibraryOpen}
+        onClose={() => setMediaLibraryOpen(false)}
+        onSelect={handleMediaSelect}
+        fileType="image"
+      />
     </div>
   );
 }

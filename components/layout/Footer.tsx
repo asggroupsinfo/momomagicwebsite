@@ -5,8 +5,8 @@ export const Footer: React.FC = () => {
   return (
     <footer className="bg-deep-space border-t border-charcoal">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="col-span-1 md:col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+          <div className="col-span-1 md:col-span-2 lg:col-span-2">
             <h3 className="text-2xl font-bold text-premium-orange mb-4">
               Momos Magic
             </h3>
@@ -14,12 +14,25 @@ export const Footer: React.FC = () => {
               From Humble Stall to Culinary Legend. Experience the Magic That 
               Transformed Sherghati's Street Food Scene.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 mb-6">
               <span className="text-vegetarian-green">📍</span>
               <span className="text-foreground/80">
                 Naya Bazar, Near Post Office<br />
                 Sherghati, Bihar 824211
               </span>
+            </div>
+            
+            {/* Download App Section */}
+            <div className="mt-6">
+              <h4 className="text-lg font-semibold text-golden-glow mb-3">
+                📱 Get Our App
+              </h4>
+              <Link 
+                href="/download-app" 
+                className="inline-block bg-premium-orange text-pitch-black px-6 py-3 rounded-lg text-sm font-bold hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(255,194,65,0.3)] transition-all duration-300"
+              >
+                Download Now
+              </Link>
             </div>
           </div>
 
@@ -29,8 +42,33 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2">
               <li>
+                <Link href="/" className="text-foreground/80 hover:text-premium-orange transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li>
                 <Link href="/menu" className="text-foreground/80 hover:text-premium-orange transition-colors">
                   Menu
+                </Link>
+              </li>
+              <li>
+                <Link href="/combo-deals" className="text-foreground/80 hover:text-premium-orange transition-colors">
+                  Combo Deals
+                </Link>
+              </li>
+              <li>
+                <Link href="/catering" className="text-foreground/80 hover:text-premium-orange transition-colors">
+                  Catering
+                </Link>
+              </li>
+              <li>
+                <Link href="/gallery" className="text-foreground/80 hover:text-premium-orange transition-colors">
+                  Gallery
+                </Link>
+              </li>
+              <li>
+                <Link href="/franchise" className="text-foreground/80 hover:text-premium-orange transition-colors">
+                  Franchise
                 </Link>
               </li>
               <li>
@@ -41,6 +79,44 @@ export const Footer: React.FC = () => {
               <li>
                 <Link href="/contact" className="text-foreground/80 hover:text-premium-orange transition-colors">
                   Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-lg font-semibold text-golden-glow mb-4">
+              Legal
+            </h4>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/privacy-policy" className="text-foreground/80 hover:text-premium-orange transition-colors">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms-conditions" className="text-foreground/80 hover:text-premium-orange transition-colors">
+                  Terms & Conditions
+                </Link>
+              </li>
+              <li>
+                <Link href="/refund-cancellation" className="text-foreground/80 hover:text-premium-orange transition-colors">
+                  Refund Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/shipping-delivery" className="text-foreground/80 hover:text-premium-orange transition-colors">
+                  Delivery Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/online-ordering-policy" className="text-foreground/80 hover:text-premium-orange transition-colors">
+                  Online Ordering
+                </Link>
+              </li>
+              <li>
+                <Link href="/careers" className="text-foreground/80 hover:text-premium-orange transition-colors">
+                  Careers
                 </Link>
               </li>
             </ul>

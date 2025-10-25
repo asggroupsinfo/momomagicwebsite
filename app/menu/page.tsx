@@ -183,31 +183,31 @@ export default function MenuPage() {
               </div>
             </div>
 
-            {/* Price Range Slider */}
+            {/* Price Range Slider - Single Continuous Slider */}
             <div className="mb-6">
               <p className="text-sm font-semibold text-foreground/80 mb-3">
-                Price Range: ₹{priceRange[0]} - ₹{priceRange[1]}{priceRange[1] === 250 ? '+' : ''}
+                Maximum Price: ₹{priceRange[1]}{priceRange[1] === 250 ? '+' : ''}
               </p>
-              <div className="flex items-center gap-4">
+              <div className="relative">
                 <input
                   type="range"
                   min="0"
                   max="250"
-                  value={priceRange[0]}
-                  onChange={(e) => setPriceRange([parseInt(e.target.value), priceRange[1]])}
-                  className="flex-1 h-2 bg-deep-space rounded-lg appearance-none cursor-pointer accent-premium-orange"
-                />
-                <input
-                  type="range"
-                  min="0"
-                  max="250"
+                  step="10"
                   value={priceRange[1]}
-                  onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
-                  className="flex-1 h-2 bg-deep-space rounded-lg appearance-none cursor-pointer accent-premium-orange"
+                  onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
+                  className="w-full h-3 bg-deep-space rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-premium-orange [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-[0_0_10px_rgba(255,194,65,0.5)] [&::-webkit-slider-thumb]:hover:shadow-[0_0_15px_rgba(255,194,65,0.8)] [&::-webkit-slider-thumb]:transition-all [&::-moz-range-thumb]:w-6 [&::-moz-range-thumb]:h-6 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-premium-orange [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:cursor-pointer"
+                  style={{
+                    background: `linear-gradient(to right, #ffc241 0%, #ffc241 ${(priceRange[1] / 250) * 100}%, #0a0a0a ${(priceRange[1] / 250) * 100}%, #0a0a0a 100%)`
+                  }}
                 />
               </div>
               <div className="flex justify-between text-xs text-foreground/50 mt-2">
                 <span>₹0</span>
+                <span>₹50</span>
+                <span>₹100</span>
+                <span>₹150</span>
+                <span>₹200</span>
                 <span>₹250+</span>
               </div>
             </div>

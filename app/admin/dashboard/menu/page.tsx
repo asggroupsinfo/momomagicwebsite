@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { MediaLibraryPicker } from '@/components/cms/MediaLibraryPicker';
 
 interface MenuItem {
   id: string;
@@ -55,6 +56,8 @@ export default function MenuManagementPage() {
   const [newCategory, setNewCategory] = useState('');
   const [saveMessage, setSaveMessage] = useState('');
   const [uploadingField, setUploadingField] = useState<string | null>(null);
+  const [mediaLibraryOpen, setMediaLibraryOpen] = useState(false);
+  const [mediaLibraryField, setMediaLibraryField] = useState<'image' | 'imageHalf' | 'imageFull'>('image');
   
   const imageInputRef = useRef<HTMLInputElement>(null);
   const imageHalfInputRef = useRef<HTMLInputElement>(null);
@@ -172,6 +175,18 @@ export default function MenuManagementPage() {
       setUploadingField(null);
       setTimeout(() => setSaveMessage(''), 3000);
     }
+  };
+
+  const openMediaLibrary = (field: 'image' | 'imageHalf' | 'imageFull') => {
+    setMediaLibraryField(field);
+    setMediaLibraryOpen(true);
+  };
+
+  const handleMediaSelect = (url: string) => {
+    if (!editingItem) return;
+    setEditingItem({ ...editingItem, [mediaLibraryField]: url });
+    setSaveMessage(`✅ Image selected from library!`);
+    setTimeout(() => setSaveMessage(''), 3000);
   };
 
   const handleAddCategory = async () => {
@@ -528,7 +543,13 @@ export default function MenuManagementPage() {
                         disabled={uploadingField === 'image'}
                         className="px-6 py-3 bg-premium-orange text-pitch-black rounded-lg font-bold hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50"
                       >
-                        {uploadingField === 'image' ? '⏳ Uploading...' : '📁 Upload'}
+                        {uploadingField === 'image' ? '⏳' : '📁'} Upload
+                      </button>
+                      <button
+                        onClick={() => openMediaLibrary('image')}
+                        className="px-6 py-3 bg-golden-glow text-pitch-black rounded-lg font-bold hover:-translate-y-0.5 transition-all duration-300"
+                      >
+                        📚 Library
                       </button>
                     </div>
                     {editingItem.image && (
@@ -553,23 +574,31 @@ export default function MenuManagementPage() {
                           className="w-full px-3 py-2 bg-deep-space border border-charcoal rounded-lg text-foreground text-sm focus:outline-none focus:border-golden-glow transition-colors"
                           placeholder="URL for half plate"
                         />
-                        <input
-                          ref={imageHalfInputRef}
-                          type="file"
-                          accept="image/*"
-                          onChange={(e) => {
-                            const file = e.target.files?.[0];
-                            if (file) handleFileUpload('imageHalf', file);
-                          }}
-                          className="hidden"
-                        />
-                        <button
-                          onClick={() => imageHalfInputRef.current?.click()}
-                          disabled={uploadingField === 'imageHalf'}
-                          className="w-full px-4 py-2 bg-premium-orange/80 text-pitch-black rounded-lg text-sm font-bold hover:bg-premium-orange transition-colors disabled:opacity-50"
-                        >
-                          {uploadingField === 'imageHalf' ? '⏳' : '📁'} Upload Half
-                        </button>
+                        <div className="flex gap-2">
+                          <input
+                            ref={imageHalfInputRef}
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => {
+                              const file = e.target.files?.[0];
+                              if (file) handleFileUpload('imageHalf', file);
+                            }}
+                            className="hidden"
+                          />
+                          <button
+                            onClick={() => imageHalfInputRef.current?.click()}
+                            disabled={uploadingField === 'imageHalf'}
+                            className="flex-1 px-4 py-2 bg-premium-orange/80 text-pitch-black rounded-lg text-sm font-bold hover:bg-premium-orange transition-colors disabled:opacity-50"
+                          >
+                            {uploadingField === 'imageHalf' ? '⏳' : '📁'} Upload
+                          </button>
+                          <button
+                            onClick={() => openMediaLibrary('imageHalf')}
+                            className="flex-1 px-4 py-2 bg-golden-glow/80 text-pitch-black rounded-lg text-sm font-bold hover:bg-golden-glow transition-colors"
+                          >
+                            📚 Library
+                          </button>
+                        </div>
                         {editingItem.imageHalf && (
                           <div className="h-20 bg-charcoal rounded-lg overflow-hidden">
                             <img src={editingItem.imageHalf} alt="Half plate" className="w-full h-full object-cover" />
@@ -591,23 +620,31 @@ export default function MenuManagementPage() {
                           className="w-full px-3 py-2 bg-deep-space border border-charcoal rounded-lg text-foreground text-sm focus:outline-none focus:border-golden-glow transition-colors"
                           placeholder="URL for full plate"
                         />
-                        <input
-                          ref={imageFullInputRef}
-                          type="file"
-                          accept="image/*"
-                          onChange={(e) => {
-                            const file = e.target.files?.[0];
-                            if (file) handleFileUpload('imageFull', file);
-                          }}
-                          className="hidden"
-                        />
-                        <button
-                          onClick={() => imageFullInputRef.current?.click()}
-                          disabled={uploadingField === 'imageFull'}
-                          className="w-full px-4 py-2 bg-premium-orange/80 text-pitch-black rounded-lg text-sm font-bold hover:bg-premium-orange transition-colors disabled:opacity-50"
-                        >
-                          {uploadingField === 'imageFull' ? '⏳' : '📁'} Upload Full
-                        </button>
+                        <div className="flex gap-2">
+                          <input
+                            ref={imageFullInputRef}
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => {
+                              const file = e.target.files?.[0];
+                              if (file) handleFileUpload('imageFull', file);
+                            }}
+                            className="hidden"
+                          />
+                          <button
+                            onClick={() => imageFullInputRef.current?.click()}
+                            disabled={uploadingField === 'imageFull'}
+                            className="flex-1 px-4 py-2 bg-premium-orange/80 text-pitch-black rounded-lg text-sm font-bold hover:bg-premium-orange transition-colors disabled:opacity-50"
+                          >
+                            {uploadingField === 'imageFull' ? '⏳' : '📁'} Upload
+                          </button>
+                          <button
+                            onClick={() => openMediaLibrary('imageFull')}
+                            className="flex-1 px-4 py-2 bg-golden-glow/80 text-pitch-black rounded-lg text-sm font-bold hover:bg-golden-glow transition-colors"
+                          >
+                            📚 Library
+                          </button>
+                        </div>
                         {editingItem.imageFull && (
                           <div className="h-20 bg-charcoal rounded-lg overflow-hidden">
                             <img src={editingItem.imageFull} alt="Full plate" className="w-full h-full object-cover" />
@@ -767,6 +804,14 @@ export default function MenuManagementPage() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Media Library Picker */}
+      <MediaLibraryPicker
+        isOpen={mediaLibraryOpen}
+        onClose={() => setMediaLibraryOpen(false)}
+        onSelect={handleMediaSelect}
+        fileType="image"
+      />
     </div>
   );
 }

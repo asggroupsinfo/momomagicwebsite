@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { MediaLibraryPicker } from '@/components/cms/MediaLibraryPicker';
 
 interface LogoSettings {
   headerLogo: string;
@@ -50,6 +51,8 @@ export default function LogoManagementPage() {
   const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState('');
   const [uploadingField, setUploadingField] = useState<string | null>(null);
+  const [mediaLibraryOpen, setMediaLibraryOpen] = useState(false);
+  const [mediaLibraryField, setMediaLibraryField] = useState<keyof LogoSettings>('headerLogo');
   const fileInputRefs = {
     headerLogo: useRef<HTMLInputElement>(null),
     footerLogo: useRef<HTMLInputElement>(null),
@@ -132,6 +135,17 @@ export default function LogoManagementPage() {
     if (e.target.files && e.target.files[0]) {
       handleFileUpload(field, e.target.files[0]);
     }
+  };
+
+  const openMediaLibrary = (field: keyof LogoSettings) => {
+    setMediaLibraryField(field);
+    setMediaLibraryOpen(true);
+  };
+
+  const handleMediaSelect = (url: string) => {
+    setLogos({ ...logos, [mediaLibraryField]: url });
+    setSaveMessage(`✅ ${mediaLibraryField} selected from library!`);
+    setTimeout(() => setSaveMessage(''), 3000);
   };
 
   if (isLoading) {
@@ -249,7 +263,15 @@ export default function LogoManagementPage() {
                 disabled={uploadingField === 'headerLogo'}
                 className="flex-1"
               >
-                {uploadingField === 'headerLogo' ? '⏳ Uploading...' : '📤 Upload New Logo'}
+                {uploadingField === 'headerLogo' ? '⏳ Uploading...' : '📤 Upload'}
+              </Button>
+              <Button
+                variant="outline"
+                size="md"
+                onClick={() => openMediaLibrary('headerLogo')}
+                className="flex-1 bg-golden-glow/10 border-golden-glow text-golden-glow hover:bg-golden-glow hover:text-pitch-black"
+              >
+                📚 Library
               </Button>
               <input
                 ref={fileInputRefs.headerLogo}
@@ -324,7 +346,15 @@ export default function LogoManagementPage() {
                 disabled={uploadingField === 'footerLogo'}
                 className="flex-1"
               >
-                {uploadingField === 'footerLogo' ? '⏳ Uploading...' : '📤 Upload New Logo'}
+                {uploadingField === 'footerLogo' ? '⏳ Uploading...' : '📤 Upload'}
+              </Button>
+              <Button
+                variant="outline"
+                size="md"
+                onClick={() => openMediaLibrary('footerLogo')}
+                className="flex-1 bg-golden-glow/10 border-golden-glow text-golden-glow hover:bg-golden-glow hover:text-pitch-black"
+              >
+                📚 Library
               </Button>
               <input
                 ref={fileInputRefs.footerLogo}
@@ -399,7 +429,15 @@ export default function LogoManagementPage() {
                 disabled={uploadingField === 'favicon'}
                 className="flex-1"
               >
-                {uploadingField === 'favicon' ? '⏳ Uploading...' : '📤 Upload New Favicon'}
+                {uploadingField === 'favicon' ? '⏳ Uploading...' : '📤 Upload'}
+              </Button>
+              <Button
+                variant="outline"
+                size="md"
+                onClick={() => openMediaLibrary('favicon')}
+                className="flex-1 bg-golden-glow/10 border-golden-glow text-golden-glow hover:bg-golden-glow hover:text-pitch-black"
+              >
+                📚 Library
               </Button>
               <input
                 ref={fileInputRefs.favicon}
@@ -474,7 +512,15 @@ export default function LogoManagementPage() {
                 disabled={uploadingField === 'appleTouchIcon'}
                 className="flex-1"
               >
-                {uploadingField === 'appleTouchIcon' ? '⏳ Uploading...' : '📤 Upload New Icon'}
+                {uploadingField === 'appleTouchIcon' ? '⏳ Uploading...' : '📤 Upload'}
+              </Button>
+              <Button
+                variant="outline"
+                size="md"
+                onClick={() => openMediaLibrary('appleTouchIcon')}
+                className="flex-1 bg-golden-glow/10 border-golden-glow text-golden-glow hover:bg-golden-glow hover:text-pitch-black"
+              >
+                📚 Library
               </Button>
               <input
                 ref={fileInputRefs.appleTouchIcon}
@@ -503,6 +549,14 @@ export default function LogoManagementPage() {
           </ul>
         </Card>
       </motion.div>
+
+      {/* Media Library Picker */}
+      <MediaLibraryPicker
+        isOpen={mediaLibraryOpen}
+        onClose={() => setMediaLibraryOpen(false)}
+        onSelect={handleMediaSelect}
+        fileType="image"
+      />
     </div>
   );
 }

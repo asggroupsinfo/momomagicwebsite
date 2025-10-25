@@ -2,9 +2,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 
 export const Hero: React.FC = () => {
+  const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -27,30 +29,40 @@ export const Hero: React.FC = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Video Background with Mobile Optimization */}
       <div className="absolute inset-0 z-0">
-        {/* Enhanced Gradient Overlay with Premium Orange Particles */}
+        {/* Enhanced Gradient Overlay with Gold Sparkle Particles */}
         <div className="absolute inset-0 bg-gradient-to-b from-pitch-black/70 via-pitch-black/50 to-pitch-black z-10">
-          {/* Animated Premium Orange Particles */}
+          {/* Animated Gold Sparkle Particles */}
           <div className="absolute inset-0 overflow-hidden">
             {[...Array(20)].map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute w-1 h-1 bg-premium-orange rounded-full"
+                className="absolute text-2xl"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  filter: 'drop-shadow(0 0 8px rgba(255, 215, 0, 0.8))',
+                }}
                 initial={{
-                  x: Math.random() * 100 + '%',
-                  y: Math.random() * 100 + '%',
+                  y: '100%',
                   opacity: 0,
+                  scale: 0,
+                  rotate: 0,
                 }}
                 animate={{
-                  y: [Math.random() * 100 + '%', (Math.random() * 100 - 20) + '%'],
-                  opacity: [0, 0.6, 0],
+                  y: [100, -20],
+                  x: [0, Math.random() * 100 - 50],
+                  opacity: [0, 1, 0],
+                  scale: [0, 1, 0],
+                  rotate: [0, 360],
                 }}
                 transition={{
-                  duration: 3 + Math.random() * 4,
+                  duration: 3 + Math.random() * 2,
                   repeat: Infinity,
                   delay: Math.random() * 5,
-                  ease: 'easeInOut',
+                  ease: 'easeOut',
                 }}
-              />
+              >
+                ✨
+              </motion.div>
             ))}
           </div>
         </div>
@@ -167,7 +179,7 @@ export const Hero: React.FC = () => {
               variant="primary" 
               size="md" 
               className="relative overflow-hidden group"
-              onClick={() => scrollToSection('menu')}
+              onClick={() => router.push('/order/menu')}
             >
               <span className="relative z-10">Order Now</span>
               <motion.div
