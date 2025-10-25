@@ -15,6 +15,14 @@ export default function OrderMenuPage() {
 
   useEffect(() => {
     checkAuth();
+    const savedCart = sessionStorage.getItem('cart');
+    if (savedCart) {
+      try {
+        setCart(JSON.parse(savedCart));
+      } catch (error) {
+        console.error('Failed to load cart:', error);
+      }
+    }
   }, []);
 
   const checkAuth = async () => {
@@ -58,7 +66,9 @@ export default function OrderMenuPage() {
       subtotal: quantity === 5 ? item.price5pc : item.price10pc,
     };
 
-    setCart([...cart, cartItem]);
+    const updatedCart = [...cart, cartItem];
+    setCart(updatedCart);
+    sessionStorage.setItem('cart', JSON.stringify(updatedCart));
     alert(`Added ${item.name} (${quantity}pc) to cart!`);
   };
 
