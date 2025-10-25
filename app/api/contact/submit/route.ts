@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sql } from '@vercel/postgres';
+import { query } from '@/lib/db';
 
 interface ContactSubmission {
   name: string;
@@ -87,20 +87,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const result = await sql`
-      INSERT INTO contact_submissions (name, email, phone, subject, message, recaptcha_score)
-      VALUES (${name}, ${email}, ${phone}, ${subject}, ${message}, ${recaptchaResult.score})
-      RETURNING id, created_at
-    `;
-
-    const submission = result.rows[0];
+    const result = await query<any>(
+      `INSERT INTO contact_submissions (name, email, phone, subject, message, recaptcha_score)
+       VALUES (?, ?, ?, ?, ?, ?)`,
+      [name, email, phone, subject, message, recaptchaResult.score]
+    );
 
     return NextResponse.json(
       { 
         success: true, 
         message: 'Contact form submitted successfully',
-        submissionId: submission.id,
-        timestamp: submission.created_at
+        submissionId: (result as any).insertId,
+        timestamp: new Date().toISOString()
       },
       { status: 200 }
     );

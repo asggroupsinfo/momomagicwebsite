@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { paymentConfig } from '@/data/orderData';
-
-const paymentDatabase = new Map<string, any>();
+import { query, queryOne, update } from '@/lib/db';
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,20 +14,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const paymentRecord = {
-      transactionId,
-      orderId,
-      userId,
-      phone,
-      amount,
-      status: 'pending',
-      merchantId: paymentConfig.merchantId,
-      keyIndex: paymentConfig.keyIndex,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-
-    paymentDatabase.set(transactionId, paymentRecord);
+    await query(
+      `INSERT INTO payments (transaction_id, order_id, user_id, phone, amount, status, merchant_id, key_index) 
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [transactionId, orderId, userId, phone, amount, 'pending', paymentConfig.merchantId, paymentConfig.keyIndex]
+    );
 
     
     const mockPaymentUrl = `/api/order/payment/simulate?transactionId=${transactionId}`;
@@ -60,7 +50,10 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const payment = paymentDatabase.get(transactionId);
+    const payment = await queryOne<any>(
+      'SELECT * FROM payments WHERE transaction_id = ?',
+      [transactionId]
+    );
 
     if (!payment) {
       return NextResponse.json(
@@ -94,7 +87,10 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    const payment = paymentDatabase.get(transactionId);
+    const payment = await queryOne<any>(
+      'SELECT * FROM payments WHERE transaction_id = ?',
+      [transactionId]
+    );
 
     if (!payment) {
       return NextResponse.json(
@@ -103,16 +99,22 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    payment.status = status;
-    payment.updatedAt = new Date().toISOString();
-    payment.phonepeResponse = phonepeResponse;
+    await update(
+      'UPDATE payments SET status = ?, phonepe_response = ? WHERE transaction_id = ?',
+      [status, JSON.stringify(phonepeResponse), transactionId]
+    );
 
-    paymentDatabase.set(transactionId, payment);
+    const updatedPayment = {
+      ...payment,
+      status,
+      phonepe_response: phonepeResponse,
+      updated_at: new Date().toISOString(),
+    };
 
     return NextResponse.json({
       success: true,
       message: 'Payment status updated',
-      payment,
+      payment: updatedPayment,
     });
   } catch (error) {
     console.error('Payment update error:', error);

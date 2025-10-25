@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
+import { query, queryOne, insert } from '@/lib/db';
 
 const otpStore = new Map<string, { otp: string; expiresAt: number }>();
-
-const userDatabase = new Map<string, any>();
 
 function generateOTP(): string {
   return Math.floor(100000 + Math.random() * 900000).toString();
@@ -54,20 +53,24 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      let user = userDatabase.get(phone);
+      let user = await queryOne<any>(
+        'SELECT * FROM users WHERE phone = ?',
+        [phone]
+      );
       const isNewUser = !user;
 
       if (!user) {
+        const userId = await insert(
+          'INSERT INTO users (phone, name, email) VALUES (?, ?, ?)',
+          [phone, name || 'User', '']
+        );
         user = {
-          id: `user-${Date.now()}`,
+          id: userId,
           phone,
           name: name || 'User',
           email: '',
-          createdAt: new Date().toISOString(),
-          loyaltyPoints: 0,
-          orderHistory: [],
+          created_at: new Date().toISOString(),
         };
-        userDatabase.set(phone, user);
       }
 
       otpStore.delete(phone);
@@ -119,7 +122,10 @@ export async function GET(request: NextRequest) {
     }
 
     const session = JSON.parse(Buffer.from(sessionToken, 'base64').toString());
-    const user = userDatabase.get(session.phone);
+    const user = await queryOne<any>(
+      'SELECT * FROM users WHERE phone = ?',
+      [session.phone]
+    );
 
     if (!user) {
       return NextResponse.json(
