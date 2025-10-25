@@ -79,6 +79,29 @@ export default function OrderCheckoutPage() {
 
       sessionStorage.setItem('currentOrder', JSON.stringify(orderData));
 
+      const orderResponse = await fetch('/api/order/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          orderId,
+          userId: user.id,
+          items: cart,
+          subtotal,
+          tax,
+          total,
+          paymentMethod,
+          transactionId: paymentMethod === 'phonepe' ? transactionId : undefined,
+        }),
+      });
+
+      const orderResult = await orderResponse.json();
+
+      if (!orderResult.success) {
+        alert('Failed to create order. Please try again.');
+        setProcessing(false);
+        return;
+      }
+
       if (paymentMethod === 'phonepe') {
         const paymentResponse = await fetch('/api/order/payment', {
           method: 'POST',
