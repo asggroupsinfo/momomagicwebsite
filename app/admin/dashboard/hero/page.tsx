@@ -5,6 +5,9 @@ import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { MediaLibraryPicker } from '@/components/cms/MediaLibraryPicker';
+import { ImageDropZone } from '@/components/cms/ImageDropZone';
+import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
+import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
 
 interface HeroContent {
   headline: string;

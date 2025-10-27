@@ -4,6 +4,9 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { ImageDropZone } from '@/components/cms/ImageDropZone';
+import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
+import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
 
 interface Testimonial {
   id: string;
@@ -14,6 +17,8 @@ interface Testimonial {
   image: string;
   date: string;
   featured: boolean;
+  state?: ContentState;
+  scheduledDate?: string;
 }
 
 export default function TestimonialsManagementPage() {
@@ -285,6 +290,31 @@ export default function TestimonialsManagementPage() {
               </h2>
 
               <div className="space-y-6">
+                {/* Content State Management */}
+                <ContentStateManager
+                  currentState={editingTestimonial.state || 'draft'}
+                  onStateChange={(newState) => setEditingTestimonial({ ...editingTestimonial, state: newState })}
+                  scheduledDate={editingTestimonial.scheduledDate}
+                  onScheduleDateChange={(date) => setEditingTestimonial({ ...editingTestimonial, scheduledDate: date })}
+                />
+
+                {/* Content Analytics */}
+                {editingTestimonial.id !== Date.now().toString() && (
+                  <ContentAnalytics
+                    contentId={editingTestimonial.id}
+                    contentType="testimonial"
+                    analytics={{
+                      views: Math.floor(Math.random() * 5000),
+                      engagement: Math.floor(Math.random() * 100),
+                      conversions: Math.floor(Math.random() * 200),
+                      performance: {
+                        loadTime: Math.random() * 2,
+                        seoScore: Math.floor(Math.random() * 100),
+                      },
+                    }}
+                  />
+                )}
+
                 {/* Customer Name */}
                 <div>
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
@@ -350,17 +380,29 @@ export default function TestimonialsManagementPage() {
                   />
                 </div>
 
-                {/* Customer Image URL */}
+                {/* Customer Image */}
                 <div>
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
-                    Customer Image URL (optional)
+                    Customer Photo (optional)
                   </label>
-                  <input
-                    type="text"
-                    value={editingTestimonial.image}
-                    onChange={(e) => setEditingTestimonial({ ...editingTestimonial, image: e.target.value })}
-                    className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
-                    placeholder="/images/customers/customer.jpg"
+                  <ImageDropZone
+                    currentImage={editingTestimonial.image}
+                    onImageChange={(url) => setEditingTestimonial({ ...editingTestimonial, image: url })}
+                    onUpload={async (file) => {
+                      const formData = new FormData();
+                      formData.append('file', file);
+                      const response = await fetch('/api/cms/media/upload', {
+                        method: 'POST',
+                        body: formData,
+                      });
+                      if (response.ok) {
+                        const data = await response.json();
+                        return data.url;
+                      }
+                      throw new Error('Upload failed');
+                    }}
+                    alt={editingTestimonial.name}
+                    height="150px"
                   />
                 </div>
 
