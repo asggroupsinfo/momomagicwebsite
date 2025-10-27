@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { ImageDropZone } from '@/components/cms/ImageDropZone';
 import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
 import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
+import { InlineEditor } from '@/components/cms/InlineEditor';
 
 interface Testimonial {
   id: string;
@@ -320,12 +321,12 @@ export default function TestimonialsManagementPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     Customer Name *
                   </label>
-                  <input
-                    type="text"
+                  <InlineEditor
                     value={editingTestimonial.name}
-                    onChange={(e) => setEditingTestimonial({ ...editingTestimonial, name: e.target.value })}
-                    className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                    onChange={(value) => setEditingTestimonial({ ...editingTestimonial, name: value })}
+                    onSave={() => handleSave(editingTestimonial)}
                     placeholder="e.g., Rohan Kumar"
+                    className="w-full"
                   />
                 </div>
 
@@ -334,12 +335,12 @@ export default function TestimonialsManagementPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     Role/Title
                   </label>
-                  <input
-                    type="text"
+                  <InlineEditor
                     value={editingTestimonial.role}
-                    onChange={(e) => setEditingTestimonial({ ...editingTestimonial, role: e.target.value })}
-                    className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                    onChange={(value) => setEditingTestimonial({ ...editingTestimonial, role: value })}
+                    onSave={() => handleSave(editingTestimonial)}
                     placeholder="e.g., Regular Customer, Food Blogger"
+                    className="w-full"
                   />
                 </div>
 
@@ -371,12 +372,13 @@ export default function TestimonialsManagementPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     Review Text *
                   </label>
-                  <textarea
+                  <InlineEditor
                     value={editingTestimonial.text}
-                    onChange={(e) => setEditingTestimonial({ ...editingTestimonial, text: e.target.value })}
-                    className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
-                    rows={5}
+                    onChange={(value) => setEditingTestimonial({ ...editingTestimonial, text: value })}
+                    onSave={() => handleSave(editingTestimonial)}
+                    multiline={true}
                     placeholder="Customer's review or testimonial..."
+                    className="w-full"
                   />
                 </div>
 
