@@ -68,7 +68,23 @@ export default function AboutCMSPage() {
       const response = await fetch('/api/cms/about');
       if (response.ok) {
         const data = await response.json();
-        setAboutData(data);
+        setAboutData({
+          ...data,
+          founderStory: data.founderStory || {
+            name: 'Dhruv Gupta',
+            title: 'Founder & Chef',
+            location: 'Sherghati, Bihar',
+            established: 'September 2023',
+            paragraphs: [],
+          },
+          philosophy: data.philosophy || {
+            title: 'Quantity bhi Mast, Taste bhi Zabardast',
+            subtitle: 'Our Philosophy',
+            description: '',
+          },
+          timeline: data.timeline || [],
+          qualityCommitments: data.qualityCommitments || [],
+        });
       }
     } catch (error) {
       console.error('Error loading about data:', error);
