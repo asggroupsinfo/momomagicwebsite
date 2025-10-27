@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
+import { ImageDropZone } from '@/components/cms/ImageDropZone';
 
 interface ContactData {
   address: {
@@ -27,6 +28,7 @@ interface ContactData {
     twitter: string;
   };
   mapEmbedUrl: string;
+  mapImage?: string;
 }
 
 export default function ContactCMSPage() {
@@ -385,22 +387,65 @@ export default function ContactCMSPage() {
           <Card>
             <h2 className="text-2xl font-bold text-golden-glow mb-6">🗺️ Google Maps Embed</h2>
             
-            <div>
-              <label className="block text-sm font-semibold text-foreground/80 mb-2">
-                Google Maps Embed URL
-              </label>
-              <textarea
-                value={contactData.mapEmbedUrl}
-                onChange={(e) => setContactData({ ...contactData, mapEmbedUrl: e.target.value })}
-                rows={4}
-                className="w-full px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
-                placeholder="https://www.google.com/maps/embed?pb=..."
-              />
-              <p className="mt-2 text-xs text-foreground/60">
-                Get the embed URL from Google Maps → Share → Embed a map
-              </p>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-foreground/80 mb-2">
+                  Google Maps Embed URL
+                </label>
+                <textarea
+                  value={contactData.mapEmbedUrl}
+                  onChange={(e) => setContactData({ ...contactData, mapEmbedUrl: e.target.value })}
+                  rows={4}
+                  className="w-full px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                  placeholder="https://www.google.com/maps/embed?pb=..."
+                />
+                <p className="mt-2 text-xs text-foreground/60">
+                  Get the embed URL from Google Maps → Share → Embed a map
+                </p>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-foreground/80 mb-2">
+                  Location Map Image
+                </label>
+                <ImageDropZone
+                  currentImage={contactData.mapImage || ''}
+                  onImageChange={(url) => setContactData({ ...contactData, mapImage: url })}
+                  onUpload={async (file) => {
+                    const formData = new FormData();
+                    formData.append('file', file);
+                    const response = await fetch('/api/cms/media/upload', {
+                      method: 'POST',
+                      body: formData,
+                    });
+                    if (response.ok) {
+                      const data = await response.json();
+                      return data.url;
+                    }
+                    throw new Error('Upload failed');
+                  }}
+                  alt="Location map"
+                  height="200px"
+                />
+              </div>
             </div>
           </Card>
+
+          {/* Content Analytics */}
+          <ContentAnalytics
+            contentId="contact-page"
+            contentType="page"
+            analytics={{
+              views: 8500,
+              engagement: 65,
+              conversions: 320,
+              lastUpdated: new Date().toISOString(),
+              performance: {
+                loadTime: 0.9,
+                seoScore: 88,
+              },
+            }}
+          />
         </div>
       </motion.div>
     </div>
