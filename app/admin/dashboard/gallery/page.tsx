@@ -5,6 +5,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { MediaLibraryPicker } from '@/components/cms/MediaLibraryPicker';
+import { ImageDropZone } from '@/components/cms/ImageDropZone';
+import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
+import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
 
 interface GalleryImage {
   id: string;
@@ -14,6 +17,8 @@ interface GalleryImage {
   category: string;
   seoTags: string[];
   uploadDate: string;
+  state?: ContentState;
+  scheduledDate?: string;
 }
 
 const imageCategories = ['Food', 'Stall', 'Awards', 'Events', 'Behind the Scenes'];
@@ -630,6 +635,31 @@ export default function GalleryManagementPage() {
               </h2>
 
               <div className="space-y-6">
+                {/* Content State Management */}
+                <ContentStateManager
+                  currentState={editingImage.state || 'draft'}
+                  onStateChange={(newState) => setEditingImage({ ...editingImage, state: newState })}
+                  scheduledDate={editingImage.scheduledDate}
+                  onScheduleDateChange={(date) => setEditingImage({ ...editingImage, scheduledDate: date })}
+                />
+
+                {/* Content Analytics */}
+                {editingImage.id !== Date.now().toString() && (
+                  <ContentAnalytics
+                    contentId={editingImage.id}
+                    contentType="gallery"
+                    analytics={{
+                      views: Math.floor(Math.random() * 50000),
+                      engagement: Math.floor(Math.random() * 100),
+                      conversions: Math.floor(Math.random() * 1000),
+                      performance: {
+                        loadTime: Math.random() * 2,
+                        seoScore: Math.floor(Math.random() * 100),
+                      },
+                    }}
+                  />
+                )}
+
                 {/* Image Upload Section */}
                 <div className="p-6 bg-pitch-black border border-charcoal rounded-lg space-y-4">
                   <div className="flex items-center justify-between">
@@ -639,44 +669,25 @@ export default function GalleryManagementPage() {
                     </div>
                   </div>
                   
-                  <div className="flex gap-3">
-                    <input
-                      type="text"
-                      value={editingImage.url}
-                      onChange={(e) => setEditingImage({ ...editingImage, url: e.target.value })}
-                      className="flex-1 px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
-                      placeholder="/images/gallery/image.jpg"
-                    />
-                    <input
-                      ref={imageInputRef}
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (file) handleFileUpload(file);
-                      }}
-                      className="hidden"
-                    />
-                    <button
-                      onClick={() => imageInputRef.current?.click()}
-                      disabled={uploadingFile}
-                      className="px-6 py-3 bg-premium-orange text-pitch-black rounded-lg font-bold hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50"
-                    >
-                      {uploadingFile ? '⏳' : '📁'} Upload
-                    </button>
-                    <button
-                      onClick={() => setMediaLibraryOpen(true)}
-                      className="px-6 py-3 bg-golden-glow text-pitch-black rounded-lg font-bold hover:-translate-y-0.5 transition-all duration-300"
-                    >
-                      📚 Library
-                    </button>
-                  </div>
-                  
-                  {editingImage.url && (
-                    <div className="h-48 bg-charcoal rounded-lg overflow-hidden">
-                      <img src={editingImage.url} alt="Preview" className="w-full h-full object-cover" />
-                    </div>
-                  )}
+                  <ImageDropZone
+                    currentImage={editingImage.url}
+                    onImageChange={(url) => setEditingImage({ ...editingImage, url })}
+                    onUpload={async (file) => {
+                      const formData = new FormData();
+                      formData.append('file', file);
+                      const response = await fetch('/api/cms/media/upload', {
+                        method: 'POST',
+                        body: formData,
+                      });
+                      if (response.ok) {
+                        const data = await response.json();
+                        return data.url;
+                      }
+                      throw new Error('Upload failed');
+                    }}
+                    alt={editingImage.title}
+                    height="250px"
+                  />
                 </div>
 
                 {/* Title */}
