@@ -364,6 +364,26 @@ export default function CateringManagementPage() {
                 </Button>
               </Card>
             )}
+
+            {/* Content Analytics */}
+            {packages.length > 0 && (
+              <div className="mt-8">
+                <ContentAnalytics
+                  contentId="catering-packages"
+                  contentType="page"
+                  analytics={{
+                    views: 6200,
+                    engagement: 72,
+                    conversions: 180,
+                    lastUpdated: new Date().toISOString(),
+                    performance: {
+                      loadTime: 1.1,
+                      seoScore: 85,
+                    },
+                  }}
+                />
+              </div>
+            )}
           </div>
         )}
 
@@ -563,6 +583,42 @@ export default function CateringManagementPage() {
                     className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
                     rows={3}
                     placeholder="Brief description of the package"
+                  />
+                </div>
+
+                {/* Package Image */}
+                <div>
+                  <label className="block text-sm font-semibold text-foreground/80 mb-2">
+                    Package Image
+                  </label>
+                  <ImageDropZone
+                    currentImage={editingPackage.image}
+                    onImageChange={(url) => setEditingPackage({ ...editingPackage, image: url })}
+                    onUpload={async (file) => {
+                      const formData = new FormData();
+                      formData.append('file', file);
+                      const response = await fetch('/api/cms/media/upload', {
+                        method: 'POST',
+                        body: formData,
+                      });
+                      if (response.ok) {
+                        const data = await response.json();
+                        return data.url;
+                      }
+                      throw new Error('Upload failed');
+                    }}
+                    alt={editingPackage.name}
+                    height="200px"
+                  />
+                </div>
+
+                {/* Content State Manager */}
+                <div>
+                  <ContentStateManager
+                    currentState={editingPackage.state || 'published'}
+                    onStateChange={(state) => setEditingPackage({ ...editingPackage, state })}
+                    scheduledDate={editingPackage.scheduledDate}
+                    onScheduleDateChange={(scheduledDate) => setEditingPackage({ ...editingPackage, scheduledDate })}
                   />
                 </div>
 
