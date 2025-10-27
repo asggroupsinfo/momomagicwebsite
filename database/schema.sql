@@ -47,11 +47,15 @@ CREATE TABLE IF NOT EXISTS menu_items (
   is_available BOOLEAN DEFAULT TRUE,
   stock_level INT DEFAULT 100,
   image_url VARCHAR(255) DEFAULT NULL,
+  state ENUM('draft', 'published', 'archived', 'scheduled') DEFAULT 'published',
+  scheduled_date TIMESTAMP NULL DEFAULT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   INDEX idx_category (category),
   INDEX idx_is_available (is_available),
-  INDEX idx_name (name)
+  INDEX idx_name (name),
+  INDEX idx_state (state),
+  INDEX idx_scheduled_date (scheduled_date)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS catering_inquiries (
@@ -113,9 +117,13 @@ CREATE TABLE IF NOT EXISTS cms_data (
   page VARCHAR(50) NOT NULL,
   section VARCHAR(50) NOT NULL,
   content JSON NOT NULL,
+  state ENUM('draft', 'published', 'archived', 'scheduled') DEFAULT 'published',
+  scheduled_date TIMESTAMP NULL DEFAULT NULL,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   UNIQUE KEY unique_page_section (page, section),
-  INDEX idx_page (page)
+  INDEX idx_page (page),
+  INDEX idx_state (state),
+  INDEX idx_scheduled_date (scheduled_date)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS contact_submissions (
