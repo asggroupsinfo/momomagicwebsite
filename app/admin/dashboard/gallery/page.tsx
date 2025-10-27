@@ -234,7 +234,7 @@ export default function GalleryManagementPage() {
   };
 
   const openEditModal = (image: GalleryImage) => {
-    setEditingImage({ ...image });
+    setEditingImage({ ...image, seoTags: image.seoTags || [] });
     setIsModalOpen(true);
   };
 
@@ -741,7 +741,7 @@ export default function GalleryManagementPage() {
                     SEO Tags (comma-separated)
                   </label>
                   <InlineEditor
-                    value={editingImage.seoTags.join(', ')}
+                    value={(editingImage.seoTags || []).join(', ')}
                     onChange={(value) => setEditingImage({ 
                       ...editingImage, 
                       seoTags: value.split(',').map(tag => tag.trim()).filter(tag => tag) 
