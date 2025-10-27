@@ -327,7 +327,7 @@ export default function CateringManagementPage() {
 
                       {/* Guest Range */}
                       <div className="text-xs text-foreground/60">
-                        Guests: {pkg.guestRange.min}-{pkg.guestRange.max} | Duration: {pkg.serviceDuration}
+                        Guests: {(pkg.guestRange?.min || 0)}-{(pkg.guestRange?.max || 0)} | Duration: {pkg.serviceDuration || 'N/A'}
                       </div>
 
                       {/* Actions */}
