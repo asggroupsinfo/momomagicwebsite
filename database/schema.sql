@@ -144,3 +144,14 @@ CREATE TABLE IF NOT EXISTS media_usage (
 
 CREATE INDEX IF NOT EXISTS idx_media_usage_media_id ON media_usage(media_id);
 CREATE INDEX IF NOT EXISTS idx_media_usage_page_url ON media_usage(page_url);
+
+CREATE TABLE IF NOT EXISTS design_settings (
+  id VARCHAR(50) PRIMARY KEY,
+  setting_type VARCHAR(50) NOT NULL,
+  setting_value LONGTEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_design_settings_type ON design_settings(setting_type);
+CREATE INDEX IF NOT EXISTS idx_design_settings_updated_at ON design_settings(updated_at DESC);

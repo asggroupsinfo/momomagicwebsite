@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { StructuredData } from "@/components/StructuredData";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { DesignSystemToggle } from "@/components/cms/DesignSystemToggle";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -111,6 +112,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <DesignSystemToggle />
       </body>
     </html>
   );

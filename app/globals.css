@@ -3,6 +3,29 @@
 :root {
   --background: #000000;
   --foreground: #ffffff;
+  
+  /* Design System Variables - Customizable via CMS */
+  --color-primary: #000000;
+  --color-secondary: #ffc241;
+  --color-accent: #ffd700;
+  --color-background: #0a0a0a;
+  --color-text: #ffffff;
+  
+  /* Typography Variables */
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --text-h1: 48px;
+  --text-h2: 32px;
+  --text-h3: 24px;
+  --text-body: 16px;
+  --font-weight-heading: 700;
+  --font-weight-body: 400;
+  --line-height: 1.5;
+  
+  /* Layout Variables */
+  --container-width: 1280px;
+  --section-spacing: 80px;
+  --grid-columns: 3;
 }
 
 @theme inline {
@@ -28,13 +51,41 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-body);
+  line-height: var(--line-height);
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-playfair), serif;
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-heading);
+  line-height: var(--line-height);
+  color: var(--color-primary);
+}
+
+h1 {
+  font-size: var(--text-h1);
+}
+
+h2 {
+  font-size: var(--text-h2);
+}
+
+h3 {
+  font-size: var(--text-h3);
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+}
+
+section {
+  padding-top: var(--section-spacing);
+  padding-bottom: var(--section-spacing);
 }
 
 @keyframes gradient-x {
