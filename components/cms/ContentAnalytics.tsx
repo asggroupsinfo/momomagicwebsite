@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 
@@ -22,16 +22,40 @@ interface ContentAnalyticsProps {
 export function ContentAnalytics({
   contentId,
   contentType,
-  analytics = {},
+  analytics: providedAnalytics = {},
 }: ContentAnalyticsProps) {
+  const [analytics, setAnalytics] = useState(providedAnalytics);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchAnalytics = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(
+          `/api/cms/content-analytics?contentId=${contentId}&contentType=${contentType}`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setAnalytics(data);
+        }
+      } catch (error) {
+        console.error('Error fetching analytics:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAnalytics();
+  }, [contentId, contentType]);
+
   const {
-    views = Math.floor(Math.random() * 1000) + 100,
-    engagement = Math.floor(Math.random() * 100),
-    conversions = Math.floor(Math.random() * 50),
+    views = 0,
+    engagement = 0,
+    conversions = 0,
     lastUpdated = new Date().toISOString(),
     performance = {
-      loadTime: Math.random() * 2 + 0.5,
-      seoScore: Math.floor(Math.random() * 30) + 70,
+      loadTime: 0,
+      seoScore: 0,
     },
   } = analytics;
 
