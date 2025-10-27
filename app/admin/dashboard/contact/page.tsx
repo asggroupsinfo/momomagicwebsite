@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
 import { ImageDropZone } from '@/components/cms/ImageDropZone';
+import { InlineEditor } from '@/components/cms/InlineEditor';
 
 interface ContactData {
   address: {
@@ -163,15 +164,15 @@ export default function ContactCMSPage() {
                 <label className="block text-sm font-semibold text-foreground/80 mb-2">
                   Address Line 1
                 </label>
-                <input
-                  type="text"
+                <InlineEditor
                   value={contactData.address.line1}
-                  onChange={(e) => setContactData({
+                  onChange={(value) => setContactData({
                     ...contactData,
-                    address: { ...contactData.address, line1: e.target.value }
+                    address: { ...contactData.address, line1: value }
                   })}
-                  className="w-full px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                  onSave={saveContactData}
                   placeholder="Naya Bazar, Near Post Office"
+                  className="w-full"
                 />
               </div>
 
@@ -179,15 +180,15 @@ export default function ContactCMSPage() {
                 <label className="block text-sm font-semibold text-foreground/80 mb-2">
                   Address Line 2 (Optional)
                 </label>
-                <input
-                  type="text"
+                <InlineEditor
                   value={contactData.address.line2}
-                  onChange={(e) => setContactData({
+                  onChange={(value) => setContactData({
                     ...contactData,
-                    address: { ...contactData.address, line2: e.target.value }
+                    address: { ...contactData.address, line2: value }
                   })}
-                  className="w-full px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                  onSave={saveContactData}
                   placeholder="Additional address details"
+                  className="w-full"
                 />
               </div>
 
@@ -196,14 +197,15 @@ export default function ContactCMSPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     City
                   </label>
-                  <input
-                    type="text"
+                  <InlineEditor
                     value={contactData.address.city}
-                    onChange={(e) => setContactData({
+                    onChange={(value) => setContactData({
                       ...contactData,
-                      address: { ...contactData.address, city: e.target.value }
+                      address: { ...contactData.address, city: value }
                     })}
-                    className="w-full px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                    onSave={saveContactData}
+                    placeholder="City"
+                    className="w-full"
                   />
                 </div>
 
@@ -211,14 +213,15 @@ export default function ContactCMSPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     State
                   </label>
-                  <input
-                    type="text"
+                  <InlineEditor
                     value={contactData.address.state}
-                    onChange={(e) => setContactData({
+                    onChange={(value) => setContactData({
                       ...contactData,
-                      address: { ...contactData.address, state: e.target.value }
+                      address: { ...contactData.address, state: value }
                     })}
-                    className="w-full px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                    onSave={saveContactData}
+                    placeholder="State"
+                    className="w-full"
                   />
                 </div>
 
@@ -226,14 +229,15 @@ export default function ContactCMSPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     Pincode
                   </label>
-                  <input
-                    type="text"
+                  <InlineEditor
                     value={contactData.address.pincode}
-                    onChange={(e) => setContactData({
+                    onChange={(value) => setContactData({
                       ...contactData,
-                      address: { ...contactData.address, pincode: e.target.value }
+                      address: { ...contactData.address, pincode: value }
                     })}
-                    className="w-full px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                    onSave={saveContactData}
+                    placeholder="Pincode"
+                    className="w-full"
                   />
                 </div>
               </div>
@@ -249,12 +253,12 @@ export default function ContactCMSPage() {
                 <label className="block text-sm font-semibold text-foreground/80 mb-2">
                   Phone Number
                 </label>
-                <input
-                  type="text"
+                <InlineEditor
                   value={contactData.phone}
-                  onChange={(e) => setContactData({ ...contactData, phone: e.target.value })}
-                  className="w-full px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                  onChange={(value) => setContactData({ ...contactData, phone: value })}
+                  onSave={saveContactData}
                   placeholder="+91 9955955191"
+                  className="w-full"
                 />
               </div>
 
@@ -262,12 +266,12 @@ export default function ContactCMSPage() {
                 <label className="block text-sm font-semibold text-foreground/80 mb-2">
                   Website
                 </label>
-                <input
-                  type="text"
+                <InlineEditor
                   value={contactData.website}
-                  onChange={(e) => setContactData({ ...contactData, website: e.target.value })}
-                  className="w-full px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                  onChange={(value) => setContactData({ ...contactData, website: value })}
+                  onSave={saveContactData}
                   placeholder="www.momomegics.com"
+                  className="w-full"
                 />
               </div>
             </div>
@@ -282,15 +286,15 @@ export default function ContactCMSPage() {
                 <label className="block text-sm font-semibold text-foreground/80 mb-2">
                   Weekdays
                 </label>
-                <input
-                  type="text"
+                <InlineEditor
                   value={contactData.businessHours.weekdays}
-                  onChange={(e) => setContactData({
+                  onChange={(value) => setContactData({
                     ...contactData,
-                    businessHours: { ...contactData.businessHours, weekdays: e.target.value }
+                    businessHours: { ...contactData.businessHours, weekdays: value }
                   })}
-                  className="w-full px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                  onSave={saveContactData}
                   placeholder="10:00 AM - 10:00 PM"
+                  className="w-full"
                 />
               </div>
 
@@ -298,15 +302,15 @@ export default function ContactCMSPage() {
                 <label className="block text-sm font-semibold text-foreground/80 mb-2">
                   Weekends
                 </label>
-                <input
-                  type="text"
+                <InlineEditor
                   value={contactData.businessHours.weekends}
-                  onChange={(e) => setContactData({
+                  onChange={(value) => setContactData({
                     ...contactData,
-                    businessHours: { ...contactData.businessHours, weekends: e.target.value }
+                    businessHours: { ...contactData.businessHours, weekends: value }
                   })}
-                  className="w-full px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                  onSave={saveContactData}
                   placeholder="10:00 AM - 10:00 PM"
+                  className="w-full"
                 />
               </div>
 
@@ -314,15 +318,15 @@ export default function ContactCMSPage() {
                 <label className="block text-sm font-semibold text-foreground/80 mb-2">
                   Note
                 </label>
-                <input
-                  type="text"
+                <InlineEditor
                   value={contactData.businessHours.note}
-                  onChange={(e) => setContactData({
+                  onChange={(value) => setContactData({
                     ...contactData,
-                    businessHours: { ...contactData.businessHours, note: e.target.value }
+                    businessHours: { ...contactData.businessHours, note: value }
                   })}
-                  className="w-full px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                  onSave={saveContactData}
                   placeholder="Open Every Day"
+                  className="w-full"
                 />
               </div>
             </div>
@@ -337,15 +341,15 @@ export default function ContactCMSPage() {
                 <label className="block text-sm font-semibold text-foreground/80 mb-2">
                   Facebook URL
                 </label>
-                <input
-                  type="text"
+                <InlineEditor
                   value={contactData.socialMedia.facebook}
-                  onChange={(e) => setContactData({
+                  onChange={(value) => setContactData({
                     ...contactData,
-                    socialMedia: { ...contactData.socialMedia, facebook: e.target.value }
+                    socialMedia: { ...contactData.socialMedia, facebook: value }
                   })}
-                  className="w-full px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                  onSave={saveContactData}
                   placeholder="https://facebook.com/momomagic"
+                  className="w-full"
                 />
               </div>
 
@@ -353,15 +357,15 @@ export default function ContactCMSPage() {
                 <label className="block text-sm font-semibold text-foreground/80 mb-2">
                   Instagram URL
                 </label>
-                <input
-                  type="text"
+                <InlineEditor
                   value={contactData.socialMedia.instagram}
-                  onChange={(e) => setContactData({
+                  onChange={(value) => setContactData({
                     ...contactData,
-                    socialMedia: { ...contactData.socialMedia, instagram: e.target.value }
+                    socialMedia: { ...contactData.socialMedia, instagram: value }
                   })}
-                  className="w-full px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                  onSave={saveContactData}
                   placeholder="https://instagram.com/momomagic"
+                  className="w-full"
                 />
               </div>
 
@@ -369,15 +373,15 @@ export default function ContactCMSPage() {
                 <label className="block text-sm font-semibold text-foreground/80 mb-2">
                   Twitter URL
                 </label>
-                <input
-                  type="text"
+                <InlineEditor
                   value={contactData.socialMedia.twitter}
-                  onChange={(e) => setContactData({
+                  onChange={(value) => setContactData({
                     ...contactData,
-                    socialMedia: { ...contactData.socialMedia, twitter: e.target.value }
+                    socialMedia: { ...contactData.socialMedia, twitter: value }
                   })}
-                  className="w-full px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                  onSave={saveContactData}
                   placeholder="https://twitter.com/momomagic"
+                  className="w-full"
                 />
               </div>
             </div>
@@ -392,12 +396,13 @@ export default function ContactCMSPage() {
                 <label className="block text-sm font-semibold text-foreground/80 mb-2">
                   Google Maps Embed URL
                 </label>
-                <textarea
+                <InlineEditor
                   value={contactData.mapEmbedUrl}
-                  onChange={(e) => setContactData({ ...contactData, mapEmbedUrl: e.target.value })}
-                  rows={4}
-                  className="w-full px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                  onChange={(value) => setContactData({ ...contactData, mapEmbedUrl: value })}
+                  onSave={saveContactData}
+                  multiline={true}
                   placeholder="https://www.google.com/maps/embed?pb=..."
+                  className="w-full"
                 />
                 <p className="mt-2 text-xs text-foreground/60">
                   Get the embed URL from Google Maps → Share → Embed a map
