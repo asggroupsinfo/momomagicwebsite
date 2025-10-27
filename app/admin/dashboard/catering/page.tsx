@@ -312,14 +312,14 @@ export default function CateringManagementPage() {
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-sm text-foreground/60">Base Price:</span>
                           <span className="text-lg font-bold text-golden-glow">
-                            ₹{pkg.basePrice.toLocaleString()}
+                            ₹{(pkg.basePrice || 0).toLocaleString()}
                           </span>
                         </div>
-                        {pkg.perGuestPrice > 0 && (
+                        {(pkg.perGuestPrice || 0) > 0 && (
                           <div className="flex items-center justify-between">
                             <span className="text-sm text-foreground/60">Per Guest:</span>
                             <span className="text-sm font-bold text-golden-glow">
-                              ₹{pkg.perGuestPrice}
+                              ₹{pkg.perGuestPrice || 0}
                             </span>
                           </div>
                         )}
