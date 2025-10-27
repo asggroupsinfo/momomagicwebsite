@@ -389,6 +389,24 @@ export default function CareerManagementPage() {
             <div className="text-gray-400">Hired</div>
           </div>
         </div>
+
+        {/* Content Analytics */}
+        <div className="mt-8">
+          <ContentAnalytics
+            contentId="careers-page"
+            contentType="page"
+            analytics={{
+              views: 4800,
+              engagement: 58,
+              conversions: 95,
+              lastUpdated: new Date().toISOString(),
+              performance: {
+                loadTime: 1.0,
+                seoScore: 82,
+              },
+            }}
+          />
+        </div>
       </div>
     </div>
   );
