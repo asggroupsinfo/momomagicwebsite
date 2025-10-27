@@ -68,7 +68,19 @@ export default function ContactCMSPage() {
       const response = await fetch('/api/cms/contact');
       if (response.ok) {
         const data = await response.json();
-        setContactData(data);
+        setContactData({
+          ...data,
+          businessHours: data.businessHours || {
+            weekdays: '10:00 AM - 10:00 PM',
+            weekends: '10:00 AM - 10:00 PM',
+            note: 'Open Every Day',
+          },
+          socialMedia: data.socialMedia || {
+            facebook: '',
+            instagram: '',
+            twitter: '',
+          },
+        });
       }
     } catch (error) {
       console.error('Error loading contact data:', error);
