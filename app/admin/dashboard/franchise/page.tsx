@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
 
 export default function FranchiseCMSPage() {
   const [activeTab, setActiveTab] = useState('settings');
@@ -345,6 +346,24 @@ export default function FranchiseCMSPage() {
           <p className="text-gray-600">Location management coming soon...</p>
         </div>
       )}
+
+      {/* Content Analytics */}
+      <div className="mt-8">
+        <ContentAnalytics
+          contentId="franchise-page"
+          contentType="page"
+          analytics={{
+            views: 5400,
+            engagement: 68,
+            conversions: 145,
+            lastUpdated: new Date().toISOString(),
+            performance: {
+              loadTime: 1.1,
+              seoScore: 84,
+            },
+          }}
+        />
+      </div>
     </div>
   );
 }
