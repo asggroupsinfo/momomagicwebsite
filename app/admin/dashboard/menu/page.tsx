@@ -8,6 +8,7 @@ import { MediaLibraryPicker } from '@/components/cms/MediaLibraryPicker';
 import { ImageDropZone } from '@/components/cms/ImageDropZone';
 import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
 import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
+import { InlineEditor } from '@/components/cms/InlineEditor';
 
 interface MenuItem {
   id: string;
@@ -673,12 +674,12 @@ export default function MenuManagementPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     Item Name *
                   </label>
-                  <input
-                    type="text"
+                  <InlineEditor
                     value={editingItem.name}
-                    onChange={(e) => setEditingItem({ ...editingItem, name: e.target.value })}
-                    className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                    onChange={(value) => setEditingItem({ ...editingItem, name: value })}
+                    onSave={() => handleSave(editingItem)}
                     placeholder="e.g., Kurkure Veg Momos"
+                    className="w-full"
                   />
                 </div>
 
@@ -703,12 +704,13 @@ export default function MenuManagementPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     Description
                   </label>
-                  <textarea
+                  <InlineEditor
                     value={editingItem.description}
-                    onChange={(e) => setEditingItem({ ...editingItem, description: e.target.value })}
-                    className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
-                    rows={3}
+                    onChange={(value) => setEditingItem({ ...editingItem, description: value })}
+                    onSave={() => handleSave(editingItem)}
+                    multiline={true}
                     placeholder="Brief description of the item"
+                    className="w-full"
                   />
                 </div>
 
@@ -955,13 +957,12 @@ export default function MenuManagementPage() {
                   Add New Category
                 </h3>
                 <div className="flex gap-3">
-                  <input
-                    type="text"
+                  <InlineEditor
                     value={newCategory}
-                    onChange={(e) => setNewCategory(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && handleAddCategory()}
-                    className="flex-1 px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                    onChange={(value) => setNewCategory(value)}
+                    onSave={handleAddCategory}
                     placeholder="e.g., Dessert Momos"
+                    className="flex-1"
                   />
                   <Button
                     variant="primary"
