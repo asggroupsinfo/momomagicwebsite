@@ -8,6 +8,7 @@ import { MediaLibraryPicker } from '@/components/cms/MediaLibraryPicker';
 import { ImageDropZone } from '@/components/cms/ImageDropZone';
 import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
 import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
+import { InlineEditor } from '@/components/cms/InlineEditor';
 
 interface HeroContent {
   headline: string;
@@ -197,12 +198,12 @@ export default function HeroCMSPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     Main Headline
                   </label>
-                  <input
-                    type="text"
+                  <InlineEditor
                     value={content.headline}
-                    onChange={(e) => setContent({ ...content, headline: e.target.value })}
-                    className="w-full px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                    onChange={(value) => setContent({ ...content, headline: value })}
+                    onSave={handleSave}
                     placeholder="Enter main headline"
+                    className="w-full text-lg font-semibold"
                   />
                   <p className="text-xs text-foreground/60 mt-1">
                     Large, bold text at the top of the hero section
@@ -214,12 +215,13 @@ export default function HeroCMSPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     Subheadline
                   </label>
-                  <textarea
+                  <InlineEditor
                     value={content.subheadline}
-                    onChange={(e) => setContent({ ...content, subheadline: e.target.value })}
-                    className="w-full px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
-                    rows={3}
+                    onChange={(value) => setContent({ ...content, subheadline: value })}
+                    onSave={handleSave}
                     placeholder="Enter subheadline"
+                    multiline={true}
+                    className="w-full"
                   />
                   <p className="text-xs text-foreground/60 mt-1">
                     Supporting text below the main headline
@@ -231,12 +233,12 @@ export default function HeroCMSPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     Primary Button Text
                   </label>
-                  <input
-                    type="text"
+                  <InlineEditor
                     value={content.primaryCTA}
-                    onChange={(e) => setContent({ ...content, primaryCTA: e.target.value })}
-                    className="w-full px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                    onChange={(value) => setContent({ ...content, primaryCTA: value })}
+                    onSave={handleSave}
                     placeholder="e.g., Order Now"
+                    className="w-full"
                   />
                 </div>
 
@@ -245,12 +247,12 @@ export default function HeroCMSPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     Secondary Button Text
                   </label>
-                  <input
-                    type="text"
+                  <InlineEditor
                     value={content.secondaryCTA}
-                    onChange={(e) => setContent({ ...content, secondaryCTA: e.target.value })}
-                    className="w-full px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                    onChange={(value) => setContent({ ...content, secondaryCTA: value })}
+                    onSave={handleSave}
                     placeholder="e.g., Our Story"
+                    className="w-full"
                   />
                 </div>
 
@@ -388,13 +390,16 @@ export default function HeroCMSPage() {
                   </div>
                   <div className="space-y-3">
                     {content.badges.map((badge, index) => (
-                      <div key={index} className="flex gap-2">
-                        <input
-                          type="text"
-                          value={badge}
-                          onChange={(e) => updateBadge(index, e.target.value)}
-                          className="flex-1 px-4 py-2 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors text-sm"
-                        />
+                      <div key={index} className="flex gap-2 items-center">
+                        <div className="flex-1">
+                          <InlineEditor
+                            value={badge}
+                            onChange={(value) => updateBadge(index, value)}
+                            onSave={handleSave}
+                            placeholder="Enter badge text"
+                            className="w-full text-sm"
+                          />
+                        </div>
                         <button
                           onClick={() => removeBadge(index)}
                           className="px-3 py-2 bg-warm-orange/20 text-warm-orange rounded-lg hover:bg-warm-orange/30 transition-colors"
