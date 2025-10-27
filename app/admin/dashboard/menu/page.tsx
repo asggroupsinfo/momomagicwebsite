@@ -517,10 +517,10 @@ export default function MenuManagementPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
+              onClick={() => bulkActionMode && toggleItemSelection(item.id)}
+              className={bulkActionMode ? 'cursor-pointer' : ''}
             >
-              <Card className={`relative overflow-hidden ${bulkActionMode ? 'cursor-pointer' : ''} ${selectedItems.has(item.id) ? 'ring-2 ring-premium-orange' : ''}`}
-                onClick={() => bulkActionMode && toggleItemSelection(item.id)}
-              >
+              <Card className={`relative overflow-hidden ${selectedItems.has(item.id) ? 'ring-2 ring-premium-orange' : ''}`}>
                 {/* Bulk Selection Checkbox */}
                 {bulkActionMode && (
                   <div className="absolute top-3 left-3 z-10">
