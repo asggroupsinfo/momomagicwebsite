@@ -28,6 +28,8 @@ interface CateringPackage {
   isFeatured: boolean;
   image: string;
   displayOrder: number;
+  state?: ContentState;
+  scheduledDate?: string;
 }
 
 interface CateringBooking {
