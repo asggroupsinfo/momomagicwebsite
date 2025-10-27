@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { ImageDropZone } from '@/components/cms/ImageDropZone';
 import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
 import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
+import { InlineEditor } from '@/components/cms/InlineEditor';
 
 interface CateringPackage {
   id: string;
@@ -507,12 +508,12 @@ export default function CateringManagementPage() {
                     <label className="block text-sm font-semibold text-foreground/80 mb-2">
                       Package Name *
                     </label>
-                    <input
-                      type="text"
+                    <InlineEditor
                       value={editingPackage.name}
-                      onChange={(e) => setEditingPackage({ ...editingPackage, name: e.target.value })}
-                      className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                      onChange={(value) => setEditingPackage({ ...editingPackage, name: value })}
+                      onSave={() => handleSavePackage(editingPackage)}
                       placeholder="e.g., Premium Wedding Package"
+                      className="w-full"
                     />
                   </div>
                   <div>
@@ -562,12 +563,12 @@ export default function CateringManagementPage() {
                     <label className="block text-sm font-semibold text-foreground/80 mb-2">
                       Badge Text
                     </label>
-                    <input
-                      type="text"
+                    <InlineEditor
                       value={editingPackage.badge}
-                      onChange={(e) => setEditingPackage({ ...editingPackage, badge: e.target.value })}
-                      className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                      onChange={(value) => setEditingPackage({ ...editingPackage, badge: value })}
+                      onSave={() => handleSavePackage(editingPackage)}
                       placeholder="Most Popular"
+                      className="w-full"
                     />
                   </div>
                 </div>
@@ -577,12 +578,13 @@ export default function CateringManagementPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     Description
                   </label>
-                  <textarea
+                  <InlineEditor
                     value={editingPackage.description}
-                    onChange={(e) => setEditingPackage({ ...editingPackage, description: e.target.value })}
-                    className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
-                    rows={3}
+                    onChange={(value) => setEditingPackage({ ...editingPackage, description: value })}
+                    onSave={() => handleSavePackage(editingPackage)}
+                    multiline={true}
                     placeholder="Brief description of the package"
+                    className="w-full"
                   />
                 </div>
 
