@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
+import { ImageDropZone } from '@/components/cms/ImageDropZone';
 
 interface TimelineItem {
   date: string;
@@ -513,6 +515,24 @@ export default function AboutCMSPage() {
             </div>
           </Card>
         )}
+
+        {/* Content Analytics */}
+        <div className="mt-8">
+          <ContentAnalytics
+            contentId="about-page"
+            contentType="page"
+            analytics={{
+              views: 9800,
+              engagement: 82,
+              conversions: 280,
+              lastUpdated: new Date().toISOString(),
+              performance: {
+                loadTime: 1.3,
+                seoScore: 90,
+              },
+            }}
+          />
+        </div>
       </motion.div>
     </div>
   );
