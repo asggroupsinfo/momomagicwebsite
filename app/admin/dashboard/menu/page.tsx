@@ -48,6 +48,7 @@ const spiceLevels = ['Mild', 'Medium', 'Hot', 'Extra Magic'];
 
 export default function MenuManagementPage() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+  const [filteredItems, setFilteredItems] = useState<MenuItem[]>([]);
   const [categories, setCategories] = useState<string[]>(defaultCategories);
   const [isLoading, setIsLoading] = useState(true);
   const [editingItem, setEditingItem] = useState<MenuItem | null>(null);
@@ -59,6 +60,14 @@ export default function MenuManagementPage() {
   const [mediaLibraryOpen, setMediaLibraryOpen] = useState(false);
   const [mediaLibraryField, setMediaLibraryField] = useState<'image' | 'imageHalf' | 'imageFull'>('image');
   
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedSpiceLevel, setSelectedSpiceLevel] = useState<string>('all');
+  const [showPopularOnly, setShowPopularOnly] = useState(false);
+  const [showNewOnly, setShowNewOnly] = useState(false);
+  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
+  const [bulkActionMode, setBulkActionMode] = useState(false);
+  
   const imageInputRef = useRef<HTMLInputElement>(null);
   const imageHalfInputRef = useRef<HTMLInputElement>(null);
   const imageFullInputRef = useRef<HTMLInputElement>(null);
@@ -66,6 +75,10 @@ export default function MenuManagementPage() {
   useEffect(() => {
     loadMenuItems();
   }, []);
+
+  useEffect(() => {
+    filterItems();
+  }, [menuItems, searchQuery, selectedCategory, selectedSpiceLevel, showPopularOnly, showNewOnly]);
 
   const loadMenuItems = async () => {
     try {
@@ -80,6 +93,83 @@ export default function MenuManagementPage() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const filterItems = () => {
+    let filtered = [...menuItems];
+
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(item =>
+        item.name.toLowerCase().includes(query) ||
+        item.description.toLowerCase().includes(query) ||
+        item.category.toLowerCase().includes(query)
+      );
+    }
+
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter(item => item.category === selectedCategory);
+    }
+
+    if (selectedSpiceLevel !== 'all') {
+      filtered = filtered.filter(item => item.spiceLevel === selectedSpiceLevel);
+    }
+
+    if (showPopularOnly) {
+      filtered = filtered.filter(item => item.isPopular);
+    }
+
+    if (showNewOnly) {
+      filtered = filtered.filter(item => item.isNew);
+    }
+
+    setFilteredItems(filtered);
+  };
+
+  const toggleItemSelection = (id: string) => {
+    const newSelected = new Set(selectedItems);
+    if (newSelected.has(id)) {
+      newSelected.delete(id);
+    } else {
+      newSelected.add(id);
+    }
+    setSelectedItems(newSelected);
+  };
+
+  const selectAllItems = () => {
+    if (selectedItems.size === filteredItems.length) {
+      setSelectedItems(new Set());
+    } else {
+      setSelectedItems(new Set(filteredItems.map(item => item.id)));
+    }
+  };
+
+  const handleBulkDelete = async () => {
+    if (selectedItems.size === 0) return;
+    if (!confirm(`Delete ${selectedItems.size} selected items?`)) return;
+
+    try {
+      const deletePromises = Array.from(selectedItems).map(id =>
+        fetch(`/api/cms/menu?id=${id}`, { method: 'DELETE' })
+      );
+      await Promise.all(deletePromises);
+      setSaveMessage(`✅ ${selectedItems.size} items deleted successfully!`);
+      setSelectedItems(new Set());
+      setBulkActionMode(false);
+      loadMenuItems();
+    } catch (error) {
+      setSaveMessage('❌ Error deleting items');
+    } finally {
+      setTimeout(() => setSaveMessage(''), 3000);
+    }
+  };
+
+  const clearFilters = () => {
+    setSearchQuery('');
+    setSelectedCategory('all');
+    setSelectedSpiceLevel('all');
+    setShowPopularOnly(false);
+    setShowNewOnly(false);
   };
 
   const handleSave = async (item: MenuItem) => {
@@ -304,16 +394,146 @@ export default function MenuManagementPage() {
           </motion.div>
         )}
 
+        {/* Search and Filters */}
+        <Card className="mb-6 p-6">
+          <div className="space-y-4">
+            {/* Search Bar */}
+            <div className="flex gap-4">
+              <div className="flex-1">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="🔍 Search menu items by name, description, or category..."
+                  className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                />
+              </div>
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => setBulkActionMode(!bulkActionMode)}
+                className={bulkActionMode ? 'bg-premium-orange/20 border-premium-orange' : ''}
+              >
+                {bulkActionMode ? '✅ Bulk Mode' : '☑️ Bulk Select'}
+              </Button>
+            </div>
+
+            {/* Filters Row */}
+            <div className="flex flex-wrap gap-3">
+              {/* Category Filter */}
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="px-4 py-2 bg-pitch-black border border-charcoal rounded-lg text-foreground text-sm focus:outline-none focus:border-golden-glow"
+              >
+                <option value="all">All Categories</option>
+                {categories.map(cat => (
+                  <option key={cat} value={cat}>{cat}</option>
+                ))}
+              </select>
+
+              {/* Spice Level Filter */}
+              <select
+                value={selectedSpiceLevel}
+                onChange={(e) => setSelectedSpiceLevel(e.target.value)}
+                className="px-4 py-2 bg-pitch-black border border-charcoal rounded-lg text-foreground text-sm focus:outline-none focus:border-golden-glow"
+              >
+                <option value="all">All Spice Levels</option>
+                {spiceLevels.map(level => (
+                  <option key={level} value={level}>{level}</option>
+                ))}
+              </select>
+
+              {/* Popular Filter */}
+              <button
+                onClick={() => setShowPopularOnly(!showPopularOnly)}
+                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                  showPopularOnly
+                    ? 'bg-golden-glow text-pitch-black'
+                    : 'bg-pitch-black border border-charcoal text-foreground hover:border-golden-glow'
+                }`}
+              >
+                ⭐ Popular Only
+              </button>
+
+              {/* New Filter */}
+              <button
+                onClick={() => setShowNewOnly(!showNewOnly)}
+                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                  showNewOnly
+                    ? 'bg-warm-orange text-white'
+                    : 'bg-pitch-black border border-charcoal text-foreground hover:border-warm-orange'
+                }`}
+              >
+                🆕 New Only
+              </button>
+
+              {/* Clear Filters */}
+              {(searchQuery || selectedCategory !== 'all' || selectedSpiceLevel !== 'all' || showPopularOnly || showNewOnly) && (
+                <button
+                  onClick={clearFilters}
+                  className="px-4 py-2 bg-pitch-black border border-charcoal rounded-lg text-foreground text-sm hover:border-warm-orange transition-colors"
+                >
+                  ✕ Clear Filters
+                </button>
+              )}
+            </div>
+
+            {/* Results Summary */}
+            <div className="flex items-center justify-between text-sm">
+              <p className="text-foreground/70">
+                Showing {filteredItems.length} of {menuItems.length} items
+                {selectedItems.size > 0 && ` • ${selectedItems.size} selected`}
+              </p>
+              
+              {/* Bulk Actions */}
+              {bulkActionMode && (
+                <div className="flex gap-2">
+                  <button
+                    onClick={selectAllItems}
+                    className="px-3 py-1 bg-pitch-black border border-charcoal rounded text-xs hover:border-golden-glow transition-colors"
+                  >
+                    {selectedItems.size === filteredItems.length ? 'Deselect All' : 'Select All'}
+                  </button>
+                  {selectedItems.size > 0 && (
+                    <button
+                      onClick={handleBulkDelete}
+                      className="px-3 py-1 bg-warm-orange/20 border border-warm-orange text-warm-orange rounded text-xs hover:bg-warm-orange/30 transition-colors"
+                    >
+                      🗑️ Delete Selected ({selectedItems.size})
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </Card>
+
         {/* Menu Items Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {menuItems.map((item, index) => (
+          {filteredItems.map((item, index) => (
             <motion.div
               key={item.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <Card className="relative overflow-hidden">
+              <Card className={`relative overflow-hidden ${bulkActionMode ? 'cursor-pointer' : ''} ${selectedItems.has(item.id) ? 'ring-2 ring-premium-orange' : ''}`}
+                onClick={() => bulkActionMode && toggleItemSelection(item.id)}
+              >
+                {/* Bulk Selection Checkbox */}
+                {bulkActionMode && (
+                  <div className="absolute top-3 left-3 z-10">
+                    <input
+                      type="checkbox"
+                      checked={selectedItems.has(item.id)}
+                      onChange={() => toggleItemSelection(item.id)}
+                      className="w-5 h-5 rounded border-2 border-golden-glow bg-pitch-black checked:bg-premium-orange cursor-pointer"
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                  </div>
+                )}
+
                 {/* Badges */}
                 <div className="absolute top-3 right-3 flex gap-2 z-10">
                   {item.isPopular && (
@@ -389,6 +609,21 @@ export default function MenuManagementPage() {
             </motion.div>
           ))}
         </div>
+
+        {filteredItems.length === 0 && menuItems.length > 0 && (
+          <Card className="text-center py-12">
+            <div className="text-6xl mb-4">🔍</div>
+            <h3 className="text-2xl font-bold text-golden-glow mb-2">
+              No Items Match Your Filters
+            </h3>
+            <p className="text-foreground/70 mb-6">
+              Try adjusting your search or filters
+            </p>
+            <Button variant="outline" size="lg" onClick={clearFilters}>
+              ✕ Clear All Filters
+            </Button>
+          </Card>
+        )}
 
         {menuItems.length === 0 && (
           <Card className="text-center py-12">
