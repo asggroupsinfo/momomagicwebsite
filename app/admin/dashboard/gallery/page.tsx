@@ -8,6 +8,7 @@ import { MediaLibraryPicker } from '@/components/cms/MediaLibraryPicker';
 import { ImageDropZone } from '@/components/cms/ImageDropZone';
 import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
 import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
+import { InlineEditor } from '@/components/cms/InlineEditor';
 
 interface GalleryImage {
   id: string;
@@ -695,12 +696,12 @@ export default function GalleryManagementPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     Title *
                   </label>
-                  <input
-                    type="text"
+                  <InlineEditor
                     value={editingImage.title}
-                    onChange={(e) => setEditingImage({ ...editingImage, title: e.target.value })}
-                    className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                    onChange={(value) => setEditingImage({ ...editingImage, title: value })}
+                    onSave={() => handleSave(editingImage)}
                     placeholder="e.g., Kurkure Momos Close-up"
+                    className="w-full"
                   />
                 </div>
 
@@ -709,12 +710,12 @@ export default function GalleryManagementPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     Alt Text (SEO) *
                   </label>
-                  <input
-                    type="text"
+                  <InlineEditor
                     value={editingImage.alt}
-                    onChange={(e) => setEditingImage({ ...editingImage, alt: e.target.value })}
-                    className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                    onChange={(value) => setEditingImage({ ...editingImage, alt: value })}
+                    onSave={() => handleSave(editingImage)}
                     placeholder="Descriptive text for accessibility and SEO"
+                    className="w-full"
                   />
                 </div>
 
@@ -739,15 +740,15 @@ export default function GalleryManagementPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     SEO Tags (comma-separated)
                   </label>
-                  <input
-                    type="text"
+                  <InlineEditor
                     value={editingImage.seoTags.join(', ')}
-                    onChange={(e) => setEditingImage({ 
+                    onChange={(value) => setEditingImage({ 
                       ...editingImage, 
-                      seoTags: e.target.value.split(',').map(tag => tag.trim()).filter(tag => tag) 
+                      seoTags: value.split(',').map(tag => tag.trim()).filter(tag => tag) 
                     })}
-                    className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                    onSave={() => handleSave(editingImage)}
                     placeholder="momos, food, sherghati, kurkure"
+                    className="w-full"
                   />
                   <p className="text-xs text-foreground/50 mt-1">
                     Add keywords for better SEO and searchability
