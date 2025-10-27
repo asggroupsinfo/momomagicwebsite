@@ -203,3 +203,81 @@ CREATE INDEX idx_menu_items_category ON menu_items(category, is_available);
 CREATE INDEX idx_catering_status_date ON catering_inquiries(status, preferred_date);
 CREATE INDEX idx_franchise_status ON franchise_applications(status, created_at DESC);
 CREATE INDEX idx_career_status_position ON career_applications(status, position);
+
+CREATE TABLE IF NOT EXISTS page_templates (
+  id VARCHAR(50) PRIMARY KEY,
+  name VARCHAR(200) NOT NULL,
+  category VARCHAR(50) NOT NULL,
+  sections LONGTEXT NOT NULL,
+  thumbnail VARCHAR(500) DEFAULT NULL,
+  is_public BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX idx_category (category),
+  INDEX idx_created_at (created_at DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS builder_pages (
+  id VARCHAR(50) PRIMARY KEY,
+  name VARCHAR(200) NOT NULL,
+  slug VARCHAR(200) UNIQUE NOT NULL,
+  sections LONGTEXT NOT NULL,
+  status ENUM('draft', 'published', 'scheduled') DEFAULT 'draft',
+  meta_title VARCHAR(200) DEFAULT NULL,
+  meta_description TEXT DEFAULT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX idx_slug (slug),
+  INDEX idx_status (status),
+  INDEX idx_updated_at (updated_at DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS ab_tests (
+  id VARCHAR(50) PRIMARY KEY,
+  name VARCHAR(200) NOT NULL,
+  page_slug VARCHAR(200) NOT NULL,
+  traffic_split JSON NOT NULL,
+  status ENUM('draft', 'running', 'paused', 'completed') DEFAULT 'draft',
+  winner_variant_id VARCHAR(50) DEFAULT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX idx_page_slug (page_slug),
+  INDEX idx_status (status),
+  INDEX idx_created_at (created_at DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS ab_test_variants (
+  id VARCHAR(50) PRIMARY KEY,
+  test_id VARCHAR(50) NOT NULL,
+  name VARCHAR(200) NOT NULL,
+  sections LONGTEXT NOT NULL,
+  traffic_percentage INT NOT NULL,
+  views INT DEFAULT 0,
+  conversions INT DEFAULT 0,
+  FOREIGN KEY (test_id) REFERENCES ab_tests(id) ON DELETE CASCADE,
+  INDEX idx_test_id (test_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS ab_test_metrics (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  test_id VARCHAR(50) NOT NULL,
+  variant_id VARCHAR(50) NOT NULL,
+  metric_type VARCHAR(50) NOT NULL,
+  metric_value DECIMAL(10, 2) NOT NULL,
+  recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (test_id) REFERENCES ab_tests(id) ON DELETE CASCADE,
+  FOREIGN KEY (variant_id) REFERENCES ab_test_variants(id) ON DELETE CASCADE,
+  INDEX idx_test_id (test_id),
+  INDEX idx_variant_id (variant_id),
+  INDEX idx_recorded_at (recorded_at DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS saved_components (
+  id VARCHAR(50) PRIMARY KEY,
+  name VARCHAR(200) NOT NULL,
+  type VARCHAR(50) NOT NULL,
+  component_data LONGTEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_type (type),
+  INDEX idx_created_at (created_at DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
