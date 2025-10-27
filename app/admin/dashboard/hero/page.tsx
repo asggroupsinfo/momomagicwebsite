@@ -18,6 +18,8 @@ interface HeroContent {
   backgroundVideo: string;
   backgroundImage?: string;
   backgroundType: 'video' | 'image';
+  state?: ContentState;
+  scheduledDate?: string;
 }
 
 const IMAGE_SPECS = {
@@ -344,43 +346,25 @@ export default function HeroCMSPage() {
                       <label className="block text-sm font-semibold text-foreground/80 mb-2">
                         Background Image
                       </label>
-                      <div className="flex gap-3">
-                        <input
-                          type="text"
-                          value={content.backgroundImage || ''}
-                          onChange={(e) => setContent({ ...content, backgroundImage: e.target.value })}
-                          className="flex-1 px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
-                          placeholder="/images/hero-bg.jpg"
-                        />
-                        <input
-                          ref={imageInputRef}
-                          type="file"
-                          accept="image/*"
-                          onChange={(e) => {
-                            const file = e.target.files?.[0];
-                            if (file) handleFileUpload(file, 'image');
-                          }}
-                          className="hidden"
-                        />
-                        <button
-                          onClick={() => imageInputRef.current?.click()}
-                          disabled={uploadingFile}
-                          className="px-6 py-3 bg-premium-orange text-pitch-black rounded-lg font-bold hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50"
-                        >
-                          {uploadingFile ? '⏳' : '📁'} Upload
-                        </button>
-                        <button
-                          onClick={() => openMediaLibrary('image')}
-                          className="px-6 py-3 bg-golden-glow text-pitch-black rounded-lg font-bold hover:-translate-y-0.5 transition-all duration-300"
-                        >
-                          📚 Library
-                        </button>
-                      </div>
-                      {content.backgroundImage && (
-                        <div className="mt-3 h-32 bg-charcoal rounded-lg overflow-hidden">
-                          <img src={content.backgroundImage} alt="Background preview" className="w-full h-full object-cover" />
-                        </div>
-                      )}
+                      <ImageDropZone
+                        currentImage={content.backgroundImage || ''}
+                        onImageChange={(url) => setContent({ ...content, backgroundImage: url })}
+                        onUpload={async (file) => {
+                          const formData = new FormData();
+                          formData.append('file', file);
+                          const response = await fetch('/api/cms/media/upload', {
+                            method: 'POST',
+                            body: formData,
+                          });
+                          if (response.ok) {
+                            const data = await response.json();
+                            return data.url;
+                          }
+                          throw new Error('Upload failed');
+                        }}
+                        alt="Hero background"
+                        height="200px"
+                      />
                     </div>
                   )}
 
@@ -427,6 +411,32 @@ export default function HeroCMSPage() {
 
           {/* Preview Panel */}
           <div className="space-y-6">
+            {/* Content State Manager */}
+            <Card>
+              <ContentStateManager
+                currentState={content.state || 'published'}
+                onStateChange={(state) => setContent({ ...content, state })}
+                scheduledDate={content.scheduledDate}
+                onScheduleDateChange={(scheduledDate) => setContent({ ...content, scheduledDate })}
+              />
+            </Card>
+
+            {/* Content Analytics */}
+            <ContentAnalytics
+              contentId="hero-section"
+              contentType="page"
+              analytics={{
+                views: 12500,
+                engagement: 78,
+                conversions: 450,
+                lastUpdated: new Date().toISOString(),
+                performance: {
+                  loadTime: 1.2,
+                  seoScore: 92,
+                },
+              }}
+            />
+
             <Card>
               <h2 className="text-2xl font-bold text-golden-glow mb-6">
                 Live Preview
