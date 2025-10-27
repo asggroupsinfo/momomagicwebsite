@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { RichTextEditor } from '@/components/cms/RichTextEditor';
+import { InlineEditor } from '@/components/cms/InlineEditor';
 
 interface LegalPageContent {
   id: string;
@@ -165,38 +167,39 @@ export default function LegalPagesCMSPage() {
                 {/* Title */}
                 <div className="mb-4">
                   <label className="block text-gray-300 mb-2 font-bold">Page Title</label>
-                  <input
-                    type="text"
+                  <InlineEditor
                     value={formData.title}
-                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    className="w-full bg-pitch-black border border-premium-orange/20 rounded-lg px-4 py-3 text-white focus:border-premium-orange focus:outline-none"
+                    onChange={(value) => setFormData({ ...formData, title: value })}
+                    onSave={handleSave}
+                    placeholder="Page title"
+                    className="w-full"
                   />
                 </div>
 
                 {/* Summary */}
                 <div className="mb-4">
                   <label className="block text-gray-300 mb-2 font-bold">Summary</label>
-                  <input
-                    type="text"
+                  <InlineEditor
                     value={formData.summary}
-                    onChange={(e) => setFormData({ ...formData, summary: e.target.value })}
-                    className="w-full bg-pitch-black border border-premium-orange/20 rounded-lg px-4 py-3 text-white focus:border-premium-orange focus:outline-none"
+                    onChange={(value) => setFormData({ ...formData, summary: value })}
+                    onSave={handleSave}
                     placeholder="Brief summary of the policy"
+                    className="w-full"
                   />
                 </div>
 
                 {/* Content Editor */}
                 <div className="mb-6">
                   <label className="block text-gray-300 mb-2 font-bold">Content</label>
-                  <textarea
+                  <RichTextEditor
                     value={formData.content}
-                    onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                    rows={20}
-                    className="w-full bg-pitch-black border border-premium-orange/20 rounded-lg px-4 py-3 text-white focus:border-premium-orange focus:outline-none resize-none font-mono text-sm"
-                    placeholder="Enter policy content in markdown format..."
+                    onChange={(value) => setFormData({ ...formData, content: value })}
+                    placeholder="Enter policy content..."
+                    label=""
+                    height="500px"
                   />
                   <p className="text-gray-400 text-sm mt-2">
-                    💡 Tip: Use markdown formatting for better structure
+                    💡 Tip: Use the formatting toolbar for better structure
                   </p>
                 </div>
 
