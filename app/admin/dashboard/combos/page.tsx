@@ -25,6 +25,8 @@ interface ComboDeal {
   isActive: boolean;
   validFrom: string;
   validUntil: string;
+  state?: ContentState;
+  scheduledDate?: string;
 }
 
 export default function ComboDealsManagementPage() {
@@ -509,17 +511,29 @@ export default function ComboDealsManagementPage() {
                   </div>
                 </div>
 
-                {/* Image URL */}
+                {/* Combo Image */}
                 <div>
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
-                    Image URL
+                    Combo Image
                   </label>
-                  <input
-                    type="text"
-                    value={editingCombo.image}
-                    onChange={(e) => setEditingCombo({ ...editingCombo, image: e.target.value })}
-                    className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
-                    placeholder="/images/combos/combo.jpg"
+                  <ImageDropZone
+                    currentImage={editingCombo.image}
+                    onImageChange={(url) => setEditingCombo({ ...editingCombo, image: url })}
+                    onUpload={async (file) => {
+                      const formData = new FormData();
+                      formData.append('file', file);
+                      const response = await fetch('/api/cms/media/upload', {
+                        method: 'POST',
+                        body: formData,
+                      });
+                      if (response.ok) {
+                        const data = await response.json();
+                        return data.url;
+                      }
+                      throw new Error('Upload failed');
+                    }}
+                    alt={editingCombo.name}
+                    height="200px"
                   />
                 </div>
 
