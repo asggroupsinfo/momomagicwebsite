@@ -96,8 +96,12 @@ export default function CTAManagementPage() {
     }
   };
 
+  const saveCtaData = async () => {
+    await loadCTAData();
+  };
+
   if (isLoading) {
-    return (
+  return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <div className="text-6xl mb-4">🎯</div>
@@ -109,6 +113,11 @@ export default function CTAManagementPage() {
 
   return (
     <div>
+      <PublishControls
+        pageName="cta"
+        onSave={saveCtaData}
+      />
+      
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

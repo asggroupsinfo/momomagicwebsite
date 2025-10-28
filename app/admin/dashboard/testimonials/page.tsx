@@ -112,8 +112,12 @@ export default function TestimonialsManagementPage() {
     setIsModalOpen(true);
   };
 
+  const saveTestimonialsData = async () => {
+    await loadTestimonials();
+  };
+
   if (isLoading) {
-    return (
+  return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <div className="text-6xl mb-4">⭐</div>
@@ -125,6 +129,11 @@ export default function TestimonialsManagementPage() {
 
   return (
     <div>
+      <PublishControls
+        pageName="testimonials"
+        onSave={saveTestimonialsData}
+      />
+      
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

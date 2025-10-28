@@ -10,6 +10,7 @@ import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
 import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
 import { InlineEditor } from '@/components/cms/InlineEditor';
 import { VisualDesignPanel } from '@/components/cms/VisualDesignPanel';
+import { PublishControls } from '@/components/cms/PublishControls';
 
 interface MenuItem {
   id: string;
@@ -342,8 +343,12 @@ export default function MenuManagementPage() {
     }
   };
 
+  const saveMenuData = async () => {
+    await loadMenuItems();
+  };
+
   if (isLoading) {
-    return (
+  return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <div className="text-6xl mb-4">🥟</div>
@@ -355,6 +360,11 @@ export default function MenuManagementPage() {
 
   return (
     <div>
+      <PublishControls
+        pageName="menu"
+        onSave={saveMenuData}
+      />
+      
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
