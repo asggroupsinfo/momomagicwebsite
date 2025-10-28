@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
 import { VisualDesignPanel } from '@/components/cms/VisualDesignPanel';
+import { PublishControls } from '@/components/cms/PublishControls';
 
 export default function FranchiseCMSPage() {
   const [activeTab, setActiveTab] = useState('settings');
@@ -66,7 +67,7 @@ export default function FranchiseCMSPage() {
   };
 
   if (loading) {
-    return (
+  return (
       <div className="p-8">
         <div className="text-center">Loading franchise data...</div>
       </div>

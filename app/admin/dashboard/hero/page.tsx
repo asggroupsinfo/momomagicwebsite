@@ -10,6 +10,7 @@ import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
 import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
 import { InlineEditor } from '@/components/cms/InlineEditor';
 import { VisualDesignPanel } from '@/components/cms/VisualDesignPanel';
+import { PublishControls } from '@/components/cms/PublishControls';
 
 interface HeroContent {
   headline: string;
@@ -178,6 +179,11 @@ export default function HeroCMSPage() {
 
   return (
     <div>
+      <PublishControls
+        pageName="hero"
+        onSave={handleSave}
+      />
+      
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

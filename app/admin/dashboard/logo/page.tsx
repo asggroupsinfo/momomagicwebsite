@@ -148,8 +148,12 @@ export default function LogoManagementPage() {
     setTimeout(() => setSaveMessage(''), 3000);
   };
 
+  const saveLogoData = async () => {
+    await loadLogoData();
+  };
+
   if (isLoading) {
-    return (
+  return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <div className="text-6xl mb-4">🎨</div>
@@ -161,6 +165,11 @@ export default function LogoManagementPage() {
 
   return (
     <div>
+      <PublishControls
+        pageName="logo"
+        onSave={saveLogoData}
+      />
+      
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

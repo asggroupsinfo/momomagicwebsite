@@ -9,6 +9,7 @@ import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
 import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
 import { InlineEditor } from '@/components/cms/InlineEditor';
 import { VisualDesignPanel } from '@/components/cms/VisualDesignPanel';
+import { PublishControls } from '@/components/cms/PublishControls';
 
 interface ComboItem {
   itemName: string;
@@ -181,8 +182,17 @@ export default function ComboDealsManagementPage() {
     );
   }
 
+  const saveComboData = async () => {
+    await loadCombos();
+  };
+
   return (
     <div>
+      <PublishControls
+        pageName="combos"
+        onSave={saveComboData}
+      />
+      
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
