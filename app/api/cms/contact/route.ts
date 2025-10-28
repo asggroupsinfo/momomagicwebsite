@@ -1,17 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAuth } from '@/lib/auth/auth';
-import fs from 'fs/promises';
-import path from 'path';
-
-const CMS_DATA_DIR = path.join(process.cwd(), 'data', 'cms');
-const CONTACT_DATA_FILE = path.join(CMS_DATA_DIR, 'contact.json');
-
-async function ensureDataDir() {
-  try {
-    await fs.mkdir(CMS_DATA_DIR, { recursive: true });
-  } catch (error) {
-  }
-}
+import { query, queryOne } from '@/lib/db';
 
 const defaultContactData = {
   address: {
@@ -39,15 +28,26 @@ const defaultContactData = {
 export async function GET(request: NextRequest) {
   try {
     await requireAuth();
-    await ensureDataDir();
 
-    try {
-      const data = await fs.readFile(CONTACT_DATA_FILE, 'utf-8');
-      return NextResponse.json(JSON.parse(data));
-    } catch (error) {
-      return NextResponse.json(defaultContactData);
+    const result = await queryOne(
+      'SELECT content_data FROM cms_content WHERE page_name = ?',
+      ['contact']
+    );
+
+    if (result && result.content_data) {
+      const contentData = typeof result.content_data === 'string' 
+        ? JSON.parse(result.content_data) 
+        : result.content_data;
+      
+      return NextResponse.json({
+        ...defaultContactData,
+        ...contentData
+      });
     }
+
+    return NextResponse.json(defaultContactData);
   } catch (error) {
+    console.error('Error fetching contact content:', error);
     return NextResponse.json(
       { error: 'Unauthorized' },
       { status: 401 }
@@ -58,11 +58,25 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     await requireAuth();
-    await ensureDataDir();
 
     const body = await request.json();
 
-    await fs.writeFile(CONTACT_DATA_FILE, JSON.stringify(body, null, 2), 'utf-8');
+    const existingResult = await queryOne(
+      'SELECT id FROM cms_content WHERE page_name = ?',
+      ['contact']
+    );
+
+    if (existingResult) {
+      await query(
+        'UPDATE cms_content SET content_data = ?, updated_at = NOW() WHERE page_name = ?',
+        [JSON.stringify(body), 'contact']
+      );
+    } else {
+      await query(
+        'INSERT INTO cms_content (page_name, content_data, created_at, updated_at) VALUES (?, ?, NOW(), NOW())',
+        ['contact', JSON.stringify(body)]
+      );
+    }
 
     return NextResponse.json({
       success: true,
