@@ -25,8 +25,13 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    const sectionsConfig = result[0].sections_config;
+    const sections = typeof sectionsConfig === 'string' 
+      ? JSON.parse(sectionsConfig) 
+      : sectionsConfig;
+    
     return NextResponse.json({
-      sections: JSON.parse(result[0].sections_config),
+      sections,
     });
   } catch (error) {
     console.error('Error fetching page configuration:', error);
