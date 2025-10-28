@@ -8,6 +8,7 @@ import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
 import { ImageDropZone } from '@/components/cms/ImageDropZone';
 import { InlineEditor } from '@/components/cms/InlineEditor';
 import { VisualDesignPanel } from '@/components/cms/VisualDesignPanel';
+import { PublishControls } from '@/components/cms/PublishControls';
 
 interface ContactData {
   address: {
@@ -129,6 +130,11 @@ export default function ContactCMSPage() {
 
   return (
     <div>
+      <PublishControls
+        pageName="contact"
+        onSave={saveContactData}
+      />
+      
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
