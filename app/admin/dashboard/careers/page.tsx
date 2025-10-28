@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ImageDropZone } from '@/components/cms/ImageDropZone';
 import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
 import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
+import { VisualDesignPanel } from '@/components/cms/VisualDesignPanel';
 
 interface JobPosting {
   id: string;
@@ -408,6 +409,9 @@ export default function CareerManagementPage() {
           />
         </div>
       </div>
+
+      {/* Visual Design Controls */}
+      <VisualDesignPanel pageName="careers" onSave={() => {}} />
     </div>
   );
 }

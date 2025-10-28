@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { RichTextEditor } from '@/components/cms/RichTextEditor';
 import { InlineEditor } from '@/components/cms/InlineEditor';
+import { VisualDesignPanel } from '@/components/cms/VisualDesignPanel';
 
 interface LegalPageContent {
   id: string;
@@ -280,6 +281,9 @@ export default function LegalPagesCMSPage() {
           </div>
         </div>
       </div>
+
+      {/* Visual Design Controls */}
+      <VisualDesignPanel pageName="legal-pages" onSave={handleSave} />
     </div>
   );
 }

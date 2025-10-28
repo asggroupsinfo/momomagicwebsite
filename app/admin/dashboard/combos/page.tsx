@@ -8,6 +8,7 @@ import { ImageDropZone } from '@/components/cms/ImageDropZone';
 import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
 import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
 import { InlineEditor } from '@/components/cms/InlineEditor';
+import { VisualDesignPanel } from '@/components/cms/VisualDesignPanel';
 
 interface ComboItem {
   itemName: string;
@@ -347,6 +348,9 @@ export default function ComboDealsManagementPage() {
             </Button>
           </Card>
         )}
+
+        {/* Visual Design Controls */}
+        <VisualDesignPanel pageName="combos" onSave={() => loadCombos()} />
       </motion.div>
 
       {/* Edit/Add Modal */}

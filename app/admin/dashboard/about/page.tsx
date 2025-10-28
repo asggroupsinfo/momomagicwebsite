@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
 import { ImageDropZone } from '@/components/cms/ImageDropZone';
 import { InlineEditor } from '@/components/cms/InlineEditor';
+import { VisualDesignPanel } from '@/components/cms/VisualDesignPanel';
 
 interface TimelineItem {
   date: string;
@@ -560,6 +561,9 @@ export default function AboutCMSPage() {
             }}
           />
         </div>
+
+        {/* Visual Design Controls */}
+        <VisualDesignPanel pageName="about" onSave={saveAboutData} />
       </motion.div>
     </div>
   );

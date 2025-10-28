@@ -9,6 +9,7 @@ import { ImageDropZone } from '@/components/cms/ImageDropZone';
 import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
 import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
 import { InlineEditor } from '@/components/cms/InlineEditor';
+import { VisualDesignPanel } from '@/components/cms/VisualDesignPanel';
 
 interface HeroContent {
   headline: string;
@@ -505,6 +506,9 @@ export default function HeroCMSPage() {
             </Card>
           </div>
         </div>
+
+        {/* Visual Design Controls */}
+        <VisualDesignPanel pageName="homepage" onSave={handleSave} />
       </motion.div>
 
       {/* Media Library Picker */}

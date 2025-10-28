@@ -8,6 +8,7 @@ import { ImageDropZone } from '@/components/cms/ImageDropZone';
 import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
 import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
 import { InlineEditor } from '@/components/cms/InlineEditor';
+import { VisualDesignPanel } from '@/components/cms/VisualDesignPanel';
 
 interface CateringPackage {
   id: string;
@@ -478,6 +479,9 @@ export default function CateringManagementPage() {
             </Card>
           </div>
         )}
+
+        {/* Visual Design Controls */}
+        <VisualDesignPanel pageName="catering" onSave={() => loadCateringData()} />
       </motion.div>
 
       {/* Package Edit Modal */}

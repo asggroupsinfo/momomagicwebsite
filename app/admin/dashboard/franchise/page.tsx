@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
+import { VisualDesignPanel } from '@/components/cms/VisualDesignPanel';
 
 export default function FranchiseCMSPage() {
   const [activeTab, setActiveTab] = useState('settings');
@@ -364,6 +365,9 @@ export default function FranchiseCMSPage() {
           }}
         />
       </div>
+
+      {/* Visual Design Controls */}
+      <VisualDesignPanel pageName="franchise" onSave={() => fetchFranchiseData()} />
     </div>
   );
 }

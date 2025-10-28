@@ -9,6 +9,7 @@ import { ImageDropZone } from '@/components/cms/ImageDropZone';
 import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
 import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
 import { InlineEditor } from '@/components/cms/InlineEditor';
+import { VisualDesignPanel } from '@/components/cms/VisualDesignPanel';
 
 interface MenuItem {
   id: string;
@@ -645,6 +646,9 @@ export default function MenuManagementPage() {
             </Button>
           </Card>
         )}
+
+        {/* Visual Design Controls */}
+        <VisualDesignPanel pageName="menu" onSave={() => loadMenuItems()} />
       </motion.div>
 
       {/* Edit/Add Modal */}
