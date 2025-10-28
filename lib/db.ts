@@ -1,4 +1,5 @@
 import mysql from 'mysql2/promise';
+import { Pool as PgPool } from 'pg';
 
 function getDatabaseConfig() {
   const databaseUrl = process.env.DATABASE_URL;
@@ -7,11 +8,12 @@ function getDatabaseConfig() {
     try {
       const url = new URL(databaseUrl);
       return {
+        type: url.protocol.startsWith('postgres') ? 'postgres' : 'mysql',
         host: url.hostname,
-        port: parseInt(url.port || '3306'),
+        port: parseInt(url.port || (url.protocol.startsWith('postgres') ? '5432' : '3306')),
         user: url.username,
         password: url.password,
-        database: url.pathname.slice(1), // Remove leading slash
+        database: url.pathname.slice(1),
         waitForConnections: true,
         connectionLimit: 10,
         queueLimit: 0,
@@ -22,6 +24,7 @@ function getDatabaseConfig() {
   }
   
   return {
+    type: 'mysql',
     host: process.env.MYSQL_HOST || 'localhost',
     port: parseInt(process.env.MYSQL_PORT || '3306'),
     user: process.env.MYSQL_USER || 'root',
@@ -35,11 +38,22 @@ function getDatabaseConfig() {
 
 const dbConfig = getDatabaseConfig();
 
-let pool: mysql.Pool | null = null;
+let pool: mysql.Pool | PgPool | null = null;
 
-export function getPool(): mysql.Pool {
+export function getPool(): mysql.Pool | PgPool {
   if (!pool) {
-    pool = mysql.createPool(dbConfig);
+    if (dbConfig.type === 'postgres') {
+      pool = new PgPool({
+        host: dbConfig.host,
+        port: dbConfig.port,
+        user: dbConfig.user,
+        password: dbConfig.password,
+        database: dbConfig.database,
+        max: dbConfig.connectionLimit,
+      });
+    } else {
+      pool = mysql.createPool(dbConfig);
+    }
   }
   return pool;
 }
@@ -48,12 +62,24 @@ export async function query<T = any>(
   sql: string,
   params?: any[]
 ): Promise<T[]> {
-  const connection = await getPool().getConnection();
-  try {
-    const [rows] = await connection.execute(sql, params);
-    return rows as T[];
-  } finally {
-    connection.release();
+  if (dbConfig.type === 'postgres') {
+    const pgPool = getPool() as PgPool;
+    const client = await pgPool.connect();
+    try {
+      const result = await client.query(sql, params);
+      return result.rows as T[];
+    } finally {
+      client.release();
+    }
+  } else {
+    const mysqlPool = getPool() as mysql.Pool;
+    const connection = await mysqlPool.getConnection();
+    try {
+      const [rows] = await connection.execute(sql, params);
+      return rows as T[];
+    } finally {
+      connection.release();
+    }
   }
 }
 
@@ -69,12 +95,24 @@ export async function insert(
   sql: string,
   params?: any[]
 ): Promise<number> {
-  const connection = await getPool().getConnection();
-  try {
-    const [result] = await connection.execute(sql, params);
-    return (result as any).insertId;
-  } finally {
-    connection.release();
+  if (dbConfig.type === 'postgres') {
+    const pgPool = getPool() as PgPool;
+    const client = await pgPool.connect();
+    try {
+      const result = await client.query(sql, params);
+      return result.rows[0]?.id || 0;
+    } finally {
+      client.release();
+    }
+  } else {
+    const mysqlPool = getPool() as mysql.Pool;
+    const connection = await mysqlPool.getConnection();
+    try {
+      const [result] = await connection.execute(sql, params);
+      return (result as any).insertId;
+    } finally {
+      connection.release();
+    }
   }
 }
 
@@ -82,12 +120,24 @@ export async function update(
   sql: string,
   params?: any[]
 ): Promise<number> {
-  const connection = await getPool().getConnection();
-  try {
-    const [result] = await connection.execute(sql, params);
-    return (result as any).affectedRows;
-  } finally {
-    connection.release();
+  if (dbConfig.type === 'postgres') {
+    const pgPool = getPool() as PgPool;
+    const client = await pgPool.connect();
+    try {
+      const result = await client.query(sql, params);
+      return result.rowCount || 0;
+    } finally {
+      client.release();
+    }
+  } else {
+    const mysqlPool = getPool() as mysql.Pool;
+    const connection = await mysqlPool.getConnection();
+    try {
+      const [result] = await connection.execute(sql, params);
+      return (result as any).affectedRows;
+    } finally {
+      connection.release();
+    }
   }
 }
 
@@ -95,20 +145,40 @@ export async function deleteQuery(
   sql: string,
   params?: any[]
 ): Promise<number> {
-  const connection = await getPool().getConnection();
-  try {
-    const [result] = await connection.execute(sql, params);
-    return (result as any).affectedRows;
-  } finally {
-    connection.release();
+  if (dbConfig.type === 'postgres') {
+    const pgPool = getPool() as PgPool;
+    const client = await pgPool.connect();
+    try {
+      const result = await client.query(sql, params);
+      return result.rowCount || 0;
+    } finally {
+      client.release();
+    }
+  } else {
+    const mysqlPool = getPool() as mysql.Pool;
+    const connection = await mysqlPool.getConnection();
+    try {
+      const [result] = await connection.execute(sql, params);
+      return (result as any).affectedRows;
+    } finally {
+      connection.release();
+    }
   }
 }
 
 export async function testConnection(): Promise<boolean> {
   try {
-    const connection = await getPool().getConnection();
-    connection.release();
-    return true;
+    if (dbConfig.type === 'postgres') {
+      const pgPool = getPool() as PgPool;
+      const client = await pgPool.connect();
+      client.release();
+      return true;
+    } else {
+      const mysqlPool = getPool() as mysql.Pool;
+      const connection = await mysqlPool.getConnection();
+      connection.release();
+      return true;
+    }
   } catch (error) {
     console.error('Database connection failed:', error);
     return false;
@@ -117,7 +187,11 @@ export async function testConnection(): Promise<boolean> {
 
 export async function closePool(): Promise<void> {
   if (pool) {
-    await pool.end();
+    if (dbConfig.type === 'postgres') {
+      await (pool as PgPool).end();
+    } else {
+      await (pool as mysql.Pool).end();
+    }
     pool = null;
   }
 }
