@@ -5,14 +5,17 @@ let cachedConfig: any = null;
 
 function getDatabaseConfig() {
   if (cachedConfig) {
+    console.log(`Using cached config: ${cachedConfig.type} @ ${cachedConfig.host}:${cachedConfig.port}`);
     return cachedConfig;
   }
   
   const databaseUrl = process.env.DATABASE_URL;
+  console.log(`DATABASE_URL present: ${!!databaseUrl}, length: ${databaseUrl?.length || 0}`);
   
   if (databaseUrl) {
     try {
       const url = new URL(databaseUrl);
+      console.log(`Parsed DATABASE_URL: ${url.protocol} @ ${url.hostname}:${url.port || 'default'}`);
       cachedConfig = {
         type: url.protocol.startsWith('postgres') ? 'postgres' : 'mysql',
         host: url.hostname,
@@ -24,12 +27,14 @@ function getDatabaseConfig() {
         connectionLimit: 10,
         queueLimit: 0,
       };
+      console.log(`Created config: ${cachedConfig.type} @ ${cachedConfig.host}:${cachedConfig.port}`);
       return cachedConfig;
     } catch (error) {
       console.error('Failed to parse DATABASE_URL:', error);
     }
   }
   
+  console.log('No DATABASE_URL found, using MySQL defaults');
   cachedConfig = {
     type: 'mysql',
     host: process.env.MYSQL_HOST || 'localhost',
@@ -45,10 +50,24 @@ function getDatabaseConfig() {
 }
 
 let pool: mysql.Pool | PgPool | null = null;
+let poolType: string | null = null;
 
 export function getPool(): mysql.Pool | PgPool {
+  const dbConfig = getDatabaseConfig();
+  
+  if (pool && poolType !== dbConfig.type) {
+    console.log(`Pool type changed from ${poolType} to ${dbConfig.type}, recreating pool`);
+    if (poolType === 'postgres') {
+      (pool as PgPool).end();
+    } else {
+      (pool as mysql.Pool).end();
+    }
+    pool = null;
+    poolType = null;
+  }
+  
   if (!pool) {
-    const dbConfig = getDatabaseConfig();
+    console.log(`Creating new ${dbConfig.type} pool for ${dbConfig.host}:${dbConfig.port}`);
     if (dbConfig.type === 'postgres') {
       pool = new PgPool({
         host: dbConfig.host,
@@ -58,8 +77,10 @@ export function getPool(): mysql.Pool | PgPool {
         database: dbConfig.database,
         max: dbConfig.connectionLimit,
       });
+      poolType = 'postgres';
     } else {
       pool = mysql.createPool(dbConfig);
+      poolType = 'mysql';
     }
   }
   return pool;
