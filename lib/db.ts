@@ -1,13 +1,19 @@
 import mysql from 'mysql2/promise';
 import { Pool as PgPool } from 'pg';
 
+let cachedConfig: any = null;
+
 function getDatabaseConfig() {
+  if (cachedConfig) {
+    return cachedConfig;
+  }
+  
   const databaseUrl = process.env.DATABASE_URL;
   
   if (databaseUrl) {
     try {
       const url = new URL(databaseUrl);
-      return {
+      cachedConfig = {
         type: url.protocol.startsWith('postgres') ? 'postgres' : 'mysql',
         host: url.hostname,
         port: parseInt(url.port || (url.protocol.startsWith('postgres') ? '5432' : '3306')),
@@ -18,12 +24,13 @@ function getDatabaseConfig() {
         connectionLimit: 10,
         queueLimit: 0,
       };
+      return cachedConfig;
     } catch (error) {
       console.error('Failed to parse DATABASE_URL:', error);
     }
   }
   
-  return {
+  cachedConfig = {
     type: 'mysql',
     host: process.env.MYSQL_HOST || 'localhost',
     port: parseInt(process.env.MYSQL_PORT || '3306'),
@@ -34,14 +41,14 @@ function getDatabaseConfig() {
     connectionLimit: 10,
     queueLimit: 0,
   };
+  return cachedConfig;
 }
-
-const dbConfig = getDatabaseConfig();
 
 let pool: mysql.Pool | PgPool | null = null;
 
 export function getPool(): mysql.Pool | PgPool {
   if (!pool) {
+    const dbConfig = getDatabaseConfig();
     if (dbConfig.type === 'postgres') {
       pool = new PgPool({
         host: dbConfig.host,
@@ -67,6 +74,7 @@ export async function query<T = any>(
   sql: string,
   params?: any[]
 ): Promise<T[]> {
+  const dbConfig = getDatabaseConfig();
   if (dbConfig.type === 'postgres') {
     const pgPool = getPool() as PgPool;
     const client = await pgPool.connect();
@@ -101,6 +109,7 @@ export async function insert(
   sql: string,
   params?: any[]
 ): Promise<number> {
+  const dbConfig = getDatabaseConfig();
   if (dbConfig.type === 'postgres') {
     const pgPool = getPool() as PgPool;
     const client = await pgPool.connect();
@@ -127,6 +136,7 @@ export async function update(
   sql: string,
   params?: any[]
 ): Promise<number> {
+  const dbConfig = getDatabaseConfig();
   if (dbConfig.type === 'postgres') {
     const pgPool = getPool() as PgPool;
     const client = await pgPool.connect();
@@ -153,6 +163,7 @@ export async function deleteQuery(
   sql: string,
   params?: any[]
 ): Promise<number> {
+  const dbConfig = getDatabaseConfig();
   if (dbConfig.type === 'postgres') {
     const pgPool = getPool() as PgPool;
     const client = await pgPool.connect();
@@ -177,6 +188,7 @@ export async function deleteQuery(
 
 export async function testConnection(): Promise<boolean> {
   try {
+    const dbConfig = getDatabaseConfig();
     if (dbConfig.type === 'postgres') {
       const pgPool = getPool() as PgPool;
       const client = await pgPool.connect();
@@ -196,6 +208,7 @@ export async function testConnection(): Promise<boolean> {
 
 export async function closePool(): Promise<void> {
   if (pool) {
+    const dbConfig = getDatabaseConfig();
     if (dbConfig.type === 'postgres') {
       await (pool as PgPool).end();
     } else {
