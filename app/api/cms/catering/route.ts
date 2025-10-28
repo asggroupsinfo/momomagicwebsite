@@ -1,42 +1,43 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAuth } from '@/lib/auth/auth';
-import fs from 'fs/promises';
-import path from 'path';
+import { query, queryOne } from '@/lib/db';
 
-const CMS_DATA_DIR = path.join(process.cwd(), 'data', 'cms');
-const CATERING_DATA_FILE = path.join(CMS_DATA_DIR, 'catering.json');
-
-async function ensureDataDir() {
-  try {
-    await fs.mkdir(CMS_DATA_DIR, { recursive: true });
-  } catch (error) {
-  }
-}
+const defaultData = {
+  packages: [],
+  bookings: [],
+  testimonials: [],
+  settings: {
+    deliveryRadius: 10,
+    advanceBookingDays: 7,
+    maxGuestsPerPackage: 1000,
+    contactPhone: '+91 9955955191',
+    contactEmail: 'catering@momomagic.com',
+  },
+};
 
 export async function GET(request: NextRequest) {
   try {
     await requireAuth();
-    await ensureDataDir();
 
-    try {
-      const data = await fs.readFile(CATERING_DATA_FILE, 'utf-8');
-      return NextResponse.json(JSON.parse(data));
-    } catch (error) {
-      const defaultData = {
-        packages: [],
-        bookings: [],
-        testimonials: [],
-        settings: {
-          deliveryRadius: 10,
-          advanceBookingDays: 7,
-          maxGuestsPerPackage: 1000,
-          contactPhone: '+91 9955955191',
-          contactEmail: 'catering@momomagic.com',
-        },
-      };
-      return NextResponse.json(defaultData);
+    const result = await queryOne(
+      'SELECT content_data FROM cms_content WHERE page_name = ?',
+      ['catering']
+    );
+
+    if (result && result.content_data) {
+      const contentData = typeof result.content_data === 'string' 
+        ? JSON.parse(result.content_data) 
+        : result.content_data;
+      
+      return NextResponse.json({
+        ...defaultData,
+        ...contentData
+      });
     }
+
+    return NextResponse.json(defaultData);
   } catch (error) {
+    console.error('Error fetching catering content:', error);
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 }
@@ -44,16 +45,21 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     await requireAuth();
-    await ensureDataDir();
 
     const body = await request.json();
     const { type, data } = body;
 
+    const result = await queryOne(
+      'SELECT content_data FROM cms_content WHERE page_name = ?',
+      ['catering']
+    );
+
     let cateringData: any = { packages: [], bookings: [], testimonials: [], settings: {} };
-    try {
-      const existingData = await fs.readFile(CATERING_DATA_FILE, 'utf-8');
-      cateringData = JSON.parse(existingData);
-    } catch (error) {
+    if (result && result.content_data) {
+      const contentData = typeof result.content_data === 'string' 
+        ? JSON.parse(result.content_data) 
+        : result.content_data;
+      cateringData = contentData;
     }
 
     switch (type) {
@@ -92,7 +98,22 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'Invalid type' }, { status: 400 });
     }
 
-    await fs.writeFile(CATERING_DATA_FILE, JSON.stringify(cateringData, null, 2), 'utf-8');
+    const existingResult = await queryOne(
+      'SELECT id FROM cms_content WHERE page_name = ?',
+      ['catering']
+    );
+
+    if (existingResult) {
+      await query(
+        'UPDATE cms_content SET content_data = ?, updated_at = NOW() WHERE page_name = ?',
+        [JSON.stringify(cateringData), 'catering']
+      );
+    } else {
+      await query(
+        'INSERT INTO cms_content (page_name, content_data, created_at, updated_at) VALUES (?, ?, NOW(), NOW())',
+        ['catering', JSON.stringify(cateringData)]
+      );
+    }
 
     return NextResponse.json({
       success: true,
@@ -111,7 +132,6 @@ export async function POST(request: NextRequest) {
 export async function DELETE(request: NextRequest) {
   try {
     await requireAuth();
-    await ensureDataDir();
 
     const { searchParams } = new URL(request.url);
     const type = searchParams.get('type');
@@ -121,13 +141,20 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: 'Type and ID are required' }, { status: 400 });
     }
 
-    let cateringData: any = { packages: [], bookings: [], testimonials: [], settings: {} };
-    try {
-      const existingData = await fs.readFile(CATERING_DATA_FILE, 'utf-8');
-      cateringData = JSON.parse(existingData);
-    } catch (error) {
+    const result = await queryOne(
+      'SELECT content_data FROM cms_content WHERE page_name = ?',
+      ['catering']
+    );
+
+    if (!result || !result.content_data) {
       return NextResponse.json({ error: 'Catering data not found' }, { status: 404 });
     }
+
+    const contentData = typeof result.content_data === 'string' 
+      ? JSON.parse(result.content_data) 
+      : result.content_data;
+    
+    let cateringData: any = contentData;
 
     switch (type) {
       case 'package':
@@ -146,7 +173,10 @@ export async function DELETE(request: NextRequest) {
         return NextResponse.json({ error: 'Invalid type' }, { status: 400 });
     }
 
-    await fs.writeFile(CATERING_DATA_FILE, JSON.stringify(cateringData, null, 2), 'utf-8');
+    await query(
+      'UPDATE cms_content SET content_data = ?, updated_at = NOW() WHERE page_name = ?',
+      [JSON.stringify(cateringData), 'catering']
+    );
 
     return NextResponse.json({
       success: true,
