@@ -1,22 +1,14 @@
 import mysql from 'mysql2/promise';
 import { Pool as PgPool } from 'pg';
 
-let cachedConfig: any = null;
-
 function getDatabaseConfig() {
-  if (cachedConfig) {
-    console.log(`Using cached config: ${cachedConfig.type} @ ${cachedConfig.host}:${cachedConfig.port}`);
-    return cachedConfig;
-  }
-  
   const databaseUrl = process.env.DATABASE_URL;
-  console.log(`DATABASE_URL present: ${!!databaseUrl}, length: ${databaseUrl?.length || 0}`);
+  console.log(`[getDatabaseConfig] DATABASE_URL present: ${!!databaseUrl}, length: ${databaseUrl?.length || 0}`);
   
   if (databaseUrl) {
     try {
       const url = new URL(databaseUrl);
-      console.log(`Parsed DATABASE_URL: ${url.protocol} @ ${url.hostname}:${url.port || 'default'}`);
-      cachedConfig = {
+      const config = {
         type: url.protocol.startsWith('postgres') ? 'postgres' : 'mysql',
         host: url.hostname,
         port: parseInt(url.port || (url.protocol.startsWith('postgres') ? '5432' : '3306')),
@@ -27,15 +19,15 @@ function getDatabaseConfig() {
         connectionLimit: 10,
         queueLimit: 0,
       };
-      console.log(`Created config: ${cachedConfig.type} @ ${cachedConfig.host}:${cachedConfig.port}`);
-      return cachedConfig;
+      console.log(`[getDatabaseConfig] Created ${config.type} config for ${config.host}:${config.port}`);
+      return config;
     } catch (error) {
-      console.error('Failed to parse DATABASE_URL:', error);
+      console.error('[getDatabaseConfig] Failed to parse DATABASE_URL:', error);
     }
   }
   
-  console.log('No DATABASE_URL found, using MySQL defaults');
-  cachedConfig = {
+  console.log('[getDatabaseConfig] No DATABASE_URL found, using MySQL defaults');
+  return {
     type: 'mysql',
     host: process.env.MYSQL_HOST || 'localhost',
     port: parseInt(process.env.MYSQL_PORT || '3306'),
@@ -46,7 +38,6 @@ function getDatabaseConfig() {
     connectionLimit: 10,
     queueLimit: 0,
   };
-  return cachedConfig;
 }
 
 let pool: mysql.Pool | PgPool | null = null;
