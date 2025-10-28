@@ -27,8 +27,8 @@ CREATE TABLE IF NOT EXISTS publish_history (
   created_by VARCHAR(100) DEFAULT 'admin'
 );
 
-CREATE INDEX IF NOT EXISTS idx_backups_page_created ON content_backups(page_name, created_at);
-CREATE INDEX IF NOT EXISTS idx_history_page_created ON publish_history(page_name, created_at);
+CREATE INDEX idx_backups_page_created ON content_backups(page_name, created_at);
+CREATE INDEX idx_history_page_created ON publish_history(page_name, created_at);
 
 SELECT 'published_content table created' AS status;
 SELECT 'content_backups table created' AS status;

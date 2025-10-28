@@ -50,8 +50,15 @@ async function createPublishTables() {
     
     console.log('🔄 Creating indexes...');
     
-    await query('CREATE INDEX IF NOT EXISTS idx_backups_page_created ON content_backups(page_name, created_at)');
-    await query('CREATE INDEX IF NOT EXISTS idx_history_page_created ON publish_history(page_name, created_at)');
+    try {
+      await query('DROP INDEX idx_backups_page_created ON content_backups');
+    } catch (e) {}
+    await query('CREATE INDEX idx_backups_page_created ON content_backups(page_name, created_at)');
+    
+    try {
+      await query('DROP INDEX idx_history_page_created ON publish_history');
+    } catch (e) {}
+    await query('CREATE INDEX idx_history_page_created ON publish_history(page_name, created_at)');
     
     console.log('✅ Indexes created!');
     
