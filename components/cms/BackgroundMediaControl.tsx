@@ -79,7 +79,7 @@ export function BackgroundMediaControl({
             <ImageDropZone
               currentImage={media.url}
               onImageChange={handleImageUpload}
-              aspectRatio="16/9"
+              height="200px"
             />
           </div>
         )}
