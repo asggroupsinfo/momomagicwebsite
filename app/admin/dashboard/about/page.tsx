@@ -109,6 +109,7 @@ export default function AboutCMSPage() {
 
       if (response.ok) {
         setMessage('✅ About content saved successfully!');
+        await loadAboutData();
       } else {
         setMessage('❌ Failed to save about content');
       }
