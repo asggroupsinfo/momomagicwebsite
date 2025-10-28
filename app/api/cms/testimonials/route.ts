@@ -53,7 +53,22 @@ export async function GET(request: NextRequest) {
 
     try {
       const data = await fs.readFile(TESTIMONIALS_DATA_FILE, 'utf-8');
-      return NextResponse.json(JSON.parse(data));
+      const rawData = JSON.parse(data);
+      
+      const transformedData = {
+        testimonials: (rawData.items || rawData.testimonials || []).map((item: any) => ({
+          id: item.id,
+          name: item.name,
+          role: item.location || item.role || 'Customer',
+          rating: item.rating,
+          text: item.text,
+          image: item.image || '',
+          date: item.date,
+          featured: item.isFeatured || item.featured || false
+        }))
+      };
+      
+      return NextResponse.json(transformedData);
     } catch (error) {
       const defaultData = {
         testimonials: defaultTestimonials

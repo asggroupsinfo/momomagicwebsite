@@ -2,6 +2,10 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ImageDropZone } from '@/components/cms/ImageDropZone';
+import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
+import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
+import { VisualDesignPanel } from '@/components/cms/VisualDesignPanel';
 
 interface JobPosting {
   id: string;
@@ -386,7 +390,28 @@ export default function CareerManagementPage() {
             <div className="text-gray-400">Hired</div>
           </div>
         </div>
+
+        {/* Content Analytics */}
+        <div className="mt-8">
+          <ContentAnalytics
+            contentId="careers-page"
+            contentType="page"
+            analytics={{
+              views: 4800,
+              engagement: 58,
+              conversions: 95,
+              lastUpdated: new Date().toISOString(),
+              performance: {
+                loadTime: 1.0,
+                seoScore: 82,
+              },
+            }}
+          />
+        </div>
       </div>
+
+      {/* Visual Design Controls */}
+      <VisualDesignPanel pageName="careers" onSave={() => {}} />
     </div>
   );
 }

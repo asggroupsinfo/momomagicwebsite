@@ -4,6 +4,11 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { ImageDropZone } from '@/components/cms/ImageDropZone';
+import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
+import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
+import { InlineEditor } from '@/components/cms/InlineEditor';
+import { VisualDesignPanel } from '@/components/cms/VisualDesignPanel';
 
 interface CateringPackage {
   id: string;
@@ -25,6 +30,8 @@ interface CateringPackage {
   isFeatured: boolean;
   image: string;
   displayOrder: number;
+  state?: ContentState;
+  scheduledDate?: string;
 }
 
 interface CateringBooking {
@@ -306,14 +313,14 @@ export default function CateringManagementPage() {
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-sm text-foreground/60">Base Price:</span>
                           <span className="text-lg font-bold text-golden-glow">
-                            ₹{pkg.basePrice.toLocaleString()}
+                            ₹{(pkg.basePrice || 0).toLocaleString()}
                           </span>
                         </div>
-                        {pkg.perGuestPrice > 0 && (
+                        {(pkg.perGuestPrice || 0) > 0 && (
                           <div className="flex items-center justify-between">
                             <span className="text-sm text-foreground/60">Per Guest:</span>
                             <span className="text-sm font-bold text-golden-glow">
-                              ₹{pkg.perGuestPrice}
+                              ₹{pkg.perGuestPrice || 0}
                             </span>
                           </div>
                         )}
@@ -321,7 +328,7 @@ export default function CateringManagementPage() {
 
                       {/* Guest Range */}
                       <div className="text-xs text-foreground/60">
-                        Guests: {pkg.guestRange.min}-{pkg.guestRange.max} | Duration: {pkg.serviceDuration}
+                        Guests: {(pkg.guestRange?.min || 0)}-{(pkg.guestRange?.max || 0)} | Duration: {pkg.serviceDuration || 'N/A'}
                       </div>
 
                       {/* Actions */}
@@ -358,6 +365,26 @@ export default function CateringManagementPage() {
                   ➕ Add First Package
                 </Button>
               </Card>
+            )}
+
+            {/* Content Analytics */}
+            {packages.length > 0 && (
+              <div className="mt-8">
+                <ContentAnalytics
+                  contentId="catering-packages"
+                  contentType="page"
+                  analytics={{
+                    views: 6200,
+                    engagement: 72,
+                    conversions: 180,
+                    lastUpdated: new Date().toISOString(),
+                    performance: {
+                      loadTime: 1.1,
+                      seoScore: 85,
+                    },
+                  }}
+                />
+              </div>
             )}
           </div>
         )}
@@ -452,6 +479,9 @@ export default function CateringManagementPage() {
             </Card>
           </div>
         )}
+
+        {/* Visual Design Controls */}
+        <VisualDesignPanel pageName="catering" onSave={() => loadCateringData()} />
       </motion.div>
 
       {/* Package Edit Modal */}
@@ -482,12 +512,12 @@ export default function CateringManagementPage() {
                     <label className="block text-sm font-semibold text-foreground/80 mb-2">
                       Package Name *
                     </label>
-                    <input
-                      type="text"
+                    <InlineEditor
                       value={editingPackage.name}
-                      onChange={(e) => setEditingPackage({ ...editingPackage, name: e.target.value })}
-                      className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                      onChange={(value) => setEditingPackage({ ...editingPackage, name: value })}
+                      onSave={() => handleSavePackage(editingPackage)}
                       placeholder="e.g., Premium Wedding Package"
+                      className="w-full"
                     />
                   </div>
                   <div>
@@ -537,12 +567,12 @@ export default function CateringManagementPage() {
                     <label className="block text-sm font-semibold text-foreground/80 mb-2">
                       Badge Text
                     </label>
-                    <input
-                      type="text"
+                    <InlineEditor
                       value={editingPackage.badge}
-                      onChange={(e) => setEditingPackage({ ...editingPackage, badge: e.target.value })}
-                      className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                      onChange={(value) => setEditingPackage({ ...editingPackage, badge: value })}
+                      onSave={() => handleSavePackage(editingPackage)}
                       placeholder="Most Popular"
+                      className="w-full"
                     />
                   </div>
                 </div>
@@ -552,12 +582,49 @@ export default function CateringManagementPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     Description
                   </label>
-                  <textarea
+                  <InlineEditor
                     value={editingPackage.description}
-                    onChange={(e) => setEditingPackage({ ...editingPackage, description: e.target.value })}
-                    className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
-                    rows={3}
+                    onChange={(value) => setEditingPackage({ ...editingPackage, description: value })}
+                    onSave={() => handleSavePackage(editingPackage)}
+                    multiline={true}
                     placeholder="Brief description of the package"
+                    className="w-full"
+                  />
+                </div>
+
+                {/* Package Image */}
+                <div>
+                  <label className="block text-sm font-semibold text-foreground/80 mb-2">
+                    Package Image
+                  </label>
+                  <ImageDropZone
+                    currentImage={editingPackage.image}
+                    onImageChange={(url) => setEditingPackage({ ...editingPackage, image: url })}
+                    onUpload={async (file) => {
+                      const formData = new FormData();
+                      formData.append('file', file);
+                      const response = await fetch('/api/cms/media/upload', {
+                        method: 'POST',
+                        body: formData,
+                      });
+                      if (response.ok) {
+                        const data = await response.json();
+                        return data.url;
+                      }
+                      throw new Error('Upload failed');
+                    }}
+                    alt={editingPackage.name}
+                    height="200px"
+                  />
+                </div>
+
+                {/* Content State Manager */}
+                <div>
+                  <ContentStateManager
+                    currentState={editingPackage.state || 'published'}
+                    onStateChange={(state) => setEditingPackage({ ...editingPackage, state })}
+                    scheduledDate={editingPackage.scheduledDate}
+                    onScheduleDateChange={(scheduledDate) => setEditingPackage({ ...editingPackage, scheduledDate })}
                   />
                 </div>
 

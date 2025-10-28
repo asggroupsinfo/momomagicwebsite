@@ -5,6 +5,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { MediaLibraryPicker } from '@/components/cms/MediaLibraryPicker';
+import { ImageDropZone } from '@/components/cms/ImageDropZone';
+import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
+import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
+import { InlineEditor } from '@/components/cms/InlineEditor';
+import { VisualDesignPanel } from '@/components/cms/VisualDesignPanel';
 
 interface GalleryImage {
   id: string;
@@ -14,6 +19,8 @@ interface GalleryImage {
   category: string;
   seoTags: string[];
   uploadDate: string;
+  state?: ContentState;
+  scheduledDate?: string;
 }
 
 const imageCategories = ['Food', 'Stall', 'Awards', 'Events', 'Behind the Scenes'];
@@ -29,6 +36,7 @@ const IMAGE_SPECS = {
 
 export default function GalleryManagementPage() {
   const [images, setImages] = useState<GalleryImage[]>([]);
+  const [filteredImages, setFilteredImages] = useState<GalleryImage[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [editingImage, setEditingImage] = useState<GalleryImage | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,12 +48,19 @@ export default function GalleryManagementPage() {
   const [isBulkUploadModalOpen, setIsBulkUploadModalOpen] = useState(false);
   const [mediaLibraryOpen, setMediaLibraryOpen] = useState(false);
   
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  
   const imageInputRef = useRef<HTMLInputElement>(null);
   const bulkUploadInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     loadImages();
   }, []);
+
+  useEffect(() => {
+    filterImages();
+  }, [images, searchQuery, selectedCategory]);
 
   const loadImages = async () => {
     try {
@@ -59,6 +74,31 @@ export default function GalleryManagementPage() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const filterImages = () => {
+    let filtered = [...images];
+
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(img =>
+        img.title.toLowerCase().includes(query) ||
+        img.alt.toLowerCase().includes(query) ||
+        img.category.toLowerCase().includes(query) ||
+        img.seoTags.some(tag => tag.toLowerCase().includes(query))
+      );
+    }
+
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter(img => img.category === selectedCategory);
+    }
+
+    setFilteredImages(filtered);
+  };
+
+  const clearFilters = () => {
+    setSearchQuery('');
+    setSelectedCategory('all');
   };
 
   const handleSave = async (image: GalleryImage) => {
@@ -174,10 +214,10 @@ export default function GalleryManagementPage() {
   };
 
   const selectAll = () => {
-    if (selectedImages.size === images.length) {
+    if (selectedImages.size === filteredImages.length && filteredImages.length > 0) {
       setSelectedImages(new Set());
     } else {
-      setSelectedImages(new Set(images.map(img => img.id)));
+      setSelectedImages(new Set(filteredImages.map(img => img.id)));
     }
   };
 
@@ -195,7 +235,7 @@ export default function GalleryManagementPage() {
   };
 
   const openEditModal = (image: GalleryImage) => {
-    setEditingImage({ ...image });
+    setEditingImage({ ...image, seoTags: image.seoTags || [] });
     setIsModalOpen(true);
   };
 
@@ -389,18 +429,67 @@ export default function GalleryManagementPage() {
           </motion.div>
         )}
 
+        {/* Search and Filters */}
+        <Card className="mb-6 p-6">
+          <div className="space-y-4">
+            {/* Search Bar */}
+            <div className="flex gap-4">
+              <div className="flex-1">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="🔍 Search images by title, alt text, category, or tags..."
+                  className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                />
+              </div>
+            </div>
+
+            {/* Filters Row */}
+            <div className="flex flex-wrap gap-3 items-center">
+              {/* Category Filter */}
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="px-4 py-2 bg-pitch-black border border-charcoal rounded-lg text-foreground text-sm focus:outline-none focus:border-golden-glow"
+              >
+                <option value="all">All Categories</option>
+                {imageCategories.map(cat => (
+                  <option key={cat} value={cat}>{cat}</option>
+                ))}
+              </select>
+
+              {/* Clear Filters */}
+              {(searchQuery || selectedCategory !== 'all') && (
+                <button
+                  onClick={clearFilters}
+                  className="px-4 py-2 bg-pitch-black border border-charcoal rounded-lg text-foreground text-sm hover:border-warm-orange transition-colors"
+                >
+                  ✕ Clear Filters
+                </button>
+              )}
+
+              {/* Results Summary */}
+              <div className="ml-auto text-sm text-foreground/70">
+                Showing {filteredImages.length} of {images.length} images
+                {selectedImages.size > 0 && ` • ${selectedImages.size} selected`}
+              </div>
+            </div>
+          </div>
+        </Card>
+
         {/* Select All */}
-        {images.length > 0 && (
+        {filteredImages.length > 0 && (
           <div className="mb-4">
             <label className="flex items-center gap-2 cursor-pointer w-fit">
               <input
                 type="checkbox"
-                checked={selectedImages.size === images.length}
+                checked={selectedImages.size === filteredImages.length && filteredImages.length > 0}
                 onChange={selectAll}
                 className="w-5 h-5 rounded border-charcoal bg-pitch-black checked:bg-golden-glow"
               />
               <span className="text-sm text-foreground/80">
-                Select All ({images.length} images)
+                Select All ({filteredImages.length} images)
               </span>
             </label>
           </div>
@@ -408,7 +497,7 @@ export default function GalleryManagementPage() {
 
         {/* Gallery Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {images.map((image, index) => (
+          {filteredImages.map((image, index) => (
             <motion.div
               key={image.id}
               initial={{ opacity: 0, y: 20 }}
@@ -495,6 +584,21 @@ export default function GalleryManagementPage() {
           ))}
         </div>
 
+        {filteredImages.length === 0 && images.length > 0 && (
+          <Card className="text-center py-12">
+            <div className="text-6xl mb-4">🔍</div>
+            <h3 className="text-2xl font-bold text-golden-glow mb-2">
+              No Images Match Your Filters
+            </h3>
+            <p className="text-foreground/70 mb-6">
+              Try adjusting your search or filters
+            </p>
+            <Button variant="outline" size="lg" onClick={clearFilters}>
+              ✕ Clear All Filters
+            </Button>
+          </Card>
+        )}
+
         {images.length === 0 && (
           <Card className="text-center py-12">
             <div className="text-6xl mb-4">📸</div>
@@ -509,6 +613,9 @@ export default function GalleryManagementPage() {
             </Button>
           </Card>
         )}
+
+        {/* Visual Design Controls */}
+        <VisualDesignPanel pageName="gallery" onSave={() => loadImages()} />
       </motion.div>
 
       {/* Edit/Add Modal */}
@@ -533,6 +640,31 @@ export default function GalleryManagementPage() {
               </h2>
 
               <div className="space-y-6">
+                {/* Content State Management */}
+                <ContentStateManager
+                  currentState={editingImage.state || 'draft'}
+                  onStateChange={(newState) => setEditingImage({ ...editingImage, state: newState })}
+                  scheduledDate={editingImage.scheduledDate}
+                  onScheduleDateChange={(date) => setEditingImage({ ...editingImage, scheduledDate: date })}
+                />
+
+                {/* Content Analytics */}
+                {editingImage.id !== Date.now().toString() && (
+                  <ContentAnalytics
+                    contentId={editingImage.id}
+                    contentType="gallery"
+                    analytics={{
+                      views: Math.floor(Math.random() * 50000),
+                      engagement: Math.floor(Math.random() * 100),
+                      conversions: Math.floor(Math.random() * 1000),
+                      performance: {
+                        loadTime: Math.random() * 2,
+                        seoScore: Math.floor(Math.random() * 100),
+                      },
+                    }}
+                  />
+                )}
+
                 {/* Image Upload Section */}
                 <div className="p-6 bg-pitch-black border border-charcoal rounded-lg space-y-4">
                   <div className="flex items-center justify-between">
@@ -542,44 +674,25 @@ export default function GalleryManagementPage() {
                     </div>
                   </div>
                   
-                  <div className="flex gap-3">
-                    <input
-                      type="text"
-                      value={editingImage.url}
-                      onChange={(e) => setEditingImage({ ...editingImage, url: e.target.value })}
-                      className="flex-1 px-4 py-3 bg-deep-space border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
-                      placeholder="/images/gallery/image.jpg"
-                    />
-                    <input
-                      ref={imageInputRef}
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (file) handleFileUpload(file);
-                      }}
-                      className="hidden"
-                    />
-                    <button
-                      onClick={() => imageInputRef.current?.click()}
-                      disabled={uploadingFile}
-                      className="px-6 py-3 bg-premium-orange text-pitch-black rounded-lg font-bold hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50"
-                    >
-                      {uploadingFile ? '⏳' : '📁'} Upload
-                    </button>
-                    <button
-                      onClick={() => setMediaLibraryOpen(true)}
-                      className="px-6 py-3 bg-golden-glow text-pitch-black rounded-lg font-bold hover:-translate-y-0.5 transition-all duration-300"
-                    >
-                      📚 Library
-                    </button>
-                  </div>
-                  
-                  {editingImage.url && (
-                    <div className="h-48 bg-charcoal rounded-lg overflow-hidden">
-                      <img src={editingImage.url} alt="Preview" className="w-full h-full object-cover" />
-                    </div>
-                  )}
+                  <ImageDropZone
+                    currentImage={editingImage.url}
+                    onImageChange={(url) => setEditingImage({ ...editingImage, url })}
+                    onUpload={async (file) => {
+                      const formData = new FormData();
+                      formData.append('file', file);
+                      const response = await fetch('/api/cms/media/upload', {
+                        method: 'POST',
+                        body: formData,
+                      });
+                      if (response.ok) {
+                        const data = await response.json();
+                        return data.url;
+                      }
+                      throw new Error('Upload failed');
+                    }}
+                    alt={editingImage.title}
+                    height="250px"
+                  />
                 </div>
 
                 {/* Title */}
@@ -587,12 +700,12 @@ export default function GalleryManagementPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     Title *
                   </label>
-                  <input
-                    type="text"
+                  <InlineEditor
                     value={editingImage.title}
-                    onChange={(e) => setEditingImage({ ...editingImage, title: e.target.value })}
-                    className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                    onChange={(value) => setEditingImage({ ...editingImage, title: value })}
+                    onSave={() => handleSave(editingImage)}
                     placeholder="e.g., Kurkure Momos Close-up"
+                    className="w-full"
                   />
                 </div>
 
@@ -601,12 +714,12 @@ export default function GalleryManagementPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     Alt Text (SEO) *
                   </label>
-                  <input
-                    type="text"
+                  <InlineEditor
                     value={editingImage.alt}
-                    onChange={(e) => setEditingImage({ ...editingImage, alt: e.target.value })}
-                    className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                    onChange={(value) => setEditingImage({ ...editingImage, alt: value })}
+                    onSave={() => handleSave(editingImage)}
                     placeholder="Descriptive text for accessibility and SEO"
+                    className="w-full"
                   />
                 </div>
 
@@ -631,15 +744,15 @@ export default function GalleryManagementPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     SEO Tags (comma-separated)
                   </label>
-                  <input
-                    type="text"
-                    value={editingImage.seoTags.join(', ')}
-                    onChange={(e) => setEditingImage({ 
+                  <InlineEditor
+                    value={(editingImage.seoTags || []).join(', ')}
+                    onChange={(value) => setEditingImage({ 
                       ...editingImage, 
-                      seoTags: e.target.value.split(',').map(tag => tag.trim()).filter(tag => tag) 
+                      seoTags: value.split(',').map(tag => tag.trim()).filter(tag => tag) 
                     })}
-                    className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                    onSave={() => handleSave(editingImage)}
                     placeholder="momos, food, sherghati, kurkure"
+                    className="w-full"
                   />
                   <p className="text-xs text-foreground/50 mt-1">
                     Add keywords for better SEO and searchability

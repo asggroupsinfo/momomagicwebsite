@@ -22,13 +22,49 @@ const defaultCategories = [
 
 export async function GET(request: NextRequest) {
   try {
-    await requireAuth();
+    console.log('[MENU API] GET request received');
+    const user = await requireAuth();
+    console.log('[MENU API] User authenticated:', user?.username);
     await ensureDataDir();
 
     try {
+      console.log('[MENU API] Reading file:', MENU_DATA_FILE);
       const data = await fs.readFile(MENU_DATA_FILE, 'utf-8');
-      return NextResponse.json(JSON.parse(data));
+      const menuData = JSON.parse(data);
+      console.log('[MENU API] Raw data items count:', menuData.items?.length || 0);
+      
+      const transformedItems = menuData.items.map((item: any) => {
+        const price = item.price?.half !== undefined 
+          ? item.price 
+          : {
+              half: item.price5pc || 0,
+              full: item.price10pc || 0
+            };
+        
+        return {
+          id: item.id,
+          name: item.name,
+          category: item.category,
+          description: item.description,
+          price: price,
+          image: item.image,
+          imageHalf: item.imageHalf,
+          imageFull: item.imageFull,
+          isPopular: item.isFeatured || item.isPopular || false,
+          isNew: item.badge === 'NEW' || item.isNew || false,
+          spiceLevel: item.spiceLevel || 'Medium'
+        };
+      });
+      
+      console.log('[MENU API] Transformed items count:', transformedItems.length);
+      console.log('[MENU API] First item:', JSON.stringify(transformedItems[0], null, 2));
+      
+      return NextResponse.json({
+        items: transformedItems,
+        categories: menuData.categories || defaultCategories
+      });
     } catch (error) {
+      console.error('[MENU API] Error reading menu data:', error);
       const defaultData = {
         items: [],
         categories: defaultCategories
@@ -36,6 +72,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json(defaultData);
     }
   } catch (error) {
+    console.error('[MENU API] Auth error:', error);
     return NextResponse.json(
       { error: 'Unauthorized' },
       { status: 401 }

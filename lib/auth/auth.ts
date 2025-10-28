@@ -16,7 +16,14 @@ function getAdminCredentials() {
 
 const users: Record<string, { password: string; user: User }> = {};
 
-const sessions: Map<string, User> = new Map();
+declare global {
+  var authSessions: Map<string, User> | undefined;
+}
+
+const sessions: Map<string, User> = global.authSessions || new Map();
+if (!global.authSessions) {
+  global.authSessions = sessions;
+}
 
 export function generateSessionToken(): string {
   return Math.random().toString(36).substring(2) + Date.now().toString(36);

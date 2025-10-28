@@ -47,11 +47,15 @@ CREATE TABLE IF NOT EXISTS menu_items (
   is_available BOOLEAN DEFAULT TRUE,
   stock_level INT DEFAULT 100,
   image_url VARCHAR(255) DEFAULT NULL,
+  state ENUM('draft', 'published', 'archived', 'scheduled') DEFAULT 'published',
+  scheduled_date TIMESTAMP NULL DEFAULT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   INDEX idx_category (category),
   INDEX idx_is_available (is_available),
-  INDEX idx_name (name)
+  INDEX idx_name (name),
+  INDEX idx_state (state),
+  INDEX idx_scheduled_date (scheduled_date)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS catering_inquiries (
@@ -113,9 +117,13 @@ CREATE TABLE IF NOT EXISTS cms_data (
   page VARCHAR(50) NOT NULL,
   section VARCHAR(50) NOT NULL,
   content JSON NOT NULL,
+  state ENUM('draft', 'published', 'archived', 'scheduled') DEFAULT 'published',
+  scheduled_date TIMESTAMP NULL DEFAULT NULL,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   UNIQUE KEY unique_page_section (page, section),
-  INDEX idx_page (page)
+  INDEX idx_page (page),
+  INDEX idx_state (state),
+  INDEX idx_scheduled_date (scheduled_date)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS contact_submissions (
@@ -280,4 +288,49 @@ CREATE TABLE IF NOT EXISTS saved_components (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   INDEX idx_type (type),
   INDEX idx_created_at (created_at DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS content_versions (
+  id VARCHAR(50) PRIMARY KEY,
+  content_id VARCHAR(100) NOT NULL,
+  snapshot LONGTEXT NOT NULL,
+  changes JSON DEFAULT NULL,
+  description VARCHAR(500) DEFAULT NULL,
+  author VARCHAR(100) DEFAULT 'System',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_content_id (content_id),
+  INDEX idx_created_at (created_at DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS performance_metrics (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  page_slug VARCHAR(200) NOT NULL,
+  page_load_time INT NOT NULL,
+  first_contentful_paint INT NOT NULL,
+  largest_contentful_paint INT NOT NULL,
+  cumulative_layout_shift DECIMAL(5,3) NOT NULL,
+  first_input_delay INT NOT NULL,
+  total_blocking_time INT NOT NULL,
+  speed_index INT NOT NULL,
+  recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_page_slug (page_slug),
+  INDEX idx_recorded_at (recorded_at DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS seo_analysis (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  page_slug VARCHAR(200) NOT NULL,
+  score INT NOT NULL,
+  title_score INT NOT NULL,
+  description_score INT NOT NULL,
+  keywords_score INT NOT NULL,
+  headings_score INT NOT NULL,
+  images_score INT NOT NULL,
+  links_score INT NOT NULL,
+  mobile_score INT NOT NULL,
+  speed_score INT NOT NULL,
+  analysis_data JSON NOT NULL,
+  analyzed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_page_slug (page_slug),
+  INDEX idx_analyzed_at (analyzed_at DESC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

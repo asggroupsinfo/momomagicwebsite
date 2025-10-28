@@ -4,6 +4,11 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { ImageDropZone } from '@/components/cms/ImageDropZone';
+import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
+import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
+import { InlineEditor } from '@/components/cms/InlineEditor';
+import { VisualDesignPanel } from '@/components/cms/VisualDesignPanel';
 
 interface ComboItem {
   itemName: string;
@@ -22,6 +27,8 @@ interface ComboDeal {
   isActive: boolean;
   validFrom: string;
   validUntil: string;
+  state?: ContentState;
+  scheduledDate?: string;
 }
 
 export default function ComboDealsManagementPage() {
@@ -341,6 +348,9 @@ export default function ComboDealsManagementPage() {
             </Button>
           </Card>
         )}
+
+        {/* Visual Design Controls */}
+        <VisualDesignPanel pageName="combos" onSave={() => loadCombos()} />
       </motion.div>
 
       {/* Edit/Add Modal */}
@@ -370,12 +380,12 @@ export default function ComboDealsManagementPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     Combo Name *
                   </label>
-                  <input
-                    type="text"
+                  <InlineEditor
                     value={editingCombo.name}
-                    onChange={(e) => setEditingCombo({ ...editingCombo, name: e.target.value })}
-                    className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
+                    onChange={(value) => setEditingCombo({ ...editingCombo, name: value })}
+                    onSave={() => handleSave(editingCombo)}
                     placeholder="e.g., Family Feast Combo"
+                    className="w-full"
                   />
                 </div>
 
@@ -384,12 +394,13 @@ export default function ComboDealsManagementPage() {
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
                     Description
                   </label>
-                  <textarea
+                  <InlineEditor
                     value={editingCombo.description}
-                    onChange={(e) => setEditingCombo({ ...editingCombo, description: e.target.value })}
-                    className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
-                    rows={2}
+                    onChange={(value) => setEditingCombo({ ...editingCombo, description: value })}
+                    onSave={() => handleSave(editingCombo)}
+                    multiline={true}
                     placeholder="Brief description of the combo deal"
+                    className="w-full"
                   />
                 </div>
 
@@ -411,12 +422,12 @@ export default function ComboDealsManagementPage() {
                     {editingCombo.items.map((item, index) => (
                       <div key={index} className="flex gap-3 items-start p-3 bg-pitch-black rounded-lg border border-charcoal">
                         <div className="flex-1">
-                          <input
-                            type="text"
+                          <InlineEditor
                             value={item.itemName}
-                            onChange={(e) => updateComboItem(index, 'itemName', e.target.value)}
-                            className="w-full px-3 py-2 bg-deep-space border border-charcoal rounded text-foreground text-sm focus:outline-none focus:border-golden-glow"
+                            onChange={(value) => updateComboItem(index, 'itemName', value)}
+                            onSave={() => handleSave(editingCombo)}
                             placeholder="Item name"
+                            className="w-full"
                           />
                         </div>
                         <div className="w-24">
@@ -506,17 +517,29 @@ export default function ComboDealsManagementPage() {
                   </div>
                 </div>
 
-                {/* Image URL */}
+                {/* Combo Image */}
                 <div>
                   <label className="block text-sm font-semibold text-foreground/80 mb-2">
-                    Image URL
+                    Combo Image
                   </label>
-                  <input
-                    type="text"
-                    value={editingCombo.image}
-                    onChange={(e) => setEditingCombo({ ...editingCombo, image: e.target.value })}
-                    className="w-full px-4 py-3 bg-pitch-black border border-charcoal rounded-lg text-foreground focus:outline-none focus:border-golden-glow transition-colors"
-                    placeholder="/images/combos/combo.jpg"
+                  <ImageDropZone
+                    currentImage={editingCombo.image}
+                    onImageChange={(url) => setEditingCombo({ ...editingCombo, image: url })}
+                    onUpload={async (file) => {
+                      const formData = new FormData();
+                      formData.append('file', file);
+                      const response = await fetch('/api/cms/media/upload', {
+                        method: 'POST',
+                        body: formData,
+                      });
+                      if (response.ok) {
+                        const data = await response.json();
+                        return data.url;
+                      }
+                      throw new Error('Upload failed');
+                    }}
+                    alt={editingCombo.name}
+                    height="200px"
                   />
                 </div>
 
