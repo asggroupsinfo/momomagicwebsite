@@ -17,6 +17,9 @@ export function PublishControls({ pageName, onSave, onPreview }: PublishControls
   const [message, setMessage] = useState('');
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [showHistoryDialog, setShowHistoryDialog] = useState(false);
+  const [showPreviewDialog, setShowPreviewDialog] = useState(false);
+  const [previewDevice, setPreviewDevice] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
+  const [previewMode, setPreviewMode] = useState<'draft' | 'published' | 'comparison'>('draft');
   const [publishHistory, setPublishHistory] = useState<any[]>([]);
   const [backups, setBackups] = useState<any[]>([]);
 
@@ -141,14 +144,12 @@ export function PublishControls({ pageName, onSave, onPreview }: PublishControls
           {isSaving ? '⏳ Saving...' : '💾 Save'}
         </Button>
 
-        {onPreview && (
-          <Button
-            onClick={onPreview}
-            className="bg-purple-600 hover:bg-purple-700"
-          >
-            👁️ Preview
-          </Button>
-        )}
+        <Button
+          onClick={() => setShowPreviewDialog(true)}
+          className="bg-purple-600 hover:bg-purple-700"
+        >
+          👁️ Preview
+        </Button>
 
         <Button
           onClick={() => setShowConfirmDialog(true)}
@@ -256,6 +257,146 @@ export function PublishControls({ pageName, onSave, onPreview }: PublishControls
                 Close
               </Button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {showPreviewDialog && (
+        <div className="fixed inset-0 bg-black/90 z-[100] flex flex-col">
+          <div className="bg-background border-b border-border p-4">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-bold">👁️ Live Preview - {pageName}</h3>
+              <Button
+                onClick={() => setShowPreviewDialog(false)}
+                className="bg-gray-600 hover:bg-gray-700"
+              >
+                ✕ Close
+              </Button>
+            </div>
+
+            <div className="flex items-center gap-4">
+              <div className="flex gap-2">
+                <Button
+                  onClick={() => setPreviewDevice('mobile')}
+                  className={previewDevice === 'mobile' ? 'bg-purple-600' : 'bg-gray-600'}
+                >
+                  📱 Mobile
+                </Button>
+                <Button
+                  onClick={() => setPreviewDevice('tablet')}
+                  className={previewDevice === 'tablet' ? 'bg-purple-600' : 'bg-gray-600'}
+                >
+                  📱 Tablet
+                </Button>
+                <Button
+                  onClick={() => setPreviewDevice('desktop')}
+                  className={previewDevice === 'desktop' ? 'bg-purple-600' : 'bg-gray-600'}
+                >
+                  🖥️ Desktop
+                </Button>
+              </div>
+
+              <div className="flex gap-2">
+                <Button
+                  onClick={() => setPreviewMode('draft')}
+                  className={previewMode === 'draft' ? 'bg-blue-600' : 'bg-gray-600'}
+                >
+                  📝 Draft
+                </Button>
+                <Button
+                  onClick={() => setPreviewMode('published')}
+                  className={previewMode === 'published' ? 'bg-green-600' : 'bg-gray-600'}
+                >
+                  🌐 Published
+                </Button>
+                <Button
+                  onClick={() => setPreviewMode('comparison')}
+                  className={previewMode === 'comparison' ? 'bg-orange-600' : 'bg-gray-600'}
+                >
+                  🔄 Compare
+                </Button>
+              </div>
+
+              <Button
+                onClick={() => {
+                  setShowPreviewDialog(false);
+                  setShowConfirmDialog(true);
+                }}
+                className="ml-auto bg-green-600 hover:bg-green-700"
+              >
+                🚀 Publish Now
+              </Button>
+            </div>
+          </div>
+
+          <div className="flex-1 overflow-auto p-4">
+            {previewMode === 'comparison' ? (
+              <div className="grid grid-cols-2 gap-4 h-full">
+                <div className="border border-border rounded-lg overflow-hidden">
+                  <div className="bg-blue-600 text-white p-2 text-center font-bold">
+                    📝 Draft Version
+                  </div>
+                  <div className="bg-background p-4 h-full overflow-auto">
+                    <iframe
+                      src={`/${pageName}?preview=draft`}
+                      className={`w-full h-full border-0 ${
+                        previewDevice === 'mobile' ? 'max-w-[375px] mx-auto' :
+                        previewDevice === 'tablet' ? 'max-w-[768px] mx-auto' :
+                        'w-full'
+                      }`}
+                      style={{
+                        height: previewDevice === 'mobile' ? '667px' :
+                               previewDevice === 'tablet' ? '1024px' :
+                               '100%'
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="border border-border rounded-lg overflow-hidden">
+                  <div className="bg-green-600 text-white p-2 text-center font-bold">
+                    🌐 Published Version
+                  </div>
+                  <div className="bg-background p-4 h-full overflow-auto">
+                    <iframe
+                      src={`/${pageName}`}
+                      className={`w-full h-full border-0 ${
+                        previewDevice === 'mobile' ? 'max-w-[375px] mx-auto' :
+                        previewDevice === 'tablet' ? 'max-w-[768px] mx-auto' :
+                        'w-full'
+                      }`}
+                      style={{
+                        height: previewDevice === 'mobile' ? '667px' :
+                               previewDevice === 'tablet' ? '1024px' :
+                               '100%'
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="h-full flex items-center justify-center">
+                <div className={`border border-border rounded-lg overflow-hidden ${
+                  previewDevice === 'mobile' ? 'w-[375px]' :
+                  previewDevice === 'tablet' ? 'w-[768px]' :
+                  'w-full'
+                }`}>
+                  <div className={`${
+                    previewMode === 'draft' ? 'bg-blue-600' : 'bg-green-600'
+                  } text-white p-2 text-center font-bold`}>
+                    {previewMode === 'draft' ? '📝 Draft Preview' : '🌐 Published Preview'}
+                  </div>
+                  <iframe
+                    src={previewMode === 'draft' ? `/${pageName}?preview=draft` : `/${pageName}`}
+                    className="w-full border-0"
+                    style={{
+                      height: previewDevice === 'mobile' ? '667px' :
+                             previewDevice === 'tablet' ? '1024px' :
+                             'calc(100vh - 200px)'
+                    }}
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
