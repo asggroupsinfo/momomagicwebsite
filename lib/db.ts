@@ -58,6 +58,11 @@ export function getPool(): mysql.Pool | PgPool {
   return pool;
 }
 
+function convertMySQLToPostgres(sql: string): string {
+  let index = 1;
+  return sql.replace(/\?/g, () => `$${index++}`);
+}
+
 export async function query<T = any>(
   sql: string,
   params?: any[]
@@ -66,7 +71,8 @@ export async function query<T = any>(
     const pgPool = getPool() as PgPool;
     const client = await pgPool.connect();
     try {
-      const result = await client.query(sql, params);
+      const pgSql = convertMySQLToPostgres(sql);
+      const result = await client.query(pgSql, params);
       return result.rows as T[];
     } finally {
       client.release();
@@ -99,7 +105,8 @@ export async function insert(
     const pgPool = getPool() as PgPool;
     const client = await pgPool.connect();
     try {
-      const result = await client.query(sql, params);
+      const pgSql = convertMySQLToPostgres(sql);
+      const result = await client.query(pgSql, params);
       return result.rows[0]?.id || 0;
     } finally {
       client.release();
@@ -124,7 +131,8 @@ export async function update(
     const pgPool = getPool() as PgPool;
     const client = await pgPool.connect();
     try {
-      const result = await client.query(sql, params);
+      const pgSql = convertMySQLToPostgres(sql);
+      const result = await client.query(pgSql, params);
       return result.rowCount || 0;
     } finally {
       client.release();
@@ -149,7 +157,8 @@ export async function deleteQuery(
     const pgPool = getPool() as PgPool;
     const client = await pgPool.connect();
     try {
-      const result = await client.query(sql, params);
+      const pgSql = convertMySQLToPostgres(sql);
+      const result = await client.query(pgSql, params);
       return result.rowCount || 0;
     } finally {
       client.release();
