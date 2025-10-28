@@ -47,7 +47,7 @@ export function getPool(): mysql.Pool | PgPool {
   const dbConfig = getDatabaseConfig();
   
   if (pool && poolType !== dbConfig.type) {
-    console.log(`Pool type changed from ${poolType} to ${dbConfig.type}, recreating pool`);
+    console.log(`[getPool] Pool type changed from ${poolType} to ${dbConfig.type}, recreating pool`);
     if (poolType === 'postgres') {
       (pool as PgPool).end();
     } else {
@@ -57,8 +57,15 @@ export function getPool(): mysql.Pool | PgPool {
     poolType = null;
   }
   
+  if (pool && poolType === 'mysql' && dbConfig.type === 'postgres') {
+    console.log(`[getPool] DATABASE_URL now available, switching from MySQL to PostgreSQL`);
+    (pool as mysql.Pool).end();
+    pool = null;
+    poolType = null;
+  }
+  
   if (!pool) {
-    console.log(`Creating new ${dbConfig.type} pool for ${dbConfig.host}:${dbConfig.port}`);
+    console.log(`[getPool] Creating new ${dbConfig.type} pool for ${dbConfig.host}:${dbConfig.port}/${dbConfig.database}`);
     if (dbConfig.type === 'postgres') {
       pool = new PgPool({
         host: dbConfig.host,
@@ -73,6 +80,8 @@ export function getPool(): mysql.Pool | PgPool {
       pool = mysql.createPool(dbConfig);
       poolType = 'mysql';
     }
+  } else {
+    console.log(`[getPool] Using existing ${poolType} pool`);
   }
   return pool;
 }
