@@ -10,6 +10,7 @@ import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
 import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
 import { InlineEditor } from '@/components/cms/InlineEditor';
 import { VisualDesignPanel } from '@/components/cms/VisualDesignPanel';
+import { PublishControls } from '@/components/cms/PublishControls';
 
 interface GalleryImage {
   id: string;
@@ -332,8 +333,17 @@ export default function GalleryManagementPage() {
     );
   }
 
+  const saveGalleryData = async () => {
+    await loadImages();
+  };
+
   return (
     <div>
+      <PublishControls
+        pageName="gallery"
+        onSave={saveGalleryData}
+      />
+      
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
