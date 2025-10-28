@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -59,6 +59,36 @@ export default function HeroCMSPage() {
   const videoInputRef = useRef<HTMLInputElement>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    loadHeroData();
+  }, []);
+
+  const loadHeroData = async () => {
+    try {
+      const response = await fetch('/api/cms/hero');
+      if (response.ok) {
+        const data = await response.json();
+        setContent({
+          headline: data.headline || 'From Humble Stall to Culinary Legend',
+          subheadline: data.subheadline || 'Experience the Magic That Transformed Sherghati\'s Street Food Scene',
+          primaryCTA: data.primaryCTA || 'Order Now',
+          secondaryCTA: data.secondaryCTA || 'Our Story',
+          badges: data.badges || [
+            'Awarded "Best Quality Food in City"',
+            'FSSAI Certified: 20424201001152',
+            '100% Pure Vegetarian · Since 2023',
+            '⭐ 4.9/5 (2000+ Happy Customers)'
+          ],
+          backgroundVideo: data.backgroundVideo || '/videos/hero-bg.mp4',
+          backgroundImage: data.backgroundImage || '',
+          backgroundType: data.backgroundType || 'video'
+        });
+      }
+    } catch (error) {
+      console.error('Error loading hero data:', error);
+    }
+  };
+
   const handleSave = async () => {
     setIsSaving(true);
     setSaveMessage('');
@@ -74,6 +104,7 @@ export default function HeroCMSPage() {
 
       if (response.ok) {
         setSaveMessage('✅ Hero section updated successfully!');
+        await loadHeroData();
       } else {
         setSaveMessage('❌ Failed to update hero section');
       }
