@@ -8,6 +8,7 @@ import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
 import { ImageDropZone } from '@/components/cms/ImageDropZone';
 import { InlineEditor } from '@/components/cms/InlineEditor';
 import { VisualDesignPanel } from '@/components/cms/VisualDesignPanel';
+import { PublishControls } from '@/components/cms/PublishControls';
 
 interface TimelineItem {
   date: string;
@@ -180,6 +181,11 @@ export default function AboutCMSPage() {
 
   return (
     <div>
+      <PublishControls
+        pageName="about"
+        onSave={saveAboutData}
+      />
+      
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
