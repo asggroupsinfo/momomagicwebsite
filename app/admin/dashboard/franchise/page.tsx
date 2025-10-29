@@ -66,6 +66,10 @@ export default function FranchiseCMSPage() {
     }
   };
 
+  const saveFranchiseData = async () => {
+    await fetchFranchiseData();
+  };
+
   if (loading) {
   return (
       <div className="p-8">
@@ -76,6 +80,11 @@ export default function FranchiseCMSPage() {
 
   return (
     <div className="p-8">
+      <PublishControls
+        pageName="franchise"
+        onSave={saveFranchiseData}
+      />
+      
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Franchise Management</h1>
         <p className="text-gray-600">Manage franchise settings, applications, and locations</p>

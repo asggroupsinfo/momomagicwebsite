@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { PublishControls } from '@/components/cms/PublishControls';
 
 interface SocialLink {
   platform: string;
@@ -94,6 +95,10 @@ export default function SocialMediaManagementPage() {
     }
   };
 
+  const saveSocialData = async () => {
+    await loadSocialLinks();
+  };
+
   const availablePlatforms = SOCIAL_PLATFORMS.filter(
     platform => !socialLinks.find(link => link.platform === platform.name)
   );
@@ -111,6 +116,11 @@ export default function SocialMediaManagementPage() {
 
   return (
     <div>
+      <PublishControls
+        pageName="social"
+        onSave={saveSocialData}
+      />
+      
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
