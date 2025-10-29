@@ -41,14 +41,21 @@ export async function POST(
     );
     console.log('[PUBLISH API] Existing published content found:', !!existingPublished);
 
-    // if (existingPublished) {
-    //   console.log('[PUBLISH API] Creating backup of existing published content');
-    //   await query(
-    //     'INSERT INTO content_backups (page_name, content_data, backup_type) VALUES (?, ?, ?)',
-    //     [page, JSON.stringify(existingPublished.content_data), 'auto']
-    //   );
-    //   console.log('[PUBLISH API] Backup created successfully');
-    // }
+    if (existingPublished) {
+      console.log('[PUBLISH API] Creating backup of existing published content');
+      try {
+        const backupData = typeof existingPublished.content_data === 'string' 
+          ? existingPublished.content_data 
+          : JSON.stringify(existingPublished.content_data);
+        await query(
+          'INSERT INTO content_backups (page_name, content_data, backup_type) VALUES (?, ?, ?)',
+          [page, backupData, 'auto']
+        );
+        console.log('[PUBLISH API] Backup created successfully');
+      } catch (backupError) {
+        console.error('[PUBLISH API] Backup creation failed:', backupError);
+      }
+    }
 
     const existingRecord = await queryOne(
       'SELECT id FROM published_content WHERE page_name = ?',
@@ -56,18 +63,24 @@ export async function POST(
     );
     console.log('[PUBLISH API] Existing record found:', !!existingRecord);
 
+    const contentData = typeof draftContent.content_data === 'string' 
+      ? draftContent.content_data 
+      : JSON.stringify(draftContent.content_data);
+    console.log('[PUBLISH API] Content data type:', typeof draftContent.content_data);
+    console.log('[PUBLISH API] Content data length:', contentData.length);
+
     if (existingRecord) {
       console.log('[PUBLISH API] Updating existing published content');
       await query(
         'UPDATE published_content SET content_data = ?, published_at = CURRENT_TIMESTAMP WHERE page_name = ?',
-        [JSON.stringify(draftContent.content_data), page]
+        [contentData, page]
       );
       console.log('[PUBLISH API] Update successful');
     } else {
       console.log('[PUBLISH API] Inserting new published content');
       await query(
         'INSERT INTO published_content (page_name, content_data) VALUES (?, ?)',
-        [page, JSON.stringify(draftContent.content_data)]
+        [page, contentData]
       );
       console.log('[PUBLISH API] Insert successful');
     }
