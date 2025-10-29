@@ -41,14 +41,14 @@ export async function POST(
     );
     console.log('[PUBLISH API] Existing published content found:', !!existingPublished);
 
-    if (existingPublished) {
-      console.log('[PUBLISH API] Creating backup of existing published content');
-      await query(
-        'INSERT INTO content_backups (page_name, content_data, backup_type) VALUES (?, ?, ?)',
-        [page, existingPublished.content_data, 'auto']
-      );
-      console.log('[PUBLISH API] Backup created successfully');
-    }
+    // if (existingPublished) {
+    //   console.log('[PUBLISH API] Creating backup of existing published content');
+    //   await query(
+    //     'INSERT INTO content_backups (page_name, content_data, backup_type) VALUES (?, ?, ?)',
+    //     [page, JSON.stringify(existingPublished.content_data), 'auto']
+    //   );
+    //   console.log('[PUBLISH API] Backup created successfully');
+    // }
 
     const existingRecord = await queryOne(
       'SELECT id FROM published_content WHERE page_name = ?',
@@ -60,14 +60,14 @@ export async function POST(
       console.log('[PUBLISH API] Updating existing published content');
       await query(
         'UPDATE published_content SET content_data = ?, published_at = CURRENT_TIMESTAMP WHERE page_name = ?',
-        [draftContent.content_data, page]
+        [JSON.stringify(draftContent.content_data), page]
       );
       console.log('[PUBLISH API] Update successful');
     } else {
       console.log('[PUBLISH API] Inserting new published content');
       await query(
         'INSERT INTO published_content (page_name, content_data) VALUES (?, ?)',
-        [page, draftContent.content_data]
+        [page, JSON.stringify(draftContent.content_data)]
       );
       console.log('[PUBLISH API] Insert successful');
     }
