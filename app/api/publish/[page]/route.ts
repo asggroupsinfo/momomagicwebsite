@@ -12,15 +12,21 @@ export async function POST(
   { params }: { params: Promise<{ page: string }> }
 ) {
   try {
+    console.log('[PUBLISH API] Starting publish request');
     await requireAuth();
 
     const { page } = await params;
+    console.log('[PUBLISH API] Page:', page);
+    
     const dbType = getDatabaseType();
+    console.log('[PUBLISH API] Database type:', dbType);
+    console.log('[PUBLISH API] DATABASE_URL present:', !!process.env.DATABASE_URL);
     
     const draftContent = await queryOne(
       'SELECT content_data FROM cms_content WHERE page_name = ?',
       [page]
     );
+    console.log('[PUBLISH API] Draft content found:', !!draftContent);
 
     if (!draftContent) {
       return NextResponse.json(
@@ -33,35 +39,45 @@ export async function POST(
       'SELECT content_data FROM published_content WHERE page_name = ?',
       [page]
     );
+    console.log('[PUBLISH API] Existing published content found:', !!existingPublished);
 
     if (existingPublished) {
+      console.log('[PUBLISH API] Creating backup of existing published content');
       await query(
         'INSERT INTO content_backups (page_name, content_data, backup_type) VALUES (?, ?, ?)',
         [page, JSON.stringify(existingPublished.content_data), 'auto']
       );
+      console.log('[PUBLISH API] Backup created successfully');
     }
 
     const existingRecord = await queryOne(
       'SELECT id FROM published_content WHERE page_name = ?',
       [page]
     );
+    console.log('[PUBLISH API] Existing record found:', !!existingRecord);
 
     if (existingRecord) {
+      console.log('[PUBLISH API] Updating existing published content');
       await query(
         'UPDATE published_content SET content_data = ?, published_at = CURRENT_TIMESTAMP WHERE page_name = ?',
         [JSON.stringify(draftContent.content_data), page]
       );
+      console.log('[PUBLISH API] Update successful');
     } else {
+      console.log('[PUBLISH API] Inserting new published content');
       await query(
         'INSERT INTO published_content (page_name, content_data) VALUES (?, ?)',
         [page, JSON.stringify(draftContent.content_data)]
       );
+      console.log('[PUBLISH API] Insert successful');
     }
 
+    console.log('[PUBLISH API] Recording publish history');
     await query(
       'INSERT INTO publish_history (page_name, action, status, message) VALUES (?, ?, ?, ?)',
       [page, 'publish', 'success', `Published ${page} content to live website`]
     );
+    console.log('[PUBLISH API] Publish history recorded');
 
     return NextResponse.json({
       success: true,
@@ -70,16 +86,26 @@ export async function POST(
     });
 
   } catch (error) {
-    console.error('Error publishing content:', error);
+    console.error('[PUBLISH API] ERROR OCCURRED:', error);
+    console.error('[PUBLISH API] Error name:', error instanceof Error ? error.name : 'Unknown');
+    console.error('[PUBLISH API] Error message:', error instanceof Error ? error.message : 'Unknown');
+    console.error('[PUBLISH API] Error stack:', error instanceof Error ? error.stack : 'No stack trace');
     
     const { page } = await params;
+    console.log('[PUBLISH API] Attempting to record error in publish_history');
     await query(
       'INSERT INTO publish_history (page_name, action, status, message) VALUES (?, ?, ?, ?)',
       [page, 'publish', 'error', error instanceof Error ? error.message : 'Unknown error']
-    ).catch(() => {});
+    ).catch((historyError) => {
+      console.error('[PUBLISH API] Failed to record error in history:', historyError);
+    });
 
     return NextResponse.json(
-      { error: 'Failed to publish content' },
+      { 
+        error: 'Failed to publish content',
+        details: error instanceof Error ? error.message : 'Unknown error',
+        timestamp: new Date().toISOString()
+      },
       { status: 500 }
     );
   }
