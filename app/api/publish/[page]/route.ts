@@ -117,6 +117,8 @@ export async function POST(
       { 
         error: 'Failed to publish content',
         details: error instanceof Error ? error.message : 'Unknown error',
+        errorName: error instanceof Error ? error.name : 'Unknown',
+        errorStack: error instanceof Error ? error.stack : 'No stack trace',
         timestamp: new Date().toISOString()
       },
       { status: 500 }
