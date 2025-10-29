@@ -4,12 +4,12 @@ import { query, queryOne } from '@/lib/db';
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { page: string } }
+  { params }: { params: Promise<{ page: string }> }
 ) {
   try {
     await requireAuth();
 
-    const { page } = params;
+    const { page } = await params;
     
     const latestBackup = await queryOne(
       'SELECT content_data FROM content_backups WHERE page_name = ? ORDER BY created_at DESC LIMIT 1',
