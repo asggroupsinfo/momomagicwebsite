@@ -98,7 +98,7 @@ export default function CTAManagementPage() {
   };
 
   const saveCtaData = async () => {
-    await loadCTAData();
+    await loadCTAs();
   };
 
   if (isLoading) {

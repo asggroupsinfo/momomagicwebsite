@@ -150,7 +150,7 @@ export default function LogoManagementPage() {
   };
 
   const saveLogoData = async () => {
-    await loadLogoData();
+    await loadLogos();
   };
 
   if (isLoading) {
