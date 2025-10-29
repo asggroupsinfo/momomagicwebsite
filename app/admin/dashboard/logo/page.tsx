@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { MediaLibraryPicker } from '@/components/cms/MediaLibraryPicker';
+import { PublishControls } from '@/components/cms/PublishControls';
 
 interface LogoSettings {
   headerLogo: string;
