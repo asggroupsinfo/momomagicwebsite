@@ -47,17 +47,10 @@ export async function POST(
     );
 
     if (existingRecord) {
-      if (dbType === 'postgres') {
-        await query(
-          'UPDATE published_content SET content_data = ?::jsonb, published_at = CURRENT_TIMESTAMP WHERE page_name = ?',
-          [JSON.stringify(draftContent.content_data), page]
-        );
-      } else {
-        await query(
-          'UPDATE published_content SET content_data = ?, published_at = NOW() WHERE page_name = ?',
-          [JSON.stringify(draftContent.content_data), page]
-        );
-      }
+      await query(
+        'UPDATE published_content SET content_data = ?, published_at = CURRENT_TIMESTAMP WHERE page_name = ?',
+        [JSON.stringify(draftContent.content_data), page]
+      );
     } else {
       await query(
         'INSERT INTO published_content (page_name, content_data) VALUES (?, ?)',
