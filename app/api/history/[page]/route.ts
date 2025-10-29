@@ -4,12 +4,12 @@ import { query } from '@/lib/db';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { page: string } }
+  { params }: { params: Promise<{ page: string }> }
 ) {
   try {
     await requireAuth();
 
-    const { page } = params;
+    const { page } = await params;
     
     const backups = await query(
       'SELECT id, backup_type, backup_name, created_at, created_by FROM content_backups WHERE page_name = ? AND created_at >= NOW() - INTERVAL 7 DAY ORDER BY created_at DESC LIMIT 50',

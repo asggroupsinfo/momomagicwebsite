@@ -4,12 +4,12 @@ import { query, queryOne } from '@/lib/db';
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { page: string } }
+  { params }: { params: Promise<{ page: string }> }
 ) {
   try {
     await requireAuth();
 
-    const { page } = params;
+    const { page } = await params;
     
     const draftContent = await queryOne(
       'SELECT content_data FROM cms_content WHERE page_name = ?',
@@ -25,9 +25,9 @@ export async function POST(
 
     await query(`
       CREATE TABLE IF NOT EXISTS published_content (
-        id SERIAL PRIMARY KEY,
+        id INT AUTO_INCREMENT PRIMARY KEY,
         page_name VARCHAR(100) NOT NULL UNIQUE,
-        content_data JSONB NOT NULL DEFAULT '{}'::jsonb,
+        content_data JSON NOT NULL,
         published_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         published_by VARCHAR(100) DEFAULT 'admin'
       )
@@ -35,9 +35,9 @@ export async function POST(
 
     await query(`
       CREATE TABLE IF NOT EXISTS content_backups (
-        id SERIAL PRIMARY KEY,
+        id INT AUTO_INCREMENT PRIMARY KEY,
         page_name VARCHAR(100) NOT NULL,
-        content_data JSONB NOT NULL DEFAULT '{}'::jsonb,
+        content_data JSON NOT NULL,
         backup_type VARCHAR(50) DEFAULT 'auto',
         backup_name VARCHAR(200),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -47,7 +47,7 @@ export async function POST(
 
     await query(`
       CREATE TABLE IF NOT EXISTS publish_history (
-        id SERIAL PRIMARY KEY,
+        id INT AUTO_INCREMENT PRIMARY KEY,
         page_name VARCHAR(100) NOT NULL,
         action VARCHAR(50) NOT NULL,
         status VARCHAR(50) DEFAULT 'success',
@@ -100,9 +100,10 @@ export async function POST(
   } catch (error) {
     console.error('Error publishing content:', error);
     
+    const { page } = await params;
     await query(
       'INSERT INTO publish_history (page_name, action, status, message) VALUES (?, ?, ?, ?)',
-      [params.page, 'publish', 'error', error instanceof Error ? error.message : 'Unknown error']
+      [page, 'publish', 'error', error instanceof Error ? error.message : 'Unknown error']
     ).catch(() => {});
 
     return NextResponse.json(
@@ -114,12 +115,12 @@ export async function POST(
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { page: string } }
+  { params }: { params: Promise<{ page: string }> }
 ) {
   try {
     await requireAuth();
 
-    const { page } = params;
+    const { page } = await params;
     
     const draftContent = await queryOne(
       'SELECT content_data, updated_at FROM cms_content WHERE page_name = ?',
