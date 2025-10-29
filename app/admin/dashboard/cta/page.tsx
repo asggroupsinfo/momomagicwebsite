@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { PublishControls } from '@/components/cms/PublishControls';
 
 interface CTAButton {
   id: string;
@@ -97,7 +98,7 @@ export default function CTAManagementPage() {
   };
 
   const saveCtaData = async () => {
-    await loadCTAData();
+    await loadCTAs();
   };
 
   if (isLoading) {

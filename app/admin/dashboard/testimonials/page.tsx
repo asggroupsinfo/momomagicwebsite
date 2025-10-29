@@ -8,6 +8,7 @@ import { ImageDropZone } from '@/components/cms/ImageDropZone';
 import { ContentAnalytics } from '@/components/cms/ContentAnalytics';
 import { ContentStateManager, ContentState } from '@/components/cms/ContentStateManager';
 import { InlineEditor } from '@/components/cms/InlineEditor';
+import { PublishControls } from '@/components/cms/PublishControls';
 
 interface Testimonial {
   id: string;
