@@ -137,14 +137,6 @@ export function PublishControls({ pageName, onSave, onPreview }: PublishControls
 
       <div className="flex flex-col gap-2">
         <Button
-          onClick={handleSave}
-          disabled={isSaving}
-          className="bg-blue-600 hover:bg-blue-700 w-full justify-start text-xs sm:text-sm px-2 sm:px-4 py-2"
-        >
-          {isSaving ? '⏳ Saving...' : '💾 Save Draft'}
-        </Button>
-
-        <Button
           onClick={() => setShowPreviewDialog(true)}
           className="bg-purple-600 hover:bg-purple-700 w-full justify-start text-xs sm:text-sm px-2 sm:px-4 py-2"
         >
