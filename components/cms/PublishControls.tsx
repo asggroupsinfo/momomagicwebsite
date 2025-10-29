@@ -130,23 +130,15 @@ export function PublishControls({ pageName, onSave, onPreview }: PublishControls
   };
 
   return (
-    <div className="fixed top-4 right-4 z-50 bg-background border border-border rounded-lg shadow-lg p-4 space-y-3">
-      <div className="flex items-center justify-between gap-4">
+    <div className="fixed top-4 right-4 z-50 bg-background border border-border rounded-lg shadow-lg p-4 min-w-[200px]">
+      <div className="flex items-center justify-between gap-4 mb-3">
         <div className="text-sm font-medium">{getStatusIndicator()}</div>
       </div>
 
-      <div className="flex gap-2">
-        <Button
-          onClick={handleSave}
-          disabled={isSaving}
-          className="bg-blue-600 hover:bg-blue-700"
-        >
-          {isSaving ? '⏳ Saving...' : '💾 Save'}
-        </Button>
-
+      <div className="flex flex-col gap-2">
         <Button
           onClick={() => setShowPreviewDialog(true)}
-          className="bg-purple-600 hover:bg-purple-700"
+          className="bg-purple-600 hover:bg-purple-700 w-full justify-start"
         >
           👁️ Preview
         </Button>
@@ -154,31 +146,29 @@ export function PublishControls({ pageName, onSave, onPreview }: PublishControls
         <Button
           onClick={() => setShowConfirmDialog(true)}
           disabled={isPublishing || publishStatus === 'published'}
-          className="bg-green-600 hover:bg-green-700"
+          className="bg-green-600 hover:bg-green-700 w-full justify-start"
         >
           {isPublishing ? '⏳ Publishing...' : '🚀 Publish to Live'}
         </Button>
-      </div>
 
-      <div className="flex gap-2">
         <Button
           onClick={handleUndo}
           disabled={isUndoing}
-          className="bg-orange-600 hover:bg-orange-700 text-sm"
+          className="bg-orange-600 hover:bg-orange-700 w-full justify-start"
         >
           {isUndoing ? '⏳ Undoing...' : '↩️ Undo Last Change'}
         </Button>
 
         <Button
           onClick={loadHistory}
-          className="bg-gray-600 hover:bg-gray-700 text-sm"
+          className="bg-gray-600 hover:bg-gray-700 w-full justify-start"
         >
           📅 History
         </Button>
       </div>
 
       {message && (
-        <div className="text-sm font-medium text-center">
+        <div className="text-sm font-medium text-center mt-3">
           {message}
         </div>
       )}
