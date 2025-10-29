@@ -2,6 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { requireAuth } from '@/lib/auth/auth';
 import { query, queryOne } from '@/lib/db';
 
+function getDatabaseType(): 'mysql' | 'postgres' {
+  const databaseUrl = process.env.DATABASE_URL || '';
+  return databaseUrl.includes('postgres') ? 'postgres' : 'mysql';
+}
+
 export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ page: string }> }
@@ -10,6 +15,7 @@ export async function POST(
     await requireAuth();
 
     const { page } = await params;
+    const dbType = getDatabaseType();
     
     const draftContent = await queryOne(
       'SELECT content_data FROM cms_content WHERE page_name = ?',
@@ -22,40 +28,6 @@ export async function POST(
         { status: 404 }
       );
     }
-
-    await query(`
-      CREATE TABLE IF NOT EXISTS published_content (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        page_name VARCHAR(100) NOT NULL UNIQUE,
-        content_data JSON NOT NULL,
-        published_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        published_by VARCHAR(100) DEFAULT 'admin'
-      )
-    `);
-
-    await query(`
-      CREATE TABLE IF NOT EXISTS content_backups (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        page_name VARCHAR(100) NOT NULL,
-        content_data JSON NOT NULL,
-        backup_type VARCHAR(50) DEFAULT 'auto',
-        backup_name VARCHAR(200),
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        created_by VARCHAR(100) DEFAULT 'admin'
-      )
-    `);
-
-    await query(`
-      CREATE TABLE IF NOT EXISTS publish_history (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        page_name VARCHAR(100) NOT NULL,
-        action VARCHAR(50) NOT NULL,
-        status VARCHAR(50) DEFAULT 'success',
-        message TEXT,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        created_by VARCHAR(100) DEFAULT 'admin'
-      )
-    `);
 
     const existingPublished = await queryOne(
       'SELECT content_data FROM published_content WHERE page_name = ?',
@@ -75,10 +47,17 @@ export async function POST(
     );
 
     if (existingRecord) {
-      await query(
-        'UPDATE published_content SET content_data = ?, published_at = NOW() WHERE page_name = ?',
-        [JSON.stringify(draftContent.content_data), page]
-      );
+      if (dbType === 'postgres') {
+        await query(
+          'UPDATE published_content SET content_data = ?::jsonb, published_at = CURRENT_TIMESTAMP WHERE page_name = ?',
+          [JSON.stringify(draftContent.content_data), page]
+        );
+      } else {
+        await query(
+          'UPDATE published_content SET content_data = ?, published_at = NOW() WHERE page_name = ?',
+          [JSON.stringify(draftContent.content_data), page]
+        );
+      }
     } else {
       await query(
         'INSERT INTO published_content (page_name, content_data) VALUES (?, ?)',
