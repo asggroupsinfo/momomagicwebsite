@@ -130,15 +130,23 @@ export function PublishControls({ pageName, onSave, onPreview }: PublishControls
   };
 
   return (
-    <div className="fixed top-4 right-4 z-50 bg-background border border-border rounded-lg shadow-lg p-4 min-w-[200px]">
-      <div className="flex items-center justify-between gap-4 mb-3">
-        <div className="text-sm font-medium">{getStatusIndicator()}</div>
+    <div className="fixed top-4 right-4 z-50 bg-background border border-border rounded-lg shadow-lg p-3 sm:p-4 min-w-[180px] sm:min-w-[220px] max-w-[95vw] sm:max-w-none">
+      <div className="flex items-center justify-between gap-2 sm:gap-4 mb-3">
+        <div className="text-xs sm:text-sm font-medium">{getStatusIndicator()}</div>
       </div>
 
       <div className="flex flex-col gap-2">
         <Button
+          onClick={handleSave}
+          disabled={isSaving}
+          className="bg-blue-600 hover:bg-blue-700 w-full justify-start text-xs sm:text-sm px-2 sm:px-4 py-2"
+        >
+          {isSaving ? '⏳ Saving...' : '💾 Save Draft'}
+        </Button>
+
+        <Button
           onClick={() => setShowPreviewDialog(true)}
-          className="bg-purple-600 hover:bg-purple-700 w-full justify-start"
+          className="bg-purple-600 hover:bg-purple-700 w-full justify-start text-xs sm:text-sm px-2 sm:px-4 py-2"
         >
           👁️ Preview
         </Button>
@@ -146,22 +154,22 @@ export function PublishControls({ pageName, onSave, onPreview }: PublishControls
         <Button
           onClick={() => setShowConfirmDialog(true)}
           disabled={isPublishing || publishStatus === 'published'}
-          className="bg-green-600 hover:bg-green-700 w-full justify-start"
+          className="bg-green-600 hover:bg-green-700 w-full justify-start text-xs sm:text-sm px-2 sm:px-4 py-2"
         >
-          {isPublishing ? '⏳ Publishing...' : '🚀 Publish to Live'}
+          {isPublishing ? '⏳ Publishing...' : '🚀 Publish'}
         </Button>
 
         <Button
           onClick={handleUndo}
           disabled={isUndoing}
-          className="bg-orange-600 hover:bg-orange-700 w-full justify-start"
+          className="bg-orange-600 hover:bg-orange-700 w-full justify-start text-xs sm:text-sm px-2 sm:px-4 py-2"
         >
-          {isUndoing ? '⏳ Undoing...' : '↩️ Undo Last Change'}
+          {isUndoing ? '⏳ Undoing...' : '↩️ Undo'}
         </Button>
 
         <Button
           onClick={loadHistory}
-          className="bg-gray-600 hover:bg-gray-700 w-full justify-start"
+          className="bg-gray-600 hover:bg-gray-700 w-full justify-start text-xs sm:text-sm px-2 sm:px-4 py-2"
         >
           📅 History
         </Button>
